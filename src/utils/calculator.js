@@ -1,5 +1,5 @@
 import ringsData from "../data/rings.json";
-import mockData from "../data/mockData.json";
+import mockData from "../data/active_economy.json";
 
 const SIMULATION_ITERATIONS = 500000;
 

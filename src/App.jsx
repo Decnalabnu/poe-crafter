@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ringsData from "./data/rings.json";
-import mockData from "./data/mockData.json";
+import mockData from "./data/active_economy.json";
 import { calculateSpamEV } from "./utils/calculator";
 
 function App() {
