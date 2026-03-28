@@ -1,0 +1,44 @@
+{
+  "basic_currency": {
+    "chaos_orb": { "name": "Chaos Orb", "cost": 1 },
+    "divine_orb": { "name": "Divine Orb", "cost": 145 },
+    "orb_of_annulment": { "name": "Orb of Annulment", "cost": 12 },
+    "veiled_orb": { "name": "Veiled Orb", "cost": 8500 }
+  },
+  "essences": {
+    "deafening_essence_of_envy": {
+      "name": "Deafening Essence of Envy",
+      "cost": 3,
+      "guaranteed_mod": "chaos_res_tier_1"
+    },
+    "deafening_essence_of_spite": {
+      "name": "Deafening Essence of Spite",
+      "cost": 2,
+      "guaranteed_mod": "int_tier_1"
+    },
+    "deafening_essence_of_wrath": {
+      "name": "Deafening Essence of Wrath",
+      "cost": 3,
+      "guaranteed_mod": "wed_tier_1"
+    }
+  },
+  "fossils": {
+    "aberrant_fossil": { "name": "Aberrant Fossil", "cost": 2 },
+    "dense_fossil": { "name": "Dense Fossil", "cost": 1 },
+    "metallic_fossil": { "name": "Metallic Fossil", "cost": 2 }
+  },
+  "influenced_currency": {
+    "crusader_exalted_orb": { "name": "Crusader's Exalted Orb", "cost": 60 },
+    "hunter_exalted_orb": { "name": "Hunter's Exalted Orb", "cost": 80 }
+  },
+  "crafting_bench": {
+    "prefixes_cannot_be_changed": {
+      "name": "Prefixes Cannot Be Changed",
+      "cost": 290
+    },
+    "suffixes_cannot_be_changed": {
+      "name": "Suffixes Cannot Be Changed",
+      "cost": 290
+    }
+  }
+}

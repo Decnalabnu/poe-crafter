@@ -1,0 +1,49 @@
+{
+  "base": "amethyst_ring",
+  "prefixes": {
+    "total_weight": 10000,
+    "mods": [
+      {
+        "id": "life_tier_1",
+        "group": "Life",
+        "text": "+(70-79) to maximum Life",
+        "weight": 1000
+      },
+      {
+        "id": "mana_tier_1",
+        "group": "Mana",
+        "text": "+(68-73) to maximum Mana",
+        "weight": 1000
+      },
+      {
+        "id": "energy_shield_tier_1",
+        "group": "BaseDefences",
+        "text": "+(44-47) to maximum Energy Shield",
+        "weight": 1000
+      }
+    ]
+  },
+  "suffixes": {
+    "total_weight": 15000,
+    "mods": [
+      {
+        "id": "fire_res_tier_1",
+        "group": "FireResistance",
+        "text": "+(42-45)% to Fire Resistance",
+        "weight": 1000
+      },
+      {
+        "id": "strength_tier_1",
+        "group": "Strength",
+        "text": "+(51-55) to Strength",
+        "weight": 1000
+      },
+      {
+        "id": "cast_speed_tier_1",
+        "group": "CastSpeed",
+        "text": "(14-16)% increased Cast Speed",
+        "weight": 500
+      }
+    ]
+  }
+}

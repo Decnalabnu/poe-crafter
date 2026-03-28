@@ -1,0 +1,79 @@
+{
+  "item_class": "ring",
+  "prefixes": [
+    {
+      "id": "life_tier_1",
+      "group": "Life",
+      "text": "+(100-114) to maximum Life",
+      "spawn_weights": [{ "tag": "ring", "weight": 1000 }]
+    },
+    {
+      "id": "mana_tier_1",
+      "group": "Mana",
+      "text": "+(68-73) to maximum Mana",
+      "spawn_weights": [{ "tag": "ring", "weight": 1000 }]
+    },
+    {
+      "id": "energy_shield_tier_1",
+      "group": "BaseDefences",
+      "text": "+(44-47) to maximum Energy Shield",
+      "spawn_weights": [{ "tag": "ring", "weight": 1000 }]
+    },
+    {
+      "id": "wed_tier_1",
+      "group": "ElementalDamageWithWeapons",
+      "text": "(37-42)% increased Elemental Damage with Attack Skills",
+      "spawn_weights": [{ "tag": "ring", "weight": 300 }]
+    },
+    {
+      "id": "rarity_prefix_tier_1",
+      "group": "IncreasedRarity",
+      "text": "(21-24)% increased Rarity of Items found",
+      "spawn_weights": [{ "tag": "ring", "weight": 1000 }]
+    },
+    {
+      "id": "junk_prefixes_and_lower_tiers",
+      "group": "JunkPrefixes",
+      "text": "(Simulated Lower Tiers & Unwanted Mods)",
+      "spawn_weights": [{ "tag": "ring", "weight": 55950 }]
+    }
+  ],
+  "suffixes": [
+    {
+      "id": "str_tier_1",
+      "group": "Strength",
+      "text": "+(51-55) to Strength",
+      "spawn_weights": [{ "tag": "ring", "weight": 1000 }]
+    },
+    {
+      "id": "int_tier_1",
+      "group": "Intelligence",
+      "text": "+(51-55) to Intelligence",
+      "spawn_weights": [{ "tag": "ring", "weight": 1000 }]
+    },
+    {
+      "id": "dex_tier_1",
+      "group": "Dexterity",
+      "text": "+(51-55) to Dexterity",
+      "spawn_weights": [{ "tag": "ring", "weight": 1000 }]
+    },
+    {
+      "id": "all_attributes_tier_1",
+      "group": "AllAttributes",
+      "text": "+(15-16) to all Attributes",
+      "spawn_weights": [{ "tag": "ring", "weight": 400 }]
+    },
+    {
+      "id": "chaos_res_tier_1",
+      "group": "ChaosResistance",
+      "text": "+(31-35)% to Chaos Resistance",
+      "spawn_weights": [{ "tag": "ring", "weight": 250 }]
+    },
+    {
+      "id": "junk_suffixes_and_lower_tiers",
+      "group": "JunkSuffixes",
+      "text": "(Simulated Lower Tiers & Unwanted Mods)",
+      "spawn_weights": [{ "tag": "ring", "weight": 90950 }]
+    }
+  ]
+}
