@@ -1,0 +1,40 @@
+{
+  "pristine": {
+    "name": "Pristine Fossil",
+    "cost": 1,
+    "multipliers": {
+      "life": 10,
+      "defences": 0,
+      "armour": 0,
+      "evasion": 0,
+      "energy_shield": 0
+    }
+  },
+  "aberrant": {
+    "name": "Aberrant Fossil",
+    "cost": 1,
+    "multipliers": {
+      "chaos": 10,
+      "lightning": 0
+    }
+  },
+  "metallic": {
+    "name": "Metallic Fossil",
+    "cost": 1,
+    "multipliers": {
+      "lightning": 10,
+      "physical": 0
+    }
+  },
+  "prismatic": {
+    "name": "Prismatic Fossil",
+    "cost": 1,
+    "multipliers": {
+      "fire": 10,
+      "cold": 10,
+      "lightning": 10,
+      "poison": 0,
+      "bleeding": 0
+    }
+  }
+}

@@ -6,7 +6,7 @@
     },
     "divine_orb": {
       "name": "Divine Orb",
-      "cost": 523.6
+      "cost": 522.7
     },
     "orb_of_annulment": {
       "name": "Orb of Annulment",
@@ -20,17 +20,17 @@
   "essences": {
     "deafening_essence_of_envy": {
       "name": "Deafening Essence of Envy",
-      "cost": 12.0,
+      "cost": 14.4,
       "guaranteed_mod": "chaos_res_tier_1"
     },
     "deafening_essence_of_spite": {
       "name": "Deafening Essence of Spite",
-      "cost": 20.0,
+      "cost": 31.28,
       "guaranteed_mod": "int_tier_1"
     },
     "deafening_essence_of_wrath": {
       "name": "Deafening Essence of Wrath",
-      "cost": 10.0,
+      "cost": 15.0,
       "guaranteed_mod": "wed_tier_1"
     }
   },
