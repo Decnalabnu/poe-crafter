@@ -29,8 +29,12 @@ import requests
 # Config
 # ---------------------------------------------------------------------------
 LEAGUE = json.load(open("src/data/active_economy.json")).get("league", "Mirage")
-LADDER_LIMIT = 200          # max entries to pull from the ladder (GGG cap = 200)
-REQUEST_DELAY = 3.0         # seconds between character item fetches
+PAGE_SIZE = 200             # GGG hard cap per request
+MAX_LADDER_PAGES = 10       # pages to paginate (up to 2000 ladder entries total)
+TARGET_PUBLIC_CHARS = 200   # stop early once we have this many public characters fetched
+REQUEST_DELAY = 6.0         # seconds between character item fetches
+BATCH_SIZE = 40             # fetch this many characters, then pause
+BATCH_PAUSE = 45.0          # seconds to pause between batches
 MIN_FREQUENCY_PCT = 0.15    # mod must appear in ≥15% of sampled items to be reported
 CACHE_DIR = "data/build_cache"
 OUTPUT_FILE = "src/data/build_items.json"
@@ -164,24 +168,45 @@ def _save_cache(key: str, data):
         json.dump(data, f)
 
 
-def fetch_ladder(league: str, limit: int, session: requests.Session) -> list:
-    cache_key = f"ladder_{league}_{limit}"
-    cached = _load_cache(cache_key)
-    if cached is not None:
-        print(f"  [cache] ladder ({len(cached)} entries)")
-        return cached
+def fetch_ladder(league: str, session: requests.Session) -> list:
+    """
+    Paginates the GGG ladder API (200 entries per page) up to MAX_LADDER_PAGES.
+    Each page is cached independently so re-runs don't re-fetch already-seen pages.
+    Returns the combined list of all ladder entries.
+    """
+    all_entries = []
+    for page in range(MAX_LADDER_PAGES):
+        offset = page * PAGE_SIZE
+        cache_key = f"ladder_{league}_{PAGE_SIZE}_{offset}"
+        cached = _load_cache(cache_key)
+        if cached is not None:
+            print(f"  [cache] ladder page {page + 1} ({len(cached)} entries)")
+            all_entries.extend(cached)
+            if len(cached) < PAGE_SIZE:
+                break  # last page was short — no more data
+            continue
 
-    print(f"  Fetching top {limit} ladder entries for {league}...")
-    resp = session.get(
-        GGG_LADDER_URL.format(league=league),
-        params={"limit": limit},
-        timeout=20,
-    )
-    resp.raise_for_status()
-    entries = resp.json().get("entries", [])
-    _save_cache(cache_key, entries)
-    print(f"  Got {len(entries)} entries")
-    return entries
+        print(f"  Fetching ladder page {page + 1} (offset={offset})...")
+        try:
+            resp = session.get(
+                GGG_LADDER_URL.format(league=league),
+                params={"limit": PAGE_SIZE, "offset": offset},
+                timeout=20,
+            )
+            resp.raise_for_status()
+            entries = resp.json().get("entries", [])
+        except Exception as e:
+            print(f"  Warning: ladder page {page + 1} failed: {e}")
+            break
+
+        _save_cache(cache_key, entries)
+        print(f"  Got {len(entries)} entries")
+        all_entries.extend(entries)
+        if len(entries) < PAGE_SIZE:
+            break  # reached end of ladder
+
+    print(f"  Total ladder entries: {len(all_entries)}")
+    return all_entries
 
 
 def fetch_character_items(account: str, char: str, session: requests.Session) -> list:
@@ -268,23 +293,37 @@ def extract_primary_skill(items: list) -> str:
 
 def scrape(league: str, session: requests.Session) -> dict:
     """
-    Fetches ladder + character items.
+    Fetches ladder pages then character items until TARGET_PUBLIC_CHARS fetched.
     Returns raw: {account/char: {"items": [...], "char_class": "..."}}
     """
-    entries = fetch_ladder(league, LADDER_LIMIT, session)
+    entries = fetch_ladder(league, session)
     public_entries = [e for e in entries if e.get("public")]
     print(f"  {len(public_entries)} public characters out of {len(entries)}")
 
     raw = {}
+    fetched = 0  # counts actual network requests made this run (cached don't count)
     for i, entry in enumerate(public_entries, 1):
+        if len(raw) >= TARGET_PUBLIC_CHARS:
+            print(f"  Reached TARGET_PUBLIC_CHARS={TARGET_PUBLIC_CHARS}, stopping early")
+            break
         acct = entry["account"]["name"]
         char = entry["character"]["name"]
         char_class = entry["character"].get("class", "Unknown")
         key = f"{acct}/{char}"
-        print(f"  [{i}/{len(public_entries)}] {char_class}: {char} ({acct})")
+
+        # Skip if already cached — no network request needed
+        already_cached = _load_cache(f"items_{acct}_{char}") is not None
+        print(f"  [{i}/{len(public_entries)}] {char_class}: {char} ({acct}){' [cached]' if already_cached else ''}")
+
         items = fetch_character_items(acct, char, session)
         if items:
             raw[key] = {"items": items, "char_class": char_class}
+
+        if not already_cached:
+            fetched += 1
+            if fetched % BATCH_SIZE == 0:
+                print(f"  --- Batch pause {BATCH_PAUSE}s to avoid rate limiting ---")
+                time.sleep(BATCH_PAUSE)
 
     return raw
 
@@ -411,7 +450,16 @@ def main():
         # Re-build raw from the ladder cache, looking up each character's item
         # cache by the same key used to write it — avoids brittle filename parsing.
         print("Loading from cache...")
-        ladder_entries = _load_cache(f"ladder_{LEAGUE}_{LADDER_LIMIT}") or []
+        ladder_entries = []
+        for page in range(MAX_LADDER_PAGES):
+            offset = page * PAGE_SIZE
+            page_data = _load_cache(f"ladder_{LEAGUE}_{PAGE_SIZE}_{offset}")
+            if page_data is None:
+                break
+            ladder_entries.extend(page_data)
+            if len(page_data) < PAGE_SIZE:
+                break
+        print(f"  {len(ladder_entries)} ladder entries loaded from cache")
         raw = {}
         for entry in ladder_entries:
             acct = entry.get("account", {}).get("name", "")
