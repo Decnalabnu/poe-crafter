@@ -1,7 +1,11 @@
 """
 Build analyzer: fetches top ladder characters from the GGG public API,
-extracts rare item mods per slot, and outputs frequency statistics to
-src/data/build_items.json.
+extracts rare item mods per slot, and outputs frequency statistics grouped
+by build archetype (ascendancy class + primary skill) to build_items.json.
+
+Output structure:
+  {league, analyzed_at, characters_sampled,
+   builds: [{char_class, primary_skill, count, play_pct, slots: {...}}]}
 
 Rate limiting: REQUEST_DELAY seconds between character item fetches.
 All raw responses are cached to data/build_cache/ so re-runs are free.
@@ -84,10 +88,6 @@ def build_mod_pattern_index(items_db: dict) -> list:
     """
     Returns a list of (compiled_regex, {group, tier, id, item_tag, is_prefix})
     sorted longest-pattern-first so more specific patterns match before general ones.
-
-    Note: the same text template may appear for multiple item classes (e.g. Maximum Life
-    on rings and helmets). Each (item_tag, pattern) pair gets its own entry so that
-    match_mod_text can filter by item_tag correctly.
     """
     entries = []
     seen: set[tuple[str, str]] = set()  # (item_tag, full_pattern)
@@ -126,8 +126,7 @@ def match_mod_text(mod_text: str, pattern_index: list, item_tag: str) -> dict | 
     Try to match a single mod string against the pattern index for a given slot.
 
     The GGG client adds a leading '+' to flat stat mods (e.g. '+47% to Fire Resistance')
-    but items.json templates don't include it (e.g. '(18-23)% to Fire Resistance').
-    We try the raw text first, then strip a leading '+' as a fallback.
+    but items.json templates don't include it. We try raw text first, then strip '+'.
     """
     candidates = [mod_text.strip()]
     if mod_text.startswith("+"):
@@ -222,13 +221,55 @@ def fetch_character_items(account: str, char: str, session: requests.Session) ->
 
 
 # ---------------------------------------------------------------------------
+# Primary skill extraction
+# ---------------------------------------------------------------------------
+
+def extract_primary_skill(items: list) -> str:
+    """
+    Find the primary active skill by locating the most-linked non-Support gem.
+    Falls back to "Unknown" if no skill gems are found.
+    """
+    best_gem = "Unknown"
+    best_links = 0
+
+    for item in items:
+        socketed = item.get("socketedItems", [])
+        if not socketed:
+            continue
+        sockets = item.get("sockets", [])
+        if not sockets:
+            continue
+
+        # Count sockets per group to find the max link count in this item
+        group_counts: dict[int, int] = {}
+        for sock in sockets:
+            g = sock.get("group", 0)
+            group_counts[g] = group_counts.get(g, 0) + 1
+        max_links = max(group_counts.values(), default=0)
+
+        if max_links < best_links:
+            continue
+
+        # Pick the first active (non-Support) skill gem
+        for gem in socketed:
+            type_line = gem.get("typeLine", "") or gem.get("baseType", "")
+            if not type_line or "Support" in type_line:
+                continue
+            best_links = max_links
+            best_gem = type_line
+            break
+
+    return best_gem
+
+
+# ---------------------------------------------------------------------------
 # Scrape
 # ---------------------------------------------------------------------------
 
 def scrape(league: str, session: requests.Session) -> dict:
     """
     Fetches ladder + character items.
-    Returns raw: {account_char_key: [item, ...], ...}
+    Returns raw: {account/char: {"items": [...], "char_class": "..."}}
     """
     entries = fetch_ladder(league, LADDER_LIMIT, session)
     public_entries = [e for e in entries if e.get("public")]
@@ -243,7 +284,7 @@ def scrape(league: str, session: requests.Session) -> dict:
         print(f"  [{i}/{len(public_entries)}] {char_class}: {char} ({acct})")
         items = fetch_character_items(acct, char, session)
         if items:
-            raw[key] = items
+            raw[key] = {"items": items, "char_class": char_class}
 
     return raw
 
@@ -252,17 +293,16 @@ def scrape(league: str, session: requests.Session) -> dict:
 # Analyze
 # ---------------------------------------------------------------------------
 
-def analyze(raw: dict, pattern_index: list) -> dict:
+def _aggregate_slots(chars_items: list, pattern_index: list) -> dict:
     """
-    Aggregates mod frequency per slot across all sampled characters.
-    Returns the build_items.json structure.
+    Aggregates mod frequency per slot across a list of character item lists.
+    Returns {slot_tag: {sample_count, mod_frequency}} filtered by MIN_FREQUENCY_PCT.
     """
-    # slot_tag → {group → [tier_or_None, ...]}
     slot_mod_tiers: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
     slot_sample_counts: dict[str, int] = defaultdict(int)
 
-    for char_key, items in raw.items():
-        seen_slots_this_char: set[str] = set()
+    for items in chars_items:
+        seen_slots: set[str] = set()
         for item in items:
             inv_id = item.get("inventoryId", "")
             item_tag = SLOT_MAP.get(inv_id)
@@ -271,11 +311,10 @@ def analyze(raw: dict, pattern_index: list) -> dict:
             if item.get("frameType") != FRAME_TYPE_RARE:
                 continue
 
-            # Count each slot once per character (Ring appears twice, count both)
-            slot_key = inv_id  # use inventoryId (Ring vs Ring2) to count separately
-            if slot_key not in seen_slots_this_char:
+            slot_key = inv_id  # Ring vs Ring2 counted separately
+            if slot_key not in seen_slots:
                 slot_sample_counts[item_tag] += 1
-                seen_slots_this_char.add(slot_key)
+                seen_slots.add(slot_key)
 
             all_mods = (
                 item.get("explicitMods", [])
@@ -287,13 +326,11 @@ def analyze(raw: dict, pattern_index: list) -> dict:
                 if match:
                     slot_mod_tiers[item_tag][match["group"]].append(match["tier"])
 
-    # Build output per slot
     slots_out = {}
     for item_tag, group_tiers in slot_mod_tiers.items():
         sample_n = slot_sample_counts[item_tag]
         if sample_n == 0:
             continue
-
         mod_freq = {}
         for group, tiers in sorted(group_tiers.items(), key=lambda x: -len(x[1])):
             count = len(tiers)
@@ -307,13 +344,48 @@ def analyze(raw: dict, pattern_index: list) -> dict:
                 "min_tier_seen": min(valid_tiers) if valid_tiers else None,
                 "avg_tier": round(sum(valid_tiers) / len(valid_tiers), 1) if valid_tiers else None,
             }
-
-        slots_out[item_tag] = {
-            "sample_count": sample_n,
-            "mod_frequency": mod_freq,
-        }
+        if mod_freq:
+            slots_out[item_tag] = {"sample_count": sample_n, "mod_frequency": mod_freq}
 
     return slots_out
+
+
+def analyze(raw: dict, pattern_index: list) -> list:
+    """
+    Groups characters by (char_class, primary_skill) build archetype.
+    Returns list of build dicts sorted by play_pct descending.
+    """
+    total_chars = len(raw)
+
+    # Group characters by build archetype
+    build_groups: dict[tuple, list] = defaultdict(list)
+    build_meta: dict[tuple, dict] = {}
+
+    for char_key, char_data in raw.items():
+        items = char_data["items"]
+        char_class = char_data["char_class"]
+        primary_skill = extract_primary_skill(items)
+        key = (char_class, primary_skill)
+        build_groups[key].append(items)
+        build_meta[key] = {"char_class": char_class, "primary_skill": primary_skill}
+
+    builds_out = []
+    for key, chars_items in sorted(build_groups.items(), key=lambda x: -len(x[1])):
+        meta = build_meta[key]
+        count = len(chars_items)
+        play_pct = round(count / total_chars * 100, 1) if total_chars > 0 else 0
+
+        slots_out = _aggregate_slots(chars_items, pattern_index)
+
+        builds_out.append({
+            "char_class": meta["char_class"],
+            "primary_skill": meta["primary_skill"],
+            "count": count,
+            "play_pct": play_pct,
+            "slots": slots_out,
+        })
+
+    return builds_out
 
 
 # ---------------------------------------------------------------------------
@@ -336,31 +408,34 @@ def main():
     session.headers.update(HEADERS)
 
     if args.analyze:
-        # Load existing cached item data
+        # Re-build raw from the ladder cache, looking up each character's item
+        # cache by the same key used to write it — avoids brittle filename parsing.
         print("Loading from cache...")
+        ladder_entries = _load_cache(f"ladder_{LEAGUE}_{LADDER_LIMIT}") or []
         raw = {}
-        if os.path.exists(CACHE_DIR):
-            for fname in os.listdir(CACHE_DIR):
-                if fname.startswith("items_") and fname.endswith(".json"):
-                    with open(os.path.join(CACHE_DIR, fname), encoding="utf-8") as f:
-                        items = json.load(f)
-                    if items:
-                        key = fname[len("items_"):-len(".json")].replace("_", "/", 1)
-                        raw[key] = items
+        for entry in ladder_entries:
+            acct = entry.get("account", {}).get("name", "")
+            char = entry.get("character", {}).get("name", "")
+            char_class = entry.get("character", {}).get("class", "Unknown")
+            if not acct or not char:
+                continue
+            items = _load_cache(f"items_{acct}_{char}")
+            if items:
+                raw[f"{acct}/{char}"] = {"items": items, "char_class": char_class}
         print(f"  {len(raw)} cached characters found")
     else:
         print("Scraping ladder + character items...")
         raw = scrape(LEAGUE, session)
         print(f"  Collected items for {len(raw)} characters")
 
-    print("Analyzing mod frequencies...")
-    slots_out = analyze(raw, pattern_index)
+    print("Analyzing mod frequencies by build archetype...")
+    builds_out = analyze(raw, pattern_index)
 
     output = {
         "league": LEAGUE,
         "analyzed_at": datetime.now(timezone.utc).isoformat(),
         "characters_sampled": len(raw),
-        "slots": slots_out,
+        "builds": builds_out,
     }
 
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
@@ -368,10 +443,8 @@ def main():
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"\nDone. Output: {OUTPUT_FILE}")
-    for slot, data in slots_out.items():
-        top = list(data["mod_frequency"].items())[:3]
-        top_str = ", ".join(f"{g} ({v['frequency_pct']}%)" for g, v in top)
-        print(f"  {slot} (n={data['sample_count']}): {top_str}")
+    for build in builds_out[:8]:
+        print(f"  {build['char_class']} / {build['primary_skill']}: {build['count']} chars ({build['play_pct']}%)")
 
 
 if __name__ == "__main__":

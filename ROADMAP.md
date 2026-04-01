@@ -3,6 +3,7 @@
 ## Current State (~60% Complete)
 
 ### Working
+
 - Monte Carlo EV engine (500k iterations) — `src/utils/calculator.js`
 - Essence + Fossil crafting with multiplicative fossil weight stacking
 - Fractured bases support
@@ -10,6 +11,7 @@
 - 7 item classes with full mod pools from RePoE
 
 ### Architecture
+
 ```
 Python ETL (build_db.py, fetch_economy.py, update_data.py)
     ↓  produces
@@ -23,6 +25,7 @@ React App (App.jsx) → calculator.js (Monte Carlo) → profitability output
 ## Phase 1 — Complete the Crafting Engine
 
 ### 1.1 Influenced Mod Support (HIGHEST PRIORITY)
+
 Nearly every BiS rare on poe.ninja has at least one influenced mod.
 Without this, the build analyzer will miss the most profitable targets.
 
@@ -34,6 +37,7 @@ Without this, the build analyzer will miss the most profitable targets.
 - [ ] Add influence selector UI in `src/App.jsx` (6 influences + none)
 
 ### 1.2 Chaos / Alchemy Spam
+
 Most popular crafting path — already ~90% there.
 
 - [ ] Add rarity transition logic to calculator (normal → magic → rare)
@@ -42,6 +46,7 @@ Most popular crafting path — already ~90% there.
 - [ ] Add "Alchemy" and "Chaos Spam" as crafting method tabs in UI
 
 ### 1.3 Bench Crafts / Metamods
+
 Essential for hybrid strategies (block prefixes, then chaos roll suffixes).
 
 - [ ] Fetch `crafting_bench_options.json` from RePoE in `build_db.py`
@@ -53,6 +58,7 @@ Essential for hybrid strategies (block prefixes, then chaos roll suffixes).
 - [ ] UI: show available bench crafts for selected item class
 
 ### 1.4 Exalted Orb Slam Simulation
+
 Post-essence / post-fossil finishing step.
 
 - [ ] Simulate single-mod addition to an existing rare
@@ -61,6 +67,7 @@ Post-essence / post-fossil finishing step.
 - [ ] Show as optional "finishing step" in results panel
 
 ### 1.5 Veiled Mods
+
 Many BiS suffixes are veiled (e.g. "of the Crusade", movement speed + attribute).
 
 - [ ] Fetch `veiled_mods.json` from RePoE
@@ -68,6 +75,7 @@ Many BiS suffixes are veiled (e.g. "of the Crusade", movement speed + attribute)
 - [ ] Model Betrayal encounter cost (community estimate) as crafting input
 
 ### 1.6 Awakener Orb (Dual Influence)
+
 Combines two influenced items — required for top-tier crafts.
 
 - [ ] Model as two-item input (source influence + target influence)
@@ -81,22 +89,26 @@ Combines two influenced items — required for top-tier crafts.
 Goal: Scrape popular builds, extract item requirements, reverse-engineer optimal craft paths.
 
 ### 2.1 Build Scraper (`scrape_builds.py`)
+
 - [ ] Fetch poe.ninja `/builds` endpoint for top 5-10 popular build archetypes
 - [ ] Extract equipped rare items per character (body, helm, gloves, boots, rings, amulet, belt)
 - [ ] Parse item mods into structured mod IDs (match against items.json)
 - [ ] Store: `build_items.json` — list of high-value item mod targets per slot
 
 ### 2.2 Mod Requirement Extractor
+
 - [ ] Identify the "required" mods (appear in >80% of that build's items) vs "nice to have"
 - [ ] Determine min tier thresholds from sampled items (e.g., T1-T2 life on rings)
 - [ ] Output: ranked list of mod combos per item slot per build archetype
 
 ### 2.3 Market Value Estimator
+
 - [ ] Cross-reference target mod combos against poe.ninja trade data
 - [ ] Estimate item value based on mod combination rarity + demand
 - [ ] Feed market value estimate into existing profitability calculator
 
 ### 2.4 Craft Path Ranker
+
 - [ ] For each target item: run Monte Carlo across all viable crafting methods
   - Essence spam, fossil spam, chaos spam, influenced essence, etc.
 - [ ] Rank by expected profit: `market_value - (base_cost + expected_craft_cost)`
@@ -109,23 +121,27 @@ Goal: Scrape popular builds, extract item requirements, reverse-engineer optimal
 Goal: Surface the single best crafting strategy for a given target item.
 
 ### 3.1 Item-Centric Workflow (like Craft of Exile)
+
 - [ ] Replace current "select mods manually" flow with "select a target item archetype"
 - [ ] Auto-populate target mods from build analyzer output
 - [ ] Show all crafting paths side-by-side in a comparison table
 
 ### 3.2 Comparison Table
-| Path | Avg Tries | Expected Cost | Success Rate | Profit |
-|------|-----------|---------------|--------------|--------|
-| Essence of Rage × 3 → Exalt | 12 | 180c | 8.3% | +420c |
-| 4-Fossil Resonator | 28 | 420c | 3.6% | +180c |
-| Chaos Spam | 847 | 1270c | 0.12% | -250c |
+
+| Path                        | Avg Tries | Expected Cost | Success Rate | Profit |
+| --------------------------- | --------- | ------------- | ------------ | ------ |
+| Essence of Rage × 3 → Exalt | 12        | 180c          | 8.3%         | +420c  |
+| 4-Fossil Resonator          | 28        | 420c          | 3.6%         | +180c  |
+| Chaos Spam                  | 847       | 1270c         | 0.12%        | -250c  |
 
 ### 3.3 "Craft This" Mode
+
 - [ ] Step-by-step crafting instructions with current prices
 - [ ] Decision points: "If you hit X, proceed to step 3. If not, scour and repeat."
 - [ ] Estimated total budget needed for 90% confidence of success
 
 ### 3.4 Historical Profitability Tracking
+
 - [ ] Store daily snapshots of active_economy.json
 - [ ] Plot craft EV over time (prices change as league progresses)
 - [ ] Alert when a craft crosses from loss → profit territory
@@ -134,16 +150,16 @@ Goal: Surface the single best crafting strategy for a given target item.
 
 ## Data Sources Reference
 
-| Data | Source | Script |
-|------|--------|--------|
-| Mod pools | RePoE GitHub (`mods.json`) | `build_db.py` |
-| Essences | RePoE GitHub (`essences.json`) | `build_db.py` |
-| Fossils | RePoE GitHub | `build_db.py` |
-| Bench crafts | RePoE (`crafting_bench_options.json`) | to add |
-| Veiled mods | RePoE (`veiled_mods.json`) | to add |
-| Live prices | poe.ninja currency + essence APIs | `fetch_economy.py` |
-| Build data | poe.ninja `/builds` endpoint | to add (`scrape_builds.py`) |
-| Trade prices | poe.ninja trade search API | to add |
+| Data         | Source                                | Script                      |
+| ------------ | ------------------------------------- | --------------------------- |
+| Mod pools    | RePoE GitHub (`mods.json`)            | `build_db.py`               |
+| Essences     | RePoE GitHub (`essences.json`)        | `build_db.py`               |
+| Fossils      | RePoE GitHub                          | `build_db.py`               |
+| Bench crafts | RePoE (`crafting_bench_options.json`) | to add                      |
+| Veiled mods  | RePoE (`veiled_mods.json`)            | to add                      |
+| Live prices  | poe.ninja currency + essence APIs     | `fetch_economy.py`          |
+| Build data   | poe.ninja `/builds` endpoint          | to add (`scrape_builds.py`) |
+| Trade prices | poe.ninja trade search API            | to add                      |
 
 ---
 

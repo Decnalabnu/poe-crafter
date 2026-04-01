@@ -3,9 +3,191 @@ import itemsData from "./data/items.json";
 import essenceDataList from "./data/essences.json";
 import fossilData from "./data/fossils.json";
 import economyData from "./data/active_economy.json";
+import buildItemsData from "./data/build_items.json";
 import { calculateSpamEV } from "./utils/calculator";
 
+const SLOT_LABELS = {
+  ring: "Ring",
+  amulet: "Amulet",
+  belt: "Belt",
+  body_armour: "Body Armour",
+  helmet: "Helmet",
+  boots: "Boots",
+  gloves: "Gloves",
+};
+
+function freqColor(pct) {
+  if (pct >= 70) return "#4CAF50";
+  if (pct >= 40) return "#e2b659";
+  if (pct >= 20) return "#6bbbe3";
+  return "#888";
+}
+
+function SlotModList({ slots }) {
+  const [activeSlot, setActiveSlot] = useState(
+    Object.keys(slots)[0] ?? "ring"
+  );
+  const slotKeys = Object.keys(slots);
+  const slotData = slots[activeSlot];
+
+  return (
+    <div style={{ marginTop: "14px" }}>
+      {/* Slot tab strip */}
+      <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginBottom: "12px" }}>
+        {slotKeys.map((sk) => (
+          <button
+            key={sk}
+            onClick={() => setActiveSlot(sk)}
+            style={{
+              padding: "5px 11px",
+              fontSize: "12px",
+              background: activeSlot === sk ? "#c77be3" : "#2d2d2d",
+              color: activeSlot === sk ? "#000" : "#aaa",
+              border: activeSlot === sk ? "none" : "1px solid #444",
+              borderRadius: "3px",
+              cursor: "pointer",
+              fontWeight: activeSlot === sk ? "bold" : "normal",
+            }}
+          >
+            {SLOT_LABELS[sk] ?? sk}
+            <span style={{ marginLeft: "5px", opacity: 0.7, fontSize: "11px" }}>
+              n={slots[sk].sample_count}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* Mod frequency bars for active slot */}
+      {slotData && Object.entries(slotData.mod_frequency).map(([group, stats]) => {
+        const pct = stats.frequency_pct;
+        const color = freqColor(pct);
+        return (
+          <div key={group} style={{ marginBottom: "9px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", marginBottom: "3px" }}>
+              <span style={{ color: "#ddd" }}>{group}</span>
+              <span style={{ fontSize: "12px" }}>
+                {stats.min_tier_seen != null && (
+                  <span style={{ color: "#e2b659", marginRight: "8px" }}>
+                    T{stats.min_tier_seen}
+                  </span>
+                )}
+                <span style={{ color }}>{pct}%</span>
+              </span>
+            </div>
+            <div style={{ height: "4px", background: "#333", borderRadius: "2px", overflow: "hidden" }}>
+              <div style={{ width: `${Math.min(pct, 100)}%`, height: "100%", background: color, borderRadius: "2px" }} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function BuildAnalyzer() {
+  const { league, analyzed_at, characters_sampled, builds } = buildItemsData;
+  const analyzedDate = new Date(analyzed_at).toLocaleString();
+  const firstKey = builds[0] ? builds[0].char_class + builds[0].primary_skill : null;
+  const [expandedBuild, setExpandedBuild] = useState(firstKey);
+
+  return (
+    <div>
+      {/* Summary bar */}
+      <div style={{
+        background: "#1e1e1e", border: "1px solid #444", borderRadius: "6px",
+        padding: "12px 18px", marginBottom: "20px",
+        display: "flex", gap: "30px", flexWrap: "wrap", fontSize: "14px", color: "#aaa",
+      }}>
+        <span>League: <strong style={{ color: "#e2b659" }}>{league}</strong></span>
+        <span>Characters sampled: <strong style={{ color: "#ddd" }}>{characters_sampled}</strong></span>
+        <span>Analyzed: <strong style={{ color: "#ddd" }}>{analyzedDate}</strong></span>
+      </div>
+
+      {/* Play-rate overview bar */}
+      <div style={{ marginBottom: "20px" }}>
+        <div style={{ fontSize: "13px", color: "#888", marginBottom: "8px", fontWeight: "bold", letterSpacing: "0.05em" }}>
+          ASCENDANCY PLAY RATE
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+          {builds.map((b) => {
+            const key = b.char_class + b.primary_skill;
+            const isActive = expandedBuild === key;
+            return (
+              <button
+                key={key}
+                onClick={() => setExpandedBuild(isActive ? null : key)}
+                style={{
+                  padding: "8px 14px",
+                  background: isActive ? "#2d1f3d" : "#1e1e1e",
+                  border: isActive ? "1px solid #c77be3" : "1px solid #444",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  minWidth: "140px",
+                }}
+              >
+                <div style={{ color: isActive ? "#c77be3" : "#ddd", fontWeight: "bold", fontSize: "14px" }}>
+                  {b.char_class}
+                </div>
+                <div style={{ color: "#aaa", fontSize: "12px", marginTop: "2px" }}>
+                  {b.primary_skill}
+                </div>
+                <div style={{ marginTop: "6px", height: "3px", background: "#333", borderRadius: "2px", overflow: "hidden" }}>
+                  <div style={{ width: `${b.play_pct}%`, height: "100%", background: isActive ? "#c77be3" : "#555", borderRadius: "2px" }} />
+                </div>
+                <div style={{ color: freqColor(b.play_pct), fontSize: "12px", marginTop: "4px", fontWeight: "bold" }}>
+                  {b.play_pct}% · {b.count} chars
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Expanded build detail */}
+      {builds.map((b) => {
+        const key = b.char_class + b.primary_skill;
+        if (expandedBuild !== key) return null;
+        return (
+          <div key={key} style={{
+            background: "#1a1025",
+            border: "1px solid #c77be3",
+            borderRadius: "8px",
+            padding: "18px 20px",
+          }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginBottom: "4px" }}>
+              <span style={{ color: "#c77be3", fontWeight: "bold", fontSize: "18px" }}>{b.char_class}</span>
+              <span style={{ color: "#aaa", fontSize: "14px" }}>→</span>
+              <span style={{ color: "#ddd", fontSize: "15px" }}>{b.primary_skill}</span>
+              <span style={{ marginLeft: "auto", color: "#888", fontSize: "13px" }}>
+                {b.count} characters · {b.play_pct}% of ladder
+              </span>
+            </div>
+            <div style={{ fontSize: "12px", color: "#666", marginBottom: "14px" }}>
+              Rare item mod frequency by slot. T# = best tier seen on ladder.
+            </div>
+
+            {Object.keys(b.slots).length > 0
+              ? <SlotModList slots={b.slots} />
+              : <div style={{ color: "#666", fontSize: "13px" }}>No slot data available for this build.</div>
+            }
+
+            {/* Legend */}
+            <div style={{ marginTop: "16px", fontSize: "12px", color: "#555", display: "flex", gap: "16px", flexWrap: "wrap", borderTop: "1px solid #2d2d2d", paddingTop: "10px" }}>
+              <span><span style={{ color: "#4CAF50" }}>■</span> ≥70% core</span>
+              <span><span style={{ color: "#e2b659" }}>■</span> ≥40% common</span>
+              <span><span style={{ color: "#6bbbe3" }}>■</span> ≥20% situational</span>
+              <span><span style={{ color: "#888" }}>■</span> &lt;20%</span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function App() {
+  const [activeTab, setActiveTab] = useState("crafter");
   const [selectedItemClass, setSelectedItemClass] = useState("ring");
   const [craftingMethod, setCraftingMethod] = useState("essence");
   const [fracturedModId, setFracturedModId] = useState("none");
@@ -312,9 +494,35 @@ function App() {
         color: "#ddd",
       }}
     >
-      <h1>PoE Profit Crafter</h1>
+      <h1 style={{ marginBottom: "4px" }}>PoE Profit Crafter</h1>
 
-      <div
+      <div style={{ display: "flex", gap: "8px", marginBottom: "20px" }}>
+        {[
+          { id: "crafter", label: "Crafter" },
+          { id: "builds", label: "Build Analyzer" },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            style={{
+              padding: "8px 18px",
+              background: activeTab === tab.id ? "#4CAF50" : "#2d2d2d",
+              color: activeTab === tab.id ? "#000" : "#aaa",
+              border: activeTab === tab.id ? "none" : "1px solid #444",
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              fontSize: "14px",
+            }}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === "builds" && <BuildAnalyzer />}
+
+      {activeTab === "crafter" && <div
         style={{ background: "#2d2d2d", padding: "20px", borderRadius: "8px" }}
       >
         <div
@@ -792,7 +1000,7 @@ function App() {
             <strong>Error:</strong> {result.error}
           </div>
         )}
-      </div>
+      </div>}
     </div>
   );
 }
