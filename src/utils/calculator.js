@@ -41,16 +41,15 @@ function applyFossilMultipliers(pool, activeFossilIds) {
     .filter((mod) => mod.weight > 0);
 }
 
-// Returns true if modId satisfies targetId (exact match or tier-format "at least T-N" matching)
-function satisfiesTarget(modId, targetId) {
-  if (modId === targetId) return true;
-  const tMatch = targetId.match(/^(.+)_tier_(\d+)$/);
-  const rMatch = modId.match(/^(.+)_tier_(\d+)$/);
-  if (tMatch && rMatch && tMatch[1] === rMatch[1]) {
-    // Lower tier number = higher quality; T1 satisfies a T2 requirement
-    return parseInt(rMatch[2], 10) <= parseInt(tMatch[2], 10);
+// Returns true if mod m (with a .tier field from items.json) satisfies targetMod.
+// Lower tier number = better roll, so T1 satisfies a T2 requirement.
+// Falls back to exact id match for mods without tier data.
+function modSatisfiesTarget(m, targetMod) {
+  if (m.group !== targetMod.group) return false;
+  if (m.tier !== undefined && targetMod.tier !== undefined) {
+    return m.tier <= targetMod.tier;
   }
-  return false;
+  return m.id === targetMod.id;
 }
 
 // ---------------------------------------------------------------------------
@@ -221,6 +220,7 @@ export function calculateSpamEV(
     .map((m) => ({
       id: m.id,
       group: m.group,
+      tier: m.tier,
       weight: m.spawn_weights[0]?.weight || 0,
       isPrefix: true,
       mod_tags: m.mod_tags || [],
@@ -234,11 +234,15 @@ export function calculateSpamEV(
     .map((m) => ({
       id: m.id,
       group: m.group,
+      tier: m.tier,
       weight: m.spawn_weights[0]?.weight || 0,
       isPrefix: false,
       mod_tags: m.mod_tags || [],
     }))
-    .filter((m) => m.weight > 0 || m.id === fracturedModId);
+    .filter(
+      (m) =>
+        m.weight > 0 || m.id === guaranteedModId || m.id === fracturedModId,
+    );
 
   validPrefixes = applyFossilMultipliers(validPrefixes, activeFossils);
   validSuffixes = applyFossilMultipliers(validSuffixes, activeFossils);
@@ -277,9 +281,15 @@ export function calculateSpamEV(
     (m) => !prePlacedGroups.has(m.group),
   );
 
+  // Resolve each target ID to its mod object so tier comparisons work
+  const allValidMods = [...validPrefixes, ...validSuffixes];
+  const resolvedTargetMods = targetIds
+    .map((tid) => allValidMods.find((m) => m.id === tid))
+    .filter(Boolean);
+
   // Targets already satisfied by pre-placed mods are removed from requirements
-  const remainingTargets = targetIds.filter(
-    (tid) => !prePlaced.some((pm) => satisfiesTarget(pm.id, tid)),
+  const remainingTargetMods = resolvedTargetMods.filter(
+    (targetMod) => !prePlaced.some((pm) => modSatisfiesTarget(pm, targetMod)),
   );
 
   const prePlacedPrefixes = prePlaced.filter((m) => m.isPrefix).length;
@@ -287,7 +297,7 @@ export function calculateSpamEV(
   const maxPrefixSlots = 3 - prePlacedPrefixes;
   const maxSuffixSlots = 3 - prePlacedSuffixes;
 
-  if (remainingTargets.length === 0) {
+  if (remainingTargetMods.length === 0) {
     return {
       probability: "100.0000%",
       averageTries: 1,
@@ -313,13 +323,13 @@ export function calculateSpamEV(
 
   // Resolve each remaining target: find its group, qualifying weight, and full group weight
   const targetGroupDefs = [];
-  for (const tid of remainingTargets) {
+  for (const targetMod of remainingTargetMods) {
     let effectiveWeight = 0;
     let isPrefix = null;
     let group = null;
 
     for (const m of rollablePrefixes) {
-      if (satisfiesTarget(m.id, tid)) {
+      if (modSatisfiesTarget(m, targetMod)) {
         effectiveWeight += m.weight;
         isPrefix = true;
         group = m.group;
@@ -328,7 +338,7 @@ export function calculateSpamEV(
 
     if (isPrefix === null) {
       for (const m of rollableSuffixes) {
-        if (satisfiesTarget(m.id, tid)) {
+        if (modSatisfiesTarget(m, targetMod)) {
           effectiveWeight += m.weight;
           isPrefix = false;
           group = m.group;
@@ -337,14 +347,21 @@ export function calculateSpamEV(
     }
 
     if (effectiveWeight === 0 || group === null) {
-      return { error: `Target mod not found or has zero weight: ${tid}` };
+      return {
+        error: `Target mod not found or has zero weight: ${targetMod.id}`,
+      };
     }
 
     const groupTotalWeight = isPrefix
       ? prefixGroupWeights.get(group) || 0
       : suffixGroupWeights.get(group) || 0;
 
-    targetGroupDefs.push({ effectiveWeight, groupTotalWeight, isPrefix, group });
+    targetGroupDefs.push({
+      effectiveWeight,
+      groupTotalWeight,
+      isPrefix,
+      group,
+    });
   }
 
   // Non-target group pools (exclude target groups)
@@ -365,13 +382,9 @@ export function calculateSpamEV(
   const ntPrefixN = ntPrefixWeights.length;
   const ntSuffixN = ntSuffixWeights.length;
   const avgNtPW =
-    ntPrefixN > 0
-      ? ntPrefixWeights.reduce((s, w) => s + w, 0) / ntPrefixN
-      : 0;
+    ntPrefixN > 0 ? ntPrefixWeights.reduce((s, w) => s + w, 0) / ntPrefixN : 0;
   const avgNtSW =
-    ntSuffixN > 0
-      ? ntSuffixWeights.reduce((s, w) => s + w, 0) / ntSuffixN
-      : 0;
+    ntSuffixN > 0 ? ntSuffixWeights.reduce((s, w) => s + w, 0) / ntSuffixN : 0;
 
   const initialMask = (1 << targetGroupDefs.length) - 1;
   const memo = new Map();
@@ -379,7 +392,7 @@ export function calculateSpamEV(
 
   for (const { count, prob } of MOD_COUNT_DIST) {
     const randomSlots = count - prePlaced.length;
-    if (randomSlots < remainingTargets.length) continue;
+    if (randomSlots < remainingTargetMods.length) continue;
 
     const hitProb = recursiveProb(
       initialMask,

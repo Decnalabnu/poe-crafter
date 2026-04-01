@@ -1,0 +1,314 @@
+{
+  "deafening_essence_of_anger": {
+    "name": "Deafening Essence of Anger",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "FireDamagePercentEssence7",
+      "belt": "FireResist8",
+      "body_armour": "FireResist8",
+      "boots": "FireResist8",
+      "gloves": "FireResist8",
+      "helmet": "FireResist8",
+      "ring": "FireDamagePercentEssence7"
+    }
+  },
+  "deafening_essence_of_anguish": {
+    "name": "Deafening Essence of Anguish",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "AddedFireDamageEssence7",
+      "belt": "ChanceToAvoidIgniteEssence7_",
+      "body_armour": "ChanceToAvoidFireDamageEssence7",
+      "boots": "ChanceToAvoidIgniteEssence7_",
+      "gloves": "AddedFireDamage6",
+      "helmet": "ChanceToAvoidIgniteEssence7_",
+      "ring": "AddedFireDamageEssence7"
+    }
+  },
+  "deafening_essence_of_contempt": {
+    "name": "Deafening Essence of Contempt",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "AddedPhysicalDamageEssenceAmulet7",
+      "belt": "AttackerTakesDamageEssence7",
+      "body_armour": "AttackerTakesDamageEssence7",
+      "boots": "AttackerTakesDamageEssence7",
+      "gloves": "AddedPhysicalDamageEssenceGlovesQuiver7",
+      "helmet": "AttackerTakesDamageEssence7",
+      "ring": "AddedPhysicalDamageEssenceRing7"
+    }
+  },
+  "essence_of_delirium": {
+    "name": "Essence of Delirium",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "MaximumDoomAmuletEssence1",
+      "belt": "ChaosResistanceWhileUsingFlaskEssence1",
+      "body_armour": "ChaosDamageOverTimeTakenEssence1",
+      "boots": "CannotBePoisonedEssence1",
+      "gloves": "SupportDamageOverTimeEssence1",
+      "helmet": "SocketedAuraGemLevelsEssence1",
+      "ring": "GlobalDamageOverTimeMultiplierRingEssence1"
+    }
+  },
+  "deafening_essence_of_doubt": {
+    "name": "Deafening Essence of Doubt",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "IncreasedEvasionRatingPercentEssence7",
+      "belt": "IncreasedEvasionRatingEssence7",
+      "body_armour": "LocalIncreasedEvasionRatingEssence7",
+      "boots": "LocalIncreasedEvasionRatingEssenceGlovesBoots7",
+      "gloves": "LocalIncreasedEvasionRatingEssenceGlovesBoots7",
+      "helmet": "LocalIncreasedEvasionRatingEssenceHelm7",
+      "ring": "IncreasedEvasionRatingEssence7"
+    }
+  },
+  "deafening_essence_of_dread": {
+    "name": "Deafening Essence of Dread",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "IncreasedPhysicalDamageReductionRatingPercentEssence7",
+      "belt": "IncreasedPhysicalDamageReductionRatingEssence7",
+      "body_armour": "LocalIncreasedPhysicalDamageReductionRatingEssence7",
+      "boots": "LocalIncreasedPhysicalDamageReductionRatingEssenceBootsGloves7",
+      "gloves": "LocalIncreasedPhysicalDamageReductionRatingEssenceBootsGloves7",
+      "helmet": "LocalIncreasedPhysicalDamageReductionRatingEssenceHelm7_",
+      "ring": "IncreasedPhysicalDamageReductionRatingEssenceRing7"
+    }
+  },
+  "deafening_essence_of_envy": {
+    "name": "Deafening Essence of Envy",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "IncreasedChaosDamageEssence7",
+      "belt": "ChaosResist6",
+      "body_armour": "ChaosResist6",
+      "boots": "ChaosResist6",
+      "gloves": "ChaosResist6",
+      "helmet": "ChaosResist6",
+      "ring": "IncreasedChaosDamageEssence7"
+    }
+  },
+  "deafening_essence_of_fear": {
+    "name": "Deafening Essence of Fear",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "MinionRunSpeedEssence7",
+      "belt": "MinionLifeEssence7",
+      "body_armour": "MinionLifeEssence7",
+      "boots": "MinionLifeEssence7",
+      "gloves": "MinionDamageGlovesEssence7",
+      "helmet": "MinionAccuracyEssence7_",
+      "ring": "MinionRunSpeedEssence7"
+    }
+  },
+  "deafening_essence_of_greed": {
+    "name": "Deafening Essence of Greed",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "LifeRegeneration7",
+      "belt": "BeltFlaskLifeRecoveryRateEssence7",
+      "body_armour": "IncreasedLifeEssenceChest1",
+      "boots": "IncreasedLifeEssenceBootsGloves1",
+      "gloves": "IncreasedLifeEssenceBootsGloves1",
+      "helmet": "IncreasedLifeEssenceHelm1",
+      "ring": "LifeRegeneration7"
+    }
+  },
+  "deafening_essence_of_hatred": {
+    "name": "Deafening Essence of Hatred",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "ColdDamagePercentEssence7",
+      "belt": "ColdResist8",
+      "body_armour": "ColdResist8",
+      "boots": "ColdResist8",
+      "gloves": "ColdResist8",
+      "helmet": "ColdResist8",
+      "ring": "ColdDamagePercentEssence7"
+    }
+  },
+  "essence_of_horror": {
+    "name": "Essence of Horror",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "CrushOnHitChanceEssence1",
+      "belt": "AlchemistsGeniusOnFlaskEssence1_",
+      "body_armour": "PhysicalDamageTakenAsColdEssence1",
+      "boots": "ElementalDamageTakenWhileStationaryEssence1",
+      "gloves": "SocketedSkillsCriticalChanceEssence1",
+      "helmet": "SocketedGemsDealMoreElementalDamageEssence1",
+      "ring": "AddedColdDamagePerFrenzyChargeEssence1"
+    }
+  },
+  "essence_of_hysteria": {
+    "name": "Essence of Hysteria",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "IncreasedLifeLeechRateEssence1",
+      "belt": "ElementalPenetrationDuringFlaskEffectEssence1",
+      "body_armour": "AreaOfEffectEssence1",
+      "boots": "BurningGroundWhileMovingEssence1",
+      "gloves": "SocketedGemsDealAdditionalFireDamageEssence1",
+      "helmet": "SocketedSkillDamageOnLowLifeEssence1__",
+      "ring": "FireDamageAsPortionOfPhysicalDamageEssence1"
+    }
+  },
+  "essence_of_insanity": {
+    "name": "Essence of Insanity",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "ChanceToRecoverManaOnSkillUseEssence1",
+      "belt": "MovementVelocityDuringFlaskEffectEssence1",
+      "body_armour": "OnslaughtWhenHitNewEssence1",
+      "boots": "ManaRegenerationWhileShockedEssence1",
+      "gloves": "SocketedGemsHaveMoreAttackAndCastSpeedEssenceNew1",
+      "helmet": "SocketedGemsAddPercentageOfPhysicalAsLightningEssence1",
+      "ring": "ReflectDamageTakenEssence1"
+    }
+  },
+  "deafening_essence_of_loathing": {
+    "name": "Deafening Essence of Loathing",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "CriticalStrikeChanceEssence7",
+      "belt": "StunDurationEssence7",
+      "body_armour": "ManaReservationEfficiencyEssence7",
+      "boots": "ChanceToAvoidElementalStatusAilmentsEssence4",
+      "gloves": "CriticalStrikeChanceEssenceGloves7",
+      "helmet": "ManaReservationEfficiencyEssence7",
+      "ring": "CriticalStrikeChanceEssenceGloves7"
+    }
+  },
+  "deafening_essence_of_misery": {
+    "name": "Deafening Essence of Misery",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "ManaRegenerationEssence7_",
+      "belt": "BeltFlaskManaRecoveryRateEssence3",
+      "body_armour": "IncreasedManaEssence7",
+      "boots": "IncreasedManaEssence7",
+      "gloves": "IncreasedManaEssence7",
+      "helmet": "IncreasedManaEssence7",
+      "ring": "ManaRegenerationEssence7_"
+    }
+  },
+  "deafening_essence_of_rage": {
+    "name": "Deafening Essence of Rage",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "StrengthEssence7_",
+      "belt": "StrengthEssence7_",
+      "body_armour": "StrengthEssence7_",
+      "boots": "StrengthEssence7_",
+      "gloves": "StrengthEssence7_",
+      "helmet": "StrengthEssence7_",
+      "ring": "StrengthEssence7_"
+    }
+  },
+  "deafening_essence_of_scorn": {
+    "name": "Deafening Essence of Scorn",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "CriitcalMultiplierEssence7",
+      "belt": "StunThresholdReductionEssence7",
+      "body_armour": "IncreasedStunThresholdEssence7",
+      "boots": "StunAvoidanceEssence7",
+      "gloves": "StunAvoidanceEssence7",
+      "helmet": "StunAvoidanceEssence7",
+      "ring": "CriticalMultiplierEssenceRing7"
+    }
+  },
+  "deafening_essence_of_sorrow": {
+    "name": "Deafening Essence of Sorrow",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "DexterityEssence7",
+      "belt": "DexterityEssence7",
+      "body_armour": "DexterityEssence7",
+      "boots": "DexterityEssence7",
+      "gloves": "DexterityEssence7",
+      "helmet": "DexterityEssence7",
+      "ring": "DexterityEssence7"
+    }
+  },
+  "deafening_essence_of_spite": {
+    "name": "Deafening Essence of Spite",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "IntelligenceEssence7",
+      "belt": "IntelligenceEssence7",
+      "body_armour": "IntelligenceEssence7",
+      "boots": "IntelligenceEssence7",
+      "gloves": "IntelligenceEssence7",
+      "helmet": "IntelligenceEssence7",
+      "ring": "IntelligenceEssence7"
+    }
+  },
+  "deafening_essence_of_suffering": {
+    "name": "Deafening Essence of Suffering",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "AddedColdDamageEssence7",
+      "belt": "ChanceToAvoidFreezeEssence7",
+      "body_armour": "ChanceToAvoidColdDamageEssence7",
+      "boots": "ChanceToAvoidFreezeEssence7",
+      "gloves": "AddedColdDamage6",
+      "helmet": "ChanceToAvoidFreezeEssence7",
+      "ring": "AddedColdDamageEssence7"
+    }
+  },
+  "deafening_essence_of_torment": {
+    "name": "Deafening Essence of Torment",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "AddedLightningDamageEssence7",
+      "belt": "ChanceToAvoidShockEssence7",
+      "body_armour": "ChanceToAvoidLightningDamageEssence7",
+      "boots": "ChanceToAvoidShockEssence7",
+      "gloves": "AddedLightningDamage6",
+      "helmet": "ChanceToAvoidShockEssence7",
+      "ring": "AddedLightningDamageEssence7"
+    }
+  },
+  "deafening_essence_of_woe": {
+    "name": "Deafening Essence of Woe",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "IncreasedEnergyShieldPercentEssence7_",
+      "belt": "IncreasedEnergyShield10",
+      "body_armour": "LocalIncreasedEnergyShieldEssenceChest7__",
+      "boots": "LocalIncreasedEnergyShieldEssenceBootsGloves7",
+      "gloves": "LocalIncreasedEnergyShieldEssenceBootsGloves7",
+      "helmet": "LocalIncreasedEnergyShieldEssenceHelm7",
+      "ring": "IncreasedEnergyShield11"
+    }
+  },
+  "deafening_essence_of_wrath": {
+    "name": "Deafening Essence of Wrath",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "LightningDamagePercentEssence7",
+      "belt": "LightningResist8",
+      "body_armour": "LightningResist8",
+      "boots": "LightningResist8",
+      "gloves": "LightningResist8",
+      "helmet": "LightningResist8",
+      "ring": "LightningDamagePercentEssence7"
+    }
+  },
+  "deafening_essence_of_zeal": {
+    "name": "Deafening Essence of Zeal",
+    "cost": 3,
+    "guaranteed_mods": {
+      "amulet": "IncreasedCastSpeed4",
+      "belt": "TrapAndMineThrowSpeedEssence4",
+      "body_armour": "SummonTotemCastSpeedEssence4",
+      "boots": "MovementVelocityEssence7",
+      "gloves": "IncreasedAttackSpeedEssenceGloves7",
+      "helmet": "WarcrySpeedEssence4_",
+      "ring": "IncreasedCastSpeedRing4"
+    }
+  }
+}

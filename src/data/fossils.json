@@ -1,7 +1,6 @@
 {
   "pristine": {
     "name": "Pristine Fossil",
-    "cost": 1,
     "multipliers": {
       "life": 10,
       "defences": 0,
@@ -10,25 +9,38 @@
       "energy_shield": 0
     }
   },
-  "aberrant": {
-    "name": "Aberrant Fossil",
-    "cost": 1,
+  "dense": {
+    "name": "Dense Fossil",
     "multipliers": {
-      "chaos": 10,
-      "lightning": 0
+      "defences": 10,
+      "armour": 10,
+      "evasion": 10,
+      "energy_shield": 10,
+      "life": 0
     }
+  },
+  "frigid": {
+    "name": "Frigid Fossil",
+    "multipliers": { "cold": 10, "fire": 0 }
+  },
+  "scorched": {
+    "name": "Scorched Fossil",
+    "multipliers": { "fire": 10, "cold": 0 }
   },
   "metallic": {
     "name": "Metallic Fossil",
-    "cost": 1,
-    "multipliers": {
-      "lightning": 10,
-      "physical": 0
-    }
+    "multipliers": { "lightning": 10, "physical": 0 }
+  },
+  "jagged": {
+    "name": "Jagged Fossil",
+    "multipliers": { "physical": 10, "chaos": 0 }
+  },
+  "aberrant": {
+    "name": "Aberrant Fossil",
+    "multipliers": { "chaos": 10, "lightning": 0 }
   },
   "prismatic": {
     "name": "Prismatic Fossil",
-    "cost": 1,
     "multipliers": {
       "fire": 10,
       "cold": 10,
@@ -36,5 +48,33 @@
       "poison": 0,
       "bleeding": 0
     }
+  },
+  "corroded": {
+    "name": "Corroded Fossil",
+    "multipliers": {
+      "poison": 10,
+      "bleeding": 10,
+      "elemental": 0,
+      "fire": 0,
+      "cold": 0,
+      "lightning": 0
+    }
+  },
+  "lucent": {
+    "name": "Lucent Fossil",
+    "multipliers": { "mana": 10, "speed": 0 }
+  },
+  "shuddering": {
+    "name": "Shuddering Fossil",
+    "multipliers": { "speed": 10, "mana": 0 }
+  },
+  "bound": { "name": "Bound Fossil", "multipliers": { "minion": 10 } },
+  "serrated": {
+    "name": "Serrated Fossil",
+    "multipliers": { "attack": 10, "caster": 0 }
+  },
+  "aetheric": {
+    "name": "Aetheric Fossil",
+    "multipliers": { "caster": 10, "attack": 0 }
   }
 }

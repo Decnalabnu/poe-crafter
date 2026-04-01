@@ -1,71 +1,57 @@
 {
-  "basic_currency": {
-    "chaos_orb": {
-      "name": "Chaos Orb",
-      "cost": 1
-    },
-    "divine_orb": {
-      "name": "Divine Orb",
-      "cost": 522.7
-    },
-    "orb_of_annulment": {
-      "name": "Orb of Annulment",
-      "cost": 12
-    },
-    "veiled_orb": {
-      "name": "Veiled Orb",
-      "cost": 8500
-    }
-  },
+  "league": "Mirage",
+  "divine_price": 272.1,
   "essences": {
-    "deafening_essence_of_envy": {
-      "name": "Deafening Essence of Envy",
-      "cost": 14.4,
-      "guaranteed_mod": "chaos_res_tier_1"
-    },
-    "deafening_essence_of_spite": {
-      "name": "Deafening Essence of Spite",
-      "cost": 31.28,
-      "guaranteed_mod": "int_tier_1"
-    },
-    "deafening_essence_of_wrath": {
-      "name": "Deafening Essence of Wrath",
-      "cost": 15.0,
-      "guaranteed_mod": "wed_tier_1"
-    }
+    "essence_of_hysteria": 7.9,
+    "essence_of_horror": 4.7,
+    "deafening_essence_of_zeal": 4.0,
+    "essence_of_delirium": 4.0,
+    "deafening_essence_of_loathing": 3.98,
+    "deafening_essence_of_woe": 3.8,
+    "deafening_essence_of_anger": 3.15,
+    "deafening_essence_of_anguish": 3.0,
+    "deafening_essence_of_contempt": 3.0,
+    "deafening_essence_of_doubt": 3.0,
+    "deafening_essence_of_dread": 3.0,
+    "deafening_essence_of_envy": 3.0,
+    "deafening_essence_of_fear": 3.0,
+    "deafening_essence_of_greed": 3.0,
+    "deafening_essence_of_hatred": 3.0,
+    "deafening_essence_of_misery": 3.0,
+    "deafening_essence_of_rage": 3.0,
+    "deafening_essence_of_scorn": 3.0,
+    "deafening_essence_of_sorrow": 3.0,
+    "deafening_essence_of_spite": 3.0,
+    "deafening_essence_of_suffering": 3.0,
+    "deafening_essence_of_torment": 3.0,
+    "deafening_essence_of_wrath": 3.0,
+    "essence_of_insanity": 2.2
   },
   "fossils": {
-    "aberrant_fossil": {
-      "name": "Aberrant Fossil",
-      "cost": 2
-    },
-    "dense_fossil": {
-      "name": "Dense Fossil",
-      "cost": 1
-    },
-    "metallic_fossil": {
-      "name": "Metallic Fossil",
-      "cost": 2
-    }
-  },
-  "influenced_currency": {
-    "crusader_exalted_orb": {
-      "name": "Crusader's Exalted Orb",
-      "cost": 60
-    },
-    "hunter_exalted_orb": {
-      "name": "Hunter's Exalted Orb",
-      "cost": 80
-    }
-  },
-  "crafting_bench": {
-    "prefixes_cannot_be_changed": {
-      "name": "Prefixes Cannot Be Changed",
-      "cost": 290
-    },
-    "suffixes_cannot_be_changed": {
-      "name": "Suffixes Cannot Be Changed",
-      "cost": 290
-    }
+    "faceted": 293.0,
+    "hollow": 217.1,
+    "fractured": 42.0,
+    "sanctified": 30.0,
+    "glyphic": 15.2,
+    "dense": 10.0,
+    "corroded": 10.0,
+    "shuddering": 10.0,
+    "deft": 10.0,
+    "aetheric": 9.0,
+    "gilded": 8.0,
+    "jagged": 8.0,
+    "fundamental": 8.0,
+    "serrated": 7.4,
+    "opulent": 7.3,
+    "bound": 7.0,
+    "prismatic": 7.0,
+    "lucent": 7.0,
+    "tangled": 7.0,
+    "bloodstained": 5.8,
+    "aberrant": 5.0,
+    "scorched": 5.0,
+    "metallic": 5.0,
+    "pristine": 5.0,
+    "frigid": 3.34
   }
 }

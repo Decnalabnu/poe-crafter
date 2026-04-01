@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import ringsData from "./data/rings.json";
-import mockData from "./data/active_economy.json";
+import itemsData from "./data/items.json";
+import essenceDataList from "./data/essences.json";
 import fossilData from "./data/fossils.json";
+import economyData from "./data/active_economy.json";
 import { calculateSpamEV } from "./utils/calculator";
 
 function App() {
-  const [craftingMethod, setCraftingMethod] = useState("essence"); // 'essence' or 'fossil'
+  const [selectedItemClass, setSelectedItemClass] = useState("ring");
+  const [craftingMethod, setCraftingMethod] = useState("essence");
   const [fracturedModId, setFracturedModId] = useState("none");
   const [selectedEssenceId, setSelectedEssenceId] = useState(
     "deafening_essence_of_spite",
@@ -18,12 +20,24 @@ function App() {
   const [baseCostChaos, setBaseCostChaos] = useState(50);
   const [marketValueDivines, setMarketValueDivines] = useState(10);
 
-  const essenceData = mockData.essences[selectedEssenceId];
+  // Read economy values
+  const divinePrice = economyData.divine_price || 150;
+  const essenceData = essenceDataList[selectedEssenceId];
   const guaranteedModId =
-    craftingMethod === "essence" ? essenceData?.guaranteed_mod : null;
-  const divinePrice = mockData.basic_currency.divine_orb.cost;
+    craftingMethod === "essence"
+      ? essenceData?.guaranteed_mods?.[selectedItemClass]
+      : null;
 
-  // Cleanup effect
+  const currentPrefixPool = itemsData[selectedItemClass]?.prefixes || [];
+  const currentSuffixPool = itemsData[selectedItemClass]?.suffixes || [];
+
+  useEffect(() => {
+    setTargetIds([]);
+    setFracturedModId("none");
+    setResult(null);
+    setExpandedGroups({});
+  }, [selectedItemClass]);
+
   useEffect(() => {
     if (guaranteedModId) {
       setTargetIds((prev) =>
@@ -37,19 +51,22 @@ function App() {
     const evData = calculateSpamEV(
       targetIds,
       selectedEssenceId,
-      "ring",
+      selectedItemClass,
       fracturedModId,
       fossilsToPass,
     );
     setResult(evData);
   };
 
-  const toggleTarget = (modId) => {
-    setTargetIds((prev) =>
-      prev.includes(modId)
-        ? prev.filter((id) => id !== modId)
-        : [...prev, modId],
-    );
+  const toggleTarget = (modId, groupName) => {
+    setTargetIds((prev) => {
+      const groupIds = [...currentPrefixPool, ...currentSuffixPool]
+        .filter((m) => m.group === groupName)
+        .map((m) => m.id);
+      const withoutGroup = prev.filter((id) => !groupIds.includes(id));
+      if (prev.includes(modId)) return withoutGroup; // deselect
+      return [...withoutGroup, modId];
+    });
   };
 
   const toggleGroup = (groupName) => {
@@ -59,12 +76,11 @@ function App() {
   const toggleFossil = (fossilId) => {
     setActiveFossils((prev) => {
       if (prev.includes(fossilId)) return prev.filter((id) => id !== fossilId);
-      if (prev.length >= 4) return prev; // Max 4 socket resonator
+      if (prev.length >= 4) return prev;
       return [...prev, fossilId];
     });
   };
 
-  // --- DYNAMIC POOL CALCULATOR FOR THE UI TABLE ---
   const getModifiedPool = (pool, isFossilMode) => {
     return pool.map((mod) => {
       let finalWeight = mod.spawn_weights[0]?.weight || 0;
@@ -94,11 +110,11 @@ function App() {
   };
 
   const modifiedPrefixes = getModifiedPool(
-    ringsData.prefixes,
+    currentPrefixPool,
     craftingMethod === "fossil",
   );
   const modifiedSuffixes = getModifiedPool(
-    ringsData.suffixes,
+    currentSuffixPool,
     craftingMethod === "fossil",
   );
 
@@ -160,33 +176,55 @@ function App() {
                 const isZeroWeight =
                   currentWeight === 0 && !isFracture && !isEssence;
 
+                // Find the selected target in this group (if any)
+                const selectedTargetId = targetIds.find((id) =>
+                  mods.some((m) => m.id === id),
+                );
+                const selectedTarget = mods.find(
+                  (m) => m.id === selectedTargetId,
+                );
+                // This mod qualifies if its tier <= selected target's tier
+                const isQualifying =
+                  selectedTarget &&
+                  mod.tier !== undefined &&
+                  selectedTarget.tier !== undefined &&
+                  mod.tier <= selectedTarget.tier &&
+                  !isTargeted;
+
                 let bg = "#1e1e1e";
                 let cursor = "pointer";
-                let label = mod.text;
+                const tierLabel =
+                  mod.tier !== undefined ? ` [T${mod.tier}]` : "";
 
                 if (isEssence) {
                   bg = "#4a235a";
                   cursor = "not-allowed";
-                  label += " (Essence)";
                 } else if (isFracture) {
                   bg = "#5a4f23";
                   cursor = "not-allowed";
-                  label += " (Fractured)";
                 } else if (isZeroWeight) {
                   bg = "#3d1c1c";
                   cursor = "not-allowed";
-                  label += " (0 Weight)";
                 } else if (isTargeted) {
                   bg = "#4CAF50";
-                  color: "#fff";
+                } else if (isQualifying) {
+                  bg = "#2a3a23";
                 }
+
+                const suffix = isEssence
+                  ? " (Essence)"
+                  : isFracture
+                    ? " (Fractured)"
+                    : isZeroWeight
+                      ? " (0 Weight)"
+                      : "";
 
                 return (
                   <div
                     key={mod.id}
                     onClick={() => {
                       if (!isEssence && !isFracture && !isZeroWeight)
-                        toggleTarget(mod.id);
+                        toggleTarget(mod.id, groupName);
                     }}
                     style={{
                       padding: "8px",
@@ -199,7 +237,11 @@ function App() {
                       opacity: isZeroWeight ? 0.5 : 1,
                     }}
                   >
-                    {label}
+                    <span style={{ color: "#aaa", marginRight: "6px" }}>
+                      {tierLabel}
+                    </span>
+                    {mod.text}
+                    {suffix}
                   </div>
                 );
               })}
@@ -213,40 +255,32 @@ function App() {
   const getTargetStats = () => {
     return targetIds
       .map((tId) => {
-        const match = tId.match(/(.+)_tier_(\d+)/);
-        const tBase = match ? match[1] : tId;
-        const tTier = match ? parseInt(match[2], 10) : 0;
-
         let isPrefix = true;
-        let targetMod = ringsData.prefixes.find((m) => m.id === tId);
+        let targetMod = currentPrefixPool.find((m) => m.id === tId);
         if (!targetMod) {
-          targetMod = ringsData.suffixes.find((m) => m.id === tId);
+          targetMod = currentSuffixPool.find((m) => m.id === tId);
           isPrefix = false;
         }
-
         if (!targetMod) return null;
 
+        const tTier = targetMod.tier;
         const modifiedPool = isPrefix ? modifiedPrefixes : modifiedSuffixes;
         let combinedWeight = 0;
         let qualifyingTiers = 0;
 
         modifiedPool.forEach((mod) => {
-          const rMatch = mod.id.match(/(.+)_tier_(\d+)/);
-          if (match && rMatch && rMatch[1] === tBase) {
-            const rTier = parseInt(rMatch[2], 10);
-            if (rTier <= tTier && mod.currentWeight > 0) {
-              combinedWeight += mod.currentWeight;
-              qualifyingTiers++;
-            }
-          } else if (mod.id === tId && mod.currentWeight > 0) {
+          if (mod.group !== targetMod.group) return;
+          const qualifies =
+            tTier !== undefined && mod.tier !== undefined
+              ? mod.tier <= tTier
+              : mod.id === tId;
+          if (qualifies && mod.currentWeight > 0) {
             combinedWeight += mod.currentWeight;
-            qualifyingTiers = 1;
+            qualifyingTiers++;
           }
         });
 
-        const totalPoolWeight = isPrefix
-          ? totalPrefixWeight
-          : totalSuffixWeight;
+        const totalPoolWeight = isPrefix ? totalPrefixWeight : totalSuffixWeight;
         const weightPercent =
           totalPoolWeight > 0 ? (combinedWeight / totalPoolWeight) * 100 : 0;
 
@@ -254,7 +288,7 @@ function App() {
           id: tId,
           group: targetMod.group,
           type: isPrefix ? "Prefix" : "Suffix",
-          tierString: `<= ${tTier}`,
+          tierString: tTier !== undefined ? (tTier === 1 ? "T1" : `T1–T${tTier}`) : "exact",
           tiersCount: qualifyingTiers,
           weight: combinedWeight,
           weightPercent: weightPercent.toFixed(3) + "%",
@@ -280,7 +314,47 @@ function App() {
       <div
         style={{ background: "#2d2d2d", padding: "20px", borderRadius: "8px" }}
       >
-        {/* ECONOMY & BASE SETUP */}
+        <div
+          style={{
+            marginBottom: "20px",
+            paddingBottom: "15px",
+            borderBottom: "1px solid #444",
+          }}
+        >
+          <label
+            style={{
+              display: "block",
+              fontWeight: "bold",
+              color: "#fff",
+              fontSize: "16px",
+              marginBottom: "8px",
+            }}
+          >
+            Select Item Base:
+          </label>
+          <select
+            value={selectedItemClass}
+            onChange={(e) => setSelectedItemClass(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px",
+              background: "#111",
+              color: "white",
+              border: "1px solid #6bbbe3",
+              fontSize: "16px",
+              fontWeight: "bold",
+            }}
+          >
+            <option value="ring">Ring</option>
+            <option value="amulet">Amulet</option>
+            <option value="belt">Belt</option>
+            <option value="body_armour">Body Armour</option>
+            <option value="helmet">Helmet</option>
+            <option value="boots">Boots</option>
+            <option value="gloves">Gloves</option>
+          </select>
+        </div>
+
         <div style={{ display: "flex", gap: "15px", marginBottom: "15px" }}>
           <div style={{ flex: 1 }}>
             <label
@@ -344,38 +418,31 @@ function App() {
             >
               <option value="none">None / Normal Base</option>
               <optgroup label="Prefixes">
-                {ringsData.prefixes.map(
-                  (m) =>
-                    !m.id.startsWith("junk_") && (
-                      <option
-                        key={m.id}
-                        value={m.id}
-                        disabled={m.id === guaranteedModId}
-                      >
-                        {m.text}
-                      </option>
-                    ),
-                )}
+                {currentPrefixPool.map((m) => (
+                  <option
+                    key={m.id}
+                    value={m.id}
+                    disabled={m.id === guaranteedModId}
+                  >
+                    {m.text}
+                  </option>
+                ))}
               </optgroup>
               <optgroup label="Suffixes">
-                {ringsData.suffixes.map(
-                  (m) =>
-                    !m.id.startsWith("junk_") && (
-                      <option
-                        key={m.id}
-                        value={m.id}
-                        disabled={m.id === guaranteedModId}
-                      >
-                        {m.text}
-                      </option>
-                    ),
-                )}
+                {currentSuffixPool.map((m) => (
+                  <option
+                    key={m.id}
+                    value={m.id}
+                    disabled={m.id === guaranteedModId}
+                  >
+                    {m.text}
+                  </option>
+                ))}
               </optgroup>
             </select>
           </div>
         </div>
 
-        {/* CRAFTING METHOD TOGGLE */}
         <div
           style={{
             marginBottom: "20px",
@@ -417,7 +484,6 @@ function App() {
             </button>
           </div>
 
-          {/* ESSENCE CONTROLS */}
           {craftingMethod === "essence" && (
             <div>
               <select
@@ -431,60 +497,59 @@ function App() {
                   border: "1px solid #c77be3",
                 }}
               >
-                {Object.entries(mockData.essences).map(([key, data]) => (
+                {Object.entries(essenceDataList).map(([key, data]) => (
                   <option key={key} value={key}>
-                    {data.name} ({data.cost}c)
+                    {data.name} (
+                    {(economyData.essences && economyData.essences[key]) || 3}c)
                   </option>
                 ))}
               </select>
             </div>
           )}
 
-          {/* FOSSIL CONTROLS */}
           {craftingMethod === "fossil" && (
             <div>
               <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                {Object.entries(fossilData).map(([fossilId, data]) => (
-                  <button
-                    key={fossilId}
-                    onClick={() => toggleFossil(fossilId)}
-                    style={{
-                      padding: "10px 15px",
-                      background: activeFossils.includes(fossilId)
-                        ? "#e2b659"
-                        : "#1e1e1e",
-                      color: activeFossils.includes(fossilId) ? "#000" : "#aaa",
-                      border: "1px solid #e2b659",
-                      borderRadius: "4px",
-                      cursor:
-                        activeFossils.length >= 4 &&
-                        !activeFossils.includes(fossilId)
-                          ? "not-allowed"
-                          : "pointer",
-                      opacity:
-                        activeFossils.length >= 4 &&
-                        !activeFossils.includes(fossilId)
-                          ? 0.5
-                          : 1,
-                    }}
-                  >
-                    {data.name}
-                  </button>
-                ))}
-              </div>
-              <div
-                style={{ fontSize: "12px", color: "#aaa", marginTop: "8px" }}
-              >
-                Select up to 4 fossils.
+                {Object.entries(fossilData).map(([fossilId, data]) => {
+                  const fossilCost =
+                    (economyData.fossils && economyData.fossils[fossilId]) || 1;
+                  return (
+                    <button
+                      key={fossilId}
+                      onClick={() => toggleFossil(fossilId)}
+                      style={{
+                        padding: "10px 15px",
+                        background: activeFossils.includes(fossilId)
+                          ? "#e2b659"
+                          : "#1e1e1e",
+                        color: activeFossils.includes(fossilId)
+                          ? "#000"
+                          : "#aaa",
+                        border: "1px solid #e2b659",
+                        borderRadius: "4px",
+                        cursor:
+                          activeFossils.length >= 4 &&
+                          !activeFossils.includes(fossilId)
+                            ? "not-allowed"
+                            : "pointer",
+                        opacity:
+                          activeFossils.length >= 4 &&
+                          !activeFossils.includes(fossilId)
+                            ? 0.5
+                            : 1,
+                      }}
+                    >
+                      {data.name} ({fossilCost}c)
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
         </div>
 
-        {/* AFFIX PICKER */}
         <h3 style={{ marginTop: 0 }}>Select Targets</h3>
         <div style={{ display: "flex", gap: "20px", marginBottom: "20px" }}>
-          {/* Prefix Column */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
             <div
               style={{
@@ -505,11 +570,9 @@ function App() {
                 gap: "5px",
               }}
             >
-              {renderGroupedList(ringsData.prefixes, modifiedPrefixes)}
+              {renderGroupedList(currentPrefixPool, modifiedPrefixes)}
             </div>
           </div>
-
-          {/* Suffix Column */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
             <div
               style={{
@@ -530,12 +593,11 @@ function App() {
                 gap: "5px",
               }}
             >
-              {renderGroupedList(ringsData.suffixes, modifiedSuffixes)}
+              {renderGroupedList(currentSuffixPool, modifiedSuffixes)}
             </div>
           </div>
         </div>
 
-        {/* COE STYLE STATS TABLE */}
         {targetStats.length > 0 && (
           <div
             style={{
@@ -636,7 +698,6 @@ function App() {
           Calculate Final Result
         </button>
 
-        {/* RESULTS */}
         {result && !result.error && (
           <div
             style={{
