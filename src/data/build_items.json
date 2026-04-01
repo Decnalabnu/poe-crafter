@@ -1,0 +1,444 @@
+{
+  "league": "Mirage",
+  "analyzed_at": "2026-04-01T04:23:55.941660+00:00",
+  "characters_sampled": 35,
+  "slots": {
+    "helmet": {
+      "sample_count": 17,
+      "mod_frequency": {
+        "Increased Life": {
+          "count": 13,
+          "frequency_pct": 76.5,
+          "min_tier_seen": 11,
+          "avg_tier": 11.0
+        },
+        "Fire Resistance": {
+          "count": 7,
+          "frequency_pct": 41.2,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Local Evasion Rating": {
+          "count": 5,
+          "frequency_pct": 29.4,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Chaos Resistance": {
+          "count": 5,
+          "frequency_pct": 29.4,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Lightning Resistance": {
+          "count": 5,
+          "frequency_pct": 29.4,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Cold Resistance": {
+          "count": 4,
+          "frequency_pct": 23.5,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Local Energy Shield": {
+          "count": 4,
+          "frequency_pct": 23.5,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Item Found Rarity Increase Prefix": {
+          "count": 3,
+          "frequency_pct": 17.6,
+          "min_tier_seen": 3,
+          "avg_tier": 3.0
+        }
+      }
+    },
+    "ring": {
+      "sample_count": 29,
+      "mod_frequency": {
+        "Increased Life": {
+          "count": 20,
+          "frequency_pct": 69.0,
+          "min_tier_seen": 8,
+          "avg_tier": 8.0
+        },
+        "Energy Shield": {
+          "count": 9,
+          "frequency_pct": 31.0,
+          "min_tier_seen": 11,
+          "avg_tier": 11.0
+        },
+        "Increased Mana": {
+          "count": 9,
+          "frequency_pct": 31.0,
+          "min_tier_seen": 13,
+          "avg_tier": 13.0
+        },
+        "Intelligence": {
+          "count": 8,
+          "frequency_pct": 27.6,
+          "min_tier_seen": 10,
+          "avg_tier": 10.0
+        },
+        "Item Found Rarity Increase Prefix": {
+          "count": 7,
+          "frequency_pct": 24.1,
+          "min_tier_seen": 4,
+          "avg_tier": 4.0
+        },
+        "Strength": {
+          "count": 7,
+          "frequency_pct": 24.1,
+          "min_tier_seen": 10,
+          "avg_tier": 10.0
+        },
+        "Dexterity": {
+          "count": 6,
+          "frequency_pct": 20.7,
+          "min_tier_seen": 10,
+          "avg_tier": 10.0
+        },
+        "Global Damage Over Time Multiplier": {
+          "count": 5,
+          "frequency_pct": 17.2,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Fire Resistance": {
+          "count": 5,
+          "frequency_pct": 17.2,
+          "min_tier_seen": 8,
+          "avg_tier": 8.0
+        }
+      }
+    },
+    "boots": {
+      "sample_count": 17,
+      "mod_frequency": {
+        "Movement Velocity": {
+          "count": 16,
+          "frequency_pct": 94.1,
+          "min_tier_seen": 8,
+          "avg_tier": 8.0
+        },
+        "Increased Life": {
+          "count": 13,
+          "frequency_pct": 76.5,
+          "min_tier_seen": 10,
+          "avg_tier": 10.0
+        },
+        "Lightning Resistance": {
+          "count": 8,
+          "frequency_pct": 47.1,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Fire Resistance": {
+          "count": 6,
+          "frequency_pct": 35.3,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Chaos Resistance": {
+          "count": 6,
+          "frequency_pct": 35.3,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Intelligence": {
+          "count": 5,
+          "frequency_pct": 29.4,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Cold Resistance": {
+          "count": 4,
+          "frequency_pct": 23.5,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Avoid Elemental Status Ailments": {
+          "count": 3,
+          "frequency_pct": 17.6,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Local Energy Shield": {
+          "count": 3,
+          "frequency_pct": 17.6,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Item Found Rarity Increase Prefix": {
+          "count": 3,
+          "frequency_pct": 17.6,
+          "min_tier_seen": 2,
+          "avg_tier": 2.0
+        },
+        "Local Evasion Rating": {
+          "count": 3,
+          "frequency_pct": 17.6,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        }
+      }
+    },
+    "amulet": {
+      "sample_count": 14,
+      "mod_frequency": {
+        "Increased Mana": {
+          "count": 6,
+          "frequency_pct": 42.9,
+          "min_tier_seen": 13,
+          "avg_tier": 13.0
+        },
+        "Increased Life": {
+          "count": 5,
+          "frequency_pct": 35.7,
+          "min_tier_seen": 9,
+          "avg_tier": 9.0
+        },
+        "Global Energy Shield Percent": {
+          "count": 4,
+          "frequency_pct": 28.6,
+          "min_tier_seen": 8,
+          "avg_tier": 8.0
+        },
+        "Global Damage Over Time Multiplier": {
+          "count": 3,
+          "frequency_pct": 21.4,
+          "min_tier_seen": 5,
+          "avg_tier": 5.0
+        },
+        "Intelligence": {
+          "count": 3,
+          "frequency_pct": 21.4,
+          "min_tier_seen": 10,
+          "avg_tier": 10.0
+        },
+        "Item Found Rarity Increase Prefix": {
+          "count": 3,
+          "frequency_pct": 21.4,
+          "min_tier_seen": 4,
+          "avg_tier": 4.0
+        }
+      }
+    },
+    "gloves": {
+      "sample_count": 17,
+      "mod_frequency": {
+        "Increased Life": {
+          "count": 13,
+          "frequency_pct": 76.5,
+          "min_tier_seen": 10,
+          "avg_tier": 10.0
+        },
+        "Chaos Resistance": {
+          "count": 9,
+          "frequency_pct": 52.9,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Cold Resistance": {
+          "count": 8,
+          "frequency_pct": 47.1,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Increased Attack Speed": {
+          "count": 6,
+          "frequency_pct": 35.3,
+          "min_tier_seen": 6,
+          "avg_tier": 6.0
+        },
+        "Strength": {
+          "count": 4,
+          "frequency_pct": 23.5,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Fire Resistance": {
+          "count": 4,
+          "frequency_pct": 23.5,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Local Energy Shield": {
+          "count": 3,
+          "frequency_pct": 17.6,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Intelligence": {
+          "count": 3,
+          "frequency_pct": 17.6,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        }
+      }
+    },
+    "belt": {
+      "sample_count": 6,
+      "mod_frequency": {
+        "Increased Life": {
+          "count": 4,
+          "frequency_pct": 66.7,
+          "min_tier_seen": 10,
+          "avg_tier": 10.0
+        },
+        "Energy Shield": {
+          "count": 3,
+          "frequency_pct": 50.0,
+          "min_tier_seen": 12,
+          "avg_tier": 12.0
+        },
+        "Increased Mana": {
+          "count": 3,
+          "frequency_pct": 50.0,
+          "min_tier_seen": 11,
+          "avg_tier": 11.0
+        },
+        "Belt Increased Flask Duration": {
+          "count": 2,
+          "frequency_pct": 33.3,
+          "min_tier_seen": 5,
+          "avg_tier": 5.0
+        },
+        "Physical Damage Reduction Rating": {
+          "count": 2,
+          "frequency_pct": 33.3,
+          "min_tier_seen": 9,
+          "avg_tier": 9.0
+        },
+        "Chaos Resistance": {
+          "count": 2,
+          "frequency_pct": 33.3,
+          "min_tier_seen": 6,
+          "avg_tier": 6.0
+        },
+        "Intelligence": {
+          "count": 2,
+          "frequency_pct": 33.3,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Flask Effect": {
+          "count": 1,
+          "frequency_pct": 16.7,
+          "min_tier_seen": 3,
+          "avg_tier": 3.0
+        },
+        "Trap And Mine Throw Speed": {
+          "count": 1,
+          "frequency_pct": 16.7,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Stun Threshold Reduction": {
+          "count": 1,
+          "frequency_pct": 16.7,
+          "min_tier_seen": 6,
+          "avg_tier": 6.0
+        },
+        "Fire Resistance": {
+          "count": 1,
+          "frequency_pct": 16.7,
+          "min_tier_seen": 8,
+          "avg_tier": 8.0
+        },
+        "Increased Weapon Elemental Damage Percent": {
+          "count": 1,
+          "frequency_pct": 16.7,
+          "min_tier_seen": 6,
+          "avg_tier": 6.0
+        },
+        "Stun Recovery": {
+          "count": 1,
+          "frequency_pct": 16.7,
+          "min_tier_seen": 6,
+          "avg_tier": 6.0
+        },
+        "Strength": {
+          "count": 1,
+          "frequency_pct": 16.7,
+          "min_tier_seen": 11,
+          "avg_tier": 11.0
+        },
+        "Evasion Rating": {
+          "count": 1,
+          "frequency_pct": 16.7,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        }
+      }
+    },
+    "body_armour": {
+      "sample_count": 12,
+      "mod_frequency": {
+        "Local Energy Shield": {
+          "count": 8,
+          "frequency_pct": 66.7,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Fire Resistance": {
+          "count": 5,
+          "frequency_pct": 41.7,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Local Energy Shield Percent": {
+          "count": 5,
+          "frequency_pct": 41.7,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Cold Resistance": {
+          "count": 4,
+          "frequency_pct": 33.3,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Local Evasion Rating": {
+          "count": 4,
+          "frequency_pct": 33.3,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Local Physical Damage Reduction Rating": {
+          "count": 3,
+          "frequency_pct": 25.0,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Local Evasion And Energy Shield": {
+          "count": 3,
+          "frequency_pct": 25.0,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Intelligence": {
+          "count": 3,
+          "frequency_pct": 25.0,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        },
+        "Increased Life": {
+          "count": 3,
+          "frequency_pct": 25.0,
+          "min_tier_seen": 14,
+          "avg_tier": 14.0
+        },
+        "Lightning Resistance": {
+          "count": 3,
+          "frequency_pct": 25.0,
+          "min_tier_seen": 1,
+          "avg_tier": 1.0
+        }
+      }
+    }
+  }
+}

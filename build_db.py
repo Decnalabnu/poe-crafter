@@ -138,8 +138,13 @@ def build_databases():
         translated_text = get_translated_string(mod_data.get("stats", []), trans_dict_multi, trans_dict_single)
         final_text = f"{translated_text} [{mod_name}]" if mod_name and translated_text else (translated_text or f"{mod_name} ({mod_group})")
             
+        spawn_weights = mod_data.get("spawn_weights", [])
+        default_weight = next((sw["weight"] for sw in spawn_weights if sw["tag"] == "default"), 0)
+
         for tag in ITEM_TAGS:
-            tag_weight = next((sw["weight"] for sw in mod_data.get("spawn_weights", []) if sw["tag"] == tag), 0)
+            # Specific tag entry takes priority; fall back to 'default' (applies to all item types)
+            specific = next((sw["weight"] for sw in spawn_weights if sw["tag"] == tag), None)
+            tag_weight = specific if specific is not None else default_weight
             
             # Check if it's naturally rollable OR if it's an Essence exclusive mod
             is_essence_mod = mod_id in essence_mods_map and tag in essence_mods_map[mod_id]

@@ -134,6 +134,9 @@ function App() {
       if (!groups[mod.group]) groups[mod.group] = [];
       groups[mod.group].push(mod);
     });
+    for (const group of Object.values(groups)) {
+      group.sort((a, b) => (a.tier ?? Infinity) - (b.tier ?? Infinity));
+    }
     return groups;
   };
 

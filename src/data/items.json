@@ -756,6 +756,110 @@
         "tier": 2
       },
       {
+        "id": "IncreasedLife0",
+        "group": "Increased Life",
+        "text": "(3-9) to maximum Life [Hale]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "IncreasedLife1",
+        "group": "Increased Life",
+        "text": "(10-19) to maximum Life [Healthy]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "IncreasedLife2",
+        "group": "Increased Life",
+        "text": "(20-29) to maximum Life [Sanguine]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "IncreasedLife3",
+        "group": "Increased Life",
+        "text": "(30-39) to maximum Life [Stalwart]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "IncreasedLife4",
+        "group": "Increased Life",
+        "text": "(40-49) to maximum Life [Stout]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "IncreasedLife5",
+        "group": "Increased Life",
+        "text": "(50-59) to maximum Life [Robust]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "IncreasedLife6",
+        "group": "Increased Life",
+        "text": "(60-69) to maximum Life [Rotund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
+        "id": "IncreasedLife7",
+        "group": "Increased Life",
+        "text": "(70-79) to maximum Life [Virile]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 1
+      },
+      {
         "id": "IncreasedMana1",
         "group": "Increased Mana",
         "text": "(15-19) to maximum Mana [Beryl]",
@@ -2214,6 +2318,84 @@
         "tier": 1
       },
       {
+        "id": "LifeRegeneration1",
+        "group": "Life Regeneration",
+        "text": "Regenerate (60-120) Life per second [of the Newt]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "LifeRegeneration2",
+        "group": "Life Regeneration",
+        "text": "Regenerate (126-480) Life per second [of the Lizard]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "LifeRegeneration3",
+        "group": "Life Regeneration",
+        "text": "Regenerate (486-960) Life per second [of the Flatworm]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "LifeRegeneration4",
+        "group": "Life Regeneration",
+        "text": "Regenerate (966-1440) Life per second [of the Starfish]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "LifeRegeneration5",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1446-1920) Life per second [of the Hydra]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "LifeRegeneration6",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1926-2880) Life per second [of the Troll]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "ring",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
         "id": "LifeRegeneration7",
         "group": "Life Regeneration",
         "text": "Regenerate (2886-3840) Life per second [of Ryslatha]",
@@ -2221,7 +2403,7 @@
         "spawn_weights": [
           {
             "tag": "ring",
-            "weight": 0
+            "weight": 1000
           }
         ],
         "tier": 1
@@ -3682,6 +3864,123 @@
           {
             "tag": "amulet",
             "weight": 0
+          }
+        ],
+        "tier": 1
+      },
+      {
+        "id": "IncreasedLife0",
+        "group": "Increased Life",
+        "text": "(3-9) to maximum Life [Hale]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "IncreasedLife1",
+        "group": "Increased Life",
+        "text": "(10-19) to maximum Life [Healthy]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "IncreasedLife2",
+        "group": "Increased Life",
+        "text": "(20-29) to maximum Life [Sanguine]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "IncreasedLife3",
+        "group": "Increased Life",
+        "text": "(30-39) to maximum Life [Stalwart]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "IncreasedLife4",
+        "group": "Increased Life",
+        "text": "(40-49) to maximum Life [Stout]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "IncreasedLife5",
+        "group": "Increased Life",
+        "text": "(50-59) to maximum Life [Robust]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "IncreasedLife6",
+        "group": "Increased Life",
+        "text": "(60-69) to maximum Life [Rotund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "IncreasedLife7",
+        "group": "Increased Life",
+        "text": "(70-79) to maximum Life [Virile]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
+        "id": "IncreasedLife8",
+        "group": "Increased Life",
+        "text": "(80-89) to maximum Life [Athlete's]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
           }
         ],
         "tier": 1
@@ -5678,6 +5977,84 @@
         "tier": 1
       },
       {
+        "id": "LifeRegeneration1",
+        "group": "Life Regeneration",
+        "text": "Regenerate (60-120) Life per second [of the Newt]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "LifeRegeneration2",
+        "group": "Life Regeneration",
+        "text": "Regenerate (126-480) Life per second [of the Lizard]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "LifeRegeneration3",
+        "group": "Life Regeneration",
+        "text": "Regenerate (486-960) Life per second [of the Flatworm]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "LifeRegeneration4",
+        "group": "Life Regeneration",
+        "text": "Regenerate (966-1440) Life per second [of the Starfish]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "LifeRegeneration5",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1446-1920) Life per second [of the Hydra]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "LifeRegeneration6",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1926-2880) Life per second [of the Troll]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
         "id": "LifeRegeneration7",
         "group": "Life Regeneration",
         "text": "Regenerate (2886-3840) Life per second [of Ryslatha]",
@@ -5685,7 +6062,20 @@
         "spawn_weights": [
           {
             "tag": "amulet",
-            "weight": 0
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
+        "id": "LifeRegeneration8_",
+        "group": "Life Regeneration",
+        "text": "Regenerate (3846-5760) Life per second [of the Phoenix]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "amulet",
+            "weight": 1000
           }
         ],
         "tier": 1
@@ -6592,6 +6982,136 @@
         "tier": 1
       },
       {
+        "id": "IncreasedLife0",
+        "group": "Increased Life",
+        "text": "(3-9) to maximum Life [Hale]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 10
+      },
+      {
+        "id": "IncreasedLife1",
+        "group": "Increased Life",
+        "text": "(10-19) to maximum Life [Healthy]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "IncreasedLife2",
+        "group": "Increased Life",
+        "text": "(20-29) to maximum Life [Sanguine]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "IncreasedLife3",
+        "group": "Increased Life",
+        "text": "(30-39) to maximum Life [Stalwart]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "IncreasedLife4",
+        "group": "Increased Life",
+        "text": "(40-49) to maximum Life [Stout]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "IncreasedLife5",
+        "group": "Increased Life",
+        "text": "(50-59) to maximum Life [Robust]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "IncreasedLife6",
+        "group": "Increased Life",
+        "text": "(60-69) to maximum Life [Rotund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "IncreasedLife7",
+        "group": "Increased Life",
+        "text": "(70-79) to maximum Life [Virile]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "IncreasedLife8",
+        "group": "Increased Life",
+        "text": "(80-89) to maximum Life [Athlete's]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
+        "id": "IncreasedLife9",
+        "group": "Increased Life",
+        "text": "(90-99) to maximum Life [Fecund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 1
+      },
+      {
         "id": "IncreasedMana1",
         "group": "Increased Mana",
         "text": "(15-19) to maximum Mana [Beryl]",
@@ -7478,6 +7998,123 @@
         "tier": 1
       },
       {
+        "id": "LifeRegeneration1",
+        "group": "Life Regeneration",
+        "text": "Regenerate (60-120) Life per second [of the Newt]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "LifeRegeneration2",
+        "group": "Life Regeneration",
+        "text": "Regenerate (126-480) Life per second [of the Lizard]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "LifeRegeneration3",
+        "group": "Life Regeneration",
+        "text": "Regenerate (486-960) Life per second [of the Flatworm]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "LifeRegeneration4",
+        "group": "Life Regeneration",
+        "text": "Regenerate (966-1440) Life per second [of the Starfish]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "LifeRegeneration5",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1446-1920) Life per second [of the Hydra]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "LifeRegeneration6",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1926-2880) Life per second [of the Troll]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "LifeRegeneration7",
+        "group": "Life Regeneration",
+        "text": "Regenerate (2886-3840) Life per second [of Ryslatha]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "LifeRegeneration8_",
+        "group": "Life Regeneration",
+        "text": "Regenerate (3846-5760) Life per second [of the Phoenix]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
+        "id": "LifeRegeneration9",
+        "group": "Life Regeneration",
+        "text": "Regenerate (5766-7680) Life per second [of Recuperation]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "belt",
+            "weight": 1000
+          }
+        ],
+        "tier": 1
+      },
+      {
         "id": "LightningResist1",
         "group": "Lightning Resistance",
         "text": "(6-11)% to Lightning Resistance [of the Cloud]",
@@ -8067,6 +8704,32 @@
         "tier": 1
       },
       {
+        "id": "IncreasedLife0",
+        "group": "Increased Life",
+        "text": "(3-9) to maximum Life [Hale]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 14
+      },
+      {
+        "id": "IncreasedLife1",
+        "group": "Increased Life",
+        "text": "(10-19) to maximum Life [Healthy]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 13
+      },
+      {
         "id": "IncreasedLife10",
         "group": "Increased Life",
         "text": "(100-109) to maximum Life [Vigorous]",
@@ -8104,6 +8767,110 @@
           }
         ],
         "tier": 1
+      },
+      {
+        "id": "IncreasedLife2",
+        "group": "Increased Life",
+        "text": "(20-29) to maximum Life [Sanguine]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 12
+      },
+      {
+        "id": "IncreasedLife3",
+        "group": "Increased Life",
+        "text": "(30-39) to maximum Life [Stalwart]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 11
+      },
+      {
+        "id": "IncreasedLife4",
+        "group": "Increased Life",
+        "text": "(40-49) to maximum Life [Stout]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 10
+      },
+      {
+        "id": "IncreasedLife5",
+        "group": "Increased Life",
+        "text": "(50-59) to maximum Life [Robust]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "IncreasedLife6",
+        "group": "Increased Life",
+        "text": "(60-69) to maximum Life [Rotund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "IncreasedLife7",
+        "group": "Increased Life",
+        "text": "(70-79) to maximum Life [Virile]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "IncreasedLife8",
+        "group": "Increased Life",
+        "text": "(80-89) to maximum Life [Athlete's]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "IncreasedLife9",
+        "group": "Increased Life",
+        "text": "(90-99) to maximum Life [Fecund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
       },
       {
         "id": "IncreasedLifeEssenceChest1",
@@ -8420,6 +9187,19 @@
         "tier": 1
       },
       {
+        "id": "LifeRegeneration1",
+        "group": "Life Regeneration",
+        "text": "Regenerate (60-120) Life per second [of the Newt]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 11
+      },
+      {
         "id": "LifeRegeneration10__",
         "group": "Life Regeneration",
         "text": "Regenerate (7686-9120) Life per second [of Life-giving]",
@@ -8444,6 +9224,110 @@
           }
         ],
         "tier": 1
+      },
+      {
+        "id": "LifeRegeneration2",
+        "group": "Life Regeneration",
+        "text": "Regenerate (126-480) Life per second [of the Lizard]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 10
+      },
+      {
+        "id": "LifeRegeneration3",
+        "group": "Life Regeneration",
+        "text": "Regenerate (486-960) Life per second [of the Flatworm]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "LifeRegeneration4",
+        "group": "Life Regeneration",
+        "text": "Regenerate (966-1440) Life per second [of the Starfish]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "LifeRegeneration5",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1446-1920) Life per second [of the Hydra]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "LifeRegeneration6",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1926-2880) Life per second [of the Troll]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "LifeRegeneration7",
+        "group": "Life Regeneration",
+        "text": "Regenerate (2886-3840) Life per second [of Ryslatha]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "LifeRegeneration8_",
+        "group": "Life Regeneration",
+        "text": "Regenerate (3846-5760) Life per second [of the Phoenix]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "LifeRegeneration9",
+        "group": "Life Regeneration",
+        "text": "Regenerate (5766-7680) Life per second [of Recuperation]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "body_armour",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
       },
       {
         "id": "LightningResist8",
@@ -8565,6 +9449,123 @@
           }
         ],
         "tier": 1
+      },
+      {
+        "id": "IncreasedLife0",
+        "group": "Increased Life",
+        "text": "(3-9) to maximum Life [Hale]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 10
+      },
+      {
+        "id": "IncreasedLife1",
+        "group": "Increased Life",
+        "text": "(10-19) to maximum Life [Healthy]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "IncreasedLife2",
+        "group": "Increased Life",
+        "text": "(20-29) to maximum Life [Sanguine]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "IncreasedLife3",
+        "group": "Increased Life",
+        "text": "(30-39) to maximum Life [Stalwart]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "IncreasedLife4",
+        "group": "Increased Life",
+        "text": "(40-49) to maximum Life [Stout]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "IncreasedLife5",
+        "group": "Increased Life",
+        "text": "(50-59) to maximum Life [Robust]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "IncreasedLife6",
+        "group": "Increased Life",
+        "text": "(60-69) to maximum Life [Rotund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "IncreasedLife7",
+        "group": "Increased Life",
+        "text": "(70-79) to maximum Life [Virile]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "IncreasedLife8",
+        "group": "Increased Life",
+        "text": "(80-89) to maximum Life [Athlete's]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
       },
       {
         "id": "IncreasedLifeEssenceBootsGloves1",
@@ -8936,6 +9937,110 @@
         "id": "ItemFoundRarityIncrease2",
         "group": "Item Found Rarity Increase",
         "text": "(11-14)% increased Rarity of Items found [of Raiding]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 1
+      },
+      {
+        "id": "LifeRegeneration1",
+        "group": "Life Regeneration",
+        "text": "Regenerate (60-120) Life per second [of the Newt]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "LifeRegeneration2",
+        "group": "Life Regeneration",
+        "text": "Regenerate (126-480) Life per second [of the Lizard]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "LifeRegeneration3",
+        "group": "Life Regeneration",
+        "text": "Regenerate (486-960) Life per second [of the Flatworm]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "LifeRegeneration4",
+        "group": "Life Regeneration",
+        "text": "Regenerate (966-1440) Life per second [of the Starfish]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "LifeRegeneration5",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1446-1920) Life per second [of the Hydra]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "LifeRegeneration6",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1926-2880) Life per second [of the Troll]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "LifeRegeneration7",
+        "group": "Life Regeneration",
+        "text": "Regenerate (2886-3840) Life per second [of Ryslatha]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "boots",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
+        "id": "LifeRegeneration8_",
+        "group": "Life Regeneration",
+        "text": "Regenerate (3846-5760) Life per second [of the Phoenix]",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -9338,6 +10443,123 @@
           }
         ],
         "tier": 1
+      },
+      {
+        "id": "IncreasedLife0",
+        "group": "Increased Life",
+        "text": "(3-9) to maximum Life [Hale]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 10
+      },
+      {
+        "id": "IncreasedLife1",
+        "group": "Increased Life",
+        "text": "(10-19) to maximum Life [Healthy]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "IncreasedLife2",
+        "group": "Increased Life",
+        "text": "(20-29) to maximum Life [Sanguine]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "IncreasedLife3",
+        "group": "Increased Life",
+        "text": "(30-39) to maximum Life [Stalwart]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "IncreasedLife4",
+        "group": "Increased Life",
+        "text": "(40-49) to maximum Life [Stout]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "IncreasedLife5",
+        "group": "Increased Life",
+        "text": "(50-59) to maximum Life [Robust]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "IncreasedLife6",
+        "group": "Increased Life",
+        "text": "(60-69) to maximum Life [Rotund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "IncreasedLife7",
+        "group": "Increased Life",
+        "text": "(70-79) to maximum Life [Virile]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "IncreasedLife8",
+        "group": "Increased Life",
+        "text": "(80-89) to maximum Life [Athlete's]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
       },
       {
         "id": "IncreasedLifeEssenceBootsGloves1",
@@ -9927,6 +11149,110 @@
         "tier": 1
       },
       {
+        "id": "LifeRegeneration1",
+        "group": "Life Regeneration",
+        "text": "Regenerate (60-120) Life per second [of the Newt]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "LifeRegeneration2",
+        "group": "Life Regeneration",
+        "text": "Regenerate (126-480) Life per second [of the Lizard]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "LifeRegeneration3",
+        "group": "Life Regeneration",
+        "text": "Regenerate (486-960) Life per second [of the Flatworm]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "LifeRegeneration4",
+        "group": "Life Regeneration",
+        "text": "Regenerate (966-1440) Life per second [of the Starfish]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "LifeRegeneration5",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1446-1920) Life per second [of the Hydra]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "LifeRegeneration6",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1926-2880) Life per second [of the Troll]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "LifeRegeneration7",
+        "group": "Life Regeneration",
+        "text": "Regenerate (2886-3840) Life per second [of Ryslatha]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
+        "id": "LifeRegeneration8_",
+        "group": "Life Regeneration",
+        "text": "Regenerate (3846-5760) Life per second [of the Phoenix]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "gloves",
+            "weight": 1000
+          }
+        ],
+        "tier": 1
+      },
+      {
         "id": "LightningResist8",
         "group": "Lightning Resistance",
         "text": "(46-48)% to Lightning Resistance [of Ephij]",
@@ -10150,6 +11476,136 @@
           }
         ],
         "tier": 1
+      },
+      {
+        "id": "IncreasedLife0",
+        "group": "Increased Life",
+        "text": "(3-9) to maximum Life [Hale]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 11
+      },
+      {
+        "id": "IncreasedLife1",
+        "group": "Increased Life",
+        "text": "(10-19) to maximum Life [Healthy]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 10
+      },
+      {
+        "id": "IncreasedLife2",
+        "group": "Increased Life",
+        "text": "(20-29) to maximum Life [Sanguine]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "IncreasedLife3",
+        "group": "Increased Life",
+        "text": "(30-39) to maximum Life [Stalwart]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "IncreasedLife4",
+        "group": "Increased Life",
+        "text": "(40-49) to maximum Life [Stout]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "IncreasedLife5",
+        "group": "Increased Life",
+        "text": "(50-59) to maximum Life [Robust]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "IncreasedLife6",
+        "group": "Increased Life",
+        "text": "(60-69) to maximum Life [Rotund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "IncreasedLife7",
+        "group": "Increased Life",
+        "text": "(70-79) to maximum Life [Virile]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "IncreasedLife8",
+        "group": "Increased Life",
+        "text": "(80-89) to maximum Life [Athlete's]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "IncreasedLife9",
+        "group": "Increased Life",
+        "text": "(90-99) to maximum Life [Fecund]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
       },
       {
         "id": "IncreasedLifeEssenceHelm1",
@@ -10612,6 +12068,123 @@
         "id": "ItemFoundRarityIncrease4",
         "group": "Item Found Rarity Increase",
         "text": "(21-26)% increased Rarity of Items found [of Excavation]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 1
+      },
+      {
+        "id": "LifeRegeneration1",
+        "group": "Life Regeneration",
+        "text": "Regenerate (60-120) Life per second [of the Newt]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 9
+      },
+      {
+        "id": "LifeRegeneration2",
+        "group": "Life Regeneration",
+        "text": "Regenerate (126-480) Life per second [of the Lizard]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 8
+      },
+      {
+        "id": "LifeRegeneration3",
+        "group": "Life Regeneration",
+        "text": "Regenerate (486-960) Life per second [of the Flatworm]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 7
+      },
+      {
+        "id": "LifeRegeneration4",
+        "group": "Life Regeneration",
+        "text": "Regenerate (966-1440) Life per second [of the Starfish]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 6
+      },
+      {
+        "id": "LifeRegeneration5",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1446-1920) Life per second [of the Hydra]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 5
+      },
+      {
+        "id": "LifeRegeneration6",
+        "group": "Life Regeneration",
+        "text": "Regenerate (1926-2880) Life per second [of the Troll]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 4
+      },
+      {
+        "id": "LifeRegeneration7",
+        "group": "Life Regeneration",
+        "text": "Regenerate (2886-3840) Life per second [of Ryslatha]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 3
+      },
+      {
+        "id": "LifeRegeneration8_",
+        "group": "Life Regeneration",
+        "text": "Regenerate (3846-5760) Life per second [of the Phoenix]",
+        "mod_tags": [],
+        "spawn_weights": [
+          {
+            "tag": "helmet",
+            "weight": 1000
+          }
+        ],
+        "tier": 2
+      },
+      {
+        "id": "LifeRegeneration9",
+        "group": "Life Regeneration",
+        "text": "Regenerate (5766-7680) Life per second [of Recuperation]",
         "mod_tags": [],
         "spawn_weights": [
           {
