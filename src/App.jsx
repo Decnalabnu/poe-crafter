@@ -186,9 +186,19 @@ function BuildAnalyzer() {
   );
 }
 
+const INFLUENCES = [
+  { id: "shaper",   label: "Shaper",   color: "#7bafdd" },
+  { id: "elder",    label: "Elder",    color: "#c77be3" },
+  { id: "crusader", label: "Crusader", color: "#e2c060" },
+  { id: "hunter",   label: "Hunter",   color: "#7ec87e" },
+  { id: "redeemer", label: "Redeemer", color: "#63c7b8" },
+  { id: "warlord",  label: "Warlord",  color: "#e27b7b" },
+];
+
 function App() {
   const [activeTab, setActiveTab] = useState("crafter");
   const [selectedItemClass, setSelectedItemClass] = useState("ring");
+  const [selectedInfluence, setSelectedInfluence] = useState(null);
   const [craftingMethod, setCraftingMethod] = useState("essence");
   const [fracturedModId, setFracturedModId] = useState("none");
   const [selectedEssenceId, setSelectedEssenceId] = useState(
@@ -210,8 +220,15 @@ function App() {
       ? essenceData?.guaranteed_mods?.[selectedItemClass]
       : null;
 
-  const currentPrefixPool = itemsData[selectedItemClass]?.prefixes || [];
-  const currentSuffixPool = itemsData[selectedItemClass]?.suffixes || [];
+  // Influence-filtered pools: base mods always included; influence mods only when matching
+  const allPrefixes = itemsData[selectedItemClass]?.prefixes || [];
+  const allSuffixes = itemsData[selectedItemClass]?.suffixes || [];
+  const currentPrefixPool = allPrefixes.filter(
+    (m) => !m.influence || m.influence === selectedInfluence,
+  );
+  const currentSuffixPool = allSuffixes.filter(
+    (m) => !m.influence || m.influence === selectedInfluence,
+  );
 
   useEffect(() => {
     setTargetIds([]);
@@ -219,6 +236,14 @@ function App() {
     setResult(null);
     setExpandedGroups({});
   }, [selectedItemClass]);
+
+  // Reset targets when influence changes — influenced mods may no longer be in pool
+  useEffect(() => {
+    setTargetIds([]);
+    setFracturedModId("none");
+    setResult(null);
+    setExpandedGroups({});
+  }, [selectedInfluence]);
 
   useEffect(() => {
     if (guaranteedModId) {
@@ -236,6 +261,7 @@ function App() {
       selectedItemClass,
       fracturedModId,
       fossilsToPass,
+      selectedInfluence,
     );
     setResult(evData);
   };
@@ -396,6 +422,10 @@ function App() {
                   bg = "#2a3a23";
                 }
 
+                const influenceInfo = mod.influence
+                  ? INFLUENCES.find((inf) => inf.id === mod.influence)
+                  : null;
+
                 const suffix = isEssence
                   ? " (Essence)"
                   : isFracture
@@ -425,6 +455,20 @@ function App() {
                     <span style={{ color: "#aaa", marginRight: "6px" }}>
                       {tierLabel}
                     </span>
+                    {influenceInfo && (
+                      <span style={{
+                        fontSize: "10px",
+                        fontWeight: "bold",
+                        color: influenceInfo.color,
+                        border: `1px solid ${influenceInfo.color}`,
+                        borderRadius: "3px",
+                        padding: "0 4px",
+                        marginRight: "6px",
+                        verticalAlign: "middle",
+                      }}>
+                        {influenceInfo.label.toUpperCase()}
+                      </span>
+                    )}
                     {mod.text}
                     {suffix}
                   </div>
@@ -564,6 +608,54 @@ function App() {
             <option value="boots">Boots</option>
             <option value="gloves">Gloves</option>
           </select>
+
+          <label
+            style={{
+              display: "block",
+              fontWeight: "bold",
+              color: "#fff",
+              fontSize: "14px",
+              marginTop: "12px",
+              marginBottom: "6px",
+            }}
+          >
+            Item Influence:
+          </label>
+          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+            <button
+              onClick={() => setSelectedInfluence(null)}
+              style={{
+                padding: "6px 14px",
+                background: selectedInfluence === null ? "#555" : "#1e1e1e",
+                color: selectedInfluence === null ? "#fff" : "#888",
+                border: selectedInfluence === null ? "1px solid #888" : "1px solid #444",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontSize: "13px",
+                fontWeight: selectedInfluence === null ? "bold" : "normal",
+              }}
+            >
+              None
+            </button>
+            {INFLUENCES.map(({ id, label, color }) => (
+              <button
+                key={id}
+                onClick={() => setSelectedInfluence(selectedInfluence === id ? null : id)}
+                style={{
+                  padding: "6px 14px",
+                  background: selectedInfluence === id ? color + "33" : "#1e1e1e",
+                  color: selectedInfluence === id ? color : "#888",
+                  border: `1px solid ${selectedInfluence === id ? color : "#444"}`,
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  fontSize: "13px",
+                  fontWeight: selectedInfluence === id ? "bold" : "normal",
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div style={{ display: "flex", gap: "15px", marginBottom: "15px" }}>

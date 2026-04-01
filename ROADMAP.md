@@ -1,24 +1,35 @@
 # PoE Crafter — Roadmap to Craft of Exile Replica
 
-## Current State (~60% Complete)
+## Current State (~65% Complete)
 
 ### Working
 
-- Monte Carlo EV engine (500k iterations) — `src/utils/calculator.js`
+- Exact decision tree EV engine (replaces Monte Carlo) — `src/utils/calculator.js`
 - Essence + Fossil crafting with multiplicative fossil weight stacking
 - Fractured bases support
 - Live economy integration via poe.ninja ETL pipeline
 - 7 item classes with full mod pools from RePoE
+- Build scraper — GGG ladder → mod frequency by archetype (`scrape_builds.py`)
+- Trade price fetcher — GGG trade API → market value for crafting targets (`fetch_trade_prices.py`)
 
 ### Architecture
 
 ```
-Python ETL (build_db.py, fetch_economy.py, update_data.py)
-    ↓  produces
-items.json + essences.json + fossils.json + active_economy.json
-    ↓  consumed by
-React App (App.jsx) → calculator.js (Monte Carlo) → profitability output
+Python ETL
+  update_data.py       → active_economy.json   (poe.ninja material costs)
+  scrape_builds.py     → build_items.json       (mod frequency by build archetype)
+  fetch_trade_prices.py → trade_prices.json     (market value of finished items)
+      ↓
+React App (App.jsx)
+  calculator.js        → expected craft cost per method
+  heat map UI          → profit = market_value - craft_cost
 ```
+
+### Trade API Integration (new)
+- `fetch_trade_prices.py` constructs trade queries from `build_items.json` targets
+- Mod texts normalized and mapped to GGG stat IDs (88% match rate; 3 variants tried)
+- Prices fetched as top-10 cheapest listings, converted to chaos, cached 4h
+- Output: `src/data/trade_prices.json` with p10/p25/median/p75/p90 per target
 
 ---
 
@@ -88,31 +99,33 @@ Combines two influenced items — required for top-tier crafts.
 
 Goal: Scrape popular builds, extract item requirements, reverse-engineer optimal craft paths.
 
-### 2.1 Build Scraper (`scrape_builds.py`)
+### 2.1 Build Scraper (`scrape_builds.py`) ✅ DONE
 
-- [ ] Fetch poe.ninja `/builds` endpoint for top 5-10 popular build archetypes
-- [ ] Extract equipped rare items per character (body, helm, gloves, boots, rings, amulet, belt)
-- [ ] Parse item mods into structured mod IDs (match against items.json)
-- [ ] Store: `build_items.json` — list of high-value item mod targets per slot
+- [x] Fetch GGG ladder API for top characters by build archetype
+- [x] Extract equipped rare items per character (body, helm, gloves, boots, rings, amulet, belt)
+- [x] Parse item mods into structured mod IDs (matched against items.json via regex)
+- [x] Store: `build_items.json` — mod frequency + tier stats per slot per build archetype
 
-### 2.2 Mod Requirement Extractor
+### 2.2 Mod Requirement Extractor ✅ DONE (integrated into scraper + price fetcher)
 
-- [ ] Identify the "required" mods (appear in >80% of that build's items) vs "nice to have"
-- [ ] Determine min tier thresholds from sampled items (e.g., T1-T2 life on rings)
-- [ ] Output: ranked list of mod combos per item slot per build archetype
+- [x] Required mods = frequency_pct >= 50% threshold in build_items.json
+- [x] Min tier thresholds from avg_tier field (round to nearest tier)
+- [x] Min values extracted from items.json mod text range lower bounds
 
-### 2.3 Market Value Estimator
+### 2.3 Market Value Estimator (`fetch_trade_prices.py`) ✅ DONE
 
-- [ ] Cross-reference target mod combos against poe.ninja trade data
-- [ ] Estimate item value based on mod combination rarity + demand
-- [ ] Feed market value estimate into existing profitability calculator
+- [x] Map mod groups → GGG trade stat IDs (88% coverage, 3 normalization variants)
+- [x] Construct trade search queries per (build, slot) target
+- [x] Fetch top-10 cheapest online listings, convert to chaos (divine rate from economy)
+- [x] Output: `trade_prices.json` with p10/p25/median/p75/p90 per target, 4h cache
+- [ ] Refine min_value thresholds — low-tier mods (T8+) produce weak filters → prices noisy
+- [ ] Add influenced mod stat IDs once influence support lands in items.json
 
 ### 2.4 Craft Path Ranker
 
-- [ ] For each target item: run Monte Carlo across all viable crafting methods
-  - Essence spam, fossil spam, chaos spam, influenced essence, etc.
-- [ ] Rank by expected profit: `market_value - (base_cost + expected_craft_cost)`
-- [ ] Surface top 3 methods with probability, avg tries, and expected cost
+- [ ] Load trade_prices.json + run calculator.js EV engine for each crafting method
+- [ ] Compute: `profit = median_market_price - (base_cost + expected_craft_cost)`
+- [ ] Output heat map data structure: {target_id, craft_method, profit, craft_cost, market_price}
 
 ---
 

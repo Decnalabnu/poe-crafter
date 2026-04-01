@@ -188,6 +188,7 @@ export function calculateSpamEV(
   itemTag = "ring",
   fracturedModId = "none",
   activeFossils = [],
+  influence = null,
 ) {
   const essence = essenceDataList[essenceId];
   let costPerTry = 1;
@@ -216,7 +217,13 @@ export function calculateSpamEV(
   const activePool = itemsData[itemTag];
   if (!activePool) return { error: `Invalid item class: ${itemTag}` };
 
+  // Include a mod if it's a base mod (no influence) or matches selected influence.
+  // Mods with a different influence never spawn, even on influenced items.
+  const influenceFilter = (m) =>
+    !m.influence || m.influence === influence;
+
   let validPrefixes = activePool.prefixes
+    .filter(influenceFilter)
     .map((m) => ({
       id: m.id,
       group: m.group,
@@ -224,6 +231,7 @@ export function calculateSpamEV(
       weight: m.spawn_weights[0]?.weight || 0,
       isPrefix: true,
       mod_tags: m.mod_tags || [],
+      influence: m.influence || null,
     }))
     .filter(
       (m) =>
@@ -231,6 +239,7 @@ export function calculateSpamEV(
     );
 
   let validSuffixes = activePool.suffixes
+    .filter(influenceFilter)
     .map((m) => ({
       id: m.id,
       group: m.group,
@@ -238,6 +247,7 @@ export function calculateSpamEV(
       weight: m.spawn_weights[0]?.weight || 0,
       isPrefix: false,
       mod_tags: m.mod_tags || [],
+      influence: m.influence || null,
     }))
     .filter(
       (m) =>
