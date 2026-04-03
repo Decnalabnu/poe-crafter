@@ -113,7 +113,7 @@ function SlotDetail({ slotKey, slotData, build, tradeTargets }) {
   return (
     <div>
       <div style={{ fontSize: "12px", color: "#555", marginBottom: "10px" }}>
-        n={slotData.sample_count} · T# = best tier seen on ladder
+        n={slotData.sample_count} · T# = avg tier across ladder
       </div>
 
       {mods.map(([group, stats]) => {
@@ -124,8 +124,8 @@ function SlotDetail({ slotKey, slotData, build, tradeTargets }) {
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", marginBottom: "3px" }}>
               <span style={{ color: "#ddd" }}>{group}</span>
               <span style={{ fontSize: "12px" }}>
-                {stats.min_tier_seen != null && (
-                  <span style={{ color: "#e2b659", marginRight: "8px" }}>T{stats.min_tier_seen}</span>
+                {stats.avg_tier != null && (
+                  <span style={{ color: "#e2b659", marginRight: "8px" }}>T{stats.avg_tier}</span>
                 )}
                 <span style={{ color }}>{pct}%</span>
               </span>
