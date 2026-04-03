@@ -30,9 +30,9 @@ import requests
 # ---------------------------------------------------------------------------
 LEAGUE = json.load(open("src/data/active_economy.json")).get("league", "Mirage")
 PAGE_SIZE = 200             # GGG hard cap per request
-MAX_LADDER_PAGES = 10       # pages to paginate (up to 2000 ladder entries total)
-TARGET_PUBLIC_CHARS = 200   # stop early once we have this many public characters fetched
-REQUEST_DELAY = 6.0         # seconds between character item fetches
+MAX_LADDER_PAGES = 75       # GGG ladder hard cap: 15,000 entries total (75 × 200)
+TARGET_PUBLIC_CHARS = 5000  # stop early once we have this many public characters fetched
+REQUEST_DELAY = 4.5         # seconds between character item fetches (~13 req/min, well under GGG limit)
 BATCH_SIZE = 40             # fetch this many characters, then pause
 BATCH_PAUSE = 45.0          # seconds to pause between batches
 MIN_FREQUENCY_PCT = 0.15    # mod must appear in ≥15% of sampled items to be reported
@@ -224,8 +224,8 @@ def fetch_character_items(account: str, char: str, session: requests.Session) ->
                 params={"accountName": account, "character": char},
                 timeout=15,
             )
-            if resp.status_code == 403:
-                # Private profile — cache empty list so we don't retry
+            if resp.status_code in (403, 404):
+                # Private/missing profile — cache empty list so we don't retry
                 _save_cache(cache_key, [])
                 return []
             if resp.status_code == 429:
@@ -238,6 +238,14 @@ def fetch_character_items(account: str, char: str, session: requests.Session) ->
             items = resp.json().get("items", [])
             _save_cache(cache_key, items)
             return items
+        except requests.exceptions.Timeout:
+            print(f"    Timeout fetching {char} (attempt {attempt + 1}/3), retrying in {delay:.0f}s...")
+            delay *= 2
+            continue
+        except requests.exceptions.ConnectionError:
+            print(f"    Connection error fetching {char} (attempt {attempt + 1}/3), retrying in {delay:.0f}s...")
+            delay *= 2
+            continue
         except Exception as e:
             print(f"    Warning: failed to fetch {char}: {e}")
             return []
@@ -302,6 +310,8 @@ def scrape(league: str, session: requests.Session) -> dict:
 
     raw = {}
     fetched = 0  # counts actual network requests made this run (cached don't count)
+    start_time = time.time()
+
     for i, entry in enumerate(public_entries, 1):
         if len(raw) >= TARGET_PUBLIC_CHARS:
             print(f"  Reached TARGET_PUBLIC_CHARS={TARGET_PUBLIC_CHARS}, stopping early")
@@ -311,9 +321,7 @@ def scrape(league: str, session: requests.Session) -> dict:
         char_class = entry["character"].get("class", "Unknown")
         key = f"{acct}/{char}"
 
-        # Skip if already cached — no network request needed
         already_cached = _load_cache(f"items_{acct}_{char}") is not None
-        print(f"  [{i}/{len(public_entries)}] {char_class}: {char} ({acct}){' [cached]' if already_cached else ''}")
 
         items = fetch_character_items(acct, char, session)
         if items:
@@ -322,8 +330,20 @@ def scrape(league: str, session: requests.Session) -> dict:
         if not already_cached:
             fetched += 1
             if fetched % BATCH_SIZE == 0:
-                print(f"  --- Batch pause {BATCH_PAUSE}s to avoid rate limiting ---")
+                elapsed = (time.time() - start_time) / 60
+                rate = fetched / elapsed if elapsed > 0 else 0
+                remaining = TARGET_PUBLIC_CHARS - len(raw)
+                eta_min = remaining / rate if rate > 0 else 0
+                print(
+                    f"  --- Batch {fetched // BATCH_SIZE}: "
+                    f"{len(raw)} collected / {i} scanned "
+                    f"({elapsed:.0f}m elapsed, ~{eta_min:.0f}m remaining) "
+                    f"--- pausing {BATCH_PAUSE}s ---"
+                )
                 time.sleep(BATCH_PAUSE)
+        elif i % 200 == 0:
+            # Periodic heartbeat for cached runs so the terminal isn't silent
+            print(f"  [{i}/{len(public_entries)}] {len(raw)} collected (from cache)")
 
     return raw
 

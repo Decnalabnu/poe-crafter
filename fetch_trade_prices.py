@@ -38,6 +38,7 @@ PRICE_CACHE_DIR = "data/build_cache"
 TOP_BUILDS = 8          # number of build archetypes to price
 MIN_FREQ_PCT = 50.0     # mod must appear in >=50% of sampled items to be "required"
 MIN_SLOT_SAMPLES = 5    # minimum items sampled in a slot before trusting the data
+MAX_QUERY_MODS = 4      # AND logic explodes result sets; cap at this many mods per query
 LISTINGS_PER_QUERY = 10 # listings fetched per target (trade API: max 10 per fetch)
 CACHE_TTL_HOURS = 4     # stale price cache beyond this age is re-fetched
 
@@ -105,43 +106,126 @@ def build_stat_id_map(session: requests.Session, force: bool = False) -> dict:
     return stat_map
 
 
-def find_stat_id(group: str, item_tag: str, items_db: dict, stat_map: dict) -> str | None:
+# Influence name (from items.json) → GGG trade misc_filter key
+INFLUENCE_FILTER_KEYS = {
+    "shaper":   "shaper_item",
+    "elder":    "elder_item",
+    "crusader": "crusader_item",
+    "hunter":   "hunter_item",
+    "redeemer": "redeemer_item",
+    "warlord":  "warlord_item",
+}
+
+
+def _is_pct_mod(text: str) -> bool:
+    """Return True if the mod text is a percentage stat (contains % before a keyword)."""
+    return bool(re.search(r"%", text))
+
+
+def find_stat_id_and_influence(group: str, item_tag: str, items_db: dict,
+                               stat_map: dict) -> tuple[str | None, str | None]:
     """
     Find the trade stat ID for a mod group on a given item type.
-    All tiers of a mod group share one stat ID — we just need any tier's text.
+    Returns (stat_id, influence_name | None).
 
-    items.json omits the leading '+' on many percentage mods while the trade API
-    includes it (e.g. '#% to Global Critical Strike Multiplier' vs
-    '+#% to Global Critical Strike Multiplier'). We try both variants.
+    Search order: non-influenced first (most ladder items are uninfluenced), then
+    influenced. If only an influenced version exists, returns its influence type so
+    the caller can add the appropriate misc_filter to the trade query.
+
+    Normalization variants tried against the stat map:
+      1. as-is
+      2. '+' prepended  (items.json drops leading '+' on pct mods)
+      3. '(local)' appended  (trade API appends this on local defence mods)
+      4. '+' prepended AND '(local)' appended  (flat local mods, e.g. '+# to armour (local)')
+      5. '-#' → '+#' swap  (cost-reduction mods stored negative in RePoE)
+
+    For local defence mods we try to match flat vs % correctly:
+      - Mod text containing '%' → try the '% increased ... (local)' trade stat first
+      - Mod text without '%' → try '+# to ... (local)' first (flat value)
+    """
+    pool = items_db.get(item_tag, {})
+    influenced_candidate: tuple[str, str] | None = None  # (stat_id, influence)
+
+    for section in ("prefixes", "suffixes"):
+        for mod in pool.get(section, []):
+            if mod.get("group") != group:
+                continue
+            text = mod["text"]
+            normalized = _normalize_text(text)
+            is_pct = _is_pct_mod(text)
+
+            # Build candidate list prioritising the correct flat/% form for (local) mods
+            candidates: list[str] = []
+            if is_pct:
+                candidates = [
+                    normalized,
+                    normalized + " (local)",
+                    "+" + normalized,
+                    "+" + normalized + " (local)",
+                ]
+            else:
+                # flat value mod — try '+# to X (local)' before bare forms
+                candidates = [
+                    "+" + normalized + " (local)",
+                    normalized + " (local)",
+                    "+" + normalized,
+                    normalized,
+                ]
+
+            # Also try '-#' → '+#' swap for signed cost-reduction mods
+            if "-#" in normalized:
+                swapped = normalized.replace("-#", "+#")
+                candidates.append(swapped)
+                candidates.append(swapped + " (local)")
+
+            for variant in candidates:
+                if variant in stat_map:
+                    if not mod.get("influence"):
+                        return stat_map[variant], None
+                    elif influenced_candidate is None:
+                        influenced_candidate = (stat_map[variant], mod["influence"])
+                    break  # first match per mod — don't add more candidates for same mod
+
+    if influenced_candidate:
+        return influenced_candidate
+    return None, None
+
+
+def extract_min_value(group: str, item_tag: str, target_tier: int, items_db: dict,
+                      influence: str | None = None) -> int | None:
+    """
+    Return the trade query min_value for a mod group at a specific tier.
+
+    For positive mods (life, resistance, etc.): returns the lower bound of the
+    stat range so the query filters out low rolls.
+    For signed negative mods (e.g. 'Socketed Attacks have -15 to Total Mana Cost'):
+    returns the negative value because the GGG trade API stores these as negative
+    integers and filters use 'min' in the signed direction.
     """
     pool = items_db.get(item_tag, {})
     for section in ("prefixes", "suffixes"):
         for mod in pool.get(section, []):
             if mod.get("group") != group:
                 continue
-            normalized = _normalize_text(mod["text"])
-            for variant in (normalized, "+" + normalized, normalized + " (local)"):
-                if variant in stat_map:
-                    return stat_map[variant]
-    return None
-
-
-def extract_min_value(group: str, item_tag: str, target_tier: int, items_db: dict) -> int | None:
-    """
-    Return the lower bound of the numeric range for a mod group at a specific tier.
-    e.g. group='Increased Life', item_tag='ring', tier=2 → 80
-    Used as the trade query minimum so we only price items worth crafting.
-    """
-    pool = items_db.get(item_tag, {})
-    for section in ("prefixes", "suffixes"):
-        for mod in pool.get(section, []):
-            if mod.get("group") != group or mod.get("tier") != target_tier:
+            if mod.get("tier") != target_tier:
                 continue
-            # Prefer range lower bound (X-Y) → X; fall back to first bare number
-            m = re.search(r"\((\d+)[-–]\d+\)", mod["text"])
+            if influence and mod.get("influence") != influence:
+                continue
+            text = mod["text"]
+            # Signed range like "(-20 to -16)" or bare signed value "-15"
+            m = re.search(r"\((-\d+)[-–]-?\d+\)", text)
+            if m:
+                return int(m.group(1))  # negative lower bound for cost-reduction mods
+            # Positive range "(X-Y)" → X
+            m = re.search(r"\((\d+)[-–]\d+\)", text)
             if m:
                 return int(m.group(1))
-            m = re.search(r"\b(\d+)\b", mod["text"])
+            # Bare signed number e.g. "-15"
+            m = re.search(r"(?<!\d)(-\d+)\b", text)
+            if m:
+                return int(m.group(1))
+            # Bare positive number
+            m = re.search(r"\b(\d+)\b", text)
             if m:
                 return int(m.group(1))
     return None
@@ -154,6 +238,14 @@ def build_targets(build_items: dict, items_db: dict, stat_map: dict) -> list:
     """
     Constructs one trade-query target per (build, slot) with ≥2 required mods.
     Required = frequency_pct >= MIN_FREQ_PCT in the sampled build data.
+
+    Tier floor: uses min_tier_seen (the best tier actually found on sampled ladder
+    items) rather than avg_tier. This keeps min_value thresholds tight — e.g.
+    T2 life on rings requires min 60 HP, not the T8 floor of 3 HP from avg_tier.
+
+    Influence detection: if a mod group only exists in influenced form in items.json,
+    the target is tagged with that influence type and the trade query will include the
+    appropriate misc_filter (shaper_item, elder_item, etc.).
     """
     builds = sorted(build_items["builds"], key=lambda b: -b["play_pct"])[:TOP_BUILDS]
     targets = []
@@ -169,30 +261,66 @@ def build_targets(build_items: dict, items_db: dict, stat_map: dict) -> list:
                 continue
 
             required_mods = []
+            influence_votes: dict[str, int] = {}  # influence → count of mods requiring it
+
             for group, freq in slot_data.get("mod_frequency", {}).items():
                 if freq["frequency_pct"] < MIN_FREQ_PCT:
                     continue
 
-                stat_id = find_stat_id(group, slot, items_db, stat_map)
+                stat_id, mod_influence = find_stat_id_and_influence(group, slot, items_db, stat_map)
                 if not stat_id:
                     unmapped.append(f"{slot}/{group}")
                     continue
 
-                # Use round(avg_tier) as quality floor — conservative but realistic
-                avg_tier = freq.get("avg_tier")
-                target_tier = round(avg_tier) if avg_tier is not None else None
-                min_val = extract_min_value(group, slot, target_tier, items_db) if target_tier else None
+                if mod_influence:
+                    influence_votes[mod_influence] = influence_votes.get(mod_influence, 0) + 1
+
+                # Use min_tier_seen — the best tier actually seen on sampled items.
+                # This gives a tighter min_value than avg_tier, filtering out cheap
+                # items where only a single worthless stat happens to be present.
+                target_tier = freq.get("min_tier_seen")
+                min_val = (
+                    extract_min_value(group, slot, target_tier, items_db, mod_influence)
+                    if target_tier is not None else None
+                )
 
                 required_mods.append({
-                    "group":     group,
-                    "stat_id":   stat_id,
-                    "avg_tier":  avg_tier,
-                    "min_value": min_val,
+                    "group":      group,
+                    "stat_id":    stat_id,
+                    "influence":  mod_influence,
+                    "tier_floor": target_tier,
+                    "min_value":  min_val,
+                    "_freq_pct":  freq["frequency_pct"],  # used for sorting; dropped below
                 })
 
-            # Need at least 2 mods to get a meaningful price signal
             if len(required_mods) < 2:
                 continue
+
+            # Sort by frequency descending and cap at MAX_QUERY_MODS.
+            # AND logic over many mods causes exponential result set shrinkage —
+            # cap to the top N most-common mods which carry the most price signal.
+            required_mods.sort(key=lambda m: -m["_freq_pct"])
+            required_mods = required_mods[:MAX_QUERY_MODS]
+            for m in required_mods:
+                del m["_freq_pct"]
+
+            # If influenced mods agree on a single influence type, tag the target.
+            # Conflicting influences (e.g. shaper + elder) signal an Awakener orb
+            # craft — skip the influence filter and note the conflict.
+            # Recount votes after capping mods.
+            influence_votes_capped: dict[str, int] = {}
+            for m in required_mods:
+                if m["influence"]:
+                    influence_votes_capped[m["influence"]] = influence_votes_capped.get(m["influence"], 0) + 1
+
+            target_influence: str | None = None
+            if influence_votes_capped:
+                top_inf, top_count = max(influence_votes_capped.items(), key=lambda x: x[1])
+                if len(influence_votes_capped) == 1 or top_count >= len(required_mods) * 0.6:
+                    target_influence = top_inf
+                else:
+                    print(f"    {build_label}/{slot}: conflicting influences "
+                          f"{influence_votes_capped} — skipping influence filter")
 
             safe_build = re.sub(r"[^\w]", "_", build_label).lower()
             targets.append({
@@ -201,14 +329,14 @@ def build_targets(build_items: dict, items_db: dict, stat_map: dict) -> list:
                 "play_pct":      build["play_pct"],
                 "slot":          slot,
                 "category":      CATEGORY_MAP[slot],
+                "influence":     target_influence,
                 "required_mods": required_mods,
             })
 
     if unmapped:
         unique_unmapped = sorted(set(unmapped))
-        print(f"  Warning: {len(unique_unmapped)} mod groups had no stat ID match "
-              f"(influenced/veiled mods not yet in items.json):")
-        for u in unique_unmapped[:8]:
+        print(f"  Warning: {len(unique_unmapped)} mod groups had no stat ID match:")
+        for u in unique_unmapped[:10]:
             print(f"    {u}")
 
     print(f"  Built {len(targets)} targets from top {len(builds)} builds")
@@ -274,43 +402,92 @@ def fetch_target_prices(target: dict, league: str, session: requests.Session,
             f["value"] = {"min": mod["min_value"]}
         stat_filters.append(f)
 
-    payload = {
-        "query": {
-            "status": {"option": "online"},
+    # Base filters: rarity + item category
+    query_filters: dict = {
+        "type_filters": {
             "filters": {
-                "type_filters": {
-                    "filters": {
-                        "rarity":   {"option": "rare"},
-                        "category": {"option": target["category"]},
-                    }
-                }
-            },
-            "stats": [{"type": "and", "filters": stat_filters}],
-        },
-        "sort": {"price": "asc"},
+                "rarity":   {"option": "rare"},
+                "category": {"option": target["category"]},
+            }
+        }
     }
 
-    # --- POST /search ---
-    time.sleep(SEARCH_DELAY)
-    try:
-        resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
-        if resp.status_code == 429:
-            wait = int(resp.headers.get("Retry-After", 60))
-            print(f"    Rate limited — waiting {wait}s")
-            time.sleep(wait)
+    # Add influence filter when the target requires a specific influence type.
+    # This restricts results to e.g. shaper items only, so influenced-exclusive
+    # mods (like Enemies Explode or Mana Cost on Socketed Attacks) are reachable.
+    influence = target.get("influence")
+    if influence and influence in INFLUENCE_FILTER_KEYS:
+        filter_key = INFLUENCE_FILTER_KEYS[influence]
+        query_filters["misc_filters"] = {
+            "filters": {filter_key: {"option": True}}
+        }
+
+    def _do_search(filters_subset: list, with_influence: bool) -> tuple[list, str] | None:
+        """POST /search and return (result_ids, search_id) or None on failure."""
+        qf = dict(query_filters)
+        if not with_influence:
+            qf = {k: v for k, v in qf.items() if k != "misc_filters"}
+        payload = {
+            "query": {
+                "status": {"option": "online"},
+                "filters": qf,
+                "stats": [{"type": "and", "filters": filters_subset}],
+            },
+            "sort": {"price": "asc"},
+        }
+        time.sleep(SEARCH_DELAY)
+        try:
             resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
-        resp.raise_for_status()
-        search = resp.json()
-    except Exception as e:
-        print(f"    Search failed ({target['id']}): {e}")
-        return None
+            if resp.status_code == 429:
+                wait = int(resp.headers.get("Retry-After", 60))
+                print(f"    Rate limited — waiting {wait}s")
+                time.sleep(wait)
+                resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
+            resp.raise_for_status()
+            data = resp.json()
+            return data.get("result", []), data.get("id", "")
+        except Exception as e:
+            print(f"    Search error: {e}")
+            return None
 
-    result_ids = search.get("result", [])
-    search_id  = search.get("id")
-    total      = len(result_ids)
+    # Progressive fallback strategy:
+    #  1. All mods + influence filter (if any)
+    #  2. All mods, no influence filter
+    #  3. Top 2 mods only (highest frequency), no influence filter
+    influence = target.get("influence")
+    attempts = [
+        (stat_filters,        bool(influence)),
+        (stat_filters,        False),
+        (stat_filters[:2],    False),
+    ]
+    # Deduplicate identical attempts
+    seen_attempts: list[tuple] = []
+    unique_attempts = []
+    for sf, wi in attempts:
+        key = (tuple(f["id"] for f in sf), wi)
+        if key not in seen_attempts:
+            seen_attempts.append(key)
+            unique_attempts.append((sf, wi))
 
+    result_ids: list = []
+    search_id: str = ""
+    used_mods_count = len(stat_filters)
+    for attempt_sf, attempt_wi in unique_attempts:
+        res = _do_search(attempt_sf, attempt_wi)
+        if res is None:
+            return None
+        result_ids, search_id = res
+        if result_ids:
+            used_mods_count = len(attempt_sf)
+            if attempt_sf is not stat_filters or (not attempt_wi and influence):
+                suffix = "no-influence" if (not attempt_wi and influence) else f"top-{len(attempt_sf)}-mods"
+                print(f"    Fell back to {suffix} ({len(result_ids)} results)")
+            break
+        # Only log when we exhausted all attempts
+
+    total = len(result_ids)
     if total == 0:
-        print(f"    {target['id']}: 0 listings found — query may be too strict")
+        print(f"    {target['id']}: 0 listings after all fallbacks")
         return None
 
     # --- GET /fetch ---
@@ -357,10 +534,11 @@ def fetch_target_prices(target: dict, league: str, session: requests.Session,
     with open(cache_path, "w", encoding="utf-8") as f:
         json.dump(result, f)
 
+    inf_label = f" [{influence}]" if influence else ""
     mod_summary = " + ".join(m["group"] for m in target["required_mods"][:3])
     if len(target["required_mods"]) > 3:
         mod_summary += f" (+{len(target['required_mods']) - 3} more)"
-    print(f"    {target['slot']:12s} median {result['median']:>5}c  "
+    print(f"    {target['slot']:12s}{inf_label:12s} median {result['median']:>5}c  "
           f"[{total} listings]  {mod_summary}")
     return result
 
@@ -396,11 +574,13 @@ def main():
     if args.dry_run:
         print("\n--- Targets (dry run) ---")
         for t in targets:
+            inf_label = f" [{t['influence']}]" if t.get("influence") else ""
             mods = ", ".join(
-                f"{m['group']} ≥T{m['avg_tier']} (min {m['min_value']})"
+                f"{m['group']} ≥T{m['tier_floor']} (min {m['min_value']})"
+                + (f" [{m['influence']}]" if m.get("influence") else "")
                 for m in t["required_mods"]
             )
-            print(f"  {t['build']:40s} {t['slot']:12s} | {mods}")
+            print(f"  {t['build']:40s} {t['slot']:12s}{inf_label:12s} | {mods}")
         return
 
     print(f"\nFetching prices for {len(targets)} targets...")
