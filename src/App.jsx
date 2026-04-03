@@ -7,6 +7,14 @@ import buildItemsData from "./data/build_items.json";
 import tradePricesData from "./data/trade_prices.json";
 import { calculateSpamEV } from "./utils/calculator";
 
+// Elemental resist suffixes are harvest-swappable (fire ↔ cold ↔ lightning).
+// Grouped together in both build preview and crafter probability math.
+const ELEMENTAL_RESIST_GROUPS = new Set([
+  "Fire Resistance",
+  "Cold Resistance",
+  "Lightning Resistance",
+]);
+
 const SLOT_LABELS = {
   ring: "Ring",
   amulet: "Amulet",
@@ -108,21 +116,83 @@ function ProfitabilityPanel({ slot, build, tradeTargets }) {
   );
 }
 
-function SlotDetail({ slotKey, slotData, build, tradeTargets }) {
-  const mods = Object.entries(slotData.mod_frequency ?? {});
+function mergeResistGroups(modFreq) {
+  const resistEntries = Object.entries(modFreq).filter(([g]) => ELEMENTAL_RESIST_GROUPS.has(g));
+  if (resistEntries.length <= 1) return modFreq;
+
+  // Weighted average tier across all three groups
+  let totalCount = 0, weightedTierSum = 0, minTier = Infinity, maxFreq = 0;
+  for (const [, stats] of resistEntries) {
+    totalCount += stats.count;
+    if (stats.avg_tier != null) weightedTierSum += stats.avg_tier * stats.count;
+    if (stats.min_tier_seen != null) minTier = Math.min(minTier, stats.min_tier_seen);
+    maxFreq = Math.max(maxFreq, stats.frequency_pct);
+  }
+  const merged = {
+    count: totalCount,
+    frequency_pct: maxFreq,
+    avg_tier: totalCount > 0 ? Math.round((weightedTierSum / totalCount) * 10) / 10 : null,
+    min_tier_seen: isFinite(minTier) ? minTier : null,
+    _sub: resistEntries,
+  };
+
+  const out = {};
+  for (const [g, stats] of Object.entries(modFreq)) {
+    if (!ELEMENTAL_RESIST_GROUPS.has(g)) out[g] = stats;
+    else if (!out["Elemental Resistance"]) out["Elemental Resistance"] = merged;
+  }
+  return out;
+}
+
+function SlotDetail({ slotKey, slotData, build, tradeTargets, onCraftThis }) {
+  const [expandResists, setExpandResists] = useState(false);
+  const mods = Object.entries(mergeResistGroups(slotData.mod_frequency ?? {}));
+
+  // Count core+common mods, collapsing resist groups to one slot
+  const rawFreq = slotData.mod_frequency ?? {};
+  const topGroups = Object.entries(rawFreq).filter(([, s]) => s.frequency_pct >= 40);
+  const topResistCount = topGroups.filter(([g]) => ELEMENTAL_RESIST_GROUPS.has(g)).length;
+  const craftModCount = topGroups.length - Math.max(0, topResistCount - 1);
+
   return (
     <div>
-      <div style={{ fontSize: "12px", color: "#555", marginBottom: "10px" }}>
-        n={slotData.sample_count} · T# = avg tier across ladder
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+        <span style={{ fontSize: "12px", color: "#555" }}>
+          n={slotData.sample_count} · T# = avg tier across ladder
+        </span>
+        {craftModCount > 0 && (
+          <button
+            onClick={() => onCraftThis(slotKey, rawFreq)}
+            style={{
+              padding: "5px 12px",
+              fontSize: "12px",
+              background: "#1a3a1a",
+              color: "#4CAF50",
+              border: "1px solid #4CAF50",
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            Craft this slot → ({craftModCount} mods)
+          </button>
+        )}
       </div>
 
       {mods.map(([group, stats]) => {
         const pct = stats.frequency_pct;
         const color = freqColor(pct);
+        const isResistGroup = group === "Elemental Resistance";
         return (
           <div key={group} style={{ marginBottom: "9px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", marginBottom: "3px" }}>
-              <span style={{ color: "#ddd" }}>{group}</span>
+            <div
+              style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", marginBottom: "3px", cursor: isResistGroup ? "pointer" : "default" }}
+              onClick={isResistGroup ? () => setExpandResists(v => !v) : undefined}
+            >
+              <span style={{ color: "#ddd" }}>
+                {group}
+                {isResistGroup && <span style={{ color: "#555", fontSize: "11px", marginLeft: "6px" }}>harvest-swappable {expandResists ? "▼" : "▶"}</span>}
+              </span>
               <span style={{ fontSize: "12px" }}>
                 {stats.avg_tier != null && (
                   <span style={{ color: "#e2b659", marginRight: "8px" }}>T{stats.avg_tier}</span>
@@ -133,6 +203,24 @@ function SlotDetail({ slotKey, slotData, build, tradeTargets }) {
             <div style={{ height: "4px", background: "#333", borderRadius: "2px", overflow: "hidden" }}>
               <div style={{ width: `${Math.min(pct, 100)}%`, height: "100%", background: color, borderRadius: "2px" }} />
             </div>
+            {isResistGroup && expandResists && stats._sub && (
+              <div style={{ marginTop: "6px", paddingLeft: "12px", borderLeft: "2px solid #333" }}>
+                {stats._sub.map(([subGroup, subStats]) => (
+                  <div key={subGroup} style={{ marginBottom: "5px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", marginBottom: "2px" }}>
+                      <span style={{ color: "#999" }}>{subGroup}</span>
+                      <span>
+                        {subStats.avg_tier != null && <span style={{ color: "#c49a3a", marginRight: "6px" }}>T{subStats.avg_tier}</span>}
+                        <span style={{ color: freqColor(subStats.frequency_pct) }}>{subStats.frequency_pct}%</span>
+                      </span>
+                    </div>
+                    <div style={{ height: "3px", background: "#2a2a2a", borderRadius: "2px", overflow: "hidden" }}>
+                      <div style={{ width: `${Math.min(subStats.frequency_pct, 100)}%`, height: "100%", background: freqColor(subStats.frequency_pct), borderRadius: "2px" }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         );
       })}
@@ -148,7 +236,7 @@ function SlotDetail({ slotKey, slotData, build, tradeTargets }) {
   );
 }
 
-function BuildDetail({ build, tradeTargets }) {
+function BuildDetail({ build, tradeTargets, onCraftThis }) {
   const slotKeys = Object.keys(build.slots);
   const [activeSlot, setActiveSlot] = useState(slotKeys[0] ?? null);
 
@@ -194,13 +282,14 @@ function BuildDetail({ build, tradeTargets }) {
           slotData={build.slots[activeSlot]}
           build={build}
           tradeTargets={tradeTargets}
+          onCraftThis={onCraftThis}
         />
       )}
     </div>
   );
 }
 
-function AscendancyRow({ ascendancy, builds, tradeTargets }) {
+function AscendancyRow({ ascendancy, builds, tradeTargets, onCraftThis }) {
   const totalChars = builds.reduce((s, b) => s + b.count, 0);
   const topPlayPct = builds[0]?.play_pct ?? 0;
   const [expanded, setExpanded] = useState(false);
@@ -282,7 +371,7 @@ function AscendancyRow({ ascendancy, builds, tradeTargets }) {
                 <div style={{ color: "#aaa", fontSize: "12px", marginBottom: "10px" }}>
                   {b.char_class} · {b.primary_skill} · {b.count} chars ({b.play_pct}% of ladder)
                 </div>
-                <BuildDetail build={b} tradeTargets={tradeTargets} />
+                <BuildDetail build={b} tradeTargets={tradeTargets} onCraftThis={onCraftThis} />
               </div>
             );
           })()}
@@ -292,7 +381,7 @@ function AscendancyRow({ ascendancy, builds, tradeTargets }) {
   );
 }
 
-function BuildAnalyzer() {
+function BuildAnalyzer({ onCraftThis }) {
   const { league, analyzed_at, characters_sampled, builds } = buildItemsData;
   const tradeTargets = tradePricesData?.targets ?? [];
   const analyzedDate = new Date(analyzed_at).toLocaleString();
@@ -329,6 +418,7 @@ function BuildAnalyzer() {
           ascendancy={ascendancy}
           builds={aBuilds}
           tradeTargets={tradeTargets}
+          onCraftThis={onCraftThis}
         />
       ))}
     </div>
@@ -401,6 +491,55 @@ function App() {
       );
     }
   }, [guaranteedModId, fracturedModId, craftingMethod]);
+
+  const handleCraftThis = (slotKey, rawModFrequency) => {
+    // Take ≥40% groups (core + common), sorted by frequency desc
+    const topGroups = Object.entries(rawModFrequency)
+      .filter(([, stats]) => stats.frequency_pct >= 40)
+      .sort((a, b) => b[1].frequency_pct - a[1].frequency_pct)
+      .map(([group]) => group);
+
+    // Collapse elemental resists: pick only the highest-frequency one (they're harvest-swappable)
+    let resistAdded = false;
+    const deduped = [];
+    for (const group of topGroups) {
+      if (ELEMENTAL_RESIST_GROUPS.has(group)) {
+        if (!resistAdded) { deduped.push(group); resistAdded = true; }
+      } else {
+        deduped.push(group);
+      }
+    }
+
+    const pool = itemsData[slotKey];
+    if (!pool) return;
+    const allMods = [...pool.prefixes, ...pool.suffixes];
+
+    const resolved = [];
+    for (const group of deduped) {
+      const best = allMods
+        .filter(m => m.group === group && (m.spawn_weights?.[0]?.weight ?? 0) > 0)
+        .sort((a, b) => (a.tier ?? 999) - (b.tier ?? 999))[0];
+      if (best) resolved.push(best);
+    }
+
+    // Detect influence: if exactly one influence appears, set it; if mixed, drop influenced mods
+    const influences = new Set(resolved.filter(m => m.influence).map(m => m.influence));
+    let influence = null;
+    let finalMods = resolved;
+    if (influences.size === 1) {
+      influence = [...influences][0];
+    } else if (influences.size > 1) {
+      finalMods = resolved.filter(m => !m.influence);
+    }
+
+    setSelectedItemClass(slotKey);
+    setSelectedInfluence(influence);
+    setTargetIds(finalMods.map(m => m.id));
+    setFracturedModId("none");
+    setResult(null);
+    setExpandedGroups({});
+    setActiveTab("crafter");
+  };
 
   const handleCalculate = () => {
     const fossilsToPass = craftingMethod === "fossil" ? activeFossils : [];
@@ -646,8 +785,10 @@ function App() {
         let combinedWeight = 0;
         let qualifyingTiers = 0;
 
+        const swapGroup = ELEMENTAL_RESIST_GROUPS.has(targetMod.group) ? ELEMENTAL_RESIST_GROUPS : null;
         modifiedPool.forEach((mod) => {
-          if (mod.group !== targetMod.group) return;
+          const groupMatches = swapGroup ? swapGroup.has(mod.group) : mod.group === targetMod.group;
+          if (!groupMatches) return;
           const qualifies =
             tTier !== undefined && mod.tier !== undefined
               ? mod.tier <= tTier
@@ -713,7 +854,7 @@ function App() {
         ))}
       </div>
 
-      {activeTab === "builds" && <BuildAnalyzer />}
+      {activeTab === "builds" && <BuildAnalyzer onCraftThis={handleCraftThis} />}
 
       {activeTab === "crafter" && <div
         style={{ background: "#2d2d2d", padding: "20px", borderRadius: "8px" }}

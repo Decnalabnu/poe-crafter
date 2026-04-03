@@ -3,6 +3,13 @@ import essenceDataList from "../data/essences.json";
 import fossilData from "../data/fossils.json";
 import economyData from "../data/active_economy.json";
 
+// Harvest-swappable resist groups: targeting any one counts as targeting all three.
+const ELEMENTAL_RESIST_GROUPS = new Set([
+  "Fire Resistance",
+  "Cold Resistance",
+  "Lightning Resistance",
+]);
+
 // PoE rare item affix count distribution — weights 1:3:2 per GGG data
 const MOD_COUNT_DIST = [
   { count: 4, prob: 1 / 6 },
@@ -45,7 +52,8 @@ function applyFossilMultipliers(pool, activeFossilIds) {
 // Lower tier number = better roll, so T1 satisfies a T2 requirement.
 // Falls back to exact id match for mods without tier data.
 function modSatisfiesTarget(m, targetMod) {
-  if (m.group !== targetMod.group) return false;
+  const bothElemental = ELEMENTAL_RESIST_GROUPS.has(m.group) && ELEMENTAL_RESIST_GROUPS.has(targetMod.group);
+  if (!bothElemental && m.group !== targetMod.group) return false;
   if (m.tier !== undefined && targetMod.tier !== undefined) {
     return m.tier <= targetMod.tier;
   }
