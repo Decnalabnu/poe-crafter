@@ -6,6 +6,7 @@ import economyData from "./data/active_economy.json";
 import buildItemsData from "./data/build_items.json";
 import tradePricesData from "./data/trade_prices.json";
 import { calculateSpamEV } from "./utils/calculator";
+import ScryingRanker from "./components/ScryingRanker";
 
 // Elemental resist suffixes are harvest-swappable (fire ↔ cold ↔ lightning).
 // Grouped together in both build preview and crafter probability math.
@@ -834,6 +835,7 @@ function App() {
         {[
           { id: "crafter", label: "Crafter" },
           { id: "builds", label: "Build Analyzer" },
+          { id: "scrying", label: "Scrying Ranker" },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -853,6 +855,8 @@ function App() {
           </button>
         ))}
       </div>
+
+      {activeTab === "scrying" && <ScryingRanker />}
 
       {activeTab === "builds" && <BuildAnalyzer onCraftThis={handleCraftThis} />}
 

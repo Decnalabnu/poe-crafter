@@ -6547,7 +6547,7 @@
       },
       {
         "id": "MovementVelocityAmuletUber1",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "(4-6)% increased Movement Speed [The Shaper's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -6561,7 +6561,7 @@
       },
       {
         "id": "MovementVelocityAmuletUber2",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "(7-8)% increased Movement Speed [The Shaper's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -6575,7 +6575,7 @@
       },
       {
         "id": "MovementVelocityExtraInfluence1",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "(3-6)% increased Movement Speed [Hunter's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -6589,7 +6589,7 @@
       },
       {
         "id": "MovementVelocityExtraInfluence2__",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "(7-10)% increased Movement Speed [Hunter's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -16170,7 +16170,7 @@
       },
       {
         "id": "MovementVelocity1",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "10% increased Movement Speed [Runner's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -16183,7 +16183,7 @@
       },
       {
         "id": "MovementVelocity2",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "15% increased Movement Speed [Sprinter's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -16196,7 +16196,7 @@
       },
       {
         "id": "MovementVelocity2Royale",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "(15-25)% increased Movement Speed [Sprinter's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -16209,7 +16209,7 @@
       },
       {
         "id": "MovementVelocity3",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "20% increased Movement Speed [Stallion's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -16222,7 +16222,7 @@
       },
       {
         "id": "MovementVelocity4",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "25% increased Movement Speed [Gazelle's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -16235,7 +16235,7 @@
       },
       {
         "id": "MovementVelocity5",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "30% increased Movement Speed [Cheetah's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -16248,7 +16248,7 @@
       },
       {
         "id": "MovementVelocity6",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "35% increased Movement Speed [Hellion's]",
         "mod_tags": [],
         "spawn_weights": [
@@ -16261,7 +16261,7 @@
       },
       {
         "id": "MovementVelocityEssence7",
-        "group": "Movement Velocity",
+        "group": "Movement Speed",
         "text": "32% increased Movement Speed [Essences]",
         "mod_tags": [],
         "spawn_weights": [

@@ -230,7 +230,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 43,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -557,7 +557,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 33.3,
               "min_tier_seen": 8,
@@ -965,7 +965,7 @@
         "boots": {
           "sample_count": 33,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 33,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -1461,7 +1461,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 17,
               "frequency_pct": 89.5,
               "min_tier_seen": 8,
@@ -1689,7 +1689,7 @@
         "boots": {
           "sample_count": 17,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 17,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -2022,7 +2022,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 13,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -2222,7 +2222,7 @@
               "min_tier_seen": 4,
               "avg_tier": 4.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 20.0,
               "min_tier_seen": 4,
@@ -2367,7 +2367,7 @@
         "boots": {
           "sample_count": 11,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 11,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -2758,7 +2758,7 @@
         "boots": {
           "sample_count": 9,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 9,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -3095,7 +3095,7 @@
         "boots": {
           "sample_count": 10,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 10,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -3273,7 +3273,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -3479,7 +3479,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -3888,7 +3888,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 6,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -4025,7 +4025,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 7,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -4439,7 +4439,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 5,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -4737,7 +4737,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -4880,7 +4880,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 5,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -5122,7 +5122,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 6,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -5400,7 +5400,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 6,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -5603,7 +5603,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 6,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -6054,7 +6054,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 5,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -6409,7 +6409,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 5,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -6629,7 +6629,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 4,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -6908,7 +6908,7 @@
         "boots": {
           "sample_count": 4,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 4,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -7335,7 +7335,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 5,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -7549,7 +7549,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 5,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -7762,7 +7762,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 25.0,
               "min_tier_seen": 4,
@@ -7952,7 +7952,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 5,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -8229,7 +8229,7 @@
         "boots": {
           "sample_count": 3,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -8513,7 +8513,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -8928,7 +8928,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -9017,7 +9017,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 4,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -9597,7 +9597,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -9681,7 +9681,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -9995,7 +9995,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -10097,7 +10097,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -10263,7 +10263,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 4,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -10417,7 +10417,7 @@
         "boots": {
           "sample_count": 3,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -10741,7 +10741,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -10908,7 +10908,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -11178,7 +11178,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -11262,7 +11262,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -11765,7 +11765,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -12375,7 +12375,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -12483,7 +12483,7 @@
         "boots": {
           "sample_count": 3,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -13414,7 +13414,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -13568,7 +13568,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -13716,7 +13716,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 3,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -14244,7 +14244,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -14501,7 +14501,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -15123,7 +15123,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -15238,7 +15238,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -15445,7 +15445,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -15583,7 +15583,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -15749,7 +15749,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -16345,7 +16345,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -16457,7 +16457,7 @@
         "boots": {
           "sample_count": 2,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -17014,7 +17014,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -17151,7 +17151,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -17341,7 +17341,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -17448,7 +17448,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -17792,7 +17792,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -17964,7 +17964,7 @@
         "boots": {
           "sample_count": 2,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -18096,7 +18096,7 @@
         "boots": {
           "sample_count": 2,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -18437,7 +18437,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -18772,7 +18772,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -19108,7 +19108,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -19262,7 +19262,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -19381,7 +19381,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -19853,7 +19853,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -20007,7 +20007,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -20215,7 +20215,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -20363,7 +20363,7 @@
         "boots": {
           "sample_count": 2,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -20482,7 +20482,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -20720,7 +20720,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -20944,7 +20944,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -21305,7 +21305,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -21508,7 +21508,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -21574,7 +21574,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 2,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -21782,7 +21782,7 @@
               "min_tier_seen": 2,
               "avg_tier": 2.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -21912,7 +21912,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -22119,7 +22119,7 @@
               "min_tier_seen": 2,
               "avg_tier": 2.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -22546,7 +22546,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -22681,7 +22681,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -22971,7 +22971,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -23218,7 +23218,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -23284,7 +23284,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -23433,7 +23433,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -23675,7 +23675,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -23732,7 +23732,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -24048,7 +24048,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -24237,7 +24237,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -24262,7 +24262,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -24429,7 +24429,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -24466,7 +24466,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -24668,7 +24668,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -24904,7 +24904,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -25029,7 +25029,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -25108,7 +25108,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -25325,7 +25325,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -25591,7 +25591,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -25839,7 +25839,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -26017,7 +26017,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -26183,7 +26183,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -26478,7 +26478,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -26556,7 +26556,7 @@
               "min_tier_seen": 2,
               "avg_tier": 2.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -26657,7 +26657,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -26830,7 +26830,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -26930,7 +26930,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -27019,7 +27019,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -27205,7 +27205,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -27407,7 +27407,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -27526,7 +27526,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -27586,7 +27586,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -27715,7 +27715,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -27935,7 +27935,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -28130,7 +28130,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -28161,7 +28161,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -28426,7 +28426,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -28556,7 +28556,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -28810,7 +28810,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -28876,7 +28876,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -29303,7 +29303,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -29462,7 +29462,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -29594,7 +29594,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -29913,7 +29913,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -30143,7 +30143,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -30337,7 +30337,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -30470,7 +30470,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -30637,7 +30637,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -30709,7 +30709,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -31148,7 +31148,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -31255,7 +31255,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -31321,7 +31321,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -31611,7 +31611,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -31744,7 +31744,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -32008,7 +32008,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -32241,7 +32241,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -32611,7 +32611,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -32835,7 +32835,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -32941,7 +32941,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -33117,7 +33117,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -33346,7 +33346,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -33581,7 +33581,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -33817,7 +33817,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -34047,7 +34047,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -34078,7 +34078,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -34273,7 +34273,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -34500,7 +34500,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -34766,7 +34766,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -34903,7 +34903,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -35081,7 +35081,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -35228,7 +35228,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -35323,7 +35323,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -35749,7 +35749,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -35899,7 +35899,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -36265,7 +36265,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -36396,7 +36396,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -36545,7 +36545,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -36727,7 +36727,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -36765,7 +36765,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -36964,7 +36964,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -37111,7 +37111,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -37252,7 +37252,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -37600,7 +37600,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -37730,7 +37730,7 @@
               "min_tier_seen": 8,
               "avg_tier": 8.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -38021,7 +38021,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -38209,7 +38209,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -38275,7 +38275,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -38570,7 +38570,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -38763,7 +38763,7 @@
         "boots": {
           "sample_count": 1,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -38923,7 +38923,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -38977,7 +38977,7 @@
         "boots": {
           "sample_count": 1,
           "mod_frequency": {
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -39225,7 +39225,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -39392,7 +39392,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -39580,7 +39580,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -39704,7 +39704,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -39793,7 +39793,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -40244,7 +40244,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -40408,7 +40408,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -40733,7 +40733,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -40817,7 +40817,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -40888,7 +40888,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -41060,7 +41060,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -41149,7 +41149,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -41221,7 +41221,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -41327,7 +41327,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -41563,7 +41563,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -41624,7 +41624,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -42001,7 +42001,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -42143,7 +42143,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -42203,7 +42203,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -42465,7 +42465,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -42661,7 +42661,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -42843,7 +42843,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -43004,7 +43004,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -43210,7 +43210,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -43287,7 +43287,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -43604,7 +43604,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -43964,7 +43964,7 @@
               "min_tier_seen": 10,
               "avg_tier": 10.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -43995,7 +43995,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,
@@ -44107,7 +44107,7 @@
               "min_tier_seen": 1,
               "avg_tier": 1.0
             },
-            "Movement Velocity": {
+            "Movement Speed": {
               "count": 1,
               "frequency_pct": 100.0,
               "min_tier_seen": 8,

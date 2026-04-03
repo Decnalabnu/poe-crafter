@@ -3,6 +3,131 @@ import essenceDataList from "../data/essences.json";
 import fossilData from "../data/fossils.json";
 import economyData from "../data/active_economy.json";
 
+// Recombinator pool probabilities used:
+// pool=2: P(keep2) = 1/3
+// pool=4: P(keep3) = 1/4, P(selected={A,B,C}|keep3) = 2/4 → P(ABC) = 1/8
+
+// ---------------------------------------------------------------------------
+// calculateRecombEV
+//
+// Models the 3-phase recomb chain targeting 3 specific T1 affixes:
+//   Phase 1 — alt-roll single-affix magic items (A, B, C)
+//   Phase 2 — recomb (A+B) and (B+C) to get 2-affix intermediates AB and BC
+//   Phase 3 — final recomb (AB+BC) with B as double-ticket overlap to get ABC
+//
+// All three modIds must be the same type (all prefixes or all suffixes).
+// The middle mod (modIds[1]) is the overlap that appears on both intermediates.
+// ---------------------------------------------------------------------------
+export function calculateRecombEV({
+  itemClass,
+  modIds,          // [idA, idB, idC] — B is the overlap mod
+  recombCostChaos,
+  altCostChaos,
+  influence = null,
+}) {
+  const pool = itemsData[itemClass];
+  if (!pool) return { error: `Invalid item class: ${itemClass}` };
+
+  const influenceFilter = (m) => !m.influence || m.influence === influence;
+  const allPrefixes = pool.prefixes.filter(influenceFilter);
+  const allSuffixes = pool.suffixes.filter(influenceFilter);
+
+  // Resolve each mod ID → mod object
+  const resolvedMods = modIds.map((id) => {
+    const p = allPrefixes.find((m) => m.id === id);
+    if (p) return { ...p, isPrefix: true };
+    const s = allSuffixes.find((m) => m.id === id);
+    if (s) return { ...s, isPrefix: false };
+    return null;
+  });
+
+  if (resolvedMods.some((m) => m === null))
+    return { error: "One or more mods not found in the item pool." };
+
+  const allPrefix = resolvedMods.every((m) => m.isPrefix);
+  const allSuffix = resolvedMods.every((m) => !m.isPrefix);
+  if (!allPrefix && !allSuffix)
+    return { error: "All three mods must be the same type (all prefixes or all suffixes)." };
+
+  const isPrefix = allPrefix;
+  const relevantPool = isPrefix ? allPrefixes : allSuffixes;
+  const totalPoolWeight = relevantPool.reduce(
+    (sum, m) => sum + (m.spawn_weights?.[0]?.weight || 0),
+    0,
+  );
+
+  // Phase 1 — alt-roll cost per single-mod magic item
+  // P(target mod appears as a prefix/suffix on a magic alt) ≈ 0.75 × w / totalW
+  // (75% of magic items have the relevant slot type)
+  const singleModCosts = resolvedMods.map((mod) => {
+    const w = mod.spawn_weights?.[0]?.weight || 0;
+    if (w === 0) return { error: `Mod "${mod.group}" has zero spawn weight.` };
+    const pPerAlt = 0.75 * w / totalPoolWeight;
+    const expectedAlts = 1 / pPerAlt;
+    return {
+      modId: mod.id,
+      group: mod.group,
+      tier: mod.tier,
+      weight: w,
+      weightPct: (w / totalPoolWeight * 100).toFixed(2),
+      expectedAlts: Math.round(expectedAlts),
+      altCost: expectedAlts * altCostChaos,
+    };
+  });
+
+  if (singleModCosts.some((c) => c.error)) {
+    return { error: singleModCosts.find((c) => c.error).error };
+  }
+
+  const [costA, costB, costC] = singleModCosts;
+
+  // Phase 2 — recomb pairs
+  // Pool = {A, B} or {B, C}: 2 prefixes total, need keep-2 ≈ 33.3%
+  const P_phase2 = 1 / 3;
+  const E_phase2 = 1 / P_phase2; // ~3 attempts per pair
+
+  // Each failed phase 2 attempt consumes both input single-mod items.
+  // Expected single-mod items consumed per pair = E_phase2 each.
+  const costPerAB = E_phase2 * (costA.altCost + costB.altCost + recombCostChaos);
+  const costPerBC = E_phase2 * (costB.altCost + costC.altCost + recombCostChaos);
+
+  // Phase 3 — final recomb (AB + BC)
+  // Prefix pool = {A, B, B, C} (B is double-ticket)
+  // P(keep 3 from pool of 4) = 25%
+  // P(selected 3 = {A,B,C} | keep 3) = 2/4 = 50% (must skip one of the two B tickets)
+  const P_phase3 = (1 / 4) * (1 / 2); // = 12.5%
+  const E_phase3 = 1 / P_phase3;      // = 8 attempts
+
+  // Each failed phase 3 attempt consumes one AB + one BC item (which must be re-crafted).
+  const totalCostChaos = E_phase3 * (costPerAB + costPerBC + recombCostChaos);
+
+  return {
+    isPrefix,
+    mods: singleModCosts,
+    phase1: {
+      details: singleModCosts.map((c) => ({
+        group: c.group,
+        tier: c.tier,
+        weightPct: c.weightPct,
+        expectedAlts: c.expectedAlts,
+        altCost: c.altCost,
+      })),
+    },
+    phase2: {
+      pSuccess: (P_phase2 * 100).toFixed(1),
+      expectedAttempts: Math.round(E_phase2),
+      costPerAB,
+      costPerBC,
+    },
+    phase3: {
+      pSuccess: (P_phase3 * 100).toFixed(1),
+      expectedAttempts: Math.round(E_phase3),
+    },
+    totalCostChaos,
+    totalCostDivines: totalCostChaos / (economyData.divine_price || 150),
+  };
+}
+
 // Harvest-swappable resist groups: targeting any one counts as targeting all three.
 const ELEMENTAL_RESIST_GROUPS = new Set([
   "Fire Resistance",
