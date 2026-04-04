@@ -135,11 +135,11 @@ const ELEMENTAL_RESIST_GROUPS = new Set([
   "Lightning Resistance",
 ]);
 
-// PoE rare item affix count distribution — weights 1:3:2 per GGG data
+// PoE rare item affix count distribution — weights 1:2:3 per GGG data
 const MOD_COUNT_DIST = [
   { count: 4, prob: 1 / 6 },
-  { count: 5, prob: 3 / 6 },
-  { count: 6, prob: 2 / 6 },
+  { count: 5, prob: 2 / 6 },
+  { count: 6, prob: 3 / 6 },
 ];
 
 function applyFossilMultipliers(pool, activeFossilIds) {
@@ -336,6 +336,10 @@ export function calculateSpamEV(
     costPerTry = economyData.essences[essenceId] || 3;
   }
 
+  // Guaranteed mod is looked up by group name (guaranteed_mod_groups) so it stays
+  // stable even when item mod IDs change. Falls back to legacy ID lookup.
+  const guaranteedModGroup =
+    activeFossils.length > 0 ? null : essence?.guaranteed_mod_groups?.[itemTag] ?? null;
   const guaranteedModId =
     activeFossils.length > 0 ? null : essence?.guaranteed_mods?.[itemTag];
 
@@ -368,7 +372,7 @@ export function calculateSpamEV(
     }))
     .filter(
       (m) =>
-        m.weight > 0 || m.id === guaranteedModId || m.id === fracturedModId,
+        m.weight > 0 || m.group === guaranteedModGroup || m.id === guaranteedModId || m.id === fracturedModId,
     );
 
   let validSuffixes = activePool.suffixes
@@ -384,15 +388,18 @@ export function calculateSpamEV(
     }))
     .filter(
       (m) =>
-        m.weight > 0 || m.id === guaranteedModId || m.id === fracturedModId,
+        m.weight > 0 || m.group === guaranteedModGroup || m.id === guaranteedModId || m.id === fracturedModId,
     );
 
   validPrefixes = applyFossilMultipliers(validPrefixes, activeFossils);
   validSuffixes = applyFossilMultipliers(validSuffixes, activeFossils);
 
   let gMod = null;
-  if (guaranteedModId) {
+  if (guaranteedModGroup || guaranteedModId) {
+    // Prefer group-based lookup (T1 of that group); fall back to legacy ID
     gMod =
+      validPrefixes.find((m) => m.group === guaranteedModGroup && m.tier === 1) ||
+      validSuffixes.find((m) => m.group === guaranteedModGroup && m.tier === 1) ||
       validPrefixes.find((m) => m.id === guaranteedModId) ||
       validSuffixes.find((m) => m.id === guaranteedModId);
     if (!gMod)
@@ -435,10 +442,14 @@ export function calculateSpamEV(
     (targetMod) => !prePlaced.some((pm) => modSatisfiesTarget(pm, targetMod)),
   );
 
-  const prePlacedPrefixes = prePlaced.filter((m) => m.isPrefix).length;
-  const prePlacedSuffixes = prePlaced.filter((m) => !m.isPrefix).length;
-  const maxPrefixSlots = 3 - prePlacedPrefixes;
-  const maxSuffixSlots = 3 - prePlacedSuffixes;
+  // Fractured mods lock in place before the reroll and physically consume a slot.
+  // Essence mods are one of the N total mods the item gets — the N-1 random mods
+  // are drawn with the full 3P+3S capacity; the essence just guarantees which specific
+  // mod fills its slot afterward. Only fractured mods reduce the random slot cap.
+  const fracPlacedPrefixes = fMod && fMod.isPrefix ? 1 : 0;
+  const fracPlacedSuffixes = fMod && !fMod.isPrefix ? 1 : 0;
+  const maxPrefixSlots = 3 - fracPlacedPrefixes;
+  const maxSuffixSlots = 3 - fracPlacedSuffixes;
 
   if (remainingTargetMods.length === 0) {
     return {
@@ -534,6 +545,9 @@ export function calculateSpamEV(
   let totalProbability = 0;
 
   for (const { count, prob } of MOD_COUNT_DIST) {
+    // Both fractured and essence mods take 1 of the N total slots — the remaining
+    // N-1 slots are random draws. The essence group is already removed from the pool
+    // so it cannot roll randomly; its slot is guaranteed to be Intelligence (or similar).
     const randomSlots = count - prePlaced.length;
     if (randomSlots < remainingTargetMods.length) continue;
 

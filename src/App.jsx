@@ -5,7 +5,7 @@ import fossilData from "./data/fossils.json";
 import economyData from "./data/active_economy.json";
 import buildItemsData from "./data/build_items.json";
 import tradePricesData from "./data/trade_prices.json";
-import { calculateSpamEV } from "./utils/calculator";
+import { calculateSpamEV, calculateRecombEV } from "./utils/calculator";
 import ScryingRanker from "./components/ScryingRanker";
 
 // Elemental resist suffixes are harvest-swappable (fire ↔ cold ↔ lightning).
@@ -426,6 +426,274 @@ function BuildAnalyzer({ onCraftThis }) {
   );
 }
 
+// ---------------------------------------------------------------------------
+// RecombCalculator
+// ---------------------------------------------------------------------------
+function RecombCalculator() {
+  const [itemClass, setItemClass] = useState("ring");
+  const [influence, setInfluence] = useState(null);
+  const [affinityType, setAffinityType] = useState("prefix"); // "prefix" | "suffix"
+  const [selectedIds, setSelectedIds] = useState([null, null, null]); // [A, B, C]
+  const [altCost, setAltCost] = useState(1);
+  const [recombCost, setRecombCost] = useState(100);
+  const [sellValueDivines, setSellValueDivines] = useState(10);
+  const [result, setResult] = useState(null);
+
+  const divinePrice = economyData.divine_price || 150;
+
+  const pool = itemsData[itemClass];
+  const influenceFilter = (m) => !m.influence || m.influence === influence;
+  const modPool = pool
+    ? (affinityType === "prefix" ? pool.prefixes : pool.suffixes)
+        .filter(influenceFilter)
+        .filter((m) => (m.spawn_weights?.[0]?.weight || 0) > 0 && !m.id.startsWith("junk_"))
+    : [];
+
+  // Group by group name, keep only T1 (tier=1) for display
+  const t1Mods = modPool.filter((m) => m.tier === 1);
+
+  const handleSelectMod = (slotIdx, modId) => {
+    setSelectedIds((prev) => {
+      const next = [...prev];
+      next[slotIdx] = modId === prev[slotIdx] ? null : modId;
+      return next;
+    });
+    setResult(null);
+  };
+
+  const handleCalculate = () => {
+    const ids = selectedIds;
+    if (ids.some((id) => !id)) {
+      setResult({ error: "Select a mod for each of the three slots (A, B, C)." });
+      return;
+    }
+    const r = calculateRecombEV({
+      itemClass,
+      modIds: ids,
+      recombCostChaos: recombCost,
+      altCostChaos: altCost,
+      influence,
+    });
+    setResult(r);
+  };
+
+  const slotLabels = ["A", "B (overlap)", "C"];
+  const slotColors = ["#6bbbe3", "#e2b659", "#c77be3"];
+
+  const profitChaos = result && !result.error
+    ? Math.round(sellValueDivines * divinePrice - result.totalCostChaos)
+    : null;
+
+  return (
+    <div style={{ background: "#2d2d2d", padding: "20px", borderRadius: "8px" }}>
+      <div style={{ marginBottom: "16px", color: "#aaa", fontSize: "13px", lineHeight: "1.6" }}>
+        Select three T1 affixes of the same type. <strong style={{ color: "#e2b659" }}>B is the overlap mod</strong> — it appears on both 2-mod intermediates (AB and BC), giving it a double-ticket advantage in the final merge.
+      </div>
+
+      {/* Item class + influence */}
+      <div style={{ display: "flex", gap: "12px", marginBottom: "16px", flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 160px" }}>
+          <label style={{ display: "block", fontSize: "13px", color: "#aaa", marginBottom: "4px" }}>Item Class</label>
+          <select
+            value={itemClass}
+            onChange={(e) => { setItemClass(e.target.value); setSelectedIds([null, null, null]); setResult(null); }}
+            style={{ width: "100%", padding: "8px", background: "#1e1e1e", color: "white", border: "1px solid #555" }}
+          >
+            {Object.entries(SLOT_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+          </select>
+        </div>
+        <div style={{ flex: "1 1 120px" }}>
+          <label style={{ display: "block", fontSize: "13px", color: "#aaa", marginBottom: "4px" }}>Affix Type</label>
+          <div style={{ display: "flex", gap: "6px" }}>
+            {["prefix", "suffix"].map((t) => (
+              <button key={t} onClick={() => { setAffinityType(t); setSelectedIds([null, null, null]); setResult(null); }}
+                style={{
+                  flex: 1, padding: "8px", fontSize: "13px", fontWeight: "bold",
+                  background: affinityType === t ? (t === "prefix" ? "#c77be3" : "#6bbbe3") : "#1e1e1e",
+                  color: affinityType === t ? "#000" : "#aaa",
+                  border: `1px solid ${affinityType === t ? (t === "prefix" ? "#c77be3" : "#6bbbe3") : "#444"}`,
+                  borderRadius: "4px", cursor: "pointer",
+                }}>
+                {t.charAt(0).toUpperCase() + t.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div style={{ flex: "2 1 220px" }}>
+          <label style={{ display: "block", fontSize: "13px", color: "#aaa", marginBottom: "4px" }}>Influence</label>
+          <div style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
+            <button onClick={() => { setInfluence(null); setSelectedIds([null, null, null]); setResult(null); }}
+              style={{ padding: "6px 10px", fontSize: "12px", background: influence === null ? "#555" : "#1e1e1e", color: influence === null ? "#fff" : "#888", border: "1px solid #444", borderRadius: "4px", cursor: "pointer" }}>
+              None
+            </button>
+            {INFLUENCES.map(({ id, label, color }) => (
+              <button key={id} onClick={() => { setInfluence(influence === id ? null : id); setSelectedIds([null, null, null]); setResult(null); }}
+                style={{
+                  padding: "6px 10px", fontSize: "12px",
+                  background: influence === id ? color + "33" : "#1e1e1e",
+                  color: influence === id ? color : "#888",
+                  border: `1px solid ${influence === id ? color : "#444"}`,
+                  borderRadius: "4px", cursor: "pointer",
+                }}>
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Slot selectors A / B / C */}
+      <div style={{ display: "flex", gap: "10px", marginBottom: "16px", flexWrap: "wrap" }}>
+        {[0, 1, 2].map((slotIdx) => (
+          <div key={slotIdx} style={{ flex: "1 1 200px" }}>
+            <label style={{ display: "block", fontSize: "13px", marginBottom: "4px", color: slotColors[slotIdx], fontWeight: "bold" }}>
+              Mod {slotLabels[slotIdx]}
+            </label>
+            <select
+              value={selectedIds[slotIdx] || ""}
+              onChange={(e) => handleSelectMod(slotIdx, e.target.value || null)}
+              style={{ width: "100%", padding: "8px", background: "#1e1e1e", color: "white", border: `1px solid ${selectedIds[slotIdx] ? slotColors[slotIdx] : "#555"}` }}
+            >
+              <option value="">— select T1 mod —</option>
+              {t1Mods.map((m) => {
+                const w = m.spawn_weights?.[0]?.weight || 0;
+                const totalW = modPool.reduce((s, x) => s + (x.spawn_weights?.[0]?.weight || 0), 0);
+                const pct = totalW > 0 ? (w / totalW * 100).toFixed(1) : "0";
+                return (
+                  <option key={m.id} value={m.id}>{m.group} ({pct}%)</option>
+                );
+              })}
+            </select>
+          </div>
+        ))}
+      </div>
+
+      {/* Cost inputs */}
+      <div style={{ display: "flex", gap: "10px", marginBottom: "16px", flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 120px" }}>
+          <label style={{ display: "block", fontSize: "13px", color: "#aaa", marginBottom: "4px" }}>Alt Orb Cost (c)</label>
+          <input type="number" min="0.1" step="0.1" value={altCost} onChange={(e) => setAltCost(Number(e.target.value))}
+            style={{ width: "100%", padding: "8px", background: "#1e1e1e", color: "white", border: "1px solid #555" }} />
+        </div>
+        <div style={{ flex: "1 1 140px" }}>
+          <label style={{ display: "block", fontSize: "13px", color: "#aaa", marginBottom: "4px" }}>Recombinator Cost (c)</label>
+          <input type="number" min="1" value={recombCost} onChange={(e) => setRecombCost(Number(e.target.value))}
+            style={{ width: "100%", padding: "8px", background: "#1e1e1e", color: "white", border: "1px solid #555" }} />
+        </div>
+        <div style={{ flex: "1 1 140px" }}>
+          <label style={{ display: "block", fontSize: "13px", color: "#aaa", marginBottom: "4px" }}>Sell Value (div)</label>
+          <input type="number" min="0" step="0.5" value={sellValueDivines} onChange={(e) => setSellValueDivines(Number(e.target.value))}
+            style={{ width: "100%", padding: "8px", background: "#1e1e1e", color: "white", border: "1px solid #555" }} />
+        </div>
+      </div>
+
+      <button onClick={handleCalculate}
+        style={{ width: "100%", padding: "14px", fontSize: "16px", fontWeight: "bold", background: "#e2b659", color: "#000", border: "none", borderRadius: "4px", cursor: "pointer", marginBottom: "16px" }}>
+        Calculate Recomb Chain EV
+      </button>
+
+      {result?.error && (
+        <div style={{ padding: "12px", border: "1px solid #ff6666", background: "#2a0000", color: "#ff6666", borderRadius: "4px" }}>
+          <strong>Error:</strong> {result.error}
+        </div>
+      )}
+
+      {result && !result.error && (
+        <div style={{ background: "#111", border: "1px solid #444", borderRadius: "6px", overflow: "hidden" }}>
+          {/* Phase 1 */}
+          <div style={{ padding: "14px 16px", borderBottom: "1px solid #333" }}>
+            <div style={{ color: "#6bbbe3", fontWeight: "bold", fontSize: "13px", marginBottom: "8px", letterSpacing: "0.05em" }}>
+              PHASE 1 — ALT-ROLL SINGLE MODS
+            </div>
+            {result.phase1.details.map((d, i) => (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", marginBottom: "4px" }}>
+                <span style={{ color: slotColors[i] }}>Mod {slotLabels[i]}: {d.group} T{d.tier}</span>
+                <span style={{ color: "#aaa" }}>
+                  {d.weightPct}% pool · ~{d.expectedAlts} alts ·{" "}
+                  <span style={{ color: "#e2b659" }}>{Math.round(d.altCost)}c</span>
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Phase 2 */}
+          <div style={{ padding: "14px 16px", borderBottom: "1px solid #333" }}>
+            <div style={{ color: "#e2b659", fontWeight: "bold", fontSize: "13px", marginBottom: "8px", letterSpacing: "0.05em" }}>
+              PHASE 2 — BUILD 2-MOD PAIRS (AB + BC)
+            </div>
+            <div style={{ display: "flex", gap: "24px", fontSize: "13px", flexWrap: "wrap" }}>
+              <div>
+                <span style={{ color: "#888" }}>Pool size:</span> <span style={{ color: "#ddd" }}>2 mods</span>
+              </div>
+              <div>
+                <span style={{ color: "#888" }}>P(keep both):</span> <span style={{ color: "#4CAF50" }}>{result.phase2.pSuccess}%</span>
+              </div>
+              <div>
+                <span style={{ color: "#888" }}>Expected attempts per pair:</span> <span style={{ color: "#ddd" }}>~{result.phase2.expectedAttempts}</span>
+              </div>
+            </div>
+            <div style={{ marginTop: "6px", display: "flex", gap: "24px", fontSize: "13px", flexWrap: "wrap" }}>
+              <div>
+                <span style={{ color: "#888" }}>Cost for AB item:</span> <span style={{ color: "#e2b659" }}>{Math.round(result.phase2.costPerAB)}c</span>
+              </div>
+              <div>
+                <span style={{ color: "#888" }}>Cost for BC item:</span> <span style={{ color: "#e2b659" }}>{Math.round(result.phase2.costPerBC)}c</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Phase 3 */}
+          <div style={{ padding: "14px 16px", borderBottom: "1px solid #333" }}>
+            <div style={{ color: "#c77be3", fontWeight: "bold", fontSize: "13px", marginBottom: "8px", letterSpacing: "0.05em" }}>
+              PHASE 3 — FINAL MERGE (AB + BC → ABC)
+            </div>
+            <div style={{ fontSize: "13px", color: "#888", marginBottom: "4px" }}>
+              Pool = &#123;A, B, B, C&#125; — B has double-ticket (appears on both inputs)
+            </div>
+            <div style={{ display: "flex", gap: "24px", fontSize: "13px", flexWrap: "wrap" }}>
+              <div>
+                <span style={{ color: "#888" }}>P(keep 3 of 4):</span> <span style={{ color: "#ddd" }}>25%</span>
+              </div>
+              <div>
+                <span style={{ color: "#888" }}>P(correct 3 | keep 3):</span> <span style={{ color: "#ddd" }}>50%</span>
+              </div>
+              <div>
+                <span style={{ color: "#888" }}>Combined P(success):</span> <span style={{ color: "#4CAF50" }}>{result.phase3.pSuccess}%</span>
+              </div>
+              <div>
+                <span style={{ color: "#888" }}>Expected attempts:</span> <span style={{ color: "#ddd" }}>~{result.phase3.expectedAttempts}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Totals */}
+          <div style={{ padding: "14px 16px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "14px", marginBottom: "6px" }}>
+              <span style={{ color: "#aaa" }}>Total Expected Cost</span>
+              <span style={{ color: "#e2b659", fontWeight: "bold" }}>
+                {Math.round(result.totalCostChaos)}c ≈ {result.totalCostDivines.toFixed(1)} div
+              </span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "14px", marginBottom: "6px" }}>
+              <span style={{ color: "#aaa" }}>Sell Value</span>
+              <span style={{ color: "#ddd" }}>{sellValueDivines} div ≈ {Math.round(sellValueDivines * divinePrice)}c</span>
+            </div>
+            <div style={{
+              display: "flex", justifyContent: "space-between", fontSize: "18px", fontWeight: "bold",
+              borderTop: "2px solid #333", paddingTop: "12px", marginTop: "8px",
+            }}>
+              <span>Expected Profit</span>
+              <span style={{ color: profitChaos >= 0 ? "#4CAF50" : "#ff6666" }}>
+                {profitChaos >= 0 ? "+" : ""}{profitChaos}c ≈ {(profitChaos / divinePrice).toFixed(1)} div
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const INFLUENCES = [
   { id: "shaper",   label: "Shaper",   color: "#7bafdd" },
   { id: "elder",    label: "Elder",    color: "#c77be3" },
@@ -835,6 +1103,7 @@ function App() {
         {[
           { id: "crafter", label: "Crafter" },
           { id: "builds", label: "Build Analyzer" },
+          { id: "recomb", label: "Recomb Calculator" },
           { id: "scrying", label: "Scrying Ranker" },
         ].map((tab) => (
           <button
@@ -859,6 +1128,8 @@ function App() {
       {activeTab === "scrying" && <ScryingRanker />}
 
       {activeTab === "builds" && <BuildAnalyzer onCraftThis={handleCraftThis} />}
+
+      {activeTab === "recomb" && <RecombCalculator />}
 
       {activeTab === "crafter" && <div
         style={{ background: "#2d2d2d", padding: "20px", borderRadius: "8px" }}
@@ -1145,6 +1416,62 @@ function App() {
           )}
         </div>
 
+        <button
+          onClick={handleCalculate}
+          style={{
+            width: "100%",
+            padding: "15px",
+            fontSize: "18px",
+            background: "#4CAF50",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+            fontWeight: "bold",
+            marginBottom: "16px",
+          }}
+        >
+          Calculate Final Result
+        </button>
+
+        {result && !result.error && (
+          <div
+            style={{
+              marginBottom: "20px",
+              padding: "20px",
+              border: "1px solid #555",
+              background: "#111",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #333", paddingBottom: "10px", marginBottom: "10px" }}>
+              <span style={{ color: "#aaa", fontWeight: "bold" }}>FINAL CALCULATION:</span>
+              <strong style={{ fontSize: "18px", color: "#e2b659" }}>
+                {result.probability} (~{result.averageTries} tries)
+              </strong>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", paddingBottom: "5px" }}>
+              <span style={{ color: "#aaa" }}>Base Item Cost:</span>
+              <span>{baseCostChaos}c</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", paddingBottom: "10px", borderBottom: "1px solid #333", marginBottom: "10px" }}>
+              <span style={{ color: "#aaa" }}>Crafting Cost:</span>
+              <span>{result.expectedCostChaos}c</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "18px", fontWeight: "bold", borderTop: "2px solid #555", paddingTop: "15px" }}>
+              <span>Expected Profit:</span>
+              <span style={{ color: marketValueDivines * divinePrice - (baseCostChaos + result.expectedCostChaos) > 0 ? "#4CAF50" : "#ff6666" }}>
+                {Math.round(marketValueDivines * divinePrice - (baseCostChaos + result.expectedCostChaos))} Chaos
+              </span>
+            </div>
+          </div>
+        )}
+
+        {result?.error && (
+          <div style={{ marginBottom: "20px", padding: "15px", border: "1px solid #ff6666", background: "#2a0000", color: "#ff6666" }}>
+            <strong>Error:</strong> {result.error}
+          </div>
+        )}
+
         <h3 style={{ marginTop: 0 }}>Select Targets</h3>
         <div style={{ display: "flex", gap: "20px", marginBottom: "20px" }}>
           <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
@@ -1278,114 +1605,6 @@ function App() {
           </div>
         )}
 
-        <button
-          onClick={handleCalculate}
-          style={{
-            width: "100%",
-            padding: "15px",
-            fontSize: "18px",
-            background: "#4CAF50",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
-        >
-          Calculate Final Result
-        </button>
-
-        {result && !result.error && (
-          <div
-            style={{
-              marginTop: "20px",
-              padding: "20px",
-              border: "1px solid #555",
-              background: "#111",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #333",
-                paddingBottom: "10px",
-                marginBottom: "10px",
-              }}
-            >
-              <span style={{ color: "#aaa", fontWeight: "bold" }}>
-                FINAL CALCULATION:
-              </span>
-              <strong style={{ fontSize: "18px", color: "#e2b659" }}>
-                {result.probability} (~{result.averageTries} tries)
-              </strong>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                paddingBottom: "5px",
-              }}
-            >
-              <span style={{ color: "#aaa" }}>Base Item Cost:</span>
-              <span>{baseCostChaos}c</span>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                paddingBottom: "10px",
-                borderBottom: "1px solid #333",
-                marginBottom: "10px",
-              }}
-            >
-              <span style={{ color: "#aaa" }}>Crafting Cost:</span>
-              <span>{result.expectedCostChaos}c</span>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "18px",
-                fontWeight: "bold",
-                borderTop: "2px solid #555",
-                paddingTop: "15px",
-              }}
-            >
-              <span>Expected Profit:</span>
-              <span
-                style={{
-                  color:
-                    marketValueDivines * divinePrice -
-                      (baseCostChaos + result.expectedCostChaos) >
-                    0
-                      ? "#4CAF50"
-                      : "#ff6666",
-                }}
-              >
-                {Math.round(
-                  marketValueDivines * divinePrice -
-                    (baseCostChaos + result.expectedCostChaos),
-                )}{" "}
-                Chaos
-              </span>
-            </div>
-          </div>
-        )}
-
-        {result?.error && (
-          <div
-            style={{
-              marginTop: "20px",
-              padding: "15px",
-              border: "1px solid #ff6666",
-              background: "#2a0000",
-              color: "#ff6666",
-            }}
-          >
-            <strong>Error:</strong> {result.error}
-          </div>
-        )}
       </div>}
     </div>
   );

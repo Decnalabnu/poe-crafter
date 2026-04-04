@@ -4,7 +4,9 @@
       "WebSearch",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:www.poewiki.net)",
-      "WebFetch(domain:www.pathofexile.com)"
+      "WebFetch(domain:www.pathofexile.com)",
+      "Bash(python -c ':*)",
+      "Bash(ls *.py)"
     ]
   }
 }
