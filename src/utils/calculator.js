@@ -135,11 +135,11 @@ const ELEMENTAL_RESIST_GROUPS = new Set([
   "Lightning Resistance",
 ]);
 
-// PoE rare item affix count distribution — weights 1:2:3 per GGG data
+// PoE rare item affix count distribution — 5-mod items are most common (weights 1:3:2)
 const MOD_COUNT_DIST = [
   { count: 4, prob: 1 / 6 },
-  { count: 5, prob: 2 / 6 },
-  { count: 6, prob: 3 / 6 },
+  { count: 5, prob: 3 / 6 },
+  { count: 6, prob: 2 / 6 },
 ];
 
 function applyFossilMultipliers(pool, activeFossilIds) {
@@ -442,14 +442,13 @@ export function calculateSpamEV(
     (targetMod) => !prePlaced.some((pm) => modSatisfiesTarget(pm, targetMod)),
   );
 
-  // Fractured mods lock in place before the reroll and physically consume a slot.
-  // Essence mods are one of the N total mods the item gets — the N-1 random mods
-  // are drawn with the full 3P+3S capacity; the essence just guarantees which specific
-  // mod fills its slot afterward. Only fractured mods reduce the random slot cap.
-  const fracPlacedPrefixes = fMod && fMod.isPrefix ? 1 : 0;
-  const fracPlacedSuffixes = fMod && !fMod.isPrefix ? 1 : 0;
-  const maxPrefixSlots = 3 - fracPlacedPrefixes;
-  const maxSuffixSlots = 3 - fracPlacedSuffixes;
+  // Fractured mods physically lock a slot before random rolling, reducing the cap.
+  // Essence mods reserve their slot via pool exclusion (group removed from pool),
+  // not by capping the draw. The N-1 random draws still see full 3P/3S capacity.
+  const fracPrefixes = fMod && fMod.isPrefix ? 1 : 0;
+  const fracSuffixes = fMod && !fMod.isPrefix ? 1 : 0;
+  const maxPrefixSlots = 3 - fracPrefixes;
+  const maxSuffixSlots = 3 - fracSuffixes;
 
   if (remainingTargetMods.length === 0) {
     return {
