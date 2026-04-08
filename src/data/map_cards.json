@@ -1,5 +1,1860 @@
 {
-  "updated_at": "2026-04-03T18:26:31.927708+00:00",
-  "total_maps": 0,
-  "maps": {}
+  "updated_at": "2026-04-06T00:39:53.161026+00:00",
+  "total_maps": 103,
+  "maps": {
+    "Frozen Cabins": [
+      {
+        "name": "Left to Fate",
+        "weight": 6656
+      },
+      {
+        "name": "The Wind",
+        "weight": 625
+      },
+      {
+        "name": "A Chilling Wind",
+        "weight": 379
+      },
+      {
+        "name": "Mitts",
+        "weight": 0
+      }
+    ],
+    "Summit": [
+      {
+        "name": "The Mountain",
+        "weight": 6656
+      },
+      {
+        "name": "The Pack Leader",
+        "weight": 2426
+      },
+      {
+        "name": "A Chilling Wind",
+        "weight": 379
+      },
+      {
+        "name": "Ambitious Obsession",
+        "weight": 2
+      }
+    ],
+    "Courthouse": [
+      {
+        "name": "A Dab of Ink",
+        "weight": 832
+      },
+      {
+        "name": "Destined to Crumble",
+        "weight": 0
+      },
+      {
+        "name": "Sambodhi's Wisdom",
+        "weight": 0
+      },
+      {
+        "name": "The Scholar",
+        "weight": 0
+      }
+    ],
+    "Primordial Pool": [
+      {
+        "name": "The Insatiable",
+        "weight": 2426
+      },
+      {
+        "name": "The Hunger",
+        "weight": 832
+      },
+      {
+        "name": "A Modest Request",
+        "weight": 121
+      },
+      {
+        "name": "The Inoculated",
+        "weight": 0
+      }
+    ],
+    "Dry Sea": [
+      {
+        "name": "Acclimatisation",
+        "weight": 6656
+      },
+      {
+        "name": "A Note in the Wind",
+        "weight": 303
+      },
+      {
+        "name": "The Tumbleweed",
+        "weight": 34
+      },
+      {
+        "name": "Imperial Legacy",
+        "weight": 0
+      }
+    ],
+    "Torture Chamber": [
+      {
+        "name": "Who Asked",
+        "weight": 13
+      },
+      {
+        "name": "The Last Supper",
+        "weight": 12
+      },
+      {
+        "name": "A Sea of Blue",
+        "weight": 0
+      },
+      {
+        "name": "One Last Score",
+        "weight": 0
+      }
+    ],
+    "Coves": [
+      {
+        "name": "The Rite of Elements",
+        "weight": 3852
+      },
+      {
+        "name": "Lachrymal Necrosis",
+        "weight": 832
+      },
+      {
+        "name": "A Stone Perfected",
+        "weight": 169
+      },
+      {
+        "name": "The Vast",
+        "weight": 8
+      }
+    ],
+    "Underground Sea": [
+      {
+        "name": "Lysah's Respite",
+        "weight": 3852
+      },
+      {
+        "name": "Abandoned Wealth",
+        "weight": 625
+      },
+      {
+        "name": "The Survivalist",
+        "weight": 0
+      },
+      {
+        "name": "When Currents Blaze",
+        "weight": 0
+      }
+    ],
+    "Burial Chambers": [
+      {
+        "name": "Alivia's Grace",
+        "weight": 2426
+      },
+      {
+        "name": "The Scout",
+        "weight": 379
+      },
+      {
+        "name": "The Brawny Battle Mage",
+        "weight": 247
+      },
+      {
+        "name": "Pride of the First Ones",
+        "weight": 104
+      }
+    ],
+    "Jungle Valley": [
+      {
+        "name": "Alivia's Grace",
+        "weight": 2426
+      },
+      {
+        "name": "Poisoned Faith",
+        "weight": 78
+      },
+      {
+        "name": "The Wedding Gift",
+        "weight": 78
+      },
+      {
+        "name": "The Explorer",
+        "weight": 0
+      }
+    ],
+    "Vaal Pyramid": [
+      {
+        "name": "The Admirer",
+        "weight": 2426
+      },
+      {
+        "name": "Atziri's Arsenal",
+        "weight": 1625
+      },
+      {
+        "name": "Apocalypse",
+        "weight": 0
+      },
+      {
+        "name": "The Inventor",
+        "weight": 0
+      }
+    ],
+    "Arcade": [
+      {
+        "name": "The Tyrant",
+        "weight": 625
+      },
+      {
+        "name": "Broken Promises",
+        "weight": 47
+      },
+      {
+        "name": "Assassin's Favour",
+        "weight": 0
+      },
+      {
+        "name": "The Mayor",
+        "weight": 0
+      }
+    ],
+    "Courtyard Of Wasting": [
+      {
+        "name": "Astral Protection",
+        "weight": 832
+      },
+      {
+        "name": "Reckless Ambition",
+        "weight": 625
+      },
+      {
+        "name": "The Gulf",
+        "weight": 47
+      },
+      {
+        "name": "The Awakened",
+        "weight": 16
+      }
+    ],
+    "Mesa": [
+      {
+        "name": "The Betrayal",
+        "weight": 3852
+      },
+      {
+        "name": "The Fox",
+        "weight": 3852
+      },
+      {
+        "name": "Astral Protection",
+        "weight": 832
+      },
+      {
+        "name": "The Scarred Meadow",
+        "weight": 0
+      }
+    ],
+    "Bramble Valley": [
+      {
+        "name": "Call to the First Ones",
+        "weight": 2426
+      },
+      {
+        "name": "The Fox in the Brambles",
+        "weight": 1141
+      },
+      {
+        "name": "Avian Pursuit",
+        "weight": 104
+      },
+      {
+        "name": "The Demoness",
+        "weight": 0
+      }
+    ],
+    "Shipyard": [
+      {
+        "name": "Azure Rage",
+        "weight": 6656
+      },
+      {
+        "name": "Boundless Realms",
+        "weight": 6656
+      },
+      {
+        "name": "Humility",
+        "weight": 3852
+      },
+      {
+        "name": "The Traitor",
+        "weight": 1625
+      }
+    ],
+    "Wharf": [
+      {
+        "name": "Azure Rage",
+        "weight": 6656
+      },
+      {
+        "name": "The Pact",
+        "weight": 481
+      },
+      {
+        "name": "The Fishmonger",
+        "weight": 23
+      },
+      {
+        "name": "Lucky Connections",
+        "weight": 0
+      }
+    ],
+    "Arena": [
+      {
+        "name": "Azyran's Reward",
+        "weight": 481
+      },
+      {
+        "name": "The Last One Standing",
+        "weight": 21
+      },
+      {
+        "name": "The Sword King's Salute",
+        "weight": 0
+      },
+      {
+        "name": "Three Voices",
+        "weight": 0
+      }
+    ],
+    "Dunes": [
+      {
+        "name": "Earth Drinker",
+        "weight": 2426
+      },
+      {
+        "name": "Baited Expectations",
+        "weight": 625
+      },
+      {
+        "name": "Gift of Asenath",
+        "weight": 143
+      },
+      {
+        "name": "The Tumbleweed",
+        "weight": 34
+      }
+    ],
+    "Dig": [
+      {
+        "name": "The Endurance",
+        "weight": 6656
+      },
+      {
+        "name": "Buried Treasure",
+        "weight": 832
+      },
+      {
+        "name": "Bijoux",
+        "weight": 303
+      },
+      {
+        "name": "Time-Lost Relic",
+        "weight": 0
+      }
+    ],
+    "Excavation": [
+      {
+        "name": "Treasure Hunter",
+        "weight": 1141
+      },
+      {
+        "name": "Bijoux",
+        "weight": 303
+      },
+      {
+        "name": "Friendship",
+        "weight": 78
+      },
+      {
+        "name": "Volatile Power",
+        "weight": 0
+      }
+    ],
+    "Arachnid Tomb": [
+      {
+        "name": "Blind Venture",
+        "weight": 3852
+      },
+      {
+        "name": "Vile Power",
+        "weight": 2426
+      },
+      {
+        "name": "The Inoculated",
+        "weight": 0
+      },
+      {
+        "name": "The Web",
+        "weight": 0
+      }
+    ],
+    "Mausoleum": [
+      {
+        "name": "Blind Venture",
+        "weight": 3852
+      },
+      {
+        "name": "Might is Right",
+        "weight": 3852
+      },
+      {
+        "name": "No Traces",
+        "weight": 3852
+      },
+      {
+        "name": "The Innocent",
+        "weight": 1625
+      }
+    ],
+    "Chateau": [
+      {
+        "name": "The Scavenger",
+        "weight": 3852
+      },
+      {
+        "name": "The Bear Woman",
+        "weight": 1141
+      },
+      {
+        "name": "Home",
+        "weight": 121
+      },
+      {
+        "name": "Boon of Justice",
+        "weight": 0
+      }
+    ],
+    "Graveyard": [
+      {
+        "name": "Cursed Words",
+        "weight": 6656
+      },
+      {
+        "name": "The Lich",
+        "weight": 6656
+      },
+      {
+        "name": "The Rabbit's Foot",
+        "weight": 68
+      },
+      {
+        "name": "Bound by Flame",
+        "weight": 0
+      }
+    ],
+    "Beach": [
+      {
+        "name": "Boundless Realms",
+        "weight": 6656
+      },
+      {
+        "name": "The Fortunate",
+        "weight": 2426
+      },
+      {
+        "name": "The Long Watch",
+        "weight": 78
+      },
+      {
+        "name": "The Survivalist",
+        "weight": 0
+      }
+    ],
+    "Ashen Wood": [
+      {
+        "name": "Bowyer's Dream",
+        "weight": 169
+      },
+      {
+        "name": "Tranquillity",
+        "weight": 15
+      },
+      {
+        "name": "The Adventuring Spirit",
+        "weight": 0
+      },
+      {
+        "name": "The Doppelganger",
+        "weight": 0
+      }
+    ],
+    "City Square": [
+      {
+        "name": "The Life Thief",
+        "weight": 68
+      },
+      {
+        "name": "Broken Promises",
+        "weight": 47
+      },
+      {
+        "name": "The Journalist",
+        "weight": 0
+      },
+      {
+        "name": "Three Voices",
+        "weight": 0
+      }
+    ],
+    "Necropolis": [
+      {
+        "name": "Grave Knowledge",
+        "weight": 6656
+      },
+      {
+        "name": "The Lich",
+        "weight": 6656
+      },
+      {
+        "name": "The Forsaken",
+        "weight": 3852
+      },
+      {
+        "name": "Brother's Gift",
+        "weight": 60
+      }
+    ],
+    "Grave Trough": [
+      {
+        "name": "The Wretched",
+        "weight": 6656
+      },
+      {
+        "name": "The One With All",
+        "weight": 3852
+      },
+      {
+        "name": "The Craving",
+        "weight": 104
+      },
+      {
+        "name": "Brother's Stash",
+        "weight": 60
+      }
+    ],
+    "Acid Lakes": [
+      {
+        "name": "The Oath",
+        "weight": 2426
+      },
+      {
+        "name": "The Undaunted",
+        "weight": 1625
+      },
+      {
+        "name": "Brotherhood in Exile",
+        "weight": 247
+      },
+      {
+        "name": "The Miracle",
+        "weight": 0
+      }
+    ],
+    "Cursed Crypt": [
+      {
+        "name": "Might is Right",
+        "weight": 3852
+      },
+      {
+        "name": "The Celestial Justicar",
+        "weight": 1141
+      },
+      {
+        "name": "Brotherhood in Exile",
+        "weight": 247
+      },
+      {
+        "name": "The Garish Power",
+        "weight": 104
+      }
+    ],
+    "Dungeon": [
+      {
+        "name": "The Surveyor",
+        "weight": 6656
+      },
+      {
+        "name": "The Dungeon Master",
+        "weight": 481
+      },
+      {
+        "name": "Brotherhood in Exile",
+        "weight": 247
+      },
+      {
+        "name": "The Chains that Bind",
+        "weight": 0
+      }
+    ],
+    "Sepulchre": [
+      {
+        "name": "No Traces",
+        "weight": 3852
+      },
+      {
+        "name": "Brush, Paint and Palette",
+        "weight": 832
+      },
+      {
+        "name": "Harmony of Souls",
+        "weight": 247
+      },
+      {
+        "name": "The Cacophony",
+        "weight": 247
+      }
+    ],
+    "Lighthouse": [
+      {
+        "name": "Heterochromia",
+        "weight": 2426
+      },
+      {
+        "name": "The Oath",
+        "weight": 2426
+      },
+      {
+        "name": "The Traitor",
+        "weight": 1625
+      },
+      {
+        "name": "Burning Blood",
+        "weight": 11
+      }
+    ],
+    "Volcano": [
+      {
+        "name": "The Spark and the Flame",
+        "weight": 832
+      },
+      {
+        "name": "The King's Heart",
+        "weight": 625
+      },
+      {
+        "name": "Burning Blood",
+        "weight": 11
+      },
+      {
+        "name": "Lonely Warrior",
+        "weight": 7
+      }
+    ],
+    "Park": [
+      {
+        "name": "Checkmate",
+        "weight": 379
+      },
+      {
+        "name": "The Destination",
+        "weight": 16
+      },
+      {
+        "name": "The Flora's Gift",
+        "weight": 0
+      },
+      {
+        "name": "The Slumbering Beast",
+        "weight": 0
+      }
+    ],
+    "Defiled Cathedral": [
+      {
+        "name": "The Innocent",
+        "weight": 1625
+      },
+      {
+        "name": "Costly Curio",
+        "weight": 625
+      },
+      {
+        "name": "Seven Years Bad Luck",
+        "weight": 78
+      },
+      {
+        "name": "The Apothecary",
+        "weight": 10
+      }
+    ],
+    "Maze": [
+      {
+        "name": "Costly Curio",
+        "weight": 625
+      },
+      {
+        "name": "Temperance",
+        "weight": 90
+      },
+      {
+        "name": "Her Mask",
+        "weight": 0
+      },
+      {
+        "name": "The Catalyst",
+        "weight": 0
+      }
+    ],
+    "Cemetery": [
+      {
+        "name": "Cursed Words",
+        "weight": 6656
+      },
+      {
+        "name": "The Union",
+        "weight": 2426
+      },
+      {
+        "name": "Man With Bear",
+        "weight": 832
+      },
+      {
+        "name": "Rebirth and Renewal",
+        "weight": 832
+      }
+    ],
+    "Crimson Township": [
+      {
+        "name": "The Return of the Rat",
+        "weight": 1625
+      },
+      {
+        "name": "The Enlightened",
+        "weight": 90
+      },
+      {
+        "name": "Damnation",
+        "weight": 5
+      },
+      {
+        "name": "The Army of Blood",
+        "weight": 0
+      }
+    ],
+    "Coral Ruins": [
+      {
+        "name": "Deadly Joy",
+        "weight": 34
+      },
+      {
+        "name": "The Leviathan",
+        "weight": 28
+      },
+      {
+        "name": "The One That Got Away",
+        "weight": 4
+      },
+      {
+        "name": "The Stormcaller",
+        "weight": 0
+      }
+    ],
+    "Spider Lair": [
+      {
+        "name": "Poisoned Faith",
+        "weight": 78
+      },
+      {
+        "name": "Deadly Joy",
+        "weight": 34
+      },
+      {
+        "name": "The Silly Boy",
+        "weight": 0
+      },
+      {
+        "name": "The Web",
+        "weight": 0
+      }
+    ],
+    "Bog": [
+      {
+        "name": "The Rabid Rhoa",
+        "weight": 6656
+      },
+      {
+        "name": "Vile Power",
+        "weight": 2426
+      },
+      {
+        "name": "Death",
+        "weight": 1625
+      },
+      {
+        "name": "The Eye of the Dragon",
+        "weight": 68
+      }
+    ],
+    "Marshes": [
+      {
+        "name": "The Fathomless Depths",
+        "weight": 2426
+      },
+      {
+        "name": "Death",
+        "weight": 1625
+      },
+      {
+        "name": "Glimmer of Hope",
+        "weight": 0
+      },
+      {
+        "name": "Lucky Connections",
+        "weight": 0
+      }
+    ],
+    "Crimson Temple": [
+      {
+        "name": "The Mercenary",
+        "weight": 2426
+      },
+      {
+        "name": "Demigod's Wager",
+        "weight": 1141
+      },
+      {
+        "name": "Etched in Blood",
+        "weight": 38
+      },
+      {
+        "name": "The Army of Blood",
+        "weight": 0
+      }
+    ],
+    "Lookout": [
+      {
+        "name": "The Coming Storm",
+        "weight": 3852
+      },
+      {
+        "name": "Demigod's Wager",
+        "weight": 1141
+      },
+      {
+        "name": "The Stormcaller",
+        "weight": 0
+      },
+      {
+        "name": "Thunderous Skies",
+        "weight": 0
+      }
+    ],
+    "Orchard": [
+      {
+        "name": "Peaceful Moments",
+        "weight": 303
+      },
+      {
+        "name": "Desperate Crusade",
+        "weight": 247
+      },
+      {
+        "name": "Emperor's Luck",
+        "weight": 0
+      },
+      {
+        "name": "The Forbidden Fruit",
+        "weight": 0
+      }
+    ],
+    "Tropical Island": [
+      {
+        "name": "The Scout",
+        "weight": 379
+      },
+      {
+        "name": "The Shepherd's Sandals",
+        "weight": 303
+      },
+      {
+        "name": "Desperate Crusade",
+        "weight": 247
+      },
+      {
+        "name": "The Adventuring Spirit",
+        "weight": 0
+      }
+    ],
+    "Plaza": [
+      {
+        "name": "The Easy Stroll",
+        "weight": 2426
+      },
+      {
+        "name": "Peaceful Moments",
+        "weight": 303
+      },
+      {
+        "name": "Destined to Crumble",
+        "weight": 0
+      },
+      {
+        "name": "Rain Tempter",
+        "weight": 0
+      }
+    ],
+    "Haunted Mansion": [
+      {
+        "name": "Forbidden Power",
+        "weight": 3852
+      },
+      {
+        "name": "Dialla's Subjugation",
+        "weight": 2426
+      },
+      {
+        "name": "Prosperity",
+        "weight": 0
+      },
+      {
+        "name": "The Blazing Fire",
+        "weight": 0
+      }
+    ],
+    "Mineral Pools": [
+      {
+        "name": "The Siren",
+        "weight": 832
+      },
+      {
+        "name": "Divine Beauty",
+        "weight": 625
+      },
+      {
+        "name": "The Avenger",
+        "weight": 247
+      },
+      {
+        "name": "The Cacophony",
+        "weight": 247
+      }
+    ],
+    "Core": [
+      {
+        "name": "Echoes of Love",
+        "weight": 625
+      },
+      {
+        "name": "Harmony of Souls",
+        "weight": 247
+      },
+      {
+        "name": "Draped in Dreams",
+        "weight": 53
+      },
+      {
+        "name": "Doedre's Madness",
+        "weight": 0
+      }
+    ],
+    "Mud Geyser": [
+      {
+        "name": "Lingering Remnants",
+        "weight": 1625
+      },
+      {
+        "name": "The Eye of the Dragon",
+        "weight": 68
+      },
+      {
+        "name": "Lonely Warrior",
+        "weight": 7
+      },
+      {
+        "name": "Doedre's Madness",
+        "weight": 0
+      }
+    ],
+    "Arsenal": [
+      {
+        "name": "Dying Anguish",
+        "weight": 3852
+      },
+      {
+        "name": "The Ruthless Ceinture",
+        "weight": 3852
+      },
+      {
+        "name": "The Patient",
+        "weight": 1141
+      },
+      {
+        "name": "The Warlord",
+        "weight": 832
+      }
+    ],
+    "Courtyard": [
+      {
+        "name": "The Wilted Rose",
+        "weight": 3852
+      },
+      {
+        "name": "The Easy Stroll",
+        "weight": 2426
+      },
+      {
+        "name": "Emperor's Luck",
+        "weight": 0
+      },
+      {
+        "name": "The Sigil",
+        "weight": 0
+      }
+    ],
+    "Terrace": [
+      {
+        "name": "The Porcupine",
+        "weight": 6656
+      },
+      {
+        "name": "The Coming Storm",
+        "weight": 3852
+      },
+      {
+        "name": "Emperor's Luck",
+        "weight": 0
+      },
+      {
+        "name": "Struck by Lightning",
+        "weight": 0
+      }
+    ],
+    "Lair": [
+      {
+        "name": "The Wolverine",
+        "weight": 1625
+      },
+      {
+        "name": "The Mad King",
+        "weight": 481
+      },
+      {
+        "name": "Etched in Blood",
+        "weight": 38
+      },
+      {
+        "name": "Outfoxed",
+        "weight": 0
+      }
+    ],
+    "Foundry": [
+      {
+        "name": "Ever-Changing",
+        "weight": 2426
+      },
+      {
+        "name": "The Polymath",
+        "weight": 247
+      },
+      {
+        "name": "Further Invention",
+        "weight": 21
+      },
+      {
+        "name": "The Inventor",
+        "weight": 0
+      }
+    ],
+    "Ghetto": [
+      {
+        "name": "Jack in the Box",
+        "weight": 6656
+      },
+      {
+        "name": "The Saint's Treasure",
+        "weight": 1625
+      },
+      {
+        "name": "The Enthusiasts",
+        "weight": 481
+      },
+      {
+        "name": "Fire Of Unknown Origin",
+        "weight": 16
+      }
+    ],
+    "Lava Lake": [
+      {
+        "name": "The Lion",
+        "weight": 6656
+      },
+      {
+        "name": "Hope",
+        "weight": 3852
+      },
+      {
+        "name": "The Journey",
+        "weight": 1141
+      },
+      {
+        "name": "From Bone to Ashes",
+        "weight": 203
+      }
+    ],
+    "Siege": [
+      {
+        "name": "From Bone to Ashes",
+        "weight": 203
+      },
+      {
+        "name": "Last Stand",
+        "weight": 0
+      },
+      {
+        "name": "Lucky Bastion",
+        "weight": 0
+      },
+      {
+        "name": "The Mayor",
+        "weight": 0
+      }
+    ],
+    "Silo": [
+      {
+        "name": "Haunting Shadows",
+        "weight": 1141
+      },
+      {
+        "name": "Further Invention",
+        "weight": 21
+      },
+      {
+        "name": "The Standoff",
+        "weight": 0
+      },
+      {
+        "name": "The Tireless Extractor",
+        "weight": 0
+      }
+    ],
+    "Flooded Mine": [
+      {
+        "name": "The Fathomless Depths",
+        "weight": 2426
+      },
+      {
+        "name": "Terrible Secret of Space",
+        "weight": 7
+      },
+      {
+        "name": "Glimmer of Hope",
+        "weight": 0
+      },
+      {
+        "name": "Time-Lost Relic",
+        "weight": 0
+      }
+    ],
+    "Theatre Of Lies": [
+      {
+        "name": "Heterochromia",
+        "weight": 2426
+      },
+      {
+        "name": "The Innocent",
+        "weight": 1625
+      },
+      {
+        "name": "The Academic",
+        "weight": 203
+      },
+      {
+        "name": "Seven Years Bad Luck",
+        "weight": 78
+      }
+    ],
+    "Waterways": [
+      {
+        "name": "Humility",
+        "weight": 3852
+      },
+      {
+        "name": "The Pact",
+        "weight": 481
+      },
+      {
+        "name": "The Destination",
+        "weight": 16
+      },
+      {
+        "name": "When Currents Blaze",
+        "weight": 0
+      }
+    ],
+    "Forking River": [
+      {
+        "name": "The Catch",
+        "weight": 16
+      },
+      {
+        "name": "The Vast",
+        "weight": 8
+      },
+      {
+        "name": "The Old Man",
+        "weight": 3
+      },
+      {
+        "name": "Hunter's Resolve",
+        "weight": 0
+      }
+    ],
+    "Iceberg": [
+      {
+        "name": "Left to Fate",
+        "weight": 6656
+      },
+      {
+        "name": "The Fletcher",
+        "weight": 3852
+      },
+      {
+        "name": "The Undaunted",
+        "weight": 1625
+      },
+      {
+        "name": "Hunter's Resolve",
+        "weight": 0
+      }
+    ],
+    "Carcass": [
+      {
+        "name": "Immortal Resolve",
+        "weight": 1141
+      },
+      {
+        "name": "Parasitic Passengers",
+        "weight": 832
+      },
+      {
+        "name": "The Prince of Darkness",
+        "weight": 247
+      },
+      {
+        "name": "The Aesthete",
+        "weight": 0
+      }
+    ],
+    "Chambers Of Impurity": [
+      {
+        "name": "Justified Ambition",
+        "weight": 625
+      },
+      {
+        "name": "The Forgotten Treasure",
+        "weight": 379
+      },
+      {
+        "name": "The Polymath",
+        "weight": 247
+      },
+      {
+        "name": "The Fiend",
+        "weight": 5
+      }
+    ],
+    "Reef": [
+      {
+        "name": "The Watcher",
+        "weight": 6656
+      },
+      {
+        "name": "Scholar of the Seas",
+        "weight": 3852
+      },
+      {
+        "name": "Lantador's Lost Love",
+        "weight": 0
+      },
+      {
+        "name": "More is Never Enough",
+        "weight": 0
+      }
+    ],
+    "Strand": [
+      {
+        "name": "The Betrayal",
+        "weight": 3852
+      },
+      {
+        "name": "The Catch",
+        "weight": 16
+      },
+      {
+        "name": "Lantador's Lost Love",
+        "weight": 0
+      },
+      {
+        "name": "The Lake",
+        "weight": 0
+      }
+    ],
+    "Palace": [
+      {
+        "name": "The Lord of Celebration",
+        "weight": 1141
+      },
+      {
+        "name": "Light and Truth",
+        "weight": 832
+      },
+      {
+        "name": "The Conduit",
+        "weight": 832
+      },
+      {
+        "name": "The Awakened",
+        "weight": 16
+      }
+    ],
+    "Springs": [
+      {
+        "name": "The Mercenary",
+        "weight": 2426
+      },
+      {
+        "name": "Pride of the First Ones",
+        "weight": 104
+      },
+      {
+        "name": "Loyalty",
+        "weight": 0
+      },
+      {
+        "name": "The Dragon",
+        "weight": 0
+      }
+    ],
+    "Gardens": [
+      {
+        "name": "The Fox in the Brambles",
+        "weight": 1141
+      },
+      {
+        "name": "Matryoshka",
+        "weight": 2
+      },
+      {
+        "name": "The Flora's Gift",
+        "weight": 0
+      },
+      {
+        "name": "The Forbidden Fruit",
+        "weight": 0
+      }
+    ],
+    "Dark Forest": [
+      {
+        "name": "The Wolf",
+        "weight": 6656
+      },
+      {
+        "name": "The Cursed King",
+        "weight": 832
+      },
+      {
+        "name": "Mawr Blaidd",
+        "weight": 303
+      },
+      {
+        "name": "The Explorer",
+        "weight": 0
+      }
+    ],
+    "Promenade": [
+      {
+        "name": "The Warlord",
+        "weight": 832
+      },
+      {
+        "name": "Merciless Armament",
+        "weight": 303
+      },
+      {
+        "name": "Rain Tempter",
+        "weight": 0
+      },
+      {
+        "name": "The Last Laugh",
+        "weight": 0
+      }
+    ],
+    "Racecourse": [
+      {
+        "name": "Merciless Armament",
+        "weight": 303
+      },
+      {
+        "name": "The Last One Standing",
+        "weight": 21
+      },
+      {
+        "name": "The Gladiator",
+        "weight": 0
+      },
+      {
+        "name": "The Sword King's Salute",
+        "weight": 0
+      }
+    ],
+    "Cold River": [
+      {
+        "name": "The Mountain",
+        "weight": 6656
+      },
+      {
+        "name": "The Pack Leader",
+        "weight": 2426
+      },
+      {
+        "name": "The Whiteout",
+        "weight": 625
+      },
+      {
+        "name": "Mitts",
+        "weight": 0
+      }
+    ],
+    "Tribunal": [
+      {
+        "name": "Pride Before the Fall",
+        "weight": 143
+      },
+      {
+        "name": "The Demon",
+        "weight": 2
+      },
+      {
+        "name": "The Battle Born",
+        "weight": 0
+      },
+      {
+        "name": "The Tireless Extractor",
+        "weight": 0
+      }
+    ],
+    "Relic Chambers": [
+      {
+        "name": "The Forgotten Treasure",
+        "weight": 379
+      },
+      {
+        "name": "The Professor",
+        "weight": 203
+      },
+      {
+        "name": "Prosperity",
+        "weight": 0
+      },
+      {
+        "name": "The Opulent",
+        "weight": 0
+      }
+    ],
+    "Castle Ruins": [
+      {
+        "name": "The Side Quest",
+        "weight": 832
+      },
+      {
+        "name": "The Road to Power",
+        "weight": 303
+      },
+      {
+        "name": "Rain of Chaos",
+        "weight": 0
+      },
+      {
+        "name": "The Harvester",
+        "weight": 0
+      }
+    ],
+    "Factory": [
+      {
+        "name": "The Golden Era",
+        "weight": 2426
+      },
+      {
+        "name": "The Thaumaturgist",
+        "weight": 143
+      },
+      {
+        "name": "Rats",
+        "weight": 0
+      },
+      {
+        "name": "Three Faces in the Dark",
+        "weight": 0
+      }
+    ],
+    "Atoll": [
+      {
+        "name": "The Bitter Blossom",
+        "weight": 143
+      },
+      {
+        "name": "Reflection of the Heart",
+        "weight": 0
+      },
+      {
+        "name": "Struck by Lightning",
+        "weight": 0
+      },
+      {
+        "name": "The Lake",
+        "weight": 0
+      }
+    ],
+    "Wasteland": [
+      {
+        "name": "The Scavenger",
+        "weight": 3852
+      },
+      {
+        "name": "The Tyrant",
+        "weight": 625
+      },
+      {
+        "name": "The Brittle Emperor",
+        "weight": 143
+      },
+      {
+        "name": "Runic Luck",
+        "weight": 0
+      }
+    ],
+    "Overgrown Shrine": [
+      {
+        "name": "Shard of Fate",
+        "weight": 6656
+      },
+      {
+        "name": "The Surgeon",
+        "weight": 6656
+      },
+      {
+        "name": "The Dark Mage",
+        "weight": 1625
+      },
+      {
+        "name": "The Celestial Justicar",
+        "weight": 1141
+      }
+    ],
+    "Shrine": [
+      {
+        "name": "Shard of Fate",
+        "weight": 6656
+      },
+      {
+        "name": "The Twilight Moon",
+        "weight": 625
+      },
+      {
+        "name": "The Enlightened",
+        "weight": 90
+      },
+      {
+        "name": "The Lunaris Priestess",
+        "weight": 0
+      }
+    ],
+    "Residence": [
+      {
+        "name": "The Dapper Prodigy",
+        "weight": 3852
+      },
+      {
+        "name": "The Drunken Aristocrat",
+        "weight": 3852
+      },
+      {
+        "name": "Squandered Prosperity",
+        "weight": 0
+      },
+      {
+        "name": "Thirst for Knowledge",
+        "weight": 0
+      }
+    ],
+    "Ivory Temple": [
+      {
+        "name": "The Unexpected Prize",
+        "weight": 625
+      },
+      {
+        "name": "The Sephirot",
+        "weight": 379
+      },
+      {
+        "name": "The Academic",
+        "weight": 203
+      },
+      {
+        "name": "The Opulent",
+        "weight": 0
+      }
+    ],
+    "Canyon": [
+      {
+        "name": "The Deceiver",
+        "weight": 2426
+      },
+      {
+        "name": "The Arena Champion",
+        "weight": 0
+      },
+      {
+        "name": "The King's Blade",
+        "weight": 0
+      },
+      {
+        "name": "The Visionary",
+        "weight": 0
+      }
+    ],
+    "Pit": [
+      {
+        "name": "Unchained",
+        "weight": 625
+      },
+      {
+        "name": "The Arena Champion",
+        "weight": 0
+      },
+      {
+        "name": "The Gladiator",
+        "weight": 0
+      },
+      {
+        "name": "The King's Blade",
+        "weight": 0
+      }
+    ],
+    "Arid Lake": [
+      {
+        "name": "The Mind's Eyes",
+        "weight": 625
+      },
+      {
+        "name": "The Offspring",
+        "weight": 379
+      },
+      {
+        "name": "Toxic Tidings",
+        "weight": 247
+      },
+      {
+        "name": "The Bitter Blossom",
+        "weight": 143
+      }
+    ],
+    "Belfry": [
+      {
+        "name": "The Life Thief",
+        "weight": 68
+      },
+      {
+        "name": "The Demon",
+        "weight": 2
+      },
+      {
+        "name": "The Blazing Fire",
+        "weight": 0
+      },
+      {
+        "name": "The Wrath",
+        "weight": 0
+      }
+    ],
+    "Pen": [
+      {
+        "name": "The Dungeon Master",
+        "weight": 481
+      },
+      {
+        "name": "The Last Supper",
+        "weight": 12
+      },
+      {
+        "name": "The Enforcer",
+        "weight": 10
+      },
+      {
+        "name": "The Chains that Bind",
+        "weight": 0
+      }
+    ],
+    "Sulphur Vents": [
+      {
+        "name": "The Feast",
+        "weight": 3852
+      },
+      {
+        "name": "The Darkest Dream",
+        "weight": 379
+      },
+      {
+        "name": "Toxic Tidings",
+        "weight": 247
+      },
+      {
+        "name": "The Throne",
+        "weight": 203
+      }
+    ],
+    "Grotto": [
+      {
+        "name": "The Jeweller's Boon",
+        "weight": 6656
+      },
+      {
+        "name": "The Primordial",
+        "weight": 1625
+      },
+      {
+        "name": "The Fishmonger",
+        "weight": 23
+      },
+      {
+        "name": "Underground Forest",
+        "weight": 0
+      }
+    ],
+    "Fields": [
+      {
+        "name": "The Porcupine",
+        "weight": 6656
+      },
+      {
+        "name": "The Fortunate",
+        "weight": 2426
+      },
+      {
+        "name": "Tranquillity",
+        "weight": 15
+      },
+      {
+        "name": "The Scarred Meadow",
+        "weight": 0
+      }
+    ],
+    "Alleyways": [
+      {
+        "name": "The Poet",
+        "weight": 3852
+      },
+      {
+        "name": "The Gentleman",
+        "weight": 1625
+      },
+      {
+        "name": "The Long Watch",
+        "weight": 78
+      },
+      {
+        "name": "The Trial",
+        "weight": 0
+      }
+    ],
+    "Port": [
+      {
+        "name": "The Messenger",
+        "weight": 2426
+      },
+      {
+        "name": "The Leviathan",
+        "weight": 28
+      },
+      {
+        "name": "The One That Got Away",
+        "weight": 4
+      },
+      {
+        "name": "The Old Man",
+        "weight": 3
+      }
+    ],
+    "Moon Temple": [
+      {
+        "name": "The Twins",
+        "weight": 6656
+      },
+      {
+        "name": "The Twilight Moon",
+        "weight": 625
+      },
+      {
+        "name": "The Progeny of Lunaris",
+        "weight": 34
+      },
+      {
+        "name": "The Lunaris Priestess",
+        "weight": 0
+      }
+    ],
+    "Tower": [
+      {
+        "name": "The Patient",
+        "weight": 1141
+      },
+      {
+        "name": "The Offering",
+        "weight": 625
+      },
+      {
+        "name": "The Nurse",
+        "weight": 143
+      },
+      {
+        "name": "Thunderous Skies",
+        "weight": 0
+      }
+    ],
+    "Lava Chamber": [
+      {
+        "name": "The Siren",
+        "weight": 832
+      },
+      {
+        "name": "The Penitent",
+        "weight": 0
+      },
+      {
+        "name": "The Standoff",
+        "weight": 0
+      },
+      {
+        "name": "The Warden",
+        "weight": 0
+      }
+    ],
+    "Cage": [
+      {
+        "name": "The Surveyor",
+        "weight": 6656
+      },
+      {
+        "name": "Unchained",
+        "weight": 625
+      },
+      {
+        "name": "The Summoner",
+        "weight": 0
+      },
+      {
+        "name": "The Tower",
+        "weight": 0
+      }
+    ]
+  }
 }

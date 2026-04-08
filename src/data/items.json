@@ -2430,7 +2430,7 @@
       {
         "id": "ColdDamagePercent4",
         "group": "Cold Damage Percentage",
-        "text": "Minions have +(24 — 26) % to all Elemental Resistances",
+        "text": "(19 — 22) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -2444,7 +2444,7 @@
       {
         "id": "ColdDamagePercent3",
         "group": "Cold Damage Percentage",
-        "text": "+(24 — 29) % to Fire Resistance",
+        "text": "(16 — 18) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -2458,7 +2458,7 @@
       {
         "id": "ColdDamagePercent2",
         "group": "Cold Damage Percentage",
-        "text": "Gain (7 — 10) Mana per Enemy Killed",
+        "text": "(13 — 15) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -2472,7 +2472,7 @@
       {
         "id": "ColdDamagePercent1",
         "group": "Cold Damage Percentage",
-        "text": "+(12 — 17) % to Fire Resistance",
+        "text": "(10 — 12) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -3095,7 +3095,7 @@
       {
         "id": "FireDamagePercent4",
         "group": "Fire Damage Percentage",
-        "text": "Minions have +(24 — 26) % to all Elemental Resistances",
+        "text": "(19 — 22) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -3109,7 +3109,7 @@
       {
         "id": "FireDamagePercent3",
         "group": "Fire Damage Percentage",
-        "text": "+(24 — 29) % to Fire Resistance",
+        "text": "(16 — 18) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -3123,7 +3123,7 @@
       {
         "id": "FireDamagePercent2",
         "group": "Fire Damage Percentage",
-        "text": "+(18 — 22) to Strength",
+        "text": "(13 — 15) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -3137,7 +3137,7 @@
       {
         "id": "FireDamagePercent1",
         "group": "Fire Damage Percentage",
-        "text": "Minions have +(11 — 15) % to all Elemental Resistances",
+        "text": "(10 — 12) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -3976,7 +3976,7 @@
       {
         "id": "LightningDamagePercent4",
         "group": "Lightning Damage Percentage",
-        "text": "Minions have +(24 — 26) % to all Elemental Resistances",
+        "text": "(19 — 22) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -3990,7 +3990,7 @@
       {
         "id": "LightningDamagePercent3",
         "group": "Lightning Damage Percentage",
-        "text": "+(24 — 29) % to Fire Resistance",
+        "text": "(16 — 18) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -4004,7 +4004,7 @@
       {
         "id": "LightningDamagePercent2",
         "group": "Lightning Damage Percentage",
-        "text": "Gain (12 — 18) Life per Enemy Killed",
+        "text": "(13 — 15) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -4018,7 +4018,7 @@
       {
         "id": "LightningDamagePercent1",
         "group": "Lightning Damage Percentage",
-        "text": "Minions have (13 — 17) % increased maximum Life",
+        "text": "(10 — 12) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -7433,7 +7433,7 @@
       {
         "id": "ColdDamagePercent5",
         "group": "Cold Damage Percentage",
-        "text": "(23 — 26) % increased Fire Damage",
+        "text": "(23 — 26) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -7447,7 +7447,7 @@
       {
         "id": "ColdDamagePercent4",
         "group": "Cold Damage Percentage",
-        "text": "+(30 — 35) % to Cold Resistance",
+        "text": "(19 — 22) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -7461,7 +7461,7 @@
       {
         "id": "ColdDamagePercent3",
         "group": "Cold Damage Percentage",
-        "text": "+(24 — 29) % to Fire Resistance",
+        "text": "(16 — 18) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -7475,7 +7475,7 @@
       {
         "id": "ColdDamagePercent2",
         "group": "Cold Damage Percentage",
-        "text": "Gain (7 — 10) Mana per Enemy Killed",
+        "text": "(13 — 15) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -7489,7 +7489,7 @@
       {
         "id": "ColdDamagePercent1",
         "group": "Cold Damage Percentage",
-        "text": "+(12 — 17) % to Fire Resistance",
+        "text": "(10 — 12) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -8043,7 +8043,7 @@
       {
         "id": "FireDamagePercent4",
         "group": "Fire Damage Percentage",
-        "text": "+(30 — 35) % to Cold Resistance",
+        "text": "(19 — 22) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -8057,7 +8057,7 @@
       {
         "id": "FireDamagePercent3",
         "group": "Fire Damage Percentage",
-        "text": "+(24 — 29) % to Fire Resistance",
+        "text": "(16 — 18) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -8071,7 +8071,7 @@
       {
         "id": "FireDamagePercent2",
         "group": "Fire Damage Percentage",
-        "text": "+(18 — 22) to Strength",
+        "text": "(13 — 15) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -9082,7 +9082,7 @@
       {
         "id": "LightningDamagePercent5",
         "group": "Lightning Damage Percentage",
-        "text": "(23 — 26) % increased Fire Damage",
+        "text": "(23 — 26) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -9096,7 +9096,7 @@
       {
         "id": "LightningDamagePercent4",
         "group": "Lightning Damage Percentage",
-        "text": "+(30 — 35) % to Cold Resistance",
+        "text": "(19 — 22) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -9110,7 +9110,7 @@
       {
         "id": "LightningDamagePercent3",
         "group": "Lightning Damage Percentage",
-        "text": "+(24 — 29) % to Fire Resistance",
+        "text": "(16 — 18) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -9124,7 +9124,7 @@
       {
         "id": "LightningDamagePercent2",
         "group": "Lightning Damage Percentage",
-        "text": "Gain (12 — 18) Life per Enemy Killed",
+        "text": "(13 — 15) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -10476,7 +10476,7 @@
       {
         "id": "ChaosDamageInfluence2_",
         "group": "Increased Chaos Damage",
-        "text": "+(65 — 68) to maximum Mana",
+        "text": "(21 — 25) % increased Chaos Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -10491,7 +10491,7 @@
       {
         "id": "ChaosDamageInfluence1",
         "group": "Increased Chaos Damage",
-        "text": "Grants Level 22 Enduring Cry Skill",
+        "text": "(16 — 20) % increased Chaos Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -10506,7 +10506,7 @@
       {
         "id": "ColdDamageInfluence3",
         "group": "Cold Damage Percentage",
-        "text": "(26 — 30) % increased Chaos Damage",
+        "text": "(26 — 30) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -10521,7 +10521,7 @@
       {
         "id": "ColdDamageInfluence2",
         "group": "Cold Damage Percentage",
-        "text": "+(65 — 68) to maximum Mana",
+        "text": "(21 — 25) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -10536,7 +10536,7 @@
       {
         "id": "ColdDamageInfluence1",
         "group": "Cold Damage Percentage",
-        "text": "Grants Level 22 Enduring Cry Skill",
+        "text": "(16 — 20) % increased Cold Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -10731,7 +10731,7 @@
       {
         "id": "FireDamageInfluence3",
         "group": "Fire Damage Percentage",
-        "text": "(26 — 30) % increased Chaos Damage",
+        "text": "(26 — 30) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -10746,7 +10746,7 @@
       {
         "id": "FireDamageInfluence2",
         "group": "Fire Damage Percentage",
-        "text": "+(65 — 68) to maximum Mana",
+        "text": "(21 — 25) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -10761,7 +10761,7 @@
       {
         "id": "FireDamageInfluence1_",
         "group": "Fire Damage Percentage",
-        "text": "Grants Level 22 Enduring Cry Skill",
+        "text": "(16 — 20) % increased Fire Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -11635,7 +11635,7 @@
       {
         "id": "LightningDamageInfluence3_",
         "group": "Lightning Damage Percentage",
-        "text": "(26 — 30) % increased Chaos Damage",
+        "text": "(26 — 30) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -11650,7 +11650,7 @@
       {
         "id": "LightningDamageInfluence2",
         "group": "Lightning Damage Percentage",
-        "text": "+(65 — 68) to maximum Mana",
+        "text": "(21 — 25) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -11665,7 +11665,7 @@
       {
         "id": "LightningDamageInfluence1__",
         "group": "Lightning Damage Percentage",
-        "text": "Grants Level 22 Enduring Cry Skill",
+        "text": "(16 — 20) % increased Lightning Damage",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -11740,7 +11740,7 @@
       {
         "id": "PhysicalDamageBeltUber3___",
         "group": "Physical Damage Percentage",
-        "text": "(26 — 30) % increased Chaos Damage",
+        "text": "(26-30) The Elder's",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -11755,7 +11755,7 @@
       {
         "id": "PhysicalDamageBeltUber2",
         "group": "Physical Damage Percentage",
-        "text": "+(65 — 68) to maximum Mana",
+        "text": "(21-25) The Elder's",
         "mod_tags": [],
         "spawn_weights": [
           {
@@ -11770,7 +11770,7 @@
       {
         "id": "PhysicalDamageBeltUber1",
         "group": "Physical Damage Percentage",
-        "text": "Grants Level 22 Enduring Cry Skill",
+        "text": "(16-20) The Elder's",
         "mod_tags": [],
         "spawn_weights": [
           {

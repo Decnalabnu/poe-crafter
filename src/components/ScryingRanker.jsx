@@ -3,7 +3,7 @@ import mapData from "../data/map_cards.json";
 import economyData from "../data/div_cards_economy.json";
 
 export default function ScryingRanker() {
-  const [expandedMap, setExpandedMap] = useState(null);
+  const [expandedMaps, setExpandedMaps] = useState({});
 
   const rankedMaps = useMemo(() => {
     if (!mapData?.maps || !economyData?.cards) return [];
@@ -64,31 +64,36 @@ export default function ScryingRanker() {
 
       <div className="flex flex-col gap-3">
         {top10Maps.map((mapInfo, idx) => {
-          const isExpanded = expandedMap === mapInfo.name;
+          const isExpanded = !!expandedMaps[mapInfo.name];
           
+          const toggleMap = () => {
+            setExpandedMaps((prev) => ({ ...prev, [mapInfo.name]: !prev[mapInfo.name] }));
+          };
+
           return (
-            <div key={mapInfo.name} className="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden flex flex-col">
+            <div key={mapInfo.name} className="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden flex flex-col md:flex-row">
               {/* Header / Clickable Area */}
               <div 
-                className="flex justify-between items-center p-4 cursor-pointer hover:bg-slate-700 transition-colors"
-                onClick={() => setExpandedMap(isExpanded ? null : mapInfo.name)}
+                className={`flex justify-between items-center p-4 cursor-pointer hover:bg-slate-700 transition-colors ${isExpanded ? 'md:w-1/3 md:shrink-0 md:flex-col md:justify-center md:items-start md:gap-3' : 'w-full'}`}
+                onClick={toggleMap}
               >
                 <div className="flex items-center gap-4">
                   <span className="text-xl font-bold text-slate-500 w-8 text-right">#{idx + 1}</span>
                   <h3 className="text-lg font-semibold text-amber-400 leading-tight">{mapInfo.name}</h3>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className={`flex items-center gap-4 ${isExpanded ? 'md:w-full md:justify-between md:pl-12' : ''}`}>
                   <span className="font-bold text-green-400 text-right shrink-0">
                     {mapInfo.evPerDrop.toFixed(2)}c <span className="text-xs text-slate-400 font-normal">EV</span>
                   </span>
-                  <span className="text-slate-500 w-4 text-center">{isExpanded ? "▼" : "▶"}</span>
+                  <span className="text-slate-500 w-4 text-center hidden md:inline-block">{isExpanded ? "◀" : "▶"}</span>
+                  <span className="text-slate-500 w-4 text-center md:hidden">{isExpanded ? "▼" : "▶"}</span>
                 </div>
               </div>
               
               {/* Expanded Content */}
               {isExpanded && (
-                <div className="bg-slate-900 p-4 border-t border-slate-700 overflow-x-auto">
-                  <table className="w-full text-sm text-left min-w-[500px]">
+                <div className="bg-slate-900 p-4 border-t md:border-t-0 md:border-l border-slate-700 overflow-x-auto md:w-2/3 md:shrink-0">
+                  <table className="w-full text-sm text-left min-w-[400px]">
                     <thead>
                       <tr className="text-slate-400 border-b border-slate-700">
                         <th className="pb-2 font-medium">Divination Card</th>

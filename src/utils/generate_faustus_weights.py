@@ -4,13 +4,8 @@ import os
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-GOLD_COSTS_FILE = os.path.join(os.path.dirname(__file__), 'faustus_gold_costs.json')
-OUTPUT_FILE = os.path.join(os.path.dirname(__file__), 'card_weights.json')
-
-# We need an anchor to convert Gold Cost -> Relative Weight.
-# The Apothecary is historically known to have a drop weight of 13.
-ANCHOR_CARD = "The Apothecary"
-ANCHOR_WEIGHT = 13.0
+GOLD_COSTS_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'faustus_gold_costs.json')
+OUTPUT_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'card_weights.json')
 
 def generate_weights():
     print("Generating Divination Card weights from Faustus gold costs...")
@@ -23,26 +18,18 @@ def generate_weights():
     with open(GOLD_COSTS_FILE, 'r', encoding='utf-8') as f:
         gold_costs = json.load(f)
 
-    if ANCHOR_CARD not in gold_costs:
-        print(f"Error: Anchor card '{ANCHOR_CARD}' is missing from the gold costs file.")
-        print(f"We need {ANCHOR_CARD} to establish the Gold -> Weight conversion ratio.")
-        return
-
-    # Faustus gold cost is inversely proportional to drop weight.
-    # Gold_Cost * Weight = K (Constant)
-    anchor_gold = gold_costs[ANCHOR_CARD]
-    k_constant = anchor_gold * ANCHOR_WEIGHT
-    
-    print(f"Anchor: {ANCHOR_CARD} (Gold Cost: {anchor_gold}, Known Weight: {ANCHOR_WEIGHT})")
-    print(f"Derived Scaling Constant (K) = {k_constant}")
-
     weights_out = {}
     for card_name, gold_cost in gold_costs.items():
         if gold_cost <= 0:
             continue
         
-        # Inverse relation: Weight = K / Gold_Cost
-        calculated_weight = k_constant / gold_cost
+        # The intersection of the two curves is at exactly sqrt(13000) ≈ 114 gold.
+        if gold_cost <= 114:
+            # Common cards: 1 million / cost
+            calculated_weight = 1_000_000 / gold_cost
+        else:
+            # Uncommon and Rare cards: 13 billion / (cost^3)
+            calculated_weight = 13_000_000_000 / (gold_cost ** 3)
         
         # Round to nearest integer (weights are whole numbers in PoE)
         weights_out[card_name] = max(1, int(round(calculated_weight)))

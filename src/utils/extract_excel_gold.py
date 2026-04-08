@@ -7,7 +7,7 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 # Finds the path to your Documents folder automatically
 EXCEL_FILE = os.path.expanduser(r"~\Documents\gog.xlsx")
-OUTPUT_FILE = os.path.join(os.path.dirname(__file__), 'faustus_gold_costs.json')
+OUTPUT_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'faustus_gold_costs.json')
 
 # *** YOU MAY NEED TO CHANGE THESE IF HIS SPREADSHEET HEADERS ARE DIFFERENT ***
 NAME_COLUMN = "Card"                 # The exact column header for the card name

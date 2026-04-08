@@ -128,13 +128,6 @@ export function calculateRecombEV({
   };
 }
 
-// Harvest-swappable resist groups: targeting any one counts as targeting all three.
-const ELEMENTAL_RESIST_GROUPS = new Set([
-  "Fire Resistance",
-  "Cold Resistance",
-  "Lightning Resistance",
-]);
-
 // PoE rare item affix count distribution — 5-mod items are most common (weights 1:3:2)
 const MOD_COUNT_DIST = [
   { count: 4, prob: 1 / 6 },
@@ -177,8 +170,7 @@ function applyFossilMultipliers(pool, activeFossilIds) {
 // Lower tier number = better roll, so T1 satisfies a T2 requirement.
 // Falls back to exact id match for mods without tier data.
 function modSatisfiesTarget(m, targetMod) {
-  const bothElemental = ELEMENTAL_RESIST_GROUPS.has(m.group) && ELEMENTAL_RESIST_GROUPS.has(targetMod.group);
-  if (!bothElemental && m.group !== targetMod.group) return false;
+  if (m.group !== targetMod.group) return false;
   if (m.tier !== undefined && targetMod.tier !== undefined) {
     return m.tier <= targetMod.tier;
   }
@@ -192,23 +184,21 @@ function modSatisfiesTarget(m, targetMod) {
 //   1. A qualifying tier of T is selected   → target satisfied, recurse with targetsMask bit cleared
 //   2. A non-qualifying tier of T is selected → this roll path can never satisfy T, contributes 0
 //
-// Non-target groups use a mean-field approximation: track count + average weight
-// rather than enumerating every possible non-target group draw.
-// This is highly accurate for typical PoE pools (50–100 non-target groups,
-// roughly similar weights) and is computed in microseconds vs 500k MC iterations.
+// Non-target groups are tracked as sorted weight arrays (desc). Groups sharing
+// the same weight are interchangeable, so the state folds naturally — PoE's pool
+// typically has ~8 distinct weight values, giving ~165 reachable sub-multisets
+// when removing up to 3 elements. This is exact, unlike the old mean-field.
 //
-// State: (targetsMask, prefixLeft, suffixLeft, totalLeft, ntPrefixN, ntSuffixN)
+// State: (targetsMask, prefixLeft, suffixLeft, totalLeft, ntPW_sorted, ntSW_sorted)
 // ---------------------------------------------------------------------------
 function recursiveProb(
   targetsMask,
   prefixLeft,
   suffixLeft,
   totalLeft,
-  ntPrefixN,
-  ntSuffixN,
+  ntPW,          // sorted (desc) remaining non-target prefix weights
+  ntSW,          // sorted (desc) remaining non-target suffix weights
   targetGroups,
-  avgNtPW, // average weight of one non-target prefix group
-  avgNtSW, // average weight of one non-target suffix group
   memo,
 ) {
   if (targetsMask === 0) return 1.0;
@@ -221,12 +211,14 @@ function recursiveProb(
   }
   if (targetsRemaining > totalLeft) return 0.0;
 
-  const key = `${targetsMask},${prefixLeft},${suffixLeft},${totalLeft},${ntPrefixN},${ntSuffixN}`;
+  const key = `${targetsMask},${prefixLeft},${suffixLeft},${totalLeft},${ntPW.join(',')},|,${ntSW.join(',')}`;
   const cached = memo.get(key);
   if (cached !== undefined) return cached;
 
-  const ntPrefixW = avgNtPW * ntPrefixN;
-  const ntSuffixW = avgNtSW * ntSuffixN;
+  let ntPrefixW = 0;
+  for (let j = 0; j < ntPW.length; j++) ntPrefixW += ntPW[j];
+  let ntSuffixW = 0;
+  for (let j = 0; j < ntSW.length; j++) ntSuffixW += ntSW[j];
 
   // Total pool weight = full group weights for each pending target + non-target pool
   let totalW = 0;
@@ -263,11 +255,9 @@ function recursiveProb(
           prefixLeft - (tg.isPrefix ? 1 : 0),
           suffixLeft - (!tg.isPrefix ? 1 : 0),
           totalLeft - 1,
-          ntPrefixN,
-          ntSuffixN,
+          ntPW,
+          ntSW,
           targetGroups,
-          avgNtPW,
-          avgNtSW,
           memo,
         );
     }
@@ -275,40 +265,60 @@ function recursiveProb(
     // → probability contribution = pNonQualify * 0, so we skip it
   }
 
-  // Draw a non-target prefix group (mean-field: remove one average-weight group)
-  if (prefixLeft > 0 && ntPrefixN > 0 && ntPrefixW > 0) {
-    result +=
-      (ntPrefixW / totalW) *
-      recursiveProb(
-        targetsMask,
-        prefixLeft - 1,
-        suffixLeft,
-        totalLeft - 1,
-        ntPrefixN - 1,
-        ntSuffixN,
-        targetGroups,
-        avgNtPW,
-        avgNtSW,
-        memo,
-      );
+  // Draw a non-target prefix group — exact: branch over each distinct weight value
+  if (prefixLeft > 0 && ntPW.length > 0) {
+    const seen = new Set();
+    for (let j = 0; j < ntPW.length; j++) {
+      const w = ntPW[j];
+      if (seen.has(w)) continue;
+      seen.add(w);
+      // Count how many non-target prefix groups have this weight
+      let cnt = 0;
+      for (let k = 0; k < ntPW.length; k++) if (ntPW[k] === w) cnt++;
+      const pDraw = (w * cnt) / totalW;
+      // Remove one instance of w (array is sorted desc, splice first occurrence)
+      const newNtPW = ntPW.slice();
+      newNtPW.splice(newNtPW.indexOf(w), 1);
+      result +=
+        pDraw *
+        recursiveProb(
+          targetsMask,
+          prefixLeft - 1,
+          suffixLeft,
+          totalLeft - 1,
+          newNtPW,
+          ntSW,
+          targetGroups,
+          memo,
+        );
+    }
   }
 
-  // Draw a non-target suffix group (mean-field)
-  if (suffixLeft > 0 && ntSuffixN > 0 && ntSuffixW > 0) {
-    result +=
-      (ntSuffixW / totalW) *
-      recursiveProb(
-        targetsMask,
-        prefixLeft,
-        suffixLeft - 1,
-        totalLeft - 1,
-        ntPrefixN,
-        ntSuffixN - 1,
-        targetGroups,
-        avgNtPW,
-        avgNtSW,
-        memo,
-      );
+  // Draw a non-target suffix group — exact: branch over each distinct weight value
+  if (suffixLeft > 0 && ntSW.length > 0) {
+    const seen = new Set();
+    for (let j = 0; j < ntSW.length; j++) {
+      const w = ntSW[j];
+      if (seen.has(w)) continue;
+      seen.add(w);
+      let cnt = 0;
+      for (let k = 0; k < ntSW.length; k++) if (ntSW[k] === w) cnt++;
+      const pDraw = (w * cnt) / totalW;
+      const newNtSW = ntSW.slice();
+      newNtSW.splice(newNtSW.indexOf(w), 1);
+      result +=
+        pDraw *
+        recursiveProb(
+          targetsMask,
+          prefixLeft,
+          suffixLeft - 1,
+          totalLeft - 1,
+          ntPW,
+          newNtSW,
+          targetGroups,
+          memo,
+        );
+    }
   }
 
   memo.set(key, result);
@@ -442,9 +452,11 @@ export function calculateSpamEV(
     (targetMod) => !prePlaced.some((pm) => modSatisfiesTarget(pm, targetMod)),
   );
 
-  // Fractured mods physically lock a slot before random rolling, reducing the cap.
-  // Essence mods reserve their slot via pool exclusion (group removed from pool),
-  // not by capping the draw. The N-1 random draws still see full 3P/3S capacity.
+  // Only fractured mods physically reduce the random slot cap — the item base
+  // already has them, so the engine draws random mods into the remaining capacity.
+  // Essence mods consume a slot from the total count (randomSlots = K-1) but the
+  // random draws still see full 3P/3S capacity because the essence slot is reserved
+  // by count, not by type cap. (This matches Craft of Exile's verified model.)
   const fracPrefixes = fMod && fMod.isPrefix ? 1 : 0;
   const fracSuffixes = fMod && !fMod.isPrefix ? 1 : 0;
   const maxPrefixSlots = 3 - fracPrefixes;
@@ -525,19 +537,16 @@ export function calculateSpamEV(
     targetGroupDefs.filter((t) => !t.isPrefix).map((t) => t.group),
   );
 
+  // Sorted desc so groups with equal weight produce identical sub-arrays after removal,
+  // maximising memo hits across recursive branches.
   const ntPrefixWeights = [...prefixGroupWeights.entries()]
     .filter(([g]) => !targetPrefixGroups.has(g))
-    .map(([, w]) => w);
+    .map(([, w]) => w)
+    .sort((a, b) => b - a);
   const ntSuffixWeights = [...suffixGroupWeights.entries()]
     .filter(([g]) => !targetSuffixGroups.has(g))
-    .map(([, w]) => w);
-
-  const ntPrefixN = ntPrefixWeights.length;
-  const ntSuffixN = ntSuffixWeights.length;
-  const avgNtPW =
-    ntPrefixN > 0 ? ntPrefixWeights.reduce((s, w) => s + w, 0) / ntPrefixN : 0;
-  const avgNtSW =
-    ntSuffixN > 0 ? ntSuffixWeights.reduce((s, w) => s + w, 0) / ntSuffixN : 0;
+    .map(([, w]) => w)
+    .sort((a, b) => b - a);
 
   const initialMask = (1 << targetGroupDefs.length) - 1;
   const memo = new Map();
@@ -555,11 +564,9 @@ export function calculateSpamEV(
       maxPrefixSlots,
       maxSuffixSlots,
       randomSlots,
-      ntPrefixN,
-      ntSuffixN,
+      ntPrefixWeights,
+      ntSuffixWeights,
       targetGroupDefs,
-      avgNtPW,
-      avgNtSW,
       memo,
     );
     totalProbability += prob * hitProb;

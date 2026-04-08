@@ -761,6 +761,12 @@ function App() {
     }
   }, [guaranteedModId, fracturedModId, craftingMethod]);
 
+  useEffect(() => {
+    document.body.style.backgroundColor = "#0f172a"; // Tailwind slate-900
+    document.body.style.color = "#e2e8f0"; // Tailwind slate-200
+    document.body.style.margin = "0";
+  }, []);
+
   const handleCraftThis = (slotKey, rawModFrequency) => {
     // Take ≥40% groups (core + common), sorted by frequency desc
     const topGroups = Object.entries(rawModFrequency)
@@ -1092,14 +1098,13 @@ function App() {
       style={{
         padding: "20px",
         fontFamily: "sans-serif",
-        maxWidth: "900px",
+        maxWidth: "1000px",
         margin: "0 auto",
-        color: "#ddd",
       }}
     >
-      <h1 style={{ marginBottom: "4px" }}>PoE Profit Crafter</h1>
+      <h1 style={{ marginBottom: "16px", color: "#f8fafc" }}>PoE Profit Crafter</h1>
 
-      <div style={{ display: "flex", gap: "8px", marginBottom: "20px" }}>
+      <div style={{ display: "flex", gap: "8px", marginBottom: "20px", flexWrap: "wrap" }}>
         {[
           { id: "crafter", label: "Crafter" },
           { id: "builds", label: "Build Analyzer" },
