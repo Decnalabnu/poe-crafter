@@ -1,0 +1,52 @@
+{
+  "reforge_defence": {
+    "name": "Reforge Defence",
+    "guaranteed_tag": "defences",
+    "cost_chaos": 2
+  },
+  "reforge_life": {
+    "name": "Reforge Life",
+    "guaranteed_tag": "life",
+    "cost_chaos": 2
+  },
+  "reforge_caster": {
+    "name": "Reforge Caster",
+    "guaranteed_tag": "caster",
+    "cost_chaos": 2
+  },
+  "reforge_attack": {
+    "name": "Reforge Attack",
+    "guaranteed_tag": "attack",
+    "cost_chaos": 2
+  },
+  "reforge_speed": {
+    "name": "Reforge Speed",
+    "guaranteed_tag": "speed",
+    "cost_chaos": 2
+  },
+  "reforge_physical": {
+    "name": "Reforge Physical",
+    "guaranteed_tag": "physical",
+    "cost_chaos": 2
+  },
+  "reforge_fire": {
+    "name": "Reforge Fire",
+    "guaranteed_tag": "fire",
+    "cost_chaos": 2
+  },
+  "reforge_cold": {
+    "name": "Reforge Cold",
+    "guaranteed_tag": "cold",
+    "cost_chaos": 2
+  },
+  "reforge_lightning": {
+    "name": "Reforge Lightning",
+    "guaranteed_tag": "lightning",
+    "cost_chaos": 2
+  },
+  "reforge_chaos": {
+    "name": "Reforge Chaos",
+    "guaranteed_tag": "chaos",
+    "cost_chaos": 2
+  }
+}

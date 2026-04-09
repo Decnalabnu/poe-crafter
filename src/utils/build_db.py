@@ -12,6 +12,46 @@ ESSENCES_OUTPUT_FILE = "src/data/essences.json"
 
 ITEM_TAGS = ["ring", "amulet", "belt", "body_armour", "boots", "gloves", "helmet"]
 
+# Armour subtypes — every armour item belongs to exactly one of these.
+ARMOUR_SUBTYPES = [
+    "str_armour", "dex_armour", "int_armour",
+    "str_dex_armour", "str_int_armour", "dex_int_armour", "str_dex_int_armour",
+]
+
+# The slot tag for each armour item class (in addition to the subtype tag and "armour").
+ARMOUR_SLOT_TAG = {
+    "body_armour": "body_armour",
+    "helmet": "helmet",
+    "boots": "boots",
+    "gloves": "gloves",
+}
+
+# For non-armour classes, the single relevant tag.
+ITEM_TAG_ALIASES = {
+    "ring":   ["ring"],
+    "amulet": ["amulet"],
+    "belt":   ["belt"],
+}
+
+def get_first_match_weight(spawn_weights, item_tag_set):
+    """Return the weight using PoE's first-match semantics: iterate spawn_weight
+    entries in order and return the weight of the first entry whose tag the item has."""
+    for sw in spawn_weights:
+        if sw["tag"] in item_tag_set:
+            return sw["weight"]
+    return 0
+
+def compute_base_weights(spawn_weights, slot_tag):
+    """For an armour item class, compute first-match weight for each subtype.
+    Also stores the no-subtype fallback (slot + armour + default only)."""
+    result = {}
+    for subtype in ARMOUR_SUBTYPES:
+        item_tags = {subtype, slot_tag, "armour", "default"}
+        result[subtype] = get_first_match_weight(spawn_weights, item_tags)
+    # fallback: no subtype selected — use slot+armour+default (no subtype tag)
+    result["_any"] = get_first_match_weight(spawn_weights, {slot_tag, "armour", "default"})
+    return result
+
 # Maps RePoE spawn-weight codename → display name used in items.json "influence" field
 INFLUENCE_CODENAMES = {
     "shaper":     "shaper",
@@ -34,42 +74,64 @@ def build_translation_dicts(raw_translations):
         if not block.get("ids") or not block.get("English"):
             continue
         ids_tuple = tuple(block["ids"])
+        # Use the first (most canonical) translation — later entries are often
+        # conditional duplicates that would overwrite with a wrong template.
+        if ids_tuple in trans_dict_multi:
+            continue
         best_string = block["English"][0].get("string", "")
         trans_dict_multi[ids_tuple] = best_string
-        if len(ids_tuple) == 1:
+        if len(ids_tuple) == 1 and ids_tuple[0] not in trans_dict_single:
             trans_dict_single[ids_tuple[0]] = best_string
     return trans_dict_multi, trans_dict_single
+
+def substitute_values(template, values, offset=0):
+    """Replace {0}, {1}, ... placeholders in template with values list starting at offset."""
+    result = template
+    for i, val in enumerate(values):
+        result = re.sub(r"\{" + str(i + offset) + r"[^}]*\}", val, result)
+    return result.replace("+-", "-")
 
 def get_translated_string(stats_list, trans_dict_multi, trans_dict_single):
     if not stats_list: return ""
     stat_ids = tuple(s.get("id", "") for s in stats_list)
-    values = [f"{s.get('min', 0)}" if s.get('min', 0) == s.get('max', 0) else f"({s.get('min', 0)}-{s.get('max', 0)})" for s in stats_list]
+    # Use em-dash with spaces to match in-game display format, e.g. "(100 — 114)"
+    values = [
+        f"{s.get('min', 0)}"
+        if s.get('min', 0) == s.get('max', 0)
+        else f"({s.get('min', 0)} \u2014 {s.get('max', 0)})"
+        for s in stats_list
+    ]
 
+    # Try full tuple match first
     if stat_ids in trans_dict_multi:
-        trans_str = trans_dict_multi[stat_ids]
-        for i, val in enumerate(values):
-            trans_str = re.sub(r"\{" + str(i) + r"[^}]*\}", val, trans_str)
-        return trans_str.replace("+-", "-") 
+        return substitute_values(trans_dict_multi[stat_ids], values)
 
+    # Walk stats greedily: try largest remaining prefix, then fall back to pairs, then singles
     translated_lines = []
-    skip_next = False
-    for i in range(len(stat_ids)):
-        if skip_next:
-            skip_next = False
-            continue
-        if i + 1 < len(stat_ids):
-            pair_ids = (stat_ids[i], stat_ids[i+1])
-            if pair_ids in trans_dict_multi:
-                trans_str = trans_dict_multi[pair_ids]
-                trans_str = re.sub(r"\{0[^}]*\}", values[i], trans_str)
-                trans_str = re.sub(r"\{1[^}]*\}", values[i+1], trans_str)
-                translated_lines.append(trans_str.replace("+-", "-"))
-                skip_next = True
-                continue
-        single_str = trans_dict_single.get(stat_ids[i], "")
-        if single_str:
-            single_str = re.sub(r"\{0[^}]*\}", values[i], single_str)
-            translated_lines.append(single_str.replace("+-", "-"))
+    i = 0
+    while i < len(stat_ids):
+        matched = False
+        # Try descending window sizes from remaining length down to 2
+        for window in range(len(stat_ids) - i, 1, -1):
+            window_ids = stat_ids[i:i+window]
+            if window_ids in trans_dict_multi:
+                trans_str = trans_dict_multi[window_ids]
+                window_values = values[i:i+window]
+                # Template placeholders start at {0} relative to window
+                result = trans_str
+                for j, val in enumerate(window_values):
+                    result = re.sub(r"\{" + str(j) + r"[^}]*\}", val, result)
+                translated_lines.append(result.replace("+-", "-"))
+                i += window
+                matched = True
+                break
+        if not matched:
+            single_str = trans_dict_single.get(stat_ids[i], "")
+            if single_str:
+                single_str = re.sub(r"\{0[^}]*\}", values[i], single_str)
+                translated_lines.append(single_str.replace("+-", "-"))
+            i += 1
+
     return " / ".join(translated_lines)
 
 def assign_tiers_to_pool(mod_list):
@@ -140,7 +202,7 @@ def build_databases():
         if mod_data.get("domain") != "item" or mod_data.get("generation_type") not in ["prefix", "suffix"]:
             continue
             
-        mod_tags = [str(t).lower() for t in mod_data.get("types", [])]
+        mod_tags = [str(t).lower() for t in mod_data.get("implicit_tags", [])]
         mod_name = mod_data.get("name", "")
         mod_group_raw = mod_data.get("type", "") or mod_data.get("group", "Unknown Group")
         mod_group = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', mod_group_raw).replace("_", " ").title()
@@ -149,12 +211,28 @@ def build_databases():
         final_text = f"{translated_text} [{mod_name}]" if mod_name and translated_text else (translated_text or f"{mod_name} ({mod_group})")
             
         spawn_weights = mod_data.get("spawn_weights", [])
-        default_weight = next((sw["weight"] for sw in spawn_weights if sw["tag"] == "default"), 0)
+        sw_map = {sw["tag"]: sw["weight"] for sw in spawn_weights}
+        default_weight = sw_map.get("default", 0)
+        required_level = mod_data.get("required_level", 0)
 
         for tag in ITEM_TAGS:
-            # Specific tag entry takes priority; fall back to 'default' (applies to all item types)
-            specific = next((sw["weight"] for sw in spawn_weights if sw["tag"] == tag), None)
-            tag_weight = specific if specific is not None else default_weight
+            is_armour_slot = tag in ARMOUR_SLOT_TAG
+
+            if is_armour_slot:
+                # Compute first-match weight for every armour subtype.
+                # This is the only correct way to handle spawn_weight priority:
+                #   e.g. [body_armour:0, int_armour:1000] means weight=0 for int_armour
+                #   body armours (which have the body_armour tag), but weight=1000 for
+                #   int_armour shields (which don't have body_armour).
+                slot_tag = ARMOUR_SLOT_TAG[tag]
+                base_weights = compute_base_weights(spawn_weights, slot_tag)
+                # tag_weight = max across all subtypes — used as inclusion check only.
+                tag_weight = max(base_weights.values(), default=0)
+            else:
+                base_weights = None
+                tag_weight = sw_map.get(tag, 0)
+                if tag_weight == 0:
+                    tag_weight = default_weight
 
             # Check if it's naturally rollable OR if it's an Essence exclusive mod
             is_essence_mod = mod_id in essence_mods_map and tag in essence_mods_map[mod_id]
@@ -166,8 +244,11 @@ def build_databases():
                     "text": final_text,
                     "mod_tags": mod_tags,
                     "spawn_weights": [{"tag": tag, "weight": tag_weight}],
-                    "_required_level": mod_data.get("required_level", 0),
+                    "required_level": required_level,
+                    "_required_level": required_level,
                 }
+                if base_weights is not None:
+                    formatted_mod["base_weights"] = base_weights
                 if mod_data.get("generation_type") == "prefix":
                     final_db[tag]["prefixes"].append(formatted_mod)
                 else:
@@ -184,7 +265,8 @@ def build_databases():
                         "text": final_text,
                         "mod_tags": mod_tags,
                         "spawn_weights": [{"tag": inf_tag, "weight": inf_weight}],
-                        "_required_level": mod_data.get("required_level", 0),
+                        "required_level": required_level,
+                        "_required_level": required_level,
                         "influence": display_name,
                     }
                     if mod_data.get("generation_type") == "prefix":

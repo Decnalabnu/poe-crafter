@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python src/utils/build_db.py)",
+      "Bash(node -e ':*)",
+      "Bash(node --experimental-vm-modules -e ':*)",
+      "Bash(py -c ':*)",
+      "Bash(py src/utils/build_db.py)"
+    ]
+  }
+}

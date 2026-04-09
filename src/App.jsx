@@ -7,6 +7,7 @@ import buildItemsData from "./data/build_items.json";
 import tradePricesData from "./data/trade_prices.json";
 import { calculateSpamEV, calculateRecombEV } from "./utils/calculator";
 import ScryingRanker from "./components/ScryingRanker";
+import CraftOptimizer from "./components/CraftOptimizer";
 
 // Elemental resist suffixes are harvest-swappable (fire ↔ cold ↔ lightning).
 // Grouped together in both build preview and crafter probability math.
@@ -818,9 +819,11 @@ function App() {
 
   const handleCalculate = () => {
     const fossilsToPass = craftingMethod === "fossil" ? activeFossils : [];
+    const essenceToPass = craftingMethod === "essence" ? selectedEssenceId : null;
     const evData = calculateSpamEV(
       targetIds,
       selectedEssenceId,
+      essenceToPass,
       selectedItemClass,
       fracturedModId,
       fossilsToPass,
@@ -1107,6 +1110,7 @@ function App() {
       <div style={{ display: "flex", gap: "8px", marginBottom: "20px", flexWrap: "wrap" }}>
         {[
           { id: "crafter", label: "Crafter" },
+          { id: "route", label: "Craft Optimizer" },
           { id: "builds", label: "Build Analyzer" },
           { id: "recomb", label: "Recomb Calculator" },
           { id: "scrying", label: "Scrying Ranker" },
@@ -1131,6 +1135,8 @@ function App() {
       </div>
 
       {activeTab === "scrying" && <ScryingRanker />}
+
+      {activeTab === "route" && <CraftOptimizer />}
 
       {activeTab === "builds" && <BuildAnalyzer onCraftThis={handleCraftThis} />}
 
@@ -1354,6 +1360,21 @@ function App() {
               }}
             >
               Fossils
+            </button>
+            <button
+              onClick={() => setCraftingMethod("chaos")}
+              style={{
+                flex: 1,
+                padding: "10px",
+                background: craftingMethod === "chaos" ? "#6bbbe3" : "#333",
+                color: craftingMethod === "chaos" ? "#000" : "#fff",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              Chaos Orb
             </button>
           </div>
 
