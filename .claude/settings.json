@@ -5,7 +5,27 @@
       "Bash(node -e ':*)",
       "Bash(node --experimental-vm-modules -e ':*)",
       "Bash(py -c ':*)",
-      "Bash(py src/utils/build_db.py)"
+      "Bash(py src/utils/build_db.py)",
+      "Bash(rm test_disc.cjs calc_test.cjs)",
+      "Bash(ls *.cjs)",
+      "Bash(node test_configs.cjs)",
+      "Bash(node test_calib.cjs)",
+      "Bash(node test_ab.cjs)",
+      "Bash(node test_gaps.cjs)",
+      "Bash(rm test_gaps.cjs)",
+      "Bash(node test_3rand.cjs)",
+      "Bash(rm test_3rand.cjs)",
+      "Bash(node test_cold.cjs)",
+      "Bash(rm test_cold.cjs)",
+      "Bash(node test_new.cjs)",
+      "Bash(rm test_new.cjs)",
+      "Bash(node test_essence_model.cjs)",
+      "Bash(rm test_essence_model.cjs)",
+      "Bash(node test_ceiling.cjs)",
+      "Bash(rm test_ceiling.cjs)",
+      "Bash(node test_verify.cjs)",
+      "Bash(rm test_verify.cjs)",
+      "Bash(node test_fossil_suffix.cjs)"
     ]
   }
 }

@@ -6,7 +6,19 @@
       "WebFetch(domain:www.poewiki.net)",
       "WebFetch(domain:www.pathofexile.com)",
       "Bash(python -c ':*)",
-      "Bash(ls *.py)"
+      "Bash(ls *.py)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/poe-tool-dev/dat-schema/main/dat-schema.min.json\")",
+      "Bash(python3 -c \" import json,sys d = json.load\\(sys.stdin\\) if isinstance\\(d, list\\): mods = next\\(\\(t for t in d if t.get\\('name'\\) == 'Mods'\\), None\\) if mods: for col in mods.get\\('columns', []\\): print\\(col.get\\('name'\\), col.get\\('type'\\)\\) elif isinstance\\(d, dict\\): mods = d.get\\('Mods', {}\\) print\\(list\\(mods.keys\\(\\)\\)[:10] if mods else 'not found'\\) print\\(type\\(d\\)\\) \")",
+      "Bash(curl -v \"https://raw.githubusercontent.com/poe-tool-dev/dat-schema/main/dat-schema.min.json\")",
+      "Bash(curl -s \"https://api.github.com/repos/poe-tool-dev/dat-schema/git/trees/main?recursive=1\")",
+      "Bash(python3 -c \" import json,sys data = json.load\\(sys.stdin\\) for item in data.get\\('tree', []\\): if 'Mod' in item.get\\('path',''\\) or item['path'].endswith\\('.min.json'\\): print\\(item['path']\\) \")",
+      "Bash(curl -s --max-time 10 \"https://api.github.com/repos/poe-tool-dev/dat-schema/contents/\")",
+      "Bash(python3 -c \" import json,sys for item in json.load\\(sys.stdin\\): print\\(item['name']\\) \")",
+      "Bash(npx pathofexile-dat:*)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('rows:', len\\(d\\)\\); print\\('columns:', list\\(d[0].keys\\(\\)\\) if d else 'empty'\\)\")",
+      "Bash(python3 -c ':*)",
+      "Bash(node -e ':*)",
+      "Read(//c/Users/nwahi/AppData/Local/npm-cache/_npx/6b84f719dfae3186/node_modules/**)"
     ]
   }
 }

@@ -1,0 +1,47 @@
+{
+  "patch": "3.28.0.8",
+  "translations": ["English"],
+  "tables": [
+    {
+      "name": "Mods",
+      "columns": [
+        "Id",
+        "ModTypeKey",
+        "Level",
+        "Domain",
+        "Name",
+        "GenerationType",
+        "Stat1Min",
+        "Stat1Max",
+        "Stat2Min",
+        "Stat2Max",
+        "Stat3Min",
+        "Stat3Max",
+        "Stat4Min",
+        "Stat4Max",
+        "Stat5Min",
+        "Stat5Max",
+        "StatsKey1",
+        "StatsKey2",
+        "StatsKey3",
+        "StatsKey4",
+        "StatsKey5",
+        "SpawnWeight_TagsKeys",
+        "SpawnWeight_Values",
+        "ImplicitTagsKeys"
+      ]
+    },
+    {
+      "name": "ModType",
+      "columns": ["Name"]
+    },
+    {
+      "name": "Tags",
+      "columns": ["Id"]
+    },
+    {
+      "name": "Stats",
+      "columns": ["Id"]
+    }
+  ]
+}

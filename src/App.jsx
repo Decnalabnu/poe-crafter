@@ -26,7 +26,7 @@ const SLOT_LABELS = {
   boots: "Boots",
   gloves: "Gloves",
 };
-
+``
 function freqColor(pct) {
   if (pct >= 70) return "#4CAF50";
   if (pct >= 40) return "#e2b659";
@@ -715,6 +715,7 @@ function App() {
   );
   const [activeFossils, setActiveFossils] = useState([]);
   const [targetIds, setTargetIds] = useState([]);
+  const [itemLevel, setItemLevel] = useState(86);
   const [result, setResult] = useState(null);
   const [expandedGroups, setExpandedGroups] = useState({});
 
@@ -733,10 +734,14 @@ function App() {
   const allPrefixes = itemsData[selectedItemClass]?.prefixes || [];
   const allSuffixes = itemsData[selectedItemClass]?.suffixes || [];
   const currentPrefixPool = allPrefixes.filter(
-    (m) => !m.influence || m.influence === selectedInfluence,
+    (m) => (!m.influence || m.influence === selectedInfluence) &&
+           (m.required_level ?? 0) <= itemLevel &&
+           Object.values(m.base_weights ?? {}).some(w => w > 0),
   );
   const currentSuffixPool = allSuffixes.filter(
-    (m) => !m.influence || m.influence === selectedInfluence,
+    (m) => (!m.influence || m.influence === selectedInfluence) &&
+           (m.required_level ?? 0) <= itemLevel &&
+           Object.values(m.base_weights ?? {}).some(w => w > 0),
   );
 
   useEffect(() => {
@@ -822,12 +827,13 @@ function App() {
     const essenceToPass = craftingMethod === "essence" ? selectedEssenceId : null;
     const evData = calculateSpamEV(
       targetIds,
-      selectedEssenceId,
       essenceToPass,
       selectedItemClass,
       fracturedModId,
       fossilsToPass,
       selectedInfluence,
+      null,       // armourBaseTag: auto-detected inside calculateSpamEV
+      itemLevel,
     );
     setResult(evData);
   };
@@ -1232,6 +1238,40 @@ function App() {
               </button>
             ))}
           </div>
+
+          <label
+            style={{
+              display: "block",
+              fontWeight: "bold",
+              color: "#fff",
+              fontSize: "14px",
+              marginTop: "12px",
+              marginBottom: "6px",
+            }}
+          >
+            Item Level:
+          </label>
+          <input
+            type="number"
+            min={1}
+            max={100}
+            value={itemLevel}
+            onChange={(e) => {
+              const v = Math.max(1, Math.min(100, Number(e.target.value) || 1));
+              setItemLevel(v);
+              setTargetIds([]);
+              setResult(null);
+            }}
+            style={{
+              width: "80px",
+              padding: "6px 10px",
+              background: "#1e1e1e",
+              color: "white",
+              border: "1px solid #6bbbe3",
+              fontSize: "14px",
+              fontWeight: "bold",
+            }}
+          />
         </div>
 
         <div style={{ display: "flex", gap: "15px", marginBottom: "15px" }}>

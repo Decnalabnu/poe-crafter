@@ -3,19 +3,13 @@
     "name": "Pristine Fossil",
     "multipliers": {
       "life": 10,
-      "defences": 0,
-      "armour": 0,
-      "evasion": 0,
-      "energy_shield": 0
+      "defences": 0
     }
   },
   "dense": {
     "name": "Dense Fossil",
     "multipliers": {
       "defences": 10,
-      "armour": 10,
-      "evasion": 10,
-      "energy_shield": 10,
       "life": 0
     }
   },

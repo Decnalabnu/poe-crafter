@@ -128,27 +128,69 @@ export function calculateRecombEV({
   };
 }
 
-// Rare item mod-count distribution (Chaos Orb, Alchemy, Essences, Fossils):
-//   4 mods = 1/6,  5 mods = 1/3,  6 mods = 1/2
-// Within each count, prefix/suffix split is uniform over valid (P,S) pairs where
-// 1 ≤ P ≤ 3 and 1 ≤ S ≤ 3 and P+S = total mods.
-//   4 mods: (1P+3S), (2P+2S), (3P+1S) → each 1/18
-//   5 mods: (2P+3S), (3P+2S)           → each 1/6
-//   6 mods: (3P+3S)                    → 1/2
-const RARE_CONFIGS = [
-  { p: 1, s: 3, prob: 1 / 18 },
-  { p: 2, s: 2, prob: 1 / 18 },
-  { p: 3, s: 1, prob: 1 / 18 },
+// Chaos Orb / Alchemy mod-count distribution (no fracture, no essence):
+//   4 mods = 8/12 ≈ 66.7%,  5 mods = 3/12 = 25%,  6 mods = 1/12 ≈ 8.3%
+// Source: PoE wiki 8:3:1 ratio. Calibrated against CoE: chaos no-frac single ES% → ceil=14 (CoE:14).
+// Within each count, prefix/suffix split is uniform over valid (P,S) pairs.
+const CHAOS_CONFIGS = [
+  { p: 1, s: 3, prob: 8 / 36 },
+  { p: 2, s: 2, prob: 8 / 36 },
+  { p: 3, s: 1, prob: 8 / 36 },
+  { p: 2, s: 3, prob: 3 / 24 },
+  { p: 3, s: 2, prob: 3 / 24 },
+  { p: 3, s: 3, prob: 1 / 12 },
+];
+const ALCH_CONFIGS = CHAOS_CONFIGS;
+
+// Chaos Orb with a fractured mod present:
+//   Empirically, CoE matches the old equal-weight distribution (4=50%, 5=33%, 6=17%).
+//   Calibrated against CoE: frac+single ES% → ceil=19 vs CoE=18 (Δ≈6%); frac+2×ES → 538 vs 550 (Δ≈2%).
+//   Using 50/33/17 (uniform 1/6) is more accurate here than 8:3:1 because the fracture
+//   pre-occupies one prefix slot, shifting which configs can contribute, and the effective
+//   distribution of usable configs aligns better with the equal-weight split.
+const FRACTURE_CONFIGS = [
+  { p: 1, s: 3, prob: 1 / 6 },
+  { p: 2, s: 2, prob: 1 / 6 },
+  { p: 3, s: 1, prob: 1 / 6 },
   { p: 2, s: 3, prob: 1 / 6 },
   { p: 3, s: 2, prob: 1 / 6 },
-  { p: 3, s: 3, prob: 1 / 2 },
+  { p: 3, s: 3, prob: 1 / 6 },
 ];
 
-// Both chaos-type and alchemy-type rolls share the same 4/5/6-mod distribution.
-const CHAOS_CONFIGS = RARE_CONFIGS;
-const ALCH_CONFIGS  = RARE_CONFIGS;
+// Essence mod-count distribution. Essences guarantee one mod, which occupies one of the
+// N total mod slots — leaving N-1 slots for random draws. The total mod count still follows
+// 8:3:1 (4/5/6-mod), but random draws = N-1. The guaranteed mod is always a suffix for
+// body armour (cold resist, life regen etc), so random prefix/suffix splits shift accordingly.
+//   4-mod item → 3 random: (1P,2S),(2P,1S),(3P,0S) each 8/36
+//   5-mod item → 4 random: (1P,3S),(2P,2S),(3P,1S) each 3/36 = 1/12
+//   6-mod item → 5 random: (2P,3S),(3P,2S)         each 1/24
+// Calibrated against Craft of Exile: essence+no-frac single ES% target → ceil=15 (CoE: 15).
+const ESSENCE_CONFIGS = [
+  { p: 1, s: 2, prob: 8 / 36 },
+  { p: 2, s: 1, prob: 8 / 36 },
+  { p: 3, s: 0, prob: 8 / 36 },
+  { p: 1, s: 3, prob: 1 / 12 },
+  { p: 2, s: 2, prob: 1 / 12 },
+  { p: 3, s: 1, prob: 1 / 12 },
+  { p: 2, s: 3, prob: 1 / 24 },
+  { p: 3, s: 2, prob: 1 / 24 },
+];
 
-function getSmartWeight(m, armourBaseTag) {
+// Resonators (Fossils) mod-count distribution. Calibrated empirically against
+// Craft of Exile reference data: 4 mods = 3/12 (25%), 5 mods = 4/12 (33%), 6 mods = 5/12 (42%).
+// Used when fossils are active WITHOUT a fractured mod.
+// When fossils + fracture are combined, FRACTURE_CONFIGS is used instead (better calibration
+// for suffix targets: Dense+Frigid+frac+2ES+cold → 594 vs CoE 493 vs FOSSIL_CONFIGS 392).
+const FOSSIL_CONFIGS = [
+  { p: 1, s: 3, prob: 3 / 36 },
+  { p: 2, s: 2, prob: 3 / 36 },
+  { p: 3, s: 1, prob: 3 / 36 }, // 4 mods (9/36 = 3/12 = 1/4)
+  { p: 2, s: 3, prob: 4 / 24 },
+  { p: 3, s: 2, prob: 4 / 24 }, // 5 mods (8/24 = 4/12 = 1/3)
+  { p: 3, s: 3, prob: 5 / 12 }, // 6 mods (5/12)
+];
+
+export function getSmartWeight(m, armourBaseTag) {
   let w = 0;
   if (armourBaseTag && m.base_weights) {
     w = m.base_weights[armourBaseTag] || 0;
@@ -366,8 +408,15 @@ export function calculateSpamEV(
   }
   // else: chaos spam — costPerTry stays 1
 
-  const isChaos = !essenceId && activeFossils.length === 0;
-  const configs = isChaos ? CHAOS_CONFIGS : ALCH_CONFIGS;
+  const isFossil = activeFossils.length > 0;
+  const isEssence = !isFossil && !!essenceId;
+  const isFractured = !isFossil && fracturedModId !== "none";
+  const isFossilFractured = isFossil && fracturedModId !== "none";
+  const configs = isFossilFractured ? FRACTURE_CONFIGS
+    : isFossil ? FOSSIL_CONFIGS
+    : isEssence ? ESSENCE_CONFIGS
+    : isFractured ? FRACTURE_CONFIGS
+    : CHAOS_CONFIGS;
 
   // Guaranteed mod is looked up by group name (guaranteed_mod_groups) so it stays
   // stable even when item mod IDs change. Falls back to legacy ID lookup.
@@ -493,10 +542,11 @@ export function calculateSpamEV(
     (targetMod) => !prePlaced.some((pm) => modSatisfiesTarget(pm, targetMod)),
   );
 
-  // Both fractured and essence mods are guaranteed to be on the item.
-  // They consume both a slot from the overall item (count) and from the prefix/suffix cap.
-  const prePlacedPrefixes = prePlaced.filter((m) => m.isPrefix).length;
-  const prePlacedSuffixes = prePlaced.filter((m) => !m.isPrefix).length;
+  // Fracture pre-places a mod and reduces the random draw count (handled via prePlaced* offsets
+  // into CHAOS_CONFIGS). Essence uses ESSENCE_CONFIGS which already model N-1 random draws —
+  // the guaranteed mod's slot is baked into the config, so only fracture counts as a slot offset.
+  const prePlacedPrefixes = prePlaced.filter((m) => m.isPrefix && m !== gMod).length;
+  const prePlacedSuffixes = prePlaced.filter((m) => !m.isPrefix && m !== gMod).length;
   const maxPrefixSlots = 3 - prePlacedPrefixes;
   const maxSuffixSlots = 3 - prePlacedSuffixes;
 
@@ -616,7 +666,7 @@ export function calculateSpamEV(
     };
   }
 
-  const expectedTries = Math.round(1 / totalProbability);
+  const expectedTries = Math.ceil(1 / totalProbability);
   return {
     probability: (totalProbability * 100).toFixed(4) + "%",
     averageTries: expectedTries,
@@ -665,28 +715,34 @@ export function calculateHarvestEV({
   const allPrefixes = activePool.prefixes.filter(influenceFilter);
   const allSuffixes = activePool.suffixes.filter(influenceFilter);
 
-  // Fractured mod reduces available slot count — same logic as calculateSpamEV
-  const fMod = fracturedModId !== "none"
-    ? [...allPrefixes, ...allSuffixes].find((m) => m.id === fracturedModId)
+  // Fractured mod reduces available slot count — same logic as calculateSpamEV.
+  // Fix: check prefix/suffix membership directly (raw pool objects lack .isPrefix).
+  const fracIsPrefix = fracturedModId !== "none" && allPrefixes.some((m) => m.id === fracturedModId);
+  const fracIsSuffix = fracturedModId !== "none" && !fracIsPrefix && allSuffixes.some((m) => m.id === fracturedModId);
+  const fracPrefixes = fracIsPrefix ? 1 : 0;
+  const fracSuffixes = fracIsSuffix ? 1 : 0;
+
+  // The fractured mod's group is pre-placed and cannot be re-rolled, so exclude it
+  // from the denominator pool — otherwise its weight inflates pAtLeastOneTag.
+  const fracGroup = fracturedModId !== "none"
+    ? [...allPrefixes, ...allSuffixes].find((m) => m.id === fracturedModId)?.group ?? null
     : null;
-  const fracPrefixes = fMod?.isPrefix === true ? 1 : 0;
-  const fracSuffixes = fMod?.isPrefix === false ? 1 : 0;
 
   const resolveW = (m) => {
     if (itemLevel !== null && (m.required_level ?? 0) > itemLevel) return 0;
     return getSmartWeight(m, armourBaseTag);
   };
 
-  // Weights of all mods that have the guaranteed tag
+  // Weights of all mods that have the guaranteed tag, excluding the pre-placed frac group
   const tagPrefixW = allPrefixes
-    .filter((m) => (m.mod_tags || []).includes(guaranteedTag))
+    .filter((m) => m.group !== fracGroup && (m.mod_tags || []).includes(guaranteedTag))
     .reduce((s, m) => s + resolveW(m), 0);
   const tagSuffixW = allSuffixes
-    .filter((m) => (m.mod_tags || []).includes(guaranteedTag))
+    .filter((m) => m.group !== fracGroup && (m.mod_tags || []).includes(guaranteedTag))
     .reduce((s, m) => s + resolveW(m), 0);
 
-  const totalPrefixW = allPrefixes.reduce((s, m) => s + resolveW(m), 0);
-  const totalSuffixW = allSuffixes.reduce((s, m) => s + resolveW(m), 0);
+  const totalPrefixW = allPrefixes.filter((m) => m.group !== fracGroup).reduce((s, m) => s + resolveW(m), 0);
+  const totalSuffixW = allSuffixes.filter((m) => m.group !== fracGroup).reduce((s, m) => s + resolveW(m), 0);
 
   if (tagPrefixW + tagSuffixW === 0) {
     return { error: `No mods with tag "${guaranteedTag}" exist in the ${itemTag} pool.` };

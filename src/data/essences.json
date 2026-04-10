@@ -10,6 +10,15 @@
       "gloves": "FireResist8",
       "helmet": "FireResist8",
       "ring": "FireDamagePercentEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Fire Damage Percentage",
+      "belt": "Fire Resistance",
+      "body_armour": "Fire Resistance",
+      "boots": "Fire Resistance",
+      "gloves": "Fire Resistance",
+      "helmet": "Fire Resistance",
+      "ring": "Fire Damage Percentage"
     }
   },
   "deafening_essence_of_anguish": {
@@ -23,6 +32,15 @@
       "gloves": "AddedFireDamage6",
       "helmet": "ChanceToAvoidIgniteEssence7_",
       "ring": "AddedFireDamageEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Fire Damage",
+      "belt": "Avoid Ignite",
+      "body_armour": "Fire Damage Avoidance",
+      "boots": "Avoid Ignite",
+      "gloves": "Fire Damage",
+      "helmet": "Avoid Ignite",
+      "ring": "Fire Damage"
     }
   },
   "deafening_essence_of_contempt": {
@@ -36,6 +54,15 @@
       "gloves": "AddedPhysicalDamageEssenceGlovesQuiver7",
       "helmet": "AttackerTakesDamageEssence7",
       "ring": "AddedPhysicalDamageEssenceRing7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Physical Damage",
+      "belt": "Attacker Takes Damage No Range",
+      "body_armour": "Attacker Takes Damage No Range",
+      "boots": "Attacker Takes Damage No Range",
+      "gloves": "Physical Damage",
+      "helmet": "Attacker Takes Damage No Range",
+      "ring": "Physical Damage"
     }
   },
   "essence_of_delirium": {
@@ -49,6 +76,15 @@
       "gloves": "SupportDamageOverTimeEssence1",
       "helmet": "SocketedAuraGemLevelsEssence1",
       "ring": "GlobalDamageOverTimeMultiplierRingEssence1"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Curse Effectiveness",
+      "belt": "Chaos Resistance While Using Flask",
+      "body_armour": "Chaos Damage Over Time Taken",
+      "boots": "Cannot Be Poisoned",
+      "gloves": "Support Damage Over Time",
+      "helmet": "Local Increase Socketed Aura Level",
+      "ring": "Global Damage Over Time Multiplier"
     }
   },
   "deafening_essence_of_doubt": {
@@ -62,6 +98,15 @@
       "gloves": "LocalIncreasedEvasionRatingEssenceGlovesBoots7",
       "helmet": "LocalIncreasedEvasionRatingEssenceHelm7",
       "ring": "IncreasedEvasionRatingEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Global Evasion Rating Percent",
+      "belt": "Evasion Rating",
+      "body_armour": "Local Evasion Rating",
+      "boots": "Local Evasion Rating",
+      "gloves": "Local Evasion Rating",
+      "helmet": "Local Evasion Rating",
+      "ring": "Evasion Rating"
     }
   },
   "deafening_essence_of_dread": {
@@ -75,6 +120,15 @@
       "gloves": "LocalIncreasedPhysicalDamageReductionRatingEssenceBootsGloves7",
       "helmet": "LocalIncreasedPhysicalDamageReductionRatingEssenceHelm7_",
       "ring": "IncreasedPhysicalDamageReductionRatingEssenceRing7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Global Physical Damage Reduction Rating Percent",
+      "belt": "Physical Damage Reduction Rating",
+      "body_armour": "Local Physical Damage Reduction Rating",
+      "boots": "Local Physical Damage Reduction Rating",
+      "gloves": "Local Physical Damage Reduction Rating",
+      "helmet": "Local Physical Damage Reduction Rating",
+      "ring": "Physical Damage Reduction Rating"
     }
   },
   "deafening_essence_of_envy": {
@@ -88,6 +142,15 @@
       "gloves": "ChaosResist6",
       "helmet": "ChaosResist6",
       "ring": "IncreasedChaosDamageEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Increased Chaos Damage",
+      "belt": "Chaos Resistance",
+      "body_armour": "Chaos Resistance",
+      "boots": "Chaos Resistance",
+      "gloves": "Chaos Resistance",
+      "helmet": "Chaos Resistance",
+      "ring": "Increased Chaos Damage"
     }
   },
   "deafening_essence_of_fear": {
@@ -101,6 +164,15 @@
       "gloves": "MinionDamageGlovesEssence7",
       "helmet": "MinionAccuracyEssence7_",
       "ring": "MinionRunSpeedEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Minion Run Speed",
+      "belt": "Minion Life",
+      "body_armour": "Minion Life",
+      "boots": "Minion Life",
+      "gloves": "Minion Damage",
+      "helmet": "Minion Accuracy Rating",
+      "ring": "Minion Run Speed"
     }
   },
   "deafening_essence_of_greed": {
@@ -114,6 +186,15 @@
       "gloves": "IncreasedLifeEssenceBootsGloves1",
       "helmet": "IncreasedLifeEssenceHelm1",
       "ring": "LifeRegeneration7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Life Regeneration",
+      "belt": "Belt Flask Life Recovery Rate",
+      "body_armour": "Increased Life",
+      "boots": "Increased Life",
+      "gloves": "Increased Life",
+      "helmet": "Increased Life",
+      "ring": "Life Regeneration"
     }
   },
   "deafening_essence_of_hatred": {
@@ -127,6 +208,15 @@
       "gloves": "ColdResist8",
       "helmet": "ColdResist8",
       "ring": "ColdDamagePercentEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Cold Damage Percentage",
+      "belt": "Cold Resistance",
+      "body_armour": "Cold Resistance",
+      "boots": "Cold Resistance",
+      "gloves": "Cold Resistance",
+      "helmet": "Cold Resistance",
+      "ring": "Cold Damage Percentage"
     }
   },
   "essence_of_horror": {
@@ -140,6 +230,15 @@
       "gloves": "SocketedSkillsCriticalChanceEssence1",
       "helmet": "SocketedGemsDealMoreElementalDamageEssence1",
       "ring": "AddedColdDamagePerFrenzyChargeEssence1"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Crush On Hit Chance",
+      "belt": "Alchemists Genius On Flask Use Chance",
+      "body_armour": "Physical Damage Taken As Cold",
+      "boots": "Elemental Damage Taken While Stationary",
+      "gloves": "Socketed Skills Critical Chance",
+      "helmet": "Socketed Gems Deal More Elemental Damage",
+      "ring": "Added Cold Damage Per Frenzy Charge"
     }
   },
   "essence_of_hysteria": {
@@ -153,6 +252,15 @@
       "gloves": "SocketedGemsDealAdditionalFireDamageEssence1",
       "helmet": "SocketedSkillDamageOnLowLifeEssence1__",
       "ring": "FireDamageAsPortionOfPhysicalDamageEssence1"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Increased Life Leech Rate",
+      "belt": "Elemental Penetration During Flask Effect",
+      "body_armour": "Area Of Effect",
+      "boots": "Burning Ground While Moving",
+      "gloves": "Socketed Gems Deal Additional Fire Damage",
+      "helmet": "Display Supported Skills Deal Damage On Low Life",
+      "ring": "Fire Damage As Portion Of Damage"
     }
   },
   "essence_of_insanity": {
@@ -166,6 +274,15 @@
       "gloves": "SocketedGemsHaveMoreAttackAndCastSpeedEssenceNew1",
       "helmet": "SocketedGemsAddPercentageOfPhysicalAsLightningEssence1",
       "ring": "ReflectDamageTakenEssence1"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Chance To Recover Mana On Skill Use",
+      "belt": "Movement Speed During Flask Effect",
+      "body_armour": "Onslaught When Hit For Duration",
+      "boots": "Mana Regeneration While Shocked",
+      "gloves": "Socketed Gems Have More Attack And Cast Speed",
+      "helmet": "Socketed Gems Add Percentage Of Physical As Lightning",
+      "ring": "Reflect Damage Taken"
     }
   },
   "deafening_essence_of_loathing": {
@@ -179,6 +296,15 @@
       "gloves": "CriticalStrikeChanceEssenceGloves7",
       "helmet": "ManaReservationEfficiencyEssence7",
       "ring": "CriticalStrikeChanceEssenceGloves7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Critical Strike Chance",
+      "belt": "Stun Duration Increase Percent",
+      "body_armour": "Mana Reservation Efficiency",
+      "boots": "Avoid Elemental Status Ailments",
+      "gloves": "Critical Strike Chance",
+      "helmet": "Mana Reservation Efficiency",
+      "ring": "Critical Strike Chance"
     }
   },
   "deafening_essence_of_misery": {
@@ -192,6 +318,15 @@
       "gloves": "IncreasedManaEssence7",
       "helmet": "IncreasedManaEssence7",
       "ring": "ManaRegenerationEssence7_"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Mana Regeneration",
+      "belt": "Belt Flask Mana Recovery Rate",
+      "body_armour": "Increased Mana",
+      "boots": "Increased Mana",
+      "gloves": "Increased Mana",
+      "helmet": "Increased Mana",
+      "ring": "Mana Regeneration"
     }
   },
   "deafening_essence_of_rage": {
@@ -205,6 +340,15 @@
       "gloves": "StrengthEssence7_",
       "helmet": "StrengthEssence7_",
       "ring": "StrengthEssence7_"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Strength",
+      "belt": "Strength",
+      "body_armour": "Strength",
+      "boots": "Strength",
+      "gloves": "Strength",
+      "helmet": "Strength",
+      "ring": "Strength"
     }
   },
   "deafening_essence_of_scorn": {
@@ -218,6 +362,15 @@
       "gloves": "StunAvoidanceEssence7",
       "helmet": "StunAvoidanceEssence7",
       "ring": "CriticalMultiplierEssenceRing7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Critical Strike Multiplier",
+      "belt": "Stun Threshold Reduction",
+      "body_armour": "Increased Stun Threshold",
+      "boots": "Avoid Stun",
+      "gloves": "Avoid Stun",
+      "helmet": "Avoid Stun",
+      "ring": "Critical Strike Multiplier"
     }
   },
   "deafening_essence_of_sorrow": {
@@ -231,6 +384,15 @@
       "gloves": "DexterityEssence7",
       "helmet": "DexterityEssence7",
       "ring": "DexterityEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Dexterity",
+      "belt": "Dexterity",
+      "body_armour": "Dexterity",
+      "boots": "Dexterity",
+      "gloves": "Dexterity",
+      "helmet": "Dexterity",
+      "ring": "Dexterity"
     }
   },
   "deafening_essence_of_spite": {
@@ -244,6 +406,15 @@
       "gloves": "IntelligenceEssence7",
       "helmet": "IntelligenceEssence7",
       "ring": "IntelligenceEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Intelligence",
+      "belt": "Intelligence",
+      "body_armour": "Intelligence",
+      "boots": "Intelligence",
+      "gloves": "Intelligence",
+      "helmet": "Intelligence",
+      "ring": "Intelligence"
     }
   },
   "deafening_essence_of_suffering": {
@@ -257,6 +428,15 @@
       "gloves": "AddedColdDamage6",
       "helmet": "ChanceToAvoidFreezeEssence7",
       "ring": "AddedColdDamageEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Cold Damage",
+      "belt": "Chance To Avoid Freeze And Chill",
+      "body_armour": "Cold Damage Avoidance",
+      "boots": "Chance To Avoid Freeze And Chill",
+      "gloves": "Cold Damage",
+      "helmet": "Chance To Avoid Freeze And Chill",
+      "ring": "Cold Damage"
     }
   },
   "deafening_essence_of_torment": {
@@ -270,6 +450,15 @@
       "gloves": "AddedLightningDamage6",
       "helmet": "ChanceToAvoidShockEssence7",
       "ring": "AddedLightningDamageEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Lightning Damage",
+      "belt": "Reduced Shock Chance",
+      "body_armour": "Lightning Damage Avoidance",
+      "boots": "Reduced Shock Chance",
+      "gloves": "Lightning Damage",
+      "helmet": "Reduced Shock Chance",
+      "ring": "Lightning Damage"
     }
   },
   "deafening_essence_of_woe": {
@@ -283,6 +472,15 @@
       "gloves": "LocalIncreasedEnergyShieldEssenceBootsGloves7",
       "helmet": "LocalIncreasedEnergyShieldEssenceHelm7",
       "ring": "IncreasedEnergyShield11"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Global Energy Shield Percent",
+      "belt": "Energy Shield",
+      "body_armour": "Local Energy Shield",
+      "boots": "Local Energy Shield",
+      "gloves": "Local Energy Shield",
+      "helmet": "Local Energy Shield",
+      "ring": "Energy Shield"
     }
   },
   "deafening_essence_of_wrath": {
@@ -296,6 +494,15 @@
       "gloves": "LightningResist8",
       "helmet": "LightningResist8",
       "ring": "LightningDamagePercentEssence7"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Lightning Damage Percentage",
+      "belt": "Lightning Resistance",
+      "body_armour": "Lightning Resistance",
+      "boots": "Lightning Resistance",
+      "gloves": "Lightning Resistance",
+      "helmet": "Lightning Resistance",
+      "ring": "Lightning Damage Percentage"
     }
   },
   "deafening_essence_of_zeal": {
@@ -309,6 +516,15 @@
       "gloves": "IncreasedAttackSpeedEssenceGloves7",
       "helmet": "WarcrySpeedEssence4_",
       "ring": "IncreasedCastSpeedRing4"
+    },
+    "guaranteed_mod_groups": {
+      "amulet": "Increased Cast Speed",
+      "belt": "Trap And Mine Throw Speed",
+      "body_armour": "Summon Totem Cast Speed",
+      "boots": "Movement Velocity",
+      "gloves": "Increased Attack Speed",
+      "helmet": "Warcry Speed",
+      "ring": "Increased Cast Speed"
     }
   }
 }

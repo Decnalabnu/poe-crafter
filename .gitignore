@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# poe_export: downloaded game data (large, not committed)
+poe_export/tables/
+poe_export/.cache/
+poe_export/schema.min.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
