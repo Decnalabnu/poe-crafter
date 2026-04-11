@@ -35,8 +35,24 @@ export function generateCraftingRoutes({
   const pool = itemsData[itemClass];
   const allMods = pool ? [...pool.prefixes, ...pool.suffixes] : [];
 
+  // Remap any essence-exclusive targets (spawn_weight = 0) to the best rollable
+  // mod in the same group. E.g. IntelligenceEssence7 (weight 0) → Intelligence9
+  // (the highest-tier naturally-rollable Intelligence mod). Without this, chaos
+  // and fossil routes always error out for essence-only tier-1 mods.
+  const remappedTargetIds = targetIds.map((tid) => {
+    const mod = allMods.find((m) => m.id === tid);
+    if (!mod) return tid;
+    const hasWeight = (mod.spawn_weights || []).some((sw) => sw.weight > 0);
+    if (hasWeight) return tid;
+    // Find the best (lowest tier number) mod in the same group with non-zero weight
+    const rollable = allMods
+      .filter((m) => m.group === mod.group && (m.spawn_weights || []).some((sw) => sw.weight > 0))
+      .sort((a, b) => (a.tier ?? 99) - (b.tier ?? 99));
+    return rollable.length > 0 ? rollable[0].id : tid;
+  });
+
   // ---- 1. Chaos spam (baseline, 1c/try) ----
-  const chaosResult = calculateSpamEV(targetIds, null, itemClass, fracturedModId, [], influence, armourBaseTag, itemLevel);
+  const chaosResult = calculateSpamEV(remappedTargetIds, null, itemClass, fracturedModId, [], influence, armourBaseTag, itemLevel);
   const chaosRoute = makeRoute("Chaos Spam", "chaos_spam", { notes: "~1c/try, no guarantee" }, chaosResult);
   if (chaosRoute) routes.push(chaosRoute);
 
@@ -45,12 +61,14 @@ export function generateCraftingRoutes({
     const guaranteedGroup = essence.guaranteed_mod_groups?.[itemClass];
     if (!guaranteedGroup) continue;
 
+    // Check against original targetIds (includes essence-exclusive mods) so essence
+    // routes that guarantee an essence-exclusive mod are still flagged correctly.
     const isTargetGroup = targetIds.some((tid) => {
       const mod = allMods.find((m) => m.id === tid);
       return mod && mod.group === guaranteedGroup;
     });
 
-    const result = calculateSpamEV(targetIds, essenceId, itemClass, fracturedModId, [], influence, armourBaseTag, itemLevel);
+    const result = calculateSpamEV(remappedTargetIds, essenceId, itemClass, fracturedModId, [], influence, armourBaseTag, itemLevel);
     const route = makeRoute(
       essence.name,
       "essence",
@@ -71,7 +89,7 @@ export function generateCraftingRoutes({
   const singleFossilCosts = new Map();
 
   for (const fossilId of fossilIds) {
-    const result = calculateSpamEV(targetIds, null, itemClass, fracturedModId, [fossilId], influence, armourBaseTag, itemLevel);
+    const result = calculateSpamEV(remappedTargetIds, null, itemClass, fracturedModId, [fossilId], influence, armourBaseTag, itemLevel);
     if (result.error) continue;
     singleFossilCosts.set(fossilId, result.expectedCostChaos);
     const route = makeRoute(
@@ -87,7 +105,7 @@ export function generateCraftingRoutes({
   for (let i = 0; i < fossilIds.length; i++) {
     for (let j = i + 1; j < fossilIds.length; j++) {
       const pair = [fossilIds[i], fossilIds[j]];
-      const result = calculateSpamEV(targetIds, null, itemClass, fracturedModId, pair, influence, armourBaseTag, itemLevel);
+      const result = calculateSpamEV(remappedTargetIds, null, itemClass, fracturedModId, pair, influence, armourBaseTag, itemLevel);
       if (result.error) continue;
       const soloMin = Math.min(
         singleFossilCosts.get(fossilIds[i]) ?? Infinity,
@@ -103,14 +121,14 @@ export function generateCraftingRoutes({
   // ---- 4. Harvest reforge routes ----
   for (const [, craft] of Object.entries(harvestData)) {
     // Only show if at least one target mod has the guaranteed tag
-    const hasRelevantTarget = targetIds.some((tid) => {
+    const hasRelevantTarget = remappedTargetIds.some((tid) => {
       const mod = allMods.find((m) => m.id === tid);
       return mod?.mod_tags?.includes(craft.guaranteed_tag);
     });
     if (!hasRelevantTarget) continue;
 
     const result = calculateHarvestEV({
-      targetIds,
+      targetIds: remappedTargetIds,
       guaranteedTag: craft.guaranteed_tag,
       itemTag: itemClass,
       fracturedModId,

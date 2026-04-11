@@ -1,1 +1,1 @@
-{"total_listings": 1, "sampled": 1, "prices_chaos": [94.0], "p10": 94, "p25": 94, "median": 94, "p75": 94, "p90": 94}
+{"total_listings": 10, "sampled": 10, "prices_chaos": [20.0, 22.0, 25.0, 40.0, 50.0, 302.7, 302.7, 302.7, 302.7, 1816.2], "p10": 22, "p25": 25, "median": 176, "p75": 303, "p90": 1816, "common_base": "Paladin Boots"}

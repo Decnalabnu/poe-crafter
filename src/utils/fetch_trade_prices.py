@@ -36,10 +36,12 @@ STAT_ID_CACHE = "data/trade_stat_ids.json"
 PRICE_CACHE_DIR = "data/build_cache"
 
 TOP_BUILDS = 8          # number of build archetypes to price
-MIN_FREQ_PCT = 50.0     # mod must appear in >=50% of sampled items to be "required"
+MIN_PLAY_PCT = 1.0      # build must have at least this play_pct to be priced at all
+MIN_FREQ_PCT = 30.0     # mod must appear in >=30% of sampled items to be "required"
 MIN_SLOT_SAMPLES = 5    # minimum items sampled in a slot before trusting the data
 MAX_QUERY_MODS = 4      # AND logic explodes result sets; cap at this many mods per query
 LISTINGS_PER_QUERY = 10 # listings fetched per target (trade API: max 10 per fetch)
+MIN_BASE_SAMPLES = 3    # minimum listings for base price to be trusted (avoids 1-listing flukes)
 CACHE_TTL_HOURS = 4     # stale price cache beyond this age is re-fetched
 
 SEARCH_DELAY = 3.0      # seconds between POST /search requests
@@ -71,9 +73,9 @@ def _normalize_text(text: str) -> str:
       '+(80-99) to maximum Life [Athlete]'  →  '+# to maximum life'
       '+# to maximum Life'                  →  '+# to maximum life'
     """
-    text = re.sub(r"\s*\[[^\]]+\]$", "", text).strip()  # strip  [Tag suffix]
-    text = re.sub(r"\(\d+[-–]\d+\)", "#", text)          # (X-Y)  → #
-    text = re.sub(r"\b\d+(?:\.\d+)?\b", "#", text)       # bare numbers → #
+    text = re.sub(r"\s*\[[^\]]+\]$", "", text).strip()                    # strip [Tag suffix]
+    text = re.sub(r"\(\s*\d+\s*[-\u2013\u2014]\s*\d+\s*\)", "#", text)   # (X-Y) / (X — Y) → #
+    text = re.sub(r"\b\d+(?:\.\d+)?\b", "#", text)                        # bare numbers → #
     return text.lower().strip()
 
 
@@ -213,11 +215,11 @@ def extract_min_value(group: str, item_tag: str, target_tier: int, items_db: dic
                 continue
             text = mod["text"]
             # Signed range like "(-20 to -16)" or bare signed value "-15"
-            m = re.search(r"\((-\d+)[-–]-?\d+\)", text)
+            m = re.search(r"\(\s*(-\d+)\s*[-\u2013\u2014]\s*-?\d+\s*\)", text)
             if m:
                 return int(m.group(1))  # negative lower bound for cost-reduction mods
-            # Positive range "(X-Y)" → X
-            m = re.search(r"\((\d+)[-–]\d+\)", text)
+            # Positive range "(X-Y)" or "(X — Y)" → X
+            m = re.search(r"\(\s*(\d+)\s*[-\u2013\u2014]\s*\d+\s*\)", text)
             if m:
                 return int(m.group(1))
             # Bare signed number e.g. "-15"
@@ -248,6 +250,9 @@ def build_targets(build_items: dict, items_db: dict, stat_map: dict) -> list:
     appropriate misc_filter (shaper_item, elder_item, etc.).
     """
     builds = sorted(build_items["builds"], key=lambda b: -b["play_pct"])[:TOP_BUILDS]
+    # Drop builds below MIN_PLAY_PCT — they don't have enough representation
+    # to produce reliable mod-frequency data, and pricing them wastes API calls.
+    builds = [b for b in builds if b.get("play_pct", 0) >= MIN_PLAY_PCT]
     targets = []
     unmapped = []
 
@@ -322,15 +327,45 @@ def build_targets(build_items: dict, items_db: dict, stat_map: dict) -> list:
                     print(f"    {build_label}/{slot}: conflicting influences "
                           f"{influence_votes_capped} — skipping influence filter")
 
+            # Fractured base detection: the scraper tags a slot with
+            # fractured_group when a meaningful share of ladder items are on a
+            # base fractured at that mod group. We propagate the group + its
+            # resolved stat ID so fetch_base_price can price a fractured base
+            # instead of a plain one, and the profit engine can pass the
+            # fractured mod to routePlanner so rolling EV excludes it.
+            fractured_group = slot_data.get("fractured_group")
+            fractured_stat_id: str | None = None
+            fractured_min_value: int | None = None
+            fractured_freq_pct = slot_data.get("fractured_freq_pct") or 0.0
+            if fractured_group:
+                fractured_stat_id, _ = find_stat_id_and_influence(
+                    fractured_group, slot, items_db, stat_map
+                )
+                if fractured_stat_id:
+                    # Use the same tier floor as the required mod, if the same
+                    # group is required — otherwise fall back to T1 for pricing.
+                    req = next(
+                        (m for m in required_mods if m["group"] == fractured_group),
+                        None,
+                    )
+                    frac_tier_floor = req["tier_floor"] if req else 1
+                    fractured_min_value = extract_min_value(
+                        fractured_group, slot, frac_tier_floor, items_db, None
+                    )
+
             safe_build = re.sub(r"[^\w]", "_", build_label).lower()
             targets.append({
-                "id":            f"{safe_build}_{slot}",
-                "build":         build_label,
-                "play_pct":      build["play_pct"],
-                "slot":          slot,
-                "category":      CATEGORY_MAP[slot],
-                "influence":     target_influence,
-                "required_mods": required_mods,
+                "id":                   f"{safe_build}_{slot}",
+                "build":                build_label,
+                "play_pct":             build["play_pct"],
+                "slot":                 slot,
+                "category":             CATEGORY_MAP[slot],
+                "influence":            target_influence,
+                "required_mods":        required_mods,
+                "fractured_group":      fractured_group if fractured_stat_id else None,
+                "fractured_stat_id":    fractured_stat_id,
+                "fractured_min_value":  fractured_min_value,
+                "fractured_freq_pct":   fractured_freq_pct,
             })
 
     if unmapped:
@@ -515,6 +550,17 @@ def fetch_target_prices(target: dict, league: str, session: requests.Session,
         print(f"    {target['id']}: no chaos/divine-priced listings in sample")
         return None
 
+    # Extract the most common base type from sampled listings.
+    # The GGG fetch response nests item data under item["item"]; the base type
+    # is in "baseType" (or "typeLine" as fallback).
+    base_counts: dict[str, int] = {}
+    for listing in items:
+        item_obj = listing.get("item", {})
+        base = (item_obj.get("baseType") or item_obj.get("typeLine", "")).strip()
+        if base:
+            base_counts[base] = base_counts.get(base, 0) + 1
+    common_base = max(base_counts, key=base_counts.get) if base_counts else None
+
     def pct(p: float) -> int:
         idx = min(int(p / 100 * len(prices_chaos)), len(prices_chaos) - 1)
         return round(prices_chaos[idx])
@@ -528,6 +574,7 @@ def fetch_target_prices(target: dict, league: str, session: requests.Session,
         "median":         round(median(prices_chaos)),
         "p75":            pct(75),
         "p90":            pct(90),
+        "common_base":    common_base,
     }
 
     os.makedirs(PRICE_CACHE_DIR, exist_ok=True)
@@ -538,9 +585,133 @@ def fetch_target_prices(target: dict, league: str, session: requests.Session,
     mod_summary = " + ".join(m["group"] for m in target["required_mods"][:3])
     if len(target["required_mods"]) > 3:
         mod_summary += f" (+{len(target['required_mods']) - 3} more)"
+    base_label = f"  base={common_base}" if common_base else ""
     print(f"    {target['slot']:12s}{inf_label:12s} median {result['median']:>5}c  "
-          f"[{total} listings]  {mod_summary}")
+          f"[{total} listings]{base_label}  {mod_summary}")
     return result
+
+
+def fetch_base_price(base_type: str, slot: str, league: str,
+                     session: requests.Session, rates: dict,
+                     fractured_stat_id: str | None = None,
+                     fractured_min_value: int | None = None) -> float | None:
+    """
+    Fetch the going rate for a crafting blank of this base type.
+
+    Two modes:
+      - Plain base (fractured_stat_id=None): iLvl 85+ normal-rarity base, the
+        cheapest crafting blank for chaos/essence/fossil spam.
+      - Fractured base (fractured_stat_id set): iLvl 85+ rare-rarity item with
+        the fracture filter enabled and a stat filter matching the locked mod.
+        This is more expensive but is what the craft actually starts from when
+        the build uses a fractured base.
+
+    Returns median chaos price, or None if unavailable / too few listings.
+    """
+    frac_suffix = f"_frac_{fractured_stat_id.split('.')[-1]}" if fractured_stat_id else ""
+    cache_key = f"base_{re.sub(r'[^\w]', '_', base_type).lower()}_ilvl85{frac_suffix}"
+    cache_path = os.path.join(PRICE_CACHE_DIR, f"trade_{cache_key}.json")
+
+    if _cache_is_fresh(cache_path):
+        with open(cache_path, encoding="utf-8") as f:
+            cached = json.load(f)
+        return cached.get("median")
+
+    category = CATEGORY_MAP.get(slot)
+    if not category:
+        return None
+
+    if fractured_stat_id:
+        # Fractured base: rare rarity + fractured misc filter + stat filter
+        # on the fractured mod to match what the build actually starts from.
+        type_filters: dict = {
+            "rarity":   {"option": "rare"},
+            "category": {"option": category},
+            "ilvl":     {"min": 85},
+        }
+        stat_filter: dict = {"id": fractured_stat_id}
+        if fractured_min_value is not None:
+            stat_filter["value"] = {"min": fractured_min_value}
+        payload = {
+            "query": {
+                "status":  {"option": "online"},
+                "type":    base_type,
+                "filters": {
+                    "type_filters": {"filters": type_filters},
+                    "misc_filters": {"filters": {"fractured_item": {"option": True}}},
+                },
+                "stats": [{"type": "and", "filters": [stat_filter]}],
+            },
+            "sort": {"price": "asc"},
+        }
+    else:
+        payload = {
+            "query": {
+                "status": {"option": "online"},
+                "type":   base_type,
+                "filters": {
+                    "type_filters": {
+                        "filters": {
+                            "rarity":   {"option": "normal"},
+                            "category": {"option": category},
+                            "ilvl":     {"min": 85},
+                        }
+                    }
+                }
+            },
+            "sort": {"price": "asc"},
+        }
+
+    time.sleep(SEARCH_DELAY)
+    try:
+        resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
+        if resp.status_code == 429:
+            wait = int(resp.headers.get("Retry-After", 60))
+            print(f"    Rate limited (base price) — waiting {wait}s")
+            time.sleep(wait)
+            resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as e:
+        print(f"    Base price search failed ({base_type}): {e}")
+        return None
+
+    result_ids = data.get("result", [])
+    search_id  = data.get("id", "")
+    if not result_ids:
+        return None
+
+    fetch_ids = result_ids[:LISTINGS_PER_QUERY]
+    time.sleep(FETCH_DELAY)
+    try:
+        resp = session.get(
+            f"{GGG_TRADE_BASE}/fetch/{','.join(fetch_ids)}",
+            params={"query": search_id},
+            timeout=15,
+        )
+        resp.raise_for_status()
+        listings = resp.json().get("result", [])
+    except Exception as e:
+        print(f"    Base price fetch failed ({base_type}): {e}")
+        return None
+
+    prices = sorted(filter(None, (
+        price_to_chaos(item.get("listing", {}).get("price", {}), rates)
+        for item in listings
+    )))
+    if len(prices) < MIN_BASE_SAMPLES:
+        print(f"    Base '{base_type}': only {len(prices)} listing(s) — skipping (need {MIN_BASE_SAMPLES})")
+        return None
+
+    med = round(median(prices), 1)
+    cached_result = {"base_type": base_type, "median": med, "sampled": len(prices),
+                     "prices_chaos": prices}
+    os.makedirs(PRICE_CACHE_DIR, exist_ok=True)
+    with open(cache_path, "w", encoding="utf-8") as f:
+        json.dump(cached_result, f)
+
+    print(f"    Base '{base_type}': {med}c median ({len(prices)} sampled, {len(result_ids)} listings)")
+    return med
 
 # ---------------------------------------------------------------------------
 # Main
@@ -575,12 +746,16 @@ def main():
         print("\n--- Targets (dry run) ---")
         for t in targets:
             inf_label = f" [{t['influence']}]" if t.get("influence") else ""
+            frac_label = (
+                f" [FRAC:{t['fractured_group']} {t.get('fractured_freq_pct', 0):.0f}%]"
+                if t.get("fractured_group") else ""
+            )
             mods = ", ".join(
-                f"{m['group']} ≥T{m['tier_floor']} (min {m['min_value']})"
+                f"{m['group']} >=T{m['tier_floor']} (min {m['min_value']})"
                 + (f" [{m['influence']}]" if m.get("influence") else "")
                 for m in t["required_mods"]
             )
-            print(f"  {t['build']:40s} {t['slot']:12s}{inf_label:12s} | {mods}")
+            print(f"  {t['build']:40s} {t['slot']:12s}{inf_label:12s}{frac_label} | {mods}")
         return
 
     print(f"\nFetching prices for {len(targets)} targets...")
@@ -588,7 +763,51 @@ def main():
     for i, target in enumerate(targets, 1):
         print(f"  [{i:2d}/{len(targets)}] {target['build']} / {target['slot']}")
         price_data = fetch_target_prices(target, LEAGUE, session, rates)
-        output_targets.append({**target, "price_data": price_data})
+
+        # Base item cost: use common_base from sampled listings when available,
+        # falling back to build_items.json scrape data.
+        common_base = None
+        base_cost_chaos = None
+        if price_data and price_data.get("common_base"):
+            common_base = price_data["common_base"]
+        else:
+            # Look up the base type from the build scrape data as fallback
+            build_data = next(
+                (b for b in build_items["builds"]
+                 if f"{b['char_class']} / {b['primary_skill']}" == target["build"]),
+                None,
+            )
+            if build_data:
+                slot_info = build_data.get("slots", {}).get(target["slot"], {})
+                common_base = slot_info.get("common_base")
+
+        is_fractured_base = False
+        if common_base:
+            use_fractured = bool(target.get("fractured_stat_id"))
+            label = "fractured base" if use_fractured else "base"
+            print(f"    Fetching {label} price: {common_base}")
+            base_cost_chaos = fetch_base_price(
+                common_base, target["slot"], LEAGUE, session, rates,
+                fractured_stat_id=target.get("fractured_stat_id") if use_fractured else None,
+                fractured_min_value=target.get("fractured_min_value") if use_fractured else None,
+            )
+            if use_fractured and base_cost_chaos is None:
+                # Fractured query returned too few listings — fall back to the
+                # plain base price so the profit calc still has a cost floor.
+                print(f"    Fractured base had no listings, falling back to plain base")
+                base_cost_chaos = fetch_base_price(
+                    common_base, target["slot"], LEAGUE, session, rates,
+                )
+            else:
+                is_fractured_base = use_fractured
+
+        output_targets.append({
+            **target,
+            "price_data":       price_data,
+            "common_base":      common_base,
+            "base_cost_chaos":  base_cost_chaos,
+            "is_fractured_base": is_fractured_base,
+        })
 
     output = {
         "fetched_at": datetime.now(timezone.utc).isoformat(),
@@ -601,7 +820,7 @@ def main():
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     priced = sum(1 for t in output_targets if t.get("price_data"))
-    print(f"\nDone. {priced}/{len(targets)} targets priced → {OUTPUT_FILE}")
+    print(f"\nDone. {priced}/{len(targets)} targets priced -> {OUTPUT_FILE}")
     if priced < len(targets):
         print("  Unpriced targets likely have very strict mod requirements — "
               "consider lowering MIN_FREQ_PCT or MIN_SLOT_SAMPLES.")

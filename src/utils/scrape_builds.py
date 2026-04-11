@@ -31,10 +31,13 @@ import requests
 LEAGUE = json.load(open("src/data/active_economy.json")).get("league", "Mirage")
 PAGE_SIZE = 200             # GGG hard cap per request
 MAX_LADDER_PAGES = 75       # GGG ladder hard cap: 15,000 entries total (75 × 200)
-TARGET_PUBLIC_CHARS = 5000  # stop early once we have this many public characters fetched
-REQUEST_DELAY = 4.5         # seconds between character item fetches (~13 req/min, well under GGG limit)
+TARGET_PUBLIC_CHARS = 2000  # stop early once we have this many public characters fetched
+REQUEST_DELAY = 2.5         # seconds between character item fetches (~24 req/min, adaptive backoff handles 429s)
 BATCH_SIZE = 40             # fetch this many characters, then pause
-BATCH_PAUSE = 45.0          # seconds to pause between batches
+BATCH_PAUSE = 20.0          # seconds to pause between batches
+CONVERGENCE_MIN_SAMPLES = 150  # top builds need at least this many samples before early-stop is considered
+CONVERGENCE_TOP_N = 5          # number of top builds to monitor for stability
+CONVERGENCE_CHECK_INTERVAL = 250  # check convergence every N characters collected
 MIN_FREQUENCY_PCT = 0.15    # mod must appear in ≥15% of sampled items to be reported
 CACHE_DIR = "data/build_cache"
 OUTPUT_FILE = "src/data/build_items.json"
@@ -70,31 +73,52 @@ def _text_to_pattern(text: str) -> str:
 
     The GGG API returns mods as single rolled values, e.g.:
       "+114 to maximum Life"
-    items.json stores templates with ranges, e.g.:
-      "+(80-99) to maximum Life [Athlete]"
+    items.json stores templates with ranges using various dash characters + spaces, e.g.:
+      "+(80-99) to maximum Life [Athlete]"   (hyphen)
+      "(3 — 9) to maximum Life [Hale]"       (em-dash with spaces, U+2014)
+      "(25–39) to maximum Life"              (en-dash, U+2013)
 
-    Both numeric literals and range expressions are normalised to r"\d+".
+    Strategy:
+      1. Strip [Tag] suffixes.
+      2. Collapse entire parenthesised range expressions — including any dash variant
+         and surrounding whitespace — into a bare NUM placeholder. The enclosing
+         parens are also removed so the pattern matches the bare rolled value.
+      3. Strip a leading '+' from the template (GGG client adds/removes it
+         inconsistently; match_mod_text tries both forms at match time).
+      4. Replace remaining bare integers with NUM.
+      5. re.escape then restore NUM → r"\d+".
     """
-    # Strip bracket suffix like " [Athlete]"
+    # 1. Strip bracket suffix like " [Athlete]"
     text = re.sub(r"\s*\[[^\]]+\]$", "", text).strip()
-    # Replace range expressions "(X-Y)" with a placeholder before escaping
-    text = re.sub(r"\(\d+[-–]\d+\)", "NUM", text)
-    # Replace any remaining bare numbers
+
+    # 2. Collapse parenthesised ranges like (3 — 9), (80-99), (25–39) → NUM.
+    #    Dash variants: hyphen-minus (-), en-dash (–, U+2013), em-dash (—, U+2014).
+    #    Surrounding whitespace inside the parens is optional.
+    text = re.sub(r"\(\s*\d+\s*[-\u2013\u2014]\s*\d+\s*\)", "NUM", text)
+
+    # 3. Strip leading '+' so the pattern matches both "+47 to X" and "47 to X".
+    #    match_mod_text already tries both forms, but stripping here keeps the
+    #    compiled pattern anchored to the bare-value form.
+    text = text.lstrip("+")
+
+    # 4. Replace any remaining bare integers (e.g. tier values, flat numbers).
     text = re.sub(r"\b\d+\b", "NUM", text)
-    # Now escape regex metacharacters in the cleaned template
+
+    # 5. Escape then restore placeholders.
     escaped = re.escape(text)
-    # Restore placeholder as a digit matcher
     escaped = escaped.replace("NUM", r"\d+")
     return escaped
 
 
 def build_mod_pattern_index(items_db: dict) -> list:
     """
-    Returns a list of (compiled_regex, {group, tier, id, item_tag, is_prefix})
-    sorted longest-pattern-first so more specific patterns match before general ones.
+    Returns a list of (compiled_regex, {group, item_tag, is_prefix})
+    deduplicated by (item_tag, pattern_str) — one entry per unique pattern per item class.
+    Tier resolution is done separately by build_tier_ranges / resolve_tier.
+    Sorted longest-pattern-first so more specific patterns match before general ones.
     """
     entries = []
-    seen: set[tuple[str, str]] = set()  # (item_tag, full_pattern)
+    seen: set[tuple[str, str]] = set()  # (item_tag, pattern_str)
 
     for item_tag, pools in items_db.items():
         for is_prefix, mods in [(True, pools["prefixes"]), (False, pools["suffixes"])]:
@@ -103,20 +127,18 @@ def build_mod_pattern_index(items_db: dict) -> list:
                 if not text:
                     continue
                 pattern_str = _text_to_pattern(text)
-                full_pattern = r"^" + pattern_str + r"$"
-                key = (item_tag, full_pattern)
+                key = (item_tag, pattern_str)
                 if key in seen:
                     continue
                 seen.add(key)
+                full_pattern = r"^" + pattern_str + r"$"
                 try:
                     compiled = re.compile(full_pattern, re.IGNORECASE)
                 except re.error:
                     continue
                 entries.append((compiled, {
-                    "group": mod["group"],
-                    "tier": mod.get("tier"),
-                    "id": mod["id"],
-                    "item_tag": item_tag,
+                    "group":     mod["group"],
+                    "item_tag":  item_tag,
                     "is_prefix": is_prefix,
                 }))
 
@@ -125,12 +147,90 @@ def build_mod_pattern_index(items_db: dict) -> list:
     return entries
 
 
+def build_tier_ranges(items_db: dict) -> dict:
+    """
+    Returns {(item_tag, group): [(tier, min_val, max_val), ...]} sorted by min_val desc
+    (highest values = lowest tier number = best quality first).
+
+    Used by resolve_tier to determine which tier a GGG API rolled value belongs to.
+    """
+    ranges: dict[tuple, list] = {}
+
+    for item_tag, pools in items_db.items():
+        for mods in (pools["prefixes"], pools["suffixes"]):
+            for mod in mods:
+                tier = mod.get("tier")
+                if tier is None:
+                    continue
+                text = mod.get("text", "")
+                if not text:
+                    continue
+                # Extract the numeric range from items.json template text.
+                # Handles: (3 — 9), (80-99), (25–39), and bare numbers.
+                m = re.search(r"\(\s*(\d+)\s*[-\u2013\u2014]\s*(\d+)\s*\)", text)
+                if m:
+                    min_val, max_val = int(m.group(1)), int(m.group(2))
+                else:
+                    bare = re.search(r"\b(\d+)\b", text)
+                    if not bare:
+                        continue
+                    min_val = max_val = int(bare.group(1))
+
+                key = (item_tag, mod["group"])
+                if key not in ranges:
+                    ranges[key] = []
+                ranges[key].append((tier, min_val, max_val))
+
+    # Sort each list by min_val descending so T1 (highest values) is checked first
+    for key in ranges:
+        ranges[key].sort(key=lambda x: -x[1])
+
+    return ranges
+
+
+def resolve_tier(group: str, item_tag: str, mod_text: str,
+                 tier_ranges: dict) -> int | None:
+    """
+    Given a matched mod group and the GGG API mod text (e.g. '+47 to maximum Life'),
+    extract the rolled numeric value and return the corresponding tier from items.json.
+
+    Returns None when no tier range is found or no number can be extracted.
+    """
+    key = (item_tag, group)
+    tiers = tier_ranges.get(key)
+    if not tiers:
+        return None
+
+    # Extract the first integer from the mod text (absolute value for sign-negative mods)
+    m = re.search(r"\d+", mod_text)
+    if not m:
+        return None
+    val = int(m.group())
+
+    # Find the tier whose range contains this value
+    for tier, min_val, max_val in tiers:
+        if min_val <= val <= max_val:
+            return tier
+
+    # Fallback: return the tier with the closest lower bound (handles elevated mods)
+    # tiers is sorted min_val desc, so tiers[-1] has the smallest min_val (lowest quality)
+    best_diff = None
+    best_tier = None
+    for tier, min_val, max_val in tiers:
+        diff = abs(val - min_val)
+        if best_diff is None or diff < best_diff:
+            best_diff = diff
+            best_tier = tier
+    return best_tier
+
+
 def match_mod_text(mod_text: str, pattern_index: list, item_tag: str) -> dict | None:
     """
     Try to match a single mod string against the pattern index for a given slot.
+    Returns {group, item_tag, is_prefix} on match, or None.
 
-    The GGG client adds a leading '+' to flat stat mods (e.g. '+47% to Fire Resistance')
-    but items.json templates don't include it. We try raw text first, then strip '+'.
+    The GGG client adds a leading '+' to flat stat mods (e.g. '+47 to maximum Life')
+    but our patterns are built without it. We try raw text first, then strip '+'.
     """
     candidates = [mod_text.strip()]
     if mod_text.startswith("+"):
@@ -311,6 +411,42 @@ def scrape(league: str, session: requests.Session) -> dict:
     raw = {}
     fetched = 0  # counts actual network requests made this run (cached don't count)
     start_time = time.time()
+    _prev_top_builds: list = []  # for convergence check
+
+    def _top_build_signature(raw_data: dict) -> list:
+        """
+        Returns an ordered list of (char_class, primary_skill) for the top
+        CONVERGENCE_TOP_N builds by character count.  Used to detect when the
+        meta has stabilised and further sampling won't change the picture.
+        """
+        counts: dict[tuple, int] = defaultdict(int)
+        for char_data in raw_data.values():
+            skill = extract_primary_skill(char_data["items"])
+            counts[(char_data["char_class"], skill)] += 1
+        ordered = sorted(counts.items(), key=lambda x: -x[1])
+        return [k for k, _ in ordered[:CONVERGENCE_TOP_N]]
+
+    def _builds_converged(raw_data: dict) -> bool:
+        """
+        True when: (a) we have at least CONVERGENCE_MIN_SAMPLES chars per top
+        build, and (b) the identity of the top CONVERGENCE_TOP_N builds hasn't
+        changed since the last check.
+        """
+        nonlocal _prev_top_builds
+        counts: dict[tuple, int] = defaultdict(int)
+        for char_data in raw_data.values():
+            skill = extract_primary_skill(char_data["items"])
+            counts[(char_data["char_class"], skill)] += 1
+        ordered = sorted(counts.items(), key=lambda x: -x[1])
+        if not ordered:
+            return False
+        # Require the top build to have at least CONVERGENCE_MIN_SAMPLES
+        if ordered[0][1] < CONVERGENCE_MIN_SAMPLES:
+            return False
+        sig = [k for k, _ in ordered[:CONVERGENCE_TOP_N]]
+        stable = sig == _prev_top_builds
+        _prev_top_builds = sig
+        return stable
 
     for i, entry in enumerate(public_entries, 1):
         if len(raw) >= TARGET_PUBLIC_CHARS:
@@ -341,6 +477,15 @@ def scrape(league: str, session: requests.Session) -> dict:
                     f"--- pausing {BATCH_PAUSE}s ---"
                 )
                 time.sleep(BATCH_PAUSE)
+
+            # Convergence check: if the top-N build meta is stable we have enough data
+            if len(raw) > 0 and len(raw) % CONVERGENCE_CHECK_INTERVAL == 0:
+                if _builds_converged(raw):
+                    print(
+                        f"  Top-{CONVERGENCE_TOP_N} builds converged at {len(raw)} characters "
+                        f"— stopping early (use --analyze to re-run analysis on existing cache)"
+                    )
+                    break
         elif i % 200 == 0:
             # Periodic heartbeat for cached runs so the terminal isn't silent
             print(f"  [{i}/{len(public_entries)}] {len(raw)} collected (from cache)")
@@ -352,13 +497,25 @@ def scrape(league: str, session: requests.Session) -> dict:
 # Analyze
 # ---------------------------------------------------------------------------
 
-def _aggregate_slots(chars_items: list, pattern_index: list) -> dict:
+def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) -> dict:
     """
     Aggregates mod frequency per slot across a list of character item lists.
-    Returns {slot_tag: {sample_count, mod_frequency}} filtered by MIN_FREQUENCY_PCT.
+    Returns {slot_tag: {sample_count, mod_frequency, base_type_freq, common_base,
+    fractured_group, fractured_freq_pct}} filtered by MIN_FREQUENCY_PCT.
+
+    base_type_freq tracks how often each base type appears per slot so
+    fetch_trade_prices.py can price the correct raw base for craft cost.
+
+    fractured_group is the single most-common mod group that appears as a
+    fractured (locked) mod on this slot across sampled items — only set when
+    at least 30% of items have a fracture in that group. This tells the profit
+    engine the slot is typically crafted on a fractured base.
     """
     slot_mod_tiers: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
     slot_sample_counts: dict[str, int] = defaultdict(int)
+    slot_base_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    # fractured-mod tracking: per slot, count how many sampled items fracture each group
+    slot_fractured_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
 
     for items in chars_items:
         seen_slots: set[str] = set()
@@ -375,6 +532,28 @@ def _aggregate_slots(chars_items: list, pattern_index: list) -> dict:
                 slot_sample_counts[item_tag] += 1
                 seen_slots.add(slot_key)
 
+                # baseType is the raw base name stripped of the rare prefix/suffix.
+                # For rare items GGG uses "typeLine" for the base and "name" for the
+                # rare name. "baseType" is the cleaner field when available.
+                base = (
+                    item.get("baseType")
+                    or item.get("typeLine", "")
+                ).strip()
+                if base:
+                    slot_base_counts[item_tag][base] += 1
+
+            # Track fractured mods separately so we know which group is locked
+            # on the base. A mod group gets counted once per item even if it
+            # appears across explicit/crafted variants, since fracture is an
+            # item-level property.
+            fractured_groups_on_item: set[str] = set()
+            for mod_text in item.get("fracturedMods", []):
+                match = match_mod_text(mod_text, pattern_index, item_tag)
+                if match:
+                    fractured_groups_on_item.add(match["group"])
+            for g in fractured_groups_on_item:
+                slot_fractured_counts[item_tag][g] += 1
+
             all_mods = (
                 item.get("explicitMods", [])
                 + item.get("fracturedMods", [])
@@ -383,7 +562,8 @@ def _aggregate_slots(chars_items: list, pattern_index: list) -> dict:
             for mod_text in all_mods:
                 match = match_mod_text(mod_text, pattern_index, item_tag)
                 if match:
-                    slot_mod_tiers[item_tag][match["group"]].append(match["tier"])
+                    tier = resolve_tier(match["group"], item_tag, mod_text, tier_ranges)
+                    slot_mod_tiers[item_tag][match["group"]].append(tier)
 
     slots_out = {}
     for item_tag, group_tiers in slot_mod_tiers.items():
@@ -403,21 +583,59 @@ def _aggregate_slots(chars_items: list, pattern_index: list) -> dict:
                 "min_tier_seen": min(valid_tiers) if valid_tiers else None,
                 "avg_tier": round(sum(valid_tiers) / len(valid_tiers), 1) if valid_tiers else None,
             }
+
+        # Base type frequency — top 5, expressed as % of sampled items
+        base_counts = slot_base_counts.get(item_tag, {})
+        base_type_freq = {
+            base: round(count / sample_n * 100, 1)
+            for base, count in sorted(base_counts.items(), key=lambda x: -x[1])[:5]
+        }
+        common_base = max(base_counts, key=base_counts.get) if base_counts else None
+
+        # Dominant fractured mod: set only when the top fractured group shows
+        # up on a meaningful share of sampled items. Below this threshold the
+        # slot is probably crafted on a plain base and the occasional fracture
+        # is noise, not a strategy.
+        FRACTURED_MIN_PCT = 0.30
+        fractured_counts = slot_fractured_counts.get(item_tag, {})
+        fractured_group = None
+        fractured_freq_pct = 0.0
+        if fractured_counts:
+            top_group, top_count = max(fractured_counts.items(), key=lambda x: x[1])
+            frac_pct = top_count / sample_n
+            if frac_pct >= FRACTURED_MIN_PCT:
+                fractured_group = top_group
+                fractured_freq_pct = round(frac_pct * 100, 1)
+
         if mod_freq:
-            slots_out[item_tag] = {"sample_count": sample_n, "mod_frequency": mod_freq}
+            slots_out[item_tag] = {
+                "sample_count": sample_n,
+                "mod_frequency": mod_freq,
+                "common_base":   common_base,
+                "base_type_freq": base_type_freq,
+                "fractured_group":   fractured_group,
+                "fractured_freq_pct": fractured_freq_pct,
+            }
 
     return slots_out
 
 
-def analyze(raw: dict, pattern_index: list) -> list:
+EXAMPLE_CHARS_PER_BUILD = 3  # max character references saved per build archetype
+
+
+def analyze(raw: dict, pattern_index: list, tier_ranges: dict) -> list:
     """
     Groups characters by (char_class, primary_skill) build archetype.
     Returns list of build dicts sorted by play_pct descending.
+
+    Each build now includes `example_chars`: up to EXAMPLE_CHARS_PER_BUILD
+    {account, char} pairs from the ladder so the UI can link to real profiles.
     """
     total_chars = len(raw)
 
-    # Group characters by build archetype
+    # Group characters by build archetype, preserving account+char metadata
     build_groups: dict[tuple, list] = defaultdict(list)
+    build_chars: dict[tuple, list] = defaultdict(list)   # (key) → [{account, char}]
     build_meta: dict[tuple, dict] = {}
 
     for char_key, char_data in raw.items():
@@ -428,13 +646,21 @@ def analyze(raw: dict, pattern_index: list) -> list:
         build_groups[key].append(items)
         build_meta[key] = {"char_class": char_class, "primary_skill": primary_skill}
 
+        # char_key is "account/charname"
+        if "/" in char_key:
+            account, char = char_key.split("/", 1)
+            build_chars[key].append({"account": account, "char": char})
+
     builds_out = []
     for key, chars_items in sorted(build_groups.items(), key=lambda x: -len(x[1])):
         meta = build_meta[key]
         count = len(chars_items)
         play_pct = round(count / total_chars * 100, 1) if total_chars > 0 else 0
 
-        slots_out = _aggregate_slots(chars_items, pattern_index)
+        slots_out = _aggregate_slots(chars_items, pattern_index, tier_ranges)
+
+        # Save a handful of example characters for direct profile linking in the UI
+        example_chars = build_chars[key][:EXAMPLE_CHARS_PER_BUILD]
 
         builds_out.append({
             "char_class": meta["char_class"],
@@ -442,6 +668,7 @@ def analyze(raw: dict, pattern_index: list) -> list:
             "count": count,
             "play_pct": play_pct,
             "slots": slots_out,
+            "example_chars": example_chars,
         })
 
     return builds_out
@@ -461,7 +688,8 @@ def main():
     print("Building mod pattern index from items.json...")
     items_db = json.load(open(ITEMS_DB_FILE, encoding="utf-8"))
     pattern_index = build_mod_pattern_index(items_db)
-    print(f"  {len(pattern_index)} patterns built")
+    tier_ranges  = build_tier_ranges(items_db)
+    print(f"  {len(pattern_index)} patterns built, {sum(len(v) for v in tier_ranges.values())} tier range entries")
 
     session = requests.Session()
     session.headers.update(HEADERS)
@@ -497,7 +725,7 @@ def main():
         print(f"  Collected items for {len(raw)} characters")
 
     print("Analyzing mod frequencies by build archetype...")
-    builds_out = analyze(raw, pattern_index)
+    builds_out = analyze(raw, pattern_index, tier_ranges)
 
     output = {
         "league": LEAGUE,

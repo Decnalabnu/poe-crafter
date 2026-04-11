@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import shutil
 
 LEAGUE = "Mirage" 
 OUTPUT_FILE = "src/data/active_economy.json"
@@ -41,17 +42,37 @@ def update_economy():
             clean_id = name.lower().replace(" " , "_").replace("_fossil", "")
             fossil_prices[clean_id] = price
 
+    resonator_lines = fetch_ninja_data("Resonator", LEAGUE)
+    resonator_prices = {}
+    resonator_map = {
+        "Primitive Chaotic Resonator": "primitive_chaotic_resonator",
+        "Potent Chaotic Resonator": "potent_chaotic_resonator",
+        "Powerful Chaotic Resonator": "powerful_chaotic_resonator",
+        "Prime Chaotic Resonator": "prime_chaotic_resonator",
+    }
+    for item in resonator_lines:
+        name = item.get("name")
+        price = item.get("chaosValue")
+        if name in resonator_map:
+            resonator_prices[resonator_map[name]] = price
+
     economy_data = {
         "league": LEAGUE,
         "divine_price": divine_price,
         "essences": essence_prices,
-        "fossils": fossil_prices
+        "fossils": fossil_prices,
+        "resonators": resonator_prices
     }
 
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
     with open(OUTPUT_FILE, "w") as f:
         json.dump(economy_data, f, indent=2)
-    
+
+    # Mirror to public/ so the running app can fetch fresh values without a rebuild
+    public_path = "public/active_economy.json"
+    os.makedirs("public", exist_ok=True)
+    shutil.copy2(OUTPUT_FILE, public_path)
+
     print(f"Economy updated! Divine Price: {divine_price}c")
 
 if __name__ == "__main__":

@@ -402,7 +402,16 @@ export function calculateSpamEV(
       (sum, fId) => sum + (economyData.fossils[fId] || 1),
       0,
     );
-    costPerTry += 2;
+    const resonatorKeys = [
+      null,
+      "primitive_chaotic_resonator",
+      "potent_chaotic_resonator",
+      "powerful_chaotic_resonator",
+      "prime_chaotic_resonator",
+    ];
+    const resonatorKey = resonatorKeys[activeFossils.length] ?? null;
+    const resonatorCost = resonatorKey ? (economyData.resonators?.[resonatorKey] ?? 2) : 2;
+    costPerTry += resonatorCost;
   } else if (essenceId) {
     costPerTry = economyData.essences[essenceId] || 3;
   }

@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import itemsData from "./data/items.json";
 import essenceDataList from "./data/essences.json";
 import fossilData from "./data/fossils.json";
-import economyData from "./data/active_economy.json";
+import { useEconomy } from "./contexts/EconomyContext";
 import buildItemsData from "./data/build_items.json";
 import tradePricesData from "./data/trade_prices.json";
 import { calculateSpamEV, calculateRecombEV } from "./utils/calculator";
 import ScryingRanker from "./components/ScryingRanker";
 import CraftOptimizer from "./components/CraftOptimizer";
+import ProfitHeatmap from "./components/ProfitHeatmap";
 
 // Elemental resist suffixes are harvest-swappable (fire ↔ cold ↔ lightning).
 // Grouped together in both build preview and crafter probability math.
@@ -39,6 +40,7 @@ function freqColor(pct) {
 // ---------------------------------------------------------------------------
 
 function ProfitabilityPanel({ slot, build, tradeTargets }) {
+  const economyData = useEconomy();
   // Find the matching trade target for this (build, slot) if available
   const buildLabel = `${build.char_class} / ${build.primary_skill}`;
   const target = tradeTargets.find(
@@ -431,6 +433,7 @@ function BuildAnalyzer({ onCraftThis }) {
 // RecombCalculator
 // ---------------------------------------------------------------------------
 function RecombCalculator() {
+  const economyData = useEconomy();
   const [itemClass, setItemClass] = useState("ring");
   const [influence, setInfluence] = useState(null);
   const [affinityType, setAffinityType] = useState("prefix"); // "prefix" | "suffix"
@@ -705,6 +708,7 @@ const INFLUENCES = [
 ];
 
 function App() {
+  const economyData = useEconomy();
   const [activeTab, setActiveTab] = useState("crafter");
   const [selectedItemClass, setSelectedItemClass] = useState("ring");
   const [selectedInfluence, setSelectedInfluence] = useState(null);
@@ -1115,6 +1119,7 @@ function App() {
 
       <div style={{ display: "flex", gap: "8px", marginBottom: "20px", flexWrap: "wrap" }}>
         {[
+          { id: "heatmap", label: "Profit Heatmap" },
           { id: "crafter", label: "Crafter" },
           { id: "route", label: "Craft Optimizer" },
           { id: "builds", label: "Build Analyzer" },
@@ -1139,6 +1144,8 @@ function App() {
           </button>
         ))}
       </div>
+
+      {activeTab === "heatmap" && <ProfitHeatmap />}
 
       {activeTab === "scrying" && <ScryingRanker />}
 
@@ -1478,6 +1485,30 @@ function App() {
                   );
                 })}
               </div>
+              {activeFossils.length > 0 && (() => {
+                const resonatorNames = [
+                  null,
+                  "Primitive Chaotic Resonator",
+                  "Potent Chaotic Resonator",
+                  "Powerful Chaotic Resonator",
+                  "Prime Chaotic Resonator",
+                ];
+                const resonatorKeys = [
+                  null,
+                  "primitive_chaotic_resonator",
+                  "potent_chaotic_resonator",
+                  "powerful_chaotic_resonator",
+                  "prime_chaotic_resonator",
+                ];
+                const name = resonatorNames[activeFossils.length];
+                const key = resonatorKeys[activeFossils.length];
+                const cost = key ? (economyData.resonators?.[key] ?? 2) : 2;
+                return (
+                  <div style={{ marginTop: "8px", color: "#e2b659", fontSize: "13px" }}>
+                    Resonator: <strong>{name}</strong> ({cost}c)
+                  </div>
+                );
+              })()}
             </div>
           )}
         </div>

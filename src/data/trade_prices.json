@@ -1,101 +1,138 @@
 {
-  "fetched_at": "2026-04-02T19:36:45.084928+00:00",
+  "fetched_at": "2026-04-11T01:56:44.970254+00:00",
   "league": "Mirage",
   "targets": [
     {
-      "id": "deadeye___kinetic_blast_body_armour",
-      "build": "Deadeye / Kinetic Blast",
-      "play_pct": 8.5,
-      "slot": "body_armour",
-      "category": "armour.chest",
+      "id": "hierophant___kinetic_fusillade_ring",
+      "build": "Hierophant / Kinetic Fusillade",
+      "play_pct": 5.2,
+      "slot": "ring",
+      "category": "accessory.ring",
       "influence": null,
       "required_mods": [
-        {
-          "group": "Socketed Attacks Mana Cost",
-          "stat_id": "explicit.stat_2264586521",
-          "influence": "warlord",
-          "tier_floor": 1,
-          "min_value": -15
-        },
-        {
-          "group": "Enemies Explode On Death Physical Chance",
-          "stat_id": "explicit.stat_3295179224",
-          "influence": "crusader",
-          "tier_floor": 2,
-          "min_value": 11
-        },
-        {
-          "group": "Local Evasion And Energy Shield",
-          "stat_id": "explicit.stat_1999113824",
-          "influence": null,
-          "tier_floor": 1,
-          "min_value": 101
-        },
-        {
-          "group": "Area Of Effect",
-          "stat_id": "explicit.stat_280731498",
-          "influence": null,
-          "tier_floor": 1,
-          "min_value": 25
-        }
-      ],
-      "price_data": {
-        "total_listings": 2,
-        "sampled": 2,
-        "prices_chaos": [
-          2721.0,
-          5442.0
-        ],
-        "p10": 2721,
-        "p25": 2721,
-        "median": 4082,
-        "p75": 5442,
-        "p90": 5442
-      }
-    },
-    {
-      "id": "deadeye___kinetic_blast_gloves",
-      "build": "Deadeye / Kinetic Blast",
-      "play_pct": 8.5,
-      "slot": "gloves",
-      "category": "armour.gloves",
-      "influence": "crusader",
-      "required_mods": [
-        {
-          "group": "Cold Resistance",
-          "stat_id": "explicit.stat_4220027924",
-          "influence": null,
-          "tier_floor": 1,
-          "min_value": 46
-        },
-        {
-          "group": "Increased Attack Speed",
-          "stat_id": "explicit.stat_681332047",
-          "influence": null,
-          "tier_floor": 6,
-          "min_value": 5
-        },
         {
           "group": "Increased Life",
           "stat_id": "explicit.stat_3299347043",
           "influence": null,
-          "tier_floor": 10,
-          "min_value": 3
+          "tier_floor": 1,
+          "min_value": 130
         },
         {
-          "group": "Convert Physical To Cold",
-          "stat_id": "explicit.stat_2133341901",
-          "influence": "crusader",
-          "tier_floor": 2,
-          "min_value": 18
+          "group": "Lightning Damage",
+          "stat_id": "explicit.stat_1754445556",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 4
+        },
+        {
+          "group": "Dexterity",
+          "stat_id": "explicit.stat_3261801346",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 51
+        },
+        {
+          "group": "Chaos Resistance",
+          "stat_id": "explicit.stat_2923486259",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 31
         }
       ],
-      "price_data": null
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 25,
+        "sampled": 10,
+        "prices_chaos": [
+          3.0,
+          5.0,
+          5.0,
+          5.0,
+          9.0,
+          10.0,
+          12.0,
+          15.0,
+          20.0,
+          25.0
+        ],
+        "p10": 5,
+        "p25": 5,
+        "median": 10,
+        "p75": 15,
+        "p90": 25,
+        "common_base": "Gold Ring"
+      },
+      "common_base": "Gold Ring",
+      "base_cost_chaos": 5.0,
+      "is_fractured_base": false
     },
     {
-      "id": "deadeye___kinetic_blast_helmet",
-      "build": "Deadeye / Kinetic Blast",
-      "play_pct": 8.5,
+      "id": "hierophant___kinetic_fusillade_belt",
+      "build": "Hierophant / Kinetic Fusillade",
+      "play_pct": 5.2,
+      "slot": "belt",
+      "category": "accessory.belt",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 130
+        },
+        {
+          "group": "Increased Weapon Elemental Damage Percent",
+          "stat_id": "explicit.stat_387439868",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 43
+        },
+        {
+          "group": "Chaos Resistance",
+          "stat_id": "explicit.stat_2923486259",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 31
+        },
+        {
+          "group": "Energy Shield",
+          "stat_id": "explicit.stat_4052037485",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 48
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 3,
+        "sampled": 3,
+        "prices_chaos": [
+          40.0,
+          50.0,
+          9989.1
+        ],
+        "p10": 40,
+        "p25": 40,
+        "median": 50,
+        "p75": 9989,
+        "p90": 9989,
+        "common_base": "Rustic Sash"
+      },
+      "common_base": "Rustic Sash",
+      "base_cost_chaos": 302.7,
+      "is_fractured_base": false
+    },
+    {
+      "id": "hierophant___kinetic_fusillade_helmet",
+      "build": "Hierophant / Kinetic Fusillade",
+      "play_pct": 5.2,
       "slot": "helmet",
       "category": "armour.helmet",
       "influence": null,
@@ -104,63 +141,65 @@
           "group": "Increased Life",
           "stat_id": "explicit.stat_3299347043",
           "influence": null,
-          "tier_floor": 11,
-          "min_value": 3
+          "tier_floor": 2,
+          "min_value": 130
         },
         {
-          "group": "Item Found Rarity Increase Prefix",
-          "stat_id": "explicit.stat_3917489142",
+          "group": "Local Armour And Energy Shield",
+          "stat_id": "explicit.stat_3321629045",
           "influence": null,
-          "tier_floor": 3,
-          "min_value": 8
-        }
-      ],
-      "price_data": null
-    },
-    {
-      "id": "deadeye___kinetic_blast_ring",
-      "build": "Deadeye / Kinetic Blast",
-      "play_pct": 8.5,
-      "slot": "ring",
-      "category": "accessory.ring",
-      "influence": null,
-      "required_mods": [
-        {
-          "group": "Increased Life",
-          "stat_id": "explicit.stat_3299347043",
-          "influence": null,
-          "tier_floor": 8,
-          "min_value": 3
+          "tier_floor": 1,
+          "min_value": 92
         },
         {
-          "group": "Item Found Rarity Increase Prefix",
-          "stat_id": "explicit.stat_3917489142",
+          "group": "Local Physical Damage Reduction Rating",
+          "stat_id": "explicit.stat_3484657501",
           "influence": null,
-          "tier_floor": 4,
-          "min_value": 8
+          "tier_floor": 1,
+          "min_value": 161
+        },
+        {
+          "group": "Local Energy Shield",
+          "stat_id": "explicit.stat_4052037485",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 52
         }
       ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
       "price_data": {
-        "total_listings": 100,
-        "sampled": 5,
+        "total_listings": 14,
+        "sampled": 10,
         "prices_chaos": [
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0
+          5.0,
+          5.0,
+          28.0,
+          100.0,
+          200.0,
+          272.4,
+          302.7,
+          302.7,
+          605.4,
+          605.4
         ],
-        "p10": 1,
-        "p25": 1,
-        "median": 1,
-        "p75": 1,
-        "p90": 1
-      }
+        "p10": 5,
+        "p25": 28,
+        "median": 236,
+        "p75": 303,
+        "p90": 605,
+        "common_base": "Divine Crown"
+      },
+      "common_base": "Divine Crown",
+      "base_cost_chaos": 51.5,
+      "is_fractured_base": false
     },
     {
-      "id": "deadeye___kinetic_blast_boots",
-      "build": "Deadeye / Kinetic Blast",
-      "play_pct": 8.5,
+      "id": "hierophant___kinetic_fusillade_boots",
+      "build": "Hierophant / Kinetic Fusillade",
+      "play_pct": 5.2,
       "slot": "boots",
       "category": "armour.boots",
       "influence": null,
@@ -168,96 +207,315 @@
         {
           "group": "Movement Velocity",
           "stat_id": "explicit.stat_2250533757",
-          "influence": null,
-          "tier_floor": 8,
-          "min_value": 10
-        },
-        {
-          "group": "Increased Life",
-          "stat_id": "explicit.stat_3299347043",
-          "influence": null,
-          "tier_floor": 10,
-          "min_value": 3
-        },
-        {
-          "group": "Avoid Elemental Status Ailments",
-          "stat_id": "explicit.stat_3005472710",
-          "influence": null,
-          "tier_floor": 2,
-          "min_value": 31
-        }
-      ],
-      "price_data": {
-        "total_listings": 31,
-        "sampled": 10,
-        "prices_chaos": [
-          10.0,
-          10.0,
-          10.0,
-          15.0,
-          15.0,
-          20.0,
-          25.0,
-          30.0,
-          30.0,
-          45.0
-        ],
-        "p10": 10,
-        "p25": 10,
-        "median": 18,
-        "p75": 30,
-        "p90": 45
-      }
-    },
-    {
-      "id": "deadeye___kinetic_blast_amulet",
-      "build": "Deadeye / Kinetic Blast",
-      "play_pct": 8.5,
-      "slot": "amulet",
-      "category": "accessory.amulet",
-      "influence": null,
-      "required_mods": [
-        {
-          "group": "Critical Strike Multiplier",
-          "stat_id": "explicit.stat_3556824919",
           "influence": null,
           "tier_floor": 1,
           "min_value": 35
         },
         {
-          "group": "Item Found Rarity Increase Prefix",
-          "stat_id": "explicit.stat_3917489142",
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
           "influence": null,
-          "tier_floor": 4,
-          "min_value": 8
+          "tier_floor": 1,
+          "min_value": 91
+        },
+        {
+          "group": "Chaos Resistance",
+          "stat_id": "explicit.stat_2923486259",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 31
+        },
+        {
+          "group": "Fire Resistance",
+          "stat_id": "explicit.stat_3372524247",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 46
         }
       ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 78,
+        "sampled": 10,
+        "prices_chaos": [
+          1.0,
+          8.0,
+          9.0,
+          10.0,
+          10.0,
+          19.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0
+        ],
+        "p10": 8,
+        "p25": 9,
+        "median": 14,
+        "p75": 20,
+        "p90": 20,
+        "common_base": "Runic Sabatons"
+      },
+      "common_base": "Runic Sabatons",
+      "base_cost_chaos": null,
+      "is_fractured_base": false
+    },
+    {
+      "id": "hierophant___kinetic_fusillade_body_armour",
+      "build": "Hierophant / Kinetic Fusillade",
+      "play_pct": 5.2,
+      "slot": "body_armour",
+      "category": "armour.chest",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Local Armour And Energy Shield",
+          "stat_id": "explicit.stat_3321629045",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 101
+        },
+        {
+          "group": "Local Energy Shield",
+          "stat_id": "explicit.stat_4052037485",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 88
+        },
+        {
+          "group": "Local Physical Damage Reduction Rating",
+          "stat_id": "explicit.stat_3484657501",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 390
+        },
+        {
+          "group": "Stun Recovery",
+          "stat_id": "explicit.stat_2511217560",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 26
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 2,
+        "sampled": 1,
+        "prices_chaos": [
+          908.1
+        ],
+        "p10": 908,
+        "p25": 908,
+        "median": 908,
+        "p75": 908,
+        "p90": 908,
+        "common_base": "Saintly Chainmail"
+      },
+      "common_base": "Saintly Chainmail",
+      "base_cost_chaos": null,
+      "is_fractured_base": false
+    },
+    {
+      "id": "hierophant___kinetic_fusillade_gloves",
+      "build": "Hierophant / Kinetic Fusillade",
+      "play_pct": 5.2,
+      "slot": "gloves",
+      "category": "armour.gloves",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 91
+        },
+        {
+          "group": "Chaos Resistance",
+          "stat_id": "explicit.stat_2923486259",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 31
+        },
+        {
+          "group": "Increased Attack Speed",
+          "stat_id": "explicit.stat_681332047",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 17
+        },
+        {
+          "group": "Local Armour And Energy Shield",
+          "stat_id": "explicit.stat_3321629045",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 92
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": null,
+      "common_base": "Paladin Gloves",
+      "base_cost_chaos": 5.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "hierophant___kinetic_fusillade_amulet",
+      "build": "Hierophant / Kinetic Fusillade",
+      "play_pct": 5.2,
+      "slot": "amulet",
+      "category": "accessory.amulet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Percentage All Attributes",
+          "stat_id": "explicit.stat_3143208761",
+          "influence": "shaper",
+          "tier_floor": 1,
+          "min_value": 6
+        },
+        {
+          "group": "Percentage Strength",
+          "stat_id": "explicit.stat_734614379",
+          "influence": "warlord",
+          "tier_floor": 1,
+          "min_value": 9
+        },
+        {
+          "group": "Damage Per15Strength",
+          "stat_id": "explicit.stat_3948776386",
+          "influence": "elder",
+          "tier_floor": 2,
+          "min_value": 1
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": null,
+      "common_base": "Simplex Amulet",
+      "base_cost_chaos": null,
+      "is_fractured_base": false
+    },
+    {
+      "id": "chieftain___righteous_fire_helmet",
+      "build": "Chieftain / Righteous Fire",
+      "play_pct": 4.5,
+      "slot": "helmet",
+      "category": "armour.helmet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 130
+        },
+        {
+          "group": "Fire Resistance",
+          "stat_id": "explicit.stat_3372524247",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 46
+        },
+        {
+          "group": "Socketed Gems Deal More Elemental Damage",
+          "stat_id": "explicit.stat_3835899275",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 30
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
       "price_data": {
         "total_listings": 100,
         "sampled": 10,
         "prices_chaos": [
           1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          2.0,
-          2.0
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          8.0
         ],
-        "p10": 1,
-        "p25": 1,
-        "median": 1,
-        "p75": 1,
-        "p90": 2
-      }
+        "p10": 5,
+        "p25": 5,
+        "median": 5,
+        "p75": 5,
+        "p90": 8,
+        "common_base": "Magistrate Crown"
+      },
+      "common_base": "Magistrate Crown",
+      "base_cost_chaos": 302.7,
+      "is_fractured_base": false
     },
     {
-      "id": "hierophant___kinetic_fusillade_ring",
-      "build": "Hierophant / Kinetic Fusillade",
-      "play_pct": 4.0,
+      "id": "chieftain___righteous_fire_body_armour",
+      "build": "Chieftain / Righteous Fire",
+      "play_pct": 4.5,
+      "slot": "body_armour",
+      "category": "armour.chest",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Reduced Physical Damage Taken",
+          "stat_id": "explicit.stat_3771516363",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 8
+        },
+        {
+          "group": "Maximum Life Increase Percent",
+          "stat_id": "explicit.stat_983749596",
+          "influence": "elder",
+          "tier_floor": 1,
+          "min_value": 9
+        },
+        {
+          "group": "Maximum Mana Increase Shaper",
+          "stat_id": "explicit.stat_2748665614",
+          "influence": "shaper",
+          "tier_floor": 2,
+          "min_value": 9
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 175
+        }
+      ],
+      "fractured_group": "Increased Life",
+      "fractured_stat_id": "explicit.stat_3299347043",
+      "fractured_min_value": 175,
+      "fractured_freq_pct": 61.5,
+      "price_data": null,
+      "common_base": "Royal Plate",
+      "base_cost_chaos": 30.0,
+      "is_fractured_base": true
+    },
+    {
+      "id": "chieftain___righteous_fire_ring",
+      "build": "Chieftain / Righteous Fire",
+      "play_pct": 4.5,
       "slot": "ring",
       "category": "accessory.ring",
       "influence": null,
@@ -266,58 +524,274 @@
           "group": "Increased Life",
           "stat_id": "explicit.stat_3299347043",
           "influence": null,
-          "tier_floor": 8,
-          "min_value": 3
+          "tier_floor": 1,
+          "min_value": 130
         },
         {
-          "group": "Lightning Damage",
-          "stat_id": "explicit.stat_1754445556",
+          "group": "Fire Resistance",
+          "stat_id": "explicit.stat_3372524247",
           "influence": null,
-          "tier_floor": 10,
-          "min_value": 1
+          "tier_floor": 1,
+          "min_value": 46
+        },
+        {
+          "group": "Global Damage Over Time Multiplier",
+          "stat_id": "explicit.stat_3988349707",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 12
+        },
+        {
+          "group": "Fire Damage Percentage",
+          "stat_id": "explicit.stat_3962278098",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 31
         }
       ],
+      "fractured_group": "Global Damage Over Time Multiplier",
+      "fractured_stat_id": "explicit.stat_3988349707",
+      "fractured_min_value": 12,
+      "fractured_freq_pct": 54.7,
+      "price_data": {
+        "total_listings": 26,
+        "sampled": 10,
+        "prices_chaos": [
+          5.0,
+          5.0,
+          11.0,
+          13.0,
+          15.0,
+          50.0,
+          50.0,
+          60.0,
+          100.0,
+          150.0
+        ],
+        "p10": 5,
+        "p25": 11,
+        "median": 32,
+        "p75": 60,
+        "p90": 150,
+        "common_base": "Two-Stone Ring"
+      },
+      "common_base": "Two-Stone Ring",
+      "base_cost_chaos": 10.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "chieftain___righteous_fire_belt",
+      "build": "Chieftain / Righteous Fire",
+      "play_pct": 4.5,
+      "slot": "belt",
+      "category": "accessory.belt",
+      "influence": "elder",
+      "required_mods": [
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 130
+        },
+        {
+          "group": "Fire Resistance",
+          "stat_id": "explicit.stat_3372524247",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 46
+        },
+        {
+          "group": "Maximum Life Increase Percent",
+          "stat_id": "explicit.stat_983749596",
+          "influence": "elder",
+          "tier_floor": 1,
+          "min_value": null
+        },
+        {
+          "group": "Physical Damage Reduction Rating",
+          "stat_id": "explicit.stat_3484657501",
+          "influence": null,
+          "tier_floor": 4,
+          "min_value": 323
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
       "price_data": {
         "total_listings": 100,
-        "sampled": 8,
+        "sampled": 9,
         "prices_chaos": [
           1.0,
           1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0
+          2.0,
+          3.0,
+          5.0,
+          5.0,
+          6.0,
+          8.0,
+          9.0
         ],
         "p10": 1,
-        "p25": 1,
-        "median": 1,
-        "p75": 1,
-        "p90": 1
-      }
+        "p25": 2,
+        "median": 5,
+        "p75": 6,
+        "p90": 9,
+        "common_base": "Heavy Belt"
+      },
+      "common_base": "Heavy Belt",
+      "base_cost_chaos": 5.0,
+      "is_fractured_base": false
     },
     {
-      "id": "hierophant___kinetic_fusillade_boots",
-      "build": "Hierophant / Kinetic Fusillade",
-      "play_pct": 4.0,
+      "id": "chieftain___righteous_fire_amulet",
+      "build": "Chieftain / Righteous Fire",
+      "play_pct": 4.5,
+      "slot": "amulet",
+      "category": "accessory.amulet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 130
+        },
+        {
+          "group": "Global Damage Over Time Multiplier",
+          "stat_id": "explicit.stat_3988349707",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 24
+        },
+        {
+          "group": "Global Fire Gem Level",
+          "stat_id": "explicit.stat_599749213",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 1
+        },
+        {
+          "group": "Global Skill Gem Level",
+          "stat_id": "explicit.stat_4283407333",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 1
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 2,
+        "sampled": 2,
+        "prices_chaos": [
+          302.7,
+          3632.4
+        ],
+        "p10": 303,
+        "p25": 303,
+        "median": 1968,
+        "p75": 3632,
+        "p90": 3632,
+        "common_base": "Coral Amulet"
+      },
+      "common_base": "Coral Amulet",
+      "base_cost_chaos": 5.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "chieftain___righteous_fire_gloves",
+      "build": "Chieftain / Righteous Fire",
+      "play_pct": 4.5,
+      "slot": "gloves",
+      "category": "armour.gloves",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 91
+        },
+        {
+          "group": "Life Regeneration Rate",
+          "stat_id": "explicit.stat_44972811",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 20
+        },
+        {
+          "group": "Chaos Resistance",
+          "stat_id": "explicit.stat_2923486259",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 31
+        },
+        {
+          "group": "Dexterity",
+          "stat_id": "explicit.stat_3261801346",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 56
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 37,
+        "sampled": 10,
+        "prices_chaos": [
+          5.0,
+          9.0,
+          10.0,
+          10.0,
+          16.0,
+          20.0,
+          25.0,
+          40.0,
+          40.0,
+          40.0
+        ],
+        "p10": 9,
+        "p25": 10,
+        "median": 18,
+        "p75": 40,
+        "p90": 40,
+        "common_base": "Wyvernscale Gauntlets"
+      },
+      "common_base": "Wyvernscale Gauntlets",
+      "base_cost_chaos": 59.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "chieftain___righteous_fire_boots",
+      "build": "Chieftain / Righteous Fire",
+      "play_pct": 4.5,
       "slot": "boots",
       "category": "armour.boots",
       "influence": null,
       "required_mods": [
         {
-          "group": "Movement Velocity",
-          "stat_id": "explicit.stat_2250533757",
-          "influence": null,
-          "tier_floor": 8,
-          "min_value": 10
-        },
-        {
           "group": "Increased Life",
           "stat_id": "explicit.stat_3299347043",
           "influence": null,
-          "tier_floor": 10,
-          "min_value": 3
+          "tier_floor": 1,
+          "min_value": 91
+        },
+        {
+          "group": "Movement Velocity",
+          "stat_id": "explicit.stat_2250533757",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 35
         },
         {
           "group": "Fire Resistance",
@@ -334,49 +808,48 @@
           "min_value": 31
         }
       ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
       "price_data": {
-        "total_listings": 18,
-        "sampled": 10,
+        "total_listings": 1,
+        "sampled": 1,
         "prices_chaos": [
-          10.0,
-          20.0,
-          50.0,
-          50.0,
-          200.0,
-          272.1,
-          272.1,
-          272.1,
-          272.1,
-          272.1
+          4540.5
         ],
-        "p10": 20,
-        "p25": 50,
-        "median": 236,
-        "p75": 272,
-        "p90": 272
-      }
+        "p10": 4540,
+        "p25": 4540,
+        "median": 4540,
+        "p75": 4540,
+        "p90": 4540,
+        "common_base": "Phantom Boots"
+      },
+      "common_base": "Phantom Boots",
+      "base_cost_chaos": 54.5,
+      "is_fractured_base": false
     },
     {
-      "id": "hierophant___kinetic_fusillade_body_armour",
-      "build": "Hierophant / Kinetic Fusillade",
-      "play_pct": 4.0,
+      "id": "deadeye___kinetic_blast_body_armour",
+      "build": "Deadeye / Kinetic Blast",
+      "play_pct": 4.1,
       "slot": "body_armour",
       "category": "armour.chest",
       "influence": null,
       "required_mods": [
         {
-          "group": "Local Armour And Energy Shield",
-          "stat_id": "explicit.stat_3321629045",
+          "group": "Chance To Suppress Spells",
+          "stat_id": "explicit.stat_492027537",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 20
+        },
+        {
+          "group": "Local Evasion And Energy Shield",
+          "stat_id": "explicit.stat_1999113824",
           "influence": null,
           "tier_floor": 1,
           "min_value": 101
-        },
-        {
-          "group": "Local Physical Damage Reduction Rating",
-          "stat_id": "explicit.stat_3484657501",
-          "influence": null,
-          "tier_floor": 1,
-          "min_value": 390
         },
         {
           "group": "Local Energy Shield",
@@ -386,59 +859,695 @@
           "min_value": 88
         },
         {
+          "group": "Local Evasion Rating",
+          "stat_id": "explicit.stat_53045048",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 390
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": null,
+      "common_base": "Necrotic Armour",
+      "base_cost_chaos": 10.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___kinetic_blast_gloves",
+      "build": "Deadeye / Kinetic Blast",
+      "play_pct": 4.1,
+      "slot": "gloves",
+      "category": "armour.gloves",
+      "influence": "crusader",
+      "required_mods": [
+        {
           "group": "Cold Resistance",
           "stat_id": "explicit.stat_4220027924",
           "influence": null,
           "tier_floor": 1,
           "min_value": 46
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 91
+        },
+        {
+          "group": "Increased Attack Speed",
+          "stat_id": "explicit.stat_681332047",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 17
+        },
+        {
+          "group": "Convert Physical To Cold",
+          "stat_id": "explicit.stat_2133341901",
+          "influence": "crusader",
+          "tier_floor": 1,
+          "min_value": 22
         }
       ],
+      "fractured_group": "Cold Resistance",
+      "fractured_stat_id": "explicit.stat_4220027924",
+      "fractured_min_value": 46,
+      "fractured_freq_pct": 77.9,
       "price_data": {
-        "total_listings": 9,
-        "sampled": 4,
+        "total_listings": 100,
+        "sampled": 10,
         "prices_chaos": [
-          10.0,
-          272.1,
-          8163.0,
-          108840.0
+          1.0,
+          1.0,
+          1.0,
+          3.0,
+          3.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0
         ],
-        "p10": 10,
-        "p25": 272,
-        "median": 4218,
-        "p75": 108840,
-        "p90": 108840
-      }
+        "p10": 1,
+        "p25": 1,
+        "median": 4,
+        "p75": 5,
+        "p90": 5,
+        "common_base": "Harpyskin Gloves"
+      },
+      "common_base": "Harpyskin Gloves",
+      "base_cost_chaos": null,
+      "is_fractured_base": false
     },
     {
-      "id": "hierophant___kinetic_fusillade_gloves",
-      "build": "Hierophant / Kinetic Fusillade",
-      "play_pct": 4.0,
-      "slot": "gloves",
-      "category": "armour.gloves",
+      "id": "deadeye___kinetic_blast_helmet",
+      "build": "Deadeye / Kinetic Blast",
+      "play_pct": 4.1,
+      "slot": "helmet",
+      "category": "armour.helmet",
       "influence": null,
       "required_mods": [
         {
           "group": "Increased Life",
           "stat_id": "explicit.stat_3299347043",
           "influence": null,
-          "tier_floor": 10,
-          "min_value": 3
+          "tier_floor": 2,
+          "min_value": 130
         },
         {
-          "group": "Increased Attack Speed",
-          "stat_id": "explicit.stat_681332047",
+          "group": "Item Found Rarity Increase Prefix",
+          "stat_id": "explicit.stat_3917489142",
           "influence": null,
-          "tier_floor": 6,
-          "min_value": 5
+          "tier_floor": 1,
+          "min_value": 19
         },
         {
-          "group": "Increased Accuracy",
-          "stat_id": "explicit.stat_691932474",
+          "group": "Local Evasion And Energy Shield",
+          "stat_id": "explicit.stat_1999113824",
           "influence": null,
-          "tier_floor": 6,
-          "min_value": 50
+          "tier_floor": 1,
+          "min_value": 92
         }
       ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 5,
+        "sampled": 1,
+        "prices_chaos": [
+          1513.5
+        ],
+        "p10": 1514,
+        "p25": 1514,
+        "median": 1514,
+        "p75": 1514,
+        "p90": 1514,
+        "common_base": "Torturer's Mask"
+      },
+      "common_base": "Torturer's Mask",
+      "base_cost_chaos": 59.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___kinetic_blast_ring",
+      "build": "Deadeye / Kinetic Blast",
+      "play_pct": 4.1,
+      "slot": "ring",
+      "category": "accessory.ring",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 130
+        },
+        {
+          "group": "Item Found Rarity Increase Prefix",
+          "stat_id": "explicit.stat_3917489142",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 25
+        },
+        {
+          "group": "Critical Strike Multiplier",
+          "stat_id": "explicit.stat_3556824919",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 21
+        },
+        {
+          "group": "Chaos Resistance",
+          "stat_id": "explicit.stat_2923486259",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 31
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 51,
+        "sampled": 10,
+        "prices_chaos": [
+          5.0,
+          5.0,
+          5.0,
+          10.0,
+          20.0,
+          30.0,
+          30.0,
+          30.0,
+          42.0,
+          50.0
+        ],
+        "p10": 5,
+        "p25": 5,
+        "median": 25,
+        "p75": 30,
+        "p90": 50,
+        "common_base": "Bone Ring"
+      },
+      "common_base": "Bone Ring",
+      "base_cost_chaos": 69.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___kinetic_blast_boots",
+      "build": "Deadeye / Kinetic Blast",
+      "play_pct": 4.1,
+      "slot": "boots",
+      "category": "armour.boots",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Movement Velocity",
+          "stat_id": "explicit.stat_2250533757",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 35
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 91
+        },
+        {
+          "group": "Avoid Elemental Status Ailments",
+          "stat_id": "explicit.stat_3005472710",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 31
+        },
+        {
+          "group": "Local Evasion And Energy Shield",
+          "stat_id": "explicit.stat_1999113824",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 92
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 75,
+        "sampled": 10,
+        "prices_chaos": [
+          1.0,
+          8.0,
+          9.0,
+          10.0,
+          10.0,
+          19.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0
+        ],
+        "p10": 8,
+        "p25": 9,
+        "median": 14,
+        "p75": 20,
+        "p90": 20,
+        "common_base": "Runic Sabatons"
+      },
+      "common_base": "Runic Sabatons",
+      "base_cost_chaos": null,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___kinetic_blast_amulet",
+      "build": "Deadeye / Kinetic Blast",
+      "play_pct": 4.1,
+      "slot": "amulet",
+      "category": "accessory.amulet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Critical Strike Multiplier",
+          "stat_id": "explicit.stat_3556824919",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 35
+        },
+        {
+          "group": "Item Found Rarity Increase Prefix",
+          "stat_id": "explicit.stat_3917489142",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 25
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 50,
+        "sampled": 10,
+        "prices_chaos": [
+          3.0,
+          4.0,
+          5.0,
+          5.0,
+          5.0,
+          8.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0
+        ],
+        "p10": 4,
+        "p25": 5,
+        "median": 6,
+        "p75": 10,
+        "p90": 10,
+        "common_base": "Citrine Amulet"
+      },
+      "common_base": "Citrine Amulet",
+      "base_cost_chaos": 20.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___unknown_body_armour",
+      "build": "Deadeye / Unknown",
+      "play_pct": 4.1,
+      "slot": "body_armour",
+      "category": "armour.chest",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 175
+        },
+        {
+          "group": "Stun Recovery",
+          "stat_id": "explicit.stat_2511217560",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 23
+        },
+        {
+          "group": "Cold Resistance",
+          "stat_id": "explicit.stat_4220027924",
+          "influence": null,
+          "tier_floor": 5,
+          "min_value": 24
+        },
+        {
+          "group": "Lightning Resistance",
+          "stat_id": "explicit.stat_1671376347",
+          "influence": null,
+          "tier_floor": 3,
+          "min_value": 36
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 2,
+        "sampled": 2,
+        "prices_chaos": [
+          280.0,
+          302.7
+        ],
+        "p10": 280,
+        "p25": 280,
+        "median": 291,
+        "p75": 303,
+        "p90": 303,
+        "common_base": "Carnal Armour"
+      },
+      "common_base": "Carnal Armour",
+      "base_cost_chaos": 171.3,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___unknown_amulet",
+      "build": "Deadeye / Unknown",
+      "play_pct": 4.1,
+      "slot": "amulet",
+      "category": "accessory.amulet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Strength",
+          "stat_id": "explicit.stat_4080418644",
+          "influence": null,
+          "tier_floor": 3,
+          "min_value": 43
+        },
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 74
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 4,
+          "min_value": 85
+        },
+        {
+          "group": "Item Found Rarity Increase Prefix",
+          "stat_id": "explicit.stat_3917489142",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 25
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 45,
+        "sampled": 10,
+        "prices_chaos": [
+          2.0,
+          5.0,
+          5.0,
+          5.0,
+          7.0,
+          10.0,
+          10.0,
+          12.0,
+          19.0,
+          20.0
+        ],
+        "p10": 5,
+        "p25": 5,
+        "median": 8,
+        "p75": 12,
+        "p90": 20,
+        "common_base": "Onyx Amulet"
+      },
+      "common_base": "Onyx Amulet",
+      "base_cost_chaos": 9.5,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___unknown_boots",
+      "build": "Deadeye / Unknown",
+      "play_pct": 4.1,
+      "slot": "boots",
+      "category": "armour.boots",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Lightning Resistance",
+          "stat_id": "explicit.stat_1671376347",
+          "influence": null,
+          "tier_floor": 3,
+          "min_value": 36
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 115
+        },
+        {
+          "group": "Cold Resistance",
+          "stat_id": "explicit.stat_4220027924",
+          "influence": null,
+          "tier_floor": 3,
+          "min_value": 36
+        },
+        {
+          "group": "Stun Recovery",
+          "stat_id": "explicit.stat_2511217560",
+          "influence": null,
+          "tier_floor": 5,
+          "min_value": 14
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 21,
+        "sampled": 10,
+        "prices_chaos": [
+          3.0,
+          5.0,
+          9.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          15.0,
+          15.0
+        ],
+        "p10": 5,
+        "p25": 9,
+        "median": 10,
+        "p75": 10,
+        "p90": 15,
+        "common_base": "Arcanist Slippers"
+      },
+      "common_base": "Arcanist Slippers",
+      "base_cost_chaos": null,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___unknown_ring",
+      "build": "Deadeye / Unknown",
+      "play_pct": 4.1,
+      "slot": "ring",
+      "category": "accessory.ring",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Strength",
+          "stat_id": "explicit.stat_4080418644",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 51
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 3,
+          "min_value": 100
+        },
+        {
+          "group": "Evasion Rating",
+          "stat_id": "explicit.stat_53045048",
+          "influence": null,
+          "tier_floor": 3,
+          "min_value": 121
+        },
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 74
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 100,
+        "sampled": 10,
+        "prices_chaos": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          2.0,
+          3.0,
+          3.0,
+          5.0
+        ],
+        "p10": 1,
+        "p25": 1,
+        "median": 1,
+        "p75": 3,
+        "p90": 5,
+        "common_base": "Gold Ring"
+      },
+      "common_base": "Gold Ring",
+      "base_cost_chaos": 5.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___unknown_gloves",
+      "build": "Deadeye / Unknown",
+      "play_pct": 4.1,
+      "slot": "gloves",
+      "category": "armour.gloves",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Fire Resistance",
+          "stat_id": "explicit.stat_3372524247",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 46
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 115
+        },
+        {
+          "group": "Dexterity",
+          "stat_id": "explicit.stat_3261801346",
+          "influence": null,
+          "tier_floor": 4,
+          "min_value": 43
+        },
+        {
+          "group": "Local Evasion Rating",
+          "stat_id": "explicit.stat_53045048",
+          "influence": null,
+          "tier_floor": 4,
+          "min_value": 83
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 88,
+        "sampled": 10,
+        "prices_chaos": [
+          1.0,
+          1.0,
+          1.0,
+          3.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0
+        ],
+        "p10": 1,
+        "p25": 1,
+        "median": 5,
+        "p75": 5,
+        "p90": 5,
+        "common_base": "Shagreen Gloves"
+      },
+      "common_base": "Shagreen Gloves",
+      "base_cost_chaos": 10.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___unknown_helmet",
+      "build": "Deadeye / Unknown",
+      "play_pct": 4.1,
+      "slot": "helmet",
+      "category": "armour.helmet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Cold Resistance",
+          "stat_id": "explicit.stat_4220027924",
+          "influence": null,
+          "tier_floor": 4,
+          "min_value": 30
+        },
+        {
+          "group": "Stun Recovery",
+          "stat_id": "explicit.stat_2511217560",
+          "influence": null,
+          "tier_floor": 6,
+          "min_value": 11
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 4,
+          "min_value": 100
+        },
+        {
+          "group": "Local Evasion Rating Increase Percent",
+          "stat_id": "explicit.stat_2106365538",
+          "influence": null,
+          "tier_floor": 5,
+          "min_value": 43
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
       "price_data": {
         "total_listings": 100,
         "sampled": 9,
@@ -457,13 +1566,190 @@
         "p25": 1,
         "median": 1,
         "p75": 1,
-        "p90": 1
-      }
+        "p90": 1,
+        "common_base": "Siege Helmet"
+      },
+      "common_base": "Siege Helmet",
+      "base_cost_chaos": 44.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "deadeye___unknown_belt",
+      "build": "Deadeye / Unknown",
+      "play_pct": 4.1,
+      "slot": "belt",
+      "category": "accessory.belt",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Fire Resistance",
+          "stat_id": "explicit.stat_3372524247",
+          "influence": null,
+          "tier_floor": 4,
+          "min_value": 30
+        },
+        {
+          "group": "Physical Damage Reduction Rating",
+          "stat_id": "explicit.stat_3484657501",
+          "influence": null,
+          "tier_floor": 6,
+          "min_value": 61
+        },
+        {
+          "group": "Energy Shield",
+          "stat_id": "explicit.stat_4052037485",
+          "influence": null,
+          "tier_floor": 8,
+          "min_value": 16
+        },
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 5,
+          "min_value": 45
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": null,
+      "common_base": "Leather Belt",
+      "base_cost_chaos": 22.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "hierophant___unknown_boots",
+      "build": "Hierophant / Unknown",
+      "play_pct": 3.1,
+      "slot": "boots",
+      "category": "armour.boots",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Movement Velocity",
+          "stat_id": "explicit.stat_2250533757",
+          "influence": null,
+          "tier_floor": 3,
+          "min_value": 30
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 115
+        },
+        {
+          "group": "Fire Resistance",
+          "stat_id": "explicit.stat_3372524247",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 46
+        },
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 69
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 100,
+        "sampled": 10,
+        "prices_chaos": [
+          1.0,
+          2.0,
+          2.0,
+          3.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0
+        ],
+        "p10": 2,
+        "p25": 2,
+        "median": 5,
+        "p75": 5,
+        "p90": 5,
+        "common_base": "Slink Boots"
+      },
+      "common_base": "Slink Boots",
+      "base_cost_chaos": null,
+      "is_fractured_base": false
+    },
+    {
+      "id": "hierophant___kinetic_blast_of_clustering_gloves",
+      "build": "Hierophant / Kinetic Blast of Clustering",
+      "play_pct": 2.3,
+      "slot": "gloves",
+      "category": "armour.gloves",
+      "influence": "crusader",
+      "required_mods": [
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 69
+        },
+        {
+          "group": "Increased Attack Speed",
+          "stat_id": "explicit.stat_681332047",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 17
+        },
+        {
+          "group": "Convert Physical To Lightning",
+          "stat_id": "explicit.stat_3240769289",
+          "influence": "crusader",
+          "tier_floor": 1,
+          "min_value": 22
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 91
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 5,
+        "sampled": 3,
+        "prices_chaos": [
+          9.0,
+          110.0,
+          908.1
+        ],
+        "p10": 9,
+        "p25": 9,
+        "median": 110,
+        "p75": 908,
+        "p90": 908,
+        "common_base": "Warlock Gloves"
+      },
+      "common_base": "Warlock Gloves",
+      "base_cost_chaos": 10.5,
+      "is_fractured_base": false
     },
     {
       "id": "hierophant___kinetic_blast_of_clustering_body_armour",
       "build": "Hierophant / Kinetic Blast of Clustering",
-      "play_pct": 3.0,
+      "play_pct": 2.3,
       "slot": "body_armour",
       "category": "armour.chest",
       "influence": null,
@@ -476,11 +1762,18 @@
           "min_value": 88
         },
         {
-          "group": "Fire Resistance",
-          "stat_id": "explicit.stat_3372524247",
+          "group": "Local Energy Shield Percent",
+          "stat_id": "explicit.stat_4015621042",
           "influence": null,
           "tier_floor": 1,
-          "min_value": 46
+          "min_value": 101
+        },
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 69
         },
         {
           "group": "Intelligence",
@@ -488,58 +1781,51 @@
           "influence": null,
           "tier_floor": 1,
           "min_value": 51
-        },
-        {
-          "group": "Increased Mana",
-          "stat_id": "explicit.stat_1050105434",
-          "influence": null,
-          "tier_floor": 1,
-          "min_value": 69
         }
       ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
       "price_data": {
-        "total_listings": 60,
-        "sampled": 10,
+        "total_listings": 3,
+        "sampled": 2,
         "prices_chaos": [
-          1.0,
-          5.0,
-          5.0,
-          5.0,
-          6.0,
-          9.0,
-          10.0,
-          10.0,
-          10.0,
-          20.0
+          3027.0,
+          4540.5
         ],
-        "p10": 5,
-        "p25": 5,
-        "median": 8,
-        "p75": 10,
-        "p90": 20
-      }
+        "p10": 3027,
+        "p25": 3027,
+        "median": 3784,
+        "p75": 4540,
+        "p90": 4540,
+        "common_base": "Twilight Regalia"
+      },
+      "common_base": "Twilight Regalia",
+      "base_cost_chaos": 10.0,
+      "is_fractured_base": false
     },
     {
       "id": "hierophant___kinetic_blast_of_clustering_boots",
       "build": "Hierophant / Kinetic Blast of Clustering",
-      "play_pct": 3.0,
+      "play_pct": 2.3,
       "slot": "boots",
       "category": "armour.boots",
       "influence": null,
       "required_mods": [
         {
+          "group": "Movement Velocity",
+          "stat_id": "explicit.stat_2250533757",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 35
+        },
+        {
           "group": "Increased Mana",
           "stat_id": "explicit.stat_1050105434",
           "influence": null,
           "tier_floor": 1,
           "min_value": 69
-        },
-        {
-          "group": "Movement Velocity",
-          "stat_id": "explicit.stat_2250533757",
-          "influence": null,
-          "tier_floor": 8,
-          "min_value": 10
         },
         {
           "group": "Intelligence",
@@ -556,23 +1842,220 @@
           "min_value": 46
         }
       ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
       "price_data": {
-        "total_listings": 1,
-        "sampled": 1,
+        "total_listings": 10,
+        "sampled": 10,
         "prices_chaos": [
-          94.0
+          20.0,
+          22.0,
+          25.0,
+          40.0,
+          50.0,
+          302.7,
+          302.7,
+          302.7,
+          302.7,
+          1816.2
         ],
-        "p10": 94,
-        "p25": 94,
-        "median": 94,
-        "p75": 94,
-        "p90": 94
-      }
+        "p10": 22,
+        "p25": 25,
+        "median": 176,
+        "p75": 303,
+        "p90": 1816,
+        "common_base": "Paladin Boots"
+      },
+      "common_base": "Paladin Boots",
+      "base_cost_chaos": 59.0,
+      "is_fractured_base": false
     },
     {
-      "id": "chieftain___righteous_fire_ring",
-      "build": "Chieftain / Righteous Fire",
-      "play_pct": 2.0,
+      "id": "hierophant___kinetic_blast_of_clustering_amulet",
+      "build": "Hierophant / Kinetic Blast of Clustering",
+      "play_pct": 2.3,
+      "slot": "amulet",
+      "category": "accessory.amulet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 74
+        },
+        {
+          "group": "Critical Strike Multiplier",
+          "stat_id": "explicit.stat_3556824919",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 35
+        },
+        {
+          "group": "Increased Life",
+          "stat_id": "explicit.stat_3299347043",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 130
+        },
+        {
+          "group": "Intelligence",
+          "stat_id": "explicit.stat_328541901",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 51
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 32,
+        "sampled": 10,
+        "prices_chaos": [
+          1.0,
+          2.0,
+          5.0,
+          10.0,
+          10.0,
+          19.0,
+          20.0,
+          20.0,
+          20.0,
+          30.0
+        ],
+        "p10": 2,
+        "p25": 5,
+        "median": 14,
+        "p75": 20,
+        "p90": 30,
+        "common_base": "Amber Amulet"
+      },
+      "common_base": "Amber Amulet",
+      "base_cost_chaos": 302.7,
+      "is_fractured_base": false
+    },
+    {
+      "id": "hierophant___kinetic_blast_of_clustering_ring",
+      "build": "Hierophant / Kinetic Blast of Clustering",
+      "play_pct": 2.3,
+      "slot": "ring",
+      "category": "accessory.ring",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 74
+        },
+        {
+          "group": "Critical Strike Multiplier",
+          "stat_id": "explicit.stat_3556824919",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 21
+        },
+        {
+          "group": "Intelligence",
+          "stat_id": "explicit.stat_328541901",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 51
+        },
+        {
+          "group": "Strength",
+          "stat_id": "explicit.stat_4080418644",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 51
+        }
+      ],
+      "fractured_group": "Critical Strike Multiplier",
+      "fractured_stat_id": "explicit.stat_3556824919",
+      "fractured_min_value": 21,
+      "fractured_freq_pct": 50.0,
+      "price_data": {
+        "total_listings": 12,
+        "sampled": 10,
+        "prices_chaos": [
+          10.0,
+          25.0,
+          25.0,
+          60.0,
+          1513.5,
+          1513.5,
+          1513.5,
+          1513.5,
+          6054.0,
+          111696.3
+        ],
+        "p10": 25,
+        "p25": 25,
+        "median": 1514,
+        "p75": 1514,
+        "p90": 111696,
+        "common_base": "Manifold Ring"
+      },
+      "common_base": "Manifold Ring",
+      "base_cost_chaos": 1513.5,
+      "is_fractured_base": true
+    },
+    {
+      "id": "hierophant___kinetic_blast_of_clustering_helmet",
+      "build": "Hierophant / Kinetic Blast of Clustering",
+      "play_pct": 2.3,
+      "slot": "helmet",
+      "category": "armour.helmet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 2,
+          "min_value": 69
+        },
+        {
+          "group": "Local Energy Shield Percent",
+          "stat_id": "explicit.stat_4015621042",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 92
+        },
+        {
+          "group": "Local Energy Shield",
+          "stat_id": "explicit.stat_4052037485",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 52
+        },
+        {
+          "group": "Intelligence",
+          "stat_id": "explicit.stat_328541901",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 56
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": null,
+      "common_base": "Lich's Circlet",
+      "base_cost_chaos": 7.5,
+      "is_fractured_base": false
+    },
+    {
+      "id": "slayer___unknown_ring",
+      "build": "Slayer / Unknown",
+      "play_pct": 1.9,
       "slot": "ring",
       "category": "accessory.ring",
       "influence": null,
@@ -581,39 +2064,328 @@
           "group": "Increased Life",
           "stat_id": "explicit.stat_3299347043",
           "influence": null,
-          "tier_floor": 8,
-          "min_value": 3
+          "tier_floor": 4,
+          "min_value": 85
         },
         {
-          "group": "Fire Damage Percentage",
-          "stat_id": "explicit.stat_3962278098",
-          "influence": null,
-          "tier_floor": 5,
-          "min_value": 3
-        },
-        {
-          "group": "Global Damage Over Time Multiplier",
-          "stat_id": "explicit.stat_3988349707",
+          "group": "All Resistances",
+          "stat_id": "explicit.stat_2901986750",
           "influence": null,
           "tier_floor": 1,
-          "min_value": 12
+          "min_value": 15
+        },
+        {
+          "group": "Increased Accuracy",
+          "stat_id": "explicit.stat_691932474",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 351
+        },
+        {
+          "group": "Evasion Rating",
+          "stat_id": "explicit.stat_53045048",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 151
         }
       ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
       "price_data": {
-        "total_listings": 4,
-        "sampled": 4,
+        "total_listings": 100,
+        "sampled": 10,
         "prices_chaos": [
-          272.1,
-          4081.5,
-          5986.2,
-          20407.5
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          2.0,
+          2.0,
+          2.0
         ],
-        "p10": 272,
-        "p25": 4082,
-        "median": 5034,
-        "p75": 20408,
-        "p90": 20408
-      }
+        "p10": 1,
+        "p25": 1,
+        "median": 1,
+        "p75": 2,
+        "p90": 2,
+        "common_base": "Two-Stone Ring"
+      },
+      "common_base": "Two-Stone Ring",
+      "base_cost_chaos": 10.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "necromancer___kinetic_blast_of_clustering_gloves",
+      "build": "Necromancer / Kinetic Blast of Clustering",
+      "play_pct": 1.9,
+      "slot": "gloves",
+      "category": "armour.gloves",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Local Energy Shield Percent",
+          "stat_id": "explicit.stat_4015621042",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 92
+        },
+        {
+          "group": "Local Energy Shield",
+          "stat_id": "explicit.stat_4052037485",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 38
+        },
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 69
+        },
+        {
+          "group": "Intelligence",
+          "stat_id": "explicit.stat_328541901",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 51
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": null,
+      "common_base": "Warlock Gloves",
+      "base_cost_chaos": 10.5,
+      "is_fractured_base": false
+    },
+    {
+      "id": "necromancer___kinetic_blast_of_clustering_boots",
+      "build": "Necromancer / Kinetic Blast of Clustering",
+      "play_pct": 1.9,
+      "slot": "boots",
+      "category": "armour.boots",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Movement Velocity",
+          "stat_id": "explicit.stat_2250533757",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 35
+        },
+        {
+          "group": "Local Energy Shield Percent",
+          "stat_id": "explicit.stat_4015621042",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 92
+        },
+        {
+          "group": "Cold Resistance",
+          "stat_id": "explicit.stat_4220027924",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 46
+        },
+        {
+          "group": "Fire Resistance",
+          "stat_id": "explicit.stat_3372524247",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 46
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 6,
+        "sampled": 6,
+        "prices_chaos": [
+          50.0,
+          120.0,
+          220.0,
+          9081.0,
+          10594.5,
+          16648.5
+        ],
+        "p10": 50,
+        "p25": 120,
+        "median": 4650,
+        "p75": 10594,
+        "p90": 16648,
+        "common_base": "Warlock Boots"
+      },
+      "common_base": "Warlock Boots",
+      "base_cost_chaos": 49.0,
+      "is_fractured_base": false
+    },
+    {
+      "id": "necromancer___kinetic_blast_of_clustering_helmet",
+      "build": "Necromancer / Kinetic Blast of Clustering",
+      "play_pct": 1.9,
+      "slot": "helmet",
+      "category": "armour.helmet",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Local Energy Shield Percent",
+          "stat_id": "explicit.stat_4015621042",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 92
+        },
+        {
+          "group": "Local Energy Shield",
+          "stat_id": "explicit.stat_4052037485",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 52
+        },
+        {
+          "group": "Intelligence",
+          "stat_id": "explicit.stat_328541901",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 56
+        },
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 69
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": null,
+      "common_base": "Lich's Circlet",
+      "base_cost_chaos": 7.5,
+      "is_fractured_base": false
+    },
+    {
+      "id": "necromancer___kinetic_blast_of_clustering_body_armour",
+      "build": "Necromancer / Kinetic Blast of Clustering",
+      "play_pct": 1.9,
+      "slot": "body_armour",
+      "category": "armour.chest",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Local Energy Shield Percent",
+          "stat_id": "explicit.stat_4015621042",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 101
+        },
+        {
+          "group": "Local Energy Shield",
+          "stat_id": "explicit.stat_4052037485",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 88
+        },
+        {
+          "group": "Stun Recovery",
+          "stat_id": "explicit.stat_2511217560",
+          "influence": null,
+          "tier_floor": 4,
+          "min_value": 17
+        },
+        {
+          "group": "Intelligence",
+          "stat_id": "explicit.stat_328541901",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 51
+        }
+      ],
+      "fractured_group": "Local Energy Shield Percent",
+      "fractured_stat_id": "explicit.stat_4015621042",
+      "fractured_min_value": 101,
+      "fractured_freq_pct": 38.7,
+      "price_data": null,
+      "common_base": "Twilight Regalia",
+      "base_cost_chaos": 15.0,
+      "is_fractured_base": true
+    },
+    {
+      "id": "necromancer___kinetic_blast_of_clustering_ring",
+      "build": "Necromancer / Kinetic Blast of Clustering",
+      "play_pct": 1.9,
+      "slot": "ring",
+      "category": "accessory.ring",
+      "influence": null,
+      "required_mods": [
+        {
+          "group": "Increased Mana",
+          "stat_id": "explicit.stat_1050105434",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 74
+        },
+        {
+          "group": "Intelligence",
+          "stat_id": "explicit.stat_328541901",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 51
+        },
+        {
+          "group": "Critical Strike Multiplier",
+          "stat_id": "explicit.stat_3556824919",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 21
+        },
+        {
+          "group": "Item Found Rarity Increase Prefix",
+          "stat_id": "explicit.stat_3917489142",
+          "influence": null,
+          "tier_floor": 1,
+          "min_value": 25
+        }
+      ],
+      "fractured_group": null,
+      "fractured_stat_id": null,
+      "fractured_min_value": null,
+      "fractured_freq_pct": 0.0,
+      "price_data": {
+        "total_listings": 100,
+        "sampled": 10,
+        "prices_chaos": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          2.0
+        ],
+        "p10": 1,
+        "p25": 1,
+        "median": 1,
+        "p75": 1,
+        "p90": 2,
+        "common_base": "Two-Stone Ring"
+      },
+      "common_base": "Two-Stone Ring",
+      "base_cost_chaos": 10.0,
+      "is_fractured_base": false
     }
   ]
 }

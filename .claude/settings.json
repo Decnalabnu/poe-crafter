@@ -25,7 +25,30 @@
       "Bash(rm test_ceiling.cjs)",
       "Bash(node test_verify.cjs)",
       "Bash(rm test_verify.cjs)",
-      "Bash(node test_fossil_suffix.cjs)"
+      "Bash(node test_fossil_suffix.cjs)",
+      "Bash(python3 -c ':*)",
+      "Bash(python -c ':*)",
+      "Bash(python src/utils/scrape_builds.py --analyze)",
+      "Bash(grep -n \"formatChaos\\\\|function.*{$\\\\|export default function\" \"c:/Users/nwahi/poe-crafter/src/components/ProfitHeatmap.jsx\")",
+      "Bash(python src/utils/fetch_trade_prices.py --dry-run)",
+      "Bash(python src/utils/fetch_trade_prices.py --rebuild-map --dry-run)",
+      "Bash(python src/utils/fetch_trade_prices.py)",
+      "Bash(ls \"/c/Users/nwahi/poe-crafter/data/build_cache/trade_\"*)",
+      "Bash(ls data/build_cache/trade_base_*)",
+      "Bash(ls -la \"/c/Users/nwahi/poe-crafter/data/build_cache/trade_base_\"*)",
+      "Bash(ls \"/c/Users/nwahi/poe-crafter/data/build_cache/trade_base_\"*)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); priced=[t for t in d['targets'] if t.get\\('price_data'\\)]; print\\(f'Priced: {len\\(priced\\)}/40, with base: {sum\\(1 for t in d[\\\\\"targets\\\\\"] if t.get\\(\\\\\"base_cost_chaos\\\\\"\\) is not None\\)}'\\)\")",
+      "Bash(sort -k6,7)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(ls -la \"/c/Users/nwahi/poe-crafter/data/build_cache/trade_\"*.json)",
+      "Bash(rm data/build_cache/trade_base_saintly_chainmail_ilvl85.json)",
+      "Bash(python -c \"import json; d=json.load\\(open\\('src/data/active_economy.json', encoding='utf-8'\\)\\); print\\(list\\(d.keys\\(\\)\\)[:10]\\); print\\('divine_price:', d.get\\('divine_price'\\)\\); print\\('league:', d.get\\('league'\\)\\)\")",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(powershell -Command 'Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -like '\\\\''*fetch_trade_prices*'\\\\'' } | Stop-Process -Force')",
+      "Bash(taskkill //F //IM python.exe)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\nwahi\\poe-crafter\\data\\build_cache"
     ]
   }
 }

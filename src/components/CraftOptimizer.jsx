@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import itemsData from "../data/items.json";
-import economyData from "../data/active_economy.json";
+import { useEconomy } from "../contexts/EconomyContext";
 import { parseItemText } from "../utils/itemParser";
 import { generateCraftingRoutes } from "../utils/routePlanner";
 
@@ -252,14 +252,15 @@ function ItemModChecklist({ mods, unmatched, checkedIds, onToggle, fracturedId }
 // ---------------------------------------------------------------------------
 // RouteTable
 // ---------------------------------------------------------------------------
-function RouteTable({ routes, divinePrice }) {
-  if (routes.length === 0) return null;
+function RouteTable({ routes: allRoutes, divinePrice }) {
+  if (allRoutes.length === 0) return null;
+  const routes = allRoutes.slice(0, 10);
   const cheapest = routes[0].expectedCostChaos;
 
   return (
     <div style={{ marginTop: "16px" }}>
       <div style={{ color: "#4CAF50", fontWeight: "bold", fontSize: "12px", letterSpacing: "0.05em", marginBottom: "10px" }}>
-        CRAFTING ROUTES — RANKED BY COST
+        CRAFTING ROUTES — RANKED BY COST{allRoutes.length > 10 ? ` (top 10 of ${allRoutes.length})` : ""}
       </div>
       <div style={{ background: "#1a1a1a", border: "1px solid #333", borderRadius: "6px", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
@@ -323,6 +324,7 @@ function RouteTable({ routes, divinePrice }) {
 // Root
 // ---------------------------------------------------------------------------
 export default function CraftOptimizer() {
+  const economyData = useEconomy();
   const [parsedItem, setParsedItem] = useState(null);
   const [itemClass, setItemClass] = useState("ring");
   const [influence, setInfluence] = useState(null);
