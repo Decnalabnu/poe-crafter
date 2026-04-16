@@ -31,7 +31,7 @@ import requests
 LEAGUE = json.load(open("src/data/active_economy.json")).get("league", "Mirage")
 PAGE_SIZE = 200             # GGG hard cap per request
 MAX_LADDER_PAGES = 75       # GGG ladder hard cap: 15,000 entries total (75 × 200)
-TARGET_PUBLIC_CHARS = 2000  # stop early once we have this many public characters fetched
+TARGET_PUBLIC_CHARS = 5000  # stop early once we have this many public characters fetched
 REQUEST_DELAY = 2.5         # seconds between character item fetches (~24 req/min, adaptive backoff handles 429s)
 BATCH_SIZE = 40             # fetch this many characters, then pause
 BATCH_PAUSE = 20.0          # seconds to pause between batches
@@ -39,6 +39,10 @@ CONVERGENCE_MIN_SAMPLES = 150  # top builds need at least this many samples befo
 CONVERGENCE_TOP_N = 5          # number of top builds to monitor for stability
 CONVERGENCE_CHECK_INTERVAL = 250  # check convergence every N characters collected
 MIN_FREQUENCY_PCT = 0.15    # mod must appear in ≥15% of sampled items to be reported
+MIN_FREQUENCY_ABS = 3       # OR at least this many absolute hits (for small samples)
+MIN_LADDER_LEVEL  = 90      # skip ladder entries below this level (non-endgame gear pollutes the stats)
+EMPTY_CACHE_TTL_DAYS  = 7   # re-fetch character caches that were empty (private/404) after this many days
+LADDER_CACHE_TTL_HRS  = 24  # re-fetch ladder pages older than this so we pick up meta shifts across days
 CACHE_DIR = "data/build_cache"
 OUTPUT_FILE = "src/data/build_items.json"
 ITEMS_DB_FILE = "src/data/items.json"
@@ -55,7 +59,8 @@ SLOT_MAP = {
     "Boots":       "boots",
 }
 
-FRAME_TYPE_RARE = 2
+FRAME_TYPE_RARE   = 2
+FRAME_TYPE_UNIQUE = 3
 
 GGG_LADDER_URL = "https://api.pathofexile.com/ladders/{league}"
 GGG_ITEMS_URL  = "https://www.pathofexile.com/character-window/get-items"
@@ -262,6 +267,40 @@ def _load_cache(key: str):
     return None
 
 
+def _cache_age_hours(key: str) -> float | None:
+    """Age of a cache file in hours, or None if it doesn't exist."""
+    path = _cache_path(key)
+    if not os.path.exists(path):
+        return None
+    try:
+        return (time.time() - os.path.getmtime(path)) / 3600.0
+    except OSError:
+        return None
+
+
+def _empty_cache_is_stale(key: str) -> bool:
+    """
+    True when an item cache file exists, is empty ([] — private/404 at scrape time),
+    and is older than EMPTY_CACHE_TTL_DAYS. Used to periodically re-check profiles
+    that were private when first scraped in case they've flipped public.
+    """
+    path = _cache_path(key)
+    if not os.path.exists(path):
+        return False
+    try:
+        age_days = (time.time() - os.path.getmtime(path)) / 86400.0
+    except OSError:
+        return False
+    if age_days < EMPTY_CACHE_TTL_DAYS:
+        return False
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return False
+    return data == []
+
+
 def _save_cache(key: str, data):
     os.makedirs(CACHE_DIR, exist_ok=True)
     with open(_cache_path(key), "w", encoding="utf-8") as f:
@@ -279,8 +318,11 @@ def fetch_ladder(league: str, session: requests.Session) -> list:
         offset = page * PAGE_SIZE
         cache_key = f"ladder_{league}_{PAGE_SIZE}_{offset}"
         cached = _load_cache(cache_key)
-        if cached is not None:
-            print(f"  [cache] ladder page {page + 1} ({len(cached)} entries)")
+        # Re-fetch ladder pages older than LADDER_CACHE_TTL_HRS so meta shifts
+        # (new chars pushing old ones off, rerolls, deletions) are captured.
+        age_hrs = _cache_age_hours(cache_key)
+        if cached is not None and age_hrs is not None and age_hrs < LADDER_CACHE_TTL_HRS:
+            print(f"  [cache] ladder page {page + 1} ({len(cached)} entries, {age_hrs:.1f}h old)")
             all_entries.extend(cached)
             if len(cached) < PAGE_SIZE:
                 break  # last page was short — no more data
@@ -297,6 +339,14 @@ def fetch_ladder(league: str, session: requests.Session) -> list:
             entries = resp.json().get("entries", [])
         except Exception as e:
             print(f"  Warning: ladder page {page + 1} failed: {e}")
+            # If we had stale-but-valid data for this page, use it rather than
+            # losing coverage of this entire slice of the ladder.
+            if cached is not None:
+                print(f"    Falling back to stale cache ({len(cached)} entries)")
+                all_entries.extend(cached)
+                if len(cached) < PAGE_SIZE:
+                    break
+                continue
             break
 
         _save_cache(cache_key, entries)
@@ -312,8 +362,12 @@ def fetch_ladder(league: str, session: requests.Session) -> list:
 def fetch_character_items(account: str, char: str, session: requests.Session) -> list:
     cache_key = f"items_{account}_{char}"
     cached = _load_cache(cache_key)
-    if cached is not None:
+    if cached:
+        # Non-empty cache hit — always serve from disk.
         return cached
+    if cached == [] and not _empty_cache_is_stale(cache_key):
+        # Recently-cached empty (private/404) — skip re-fetch until TTL expires.
+        return []
 
     delay = REQUEST_DELAY
     for attempt in range(3):
@@ -325,7 +379,16 @@ def fetch_character_items(account: str, char: str, session: requests.Session) ->
                 timeout=15,
             )
             if resp.status_code in (403, 404):
-                # Private/missing profile — cache empty list so we don't retry
+                # Private/missing profile.  If we previously scraped this char
+                # successfully, KEEP the last-known-good snapshot — a character
+                # going private later shouldn't erase the mod data we already
+                # collected.  Just touch the file so the TTL clock restarts.
+                if cached:
+                    try:
+                        os.utime(_cache_path(cache_key), None)
+                    except OSError:
+                        pass
+                    return cached
                 _save_cache(cache_key, [])
                 return []
             if resp.status_code == 429:
@@ -357,10 +420,59 @@ def fetch_character_items(account: str, char: str, session: requests.Session) ->
 # Primary skill extraction
 # ---------------------------------------------------------------------------
 
+# Transfigured-skill → canonical base skill.  PoE transfigured gems use two
+# forms: "<Base> of <Modifier>" (e.g. "Kinetic Blast of Clustering") and a
+# handful of renamed variants (e.g. "Kinetic Fusillade" for KB).  The "of X"
+# form is handled generically by _canonicalize_skill; the renamed variants
+# need an explicit map.
+TRANSFIG_RENAME_MAP = {
+    "Kinetic Fusillade": "Kinetic Blast",
+}
+
+# Matches "Grants Level N <Skill Name> Skill" / "Triggers Level N <Skill> ..."
+_GRANTS_SKILL_RE  = re.compile(r"Grants Level \d+ (.+?) Skill", re.IGNORECASE)
+_TRIGGERS_SKILL_RE = re.compile(r"Triggers?\s+Level \d+ (.+?)\s+(?:when|on|every|each|after)", re.IGNORECASE)
+
+
+def _canonicalize_skill(skill: str) -> str:
+    """Fold transfigured variants onto their base skill for build grouping."""
+    if not skill or skill == "Unknown":
+        return skill
+    if skill in TRANSFIG_RENAME_MAP:
+        return TRANSFIG_RENAME_MAP[skill]
+    # "Kinetic Blast of Clustering" → "Kinetic Blast"
+    base = re.sub(r"\s+of\s+[A-Z][\w'-]*(?:\s+[A-Z][\w'-]*)*$", "", skill).strip()
+    return base or skill
+
+
+def _skill_from_item_mods(items: list) -> str:
+    """
+    Scan implicit/explicit/enchant mods across all items for skill-granting text.
+    Returns the granted skill name, or "" if none found.  Prefers the first
+    match on a non-swap slot (Weapon > Weapon2) since swap gear often carries
+    flask/utility grants unrelated to the main skill.
+    """
+    # Walk main-hand first, then everything else, so the active-slot grant wins.
+    ordered = sorted(items, key=lambda it: 0 if it.get("inventoryId") == "Weapon" else 1)
+    for item in ordered:
+        for key in ("enchantMods", "implicitMods", "explicitMods"):
+            for mod in item.get(key, []):
+                m = _GRANTS_SKILL_RE.search(mod)
+                if m:
+                    return m.group(1).strip()
+                m = _TRIGGERS_SKILL_RE.search(mod)
+                if m:
+                    return m.group(1).strip()
+    return ""
+
+
 def extract_primary_skill(items: list) -> str:
     """
-    Find the primary active skill by locating the most-linked non-Support gem.
-    Falls back to "Unknown" if no skill gems are found.
+    Find the primary active skill.  Resolution order:
+      1. Most-linked non-Support socketed gem (original behaviour).
+      2. Skill-granting item mod ("Grants Level N <Skill> Skill" / "Triggers ...").
+    Returns a canonicalized skill name (transfigured variants folded to base),
+    or "Unknown" if nothing can be determined.
     """
     best_gem = "Unknown"
     best_links = 0
@@ -392,7 +504,12 @@ def extract_primary_skill(items: list) -> str:
             best_gem = type_line
             break
 
-    return best_gem
+    if best_gem == "Unknown":
+        granted = _skill_from_item_mods(items)
+        if granted:
+            best_gem = granted
+
+    return _canonicalize_skill(best_gem)
 
 
 # ---------------------------------------------------------------------------
@@ -405,8 +522,16 @@ def scrape(league: str, session: requests.Session) -> dict:
     Returns raw: {account/char: {"items": [...], "char_class": "..."}}
     """
     entries = fetch_ladder(league, session)
-    public_entries = [e for e in entries if e.get("public")]
-    print(f"  {len(public_entries)} public characters out of {len(entries)}")
+    # Only keep public characters at endgame level — sub-90 chars pollute slot
+    # samples with early-mapping gear that doesn't reflect what the build runs.
+    public_entries = [
+        e for e in entries
+        if e.get("public") and e.get("character", {}).get("level", 0) >= MIN_LADDER_LEVEL
+    ]
+    print(
+        f"  {len(public_entries)} public characters (level ≥{MIN_LADDER_LEVEL}) "
+        f"out of {len(entries)} total ladder entries"
+    )
 
     raw = {}
     fetched = 0  # counts actual network requests made this run (cached don't count)
@@ -457,7 +582,12 @@ def scrape(league: str, session: requests.Session) -> dict:
         char_class = entry["character"].get("class", "Unknown")
         key = f"{acct}/{char}"
 
-        already_cached = _load_cache(f"items_{acct}_{char}") is not None
+        _cached = _load_cache(f"items_{acct}_{char}")
+        # Treat empty+stale caches as uncached so they get retried this run.
+        already_cached = (
+            _cached is not None
+            and not (_cached == [] and _empty_cache_is_stale(f"items_{acct}_{char}"))
+        )
 
         items = fetch_character_items(acct, char, session)
         if items:
@@ -512,19 +642,33 @@ def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) 
     engine the slot is typically crafted on a fractured base.
     """
     slot_mod_tiers: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
-    slot_sample_counts: dict[str, int] = defaultdict(int)
+    slot_sample_counts: dict[str, int] = defaultdict(int)     # rare items sampled
+    slot_unique_counts: dict[str, int] = defaultdict(int)     # unique items seen in the same slot
+    slot_equipped_counts: dict[str, int] = defaultdict(int)   # any-rarity items seen (denominator for unique_rate)
     slot_base_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     # fractured-mod tracking: per slot, count how many sampled items fracture each group
     slot_fractured_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
 
     for items in chars_items:
-        seen_slots: set[str] = set()
+        seen_slots: set[str] = set()   # for rare-mod aggregation (skips non-rare)
+        seen_any:   set[str] = set()   # for slot-occupancy (any rarity)
         for item in items:
             inv_id = item.get("inventoryId", "")
             item_tag = SLOT_MAP.get(inv_id)
             if item_tag is None:
                 continue
-            if item.get("frameType") != FRAME_TYPE_RARE:
+
+            # Track occupancy (any rarity) and unique rate per slot.  This lets
+            # the UI flag "most chars wear a unique here — trade, don't craft"
+            # even when rare-mod sample is tiny.
+            frame = item.get("frameType")
+            if inv_id not in seen_any:
+                slot_equipped_counts[item_tag] += 1
+                if frame == FRAME_TYPE_UNIQUE:
+                    slot_unique_counts[item_tag] += 1
+                seen_any.add(inv_id)
+
+            if frame != FRAME_TYPE_RARE:
                 continue
 
             slot_key = inv_id  # Ring vs Ring2 counted separately
@@ -571,10 +715,14 @@ def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) 
         if sample_n == 0:
             continue
         mod_freq = {}
+        # Scale the threshold so small samples need MIN_FREQUENCY_ABS absolute hits
+        # rather than MIN_FREQUENCY_PCT of a tiny denominator.  Keeps the high bar
+        # on big samples but stops single-appearance mods from passing on n=10 slots.
+        threshold_pct = max(MIN_FREQUENCY_PCT, MIN_FREQUENCY_ABS / sample_n)
         for group, tiers in sorted(group_tiers.items(), key=lambda x: -len(x[1])):
             count = len(tiers)
             pct = count / sample_n
-            if pct < MIN_FREQUENCY_PCT:
+            if pct < threshold_pct:
                 continue
             valid_tiers = [t for t in tiers if t is not None]
             mod_freq[group] = {
@@ -607,9 +755,19 @@ def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) 
                 fractured_group = top_group
                 fractured_freq_pct = round(frac_pct * 100, 1)
 
+        # Unique-rate: share of sampled characters that wear a unique in this
+        # slot (regardless of whether they also have a rare variant).  High
+        # rates mean the heatmap's rare-mod stats are statistically weak for
+        # this build + slot — user should trade a unique instead of crafting.
+        equipped_n = slot_equipped_counts.get(item_tag, 0)
+        unique_n   = slot_unique_counts.get(item_tag, 0)
+        unique_rate = round(unique_n / equipped_n * 100, 1) if equipped_n else 0.0
+
         if mod_freq:
             slots_out[item_tag] = {
                 "sample_count": sample_n,
+                "equipped_count": equipped_n,
+                "unique_rate":   unique_rate,
                 "mod_frequency": mod_freq,
                 "common_base":   common_base,
                 "base_type_freq": base_type_freq,
@@ -623,30 +781,44 @@ def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) 
 EXAMPLE_CHARS_PER_BUILD = 3  # max character references saved per build archetype
 
 
-def analyze(raw: dict, pattern_index: list, tier_ranges: dict) -> list:
+def _group_and_aggregate(
+    raw: dict,
+    pattern_index: list,
+    tier_ranges: dict,
+    group_by: str,   # "class_skill" (default) or "skill"
+) -> list:
     """
-    Groups characters by (char_class, primary_skill) build archetype.
-    Returns list of build dicts sorted by play_pct descending.
-
-    Each build now includes `example_chars`: up to EXAMPLE_CHARS_PER_BUILD
-    {account, char} pairs from the ladder so the UI can link to real profiles.
+    Groups characters by the requested keying and runs slot aggregation on each.
+    group_by="class_skill"  → (char_class, primary_skill) — the granular view.
+    group_by="skill"        → primary_skill only — the cross-ascendancy meta view
+                              that pools all classes playing the same skill, so
+                              per-slot samples are 2-3× larger for common mods.
     """
     total_chars = len(raw)
 
-    # Group characters by build archetype, preserving account+char metadata
-    build_groups: dict[tuple, list] = defaultdict(list)
-    build_chars: dict[tuple, list] = defaultdict(list)   # (key) → [{account, char}]
-    build_meta: dict[tuple, dict] = {}
+    build_groups: dict = defaultdict(list)
+    build_chars:  dict = defaultdict(list)
+    build_meta:   dict = {}
+    # Track ascendancy distribution inside skill-only buckets so the UI can
+    # flag "this skill meta is 70% Hierophant" vs "evenly split".
+    build_class_mix: dict = defaultdict(lambda: defaultdict(int))
 
     for char_key, char_data in raw.items():
         items = char_data["items"]
         char_class = char_data["char_class"]
         primary_skill = extract_primary_skill(items)
-        key = (char_class, primary_skill)
-        build_groups[key].append(items)
-        build_meta[key] = {"char_class": char_class, "primary_skill": primary_skill}
 
-        # char_key is "account/charname"
+        if group_by == "skill":
+            key = primary_skill
+            meta = {"primary_skill": primary_skill}
+        else:
+            key = (char_class, primary_skill)
+            meta = {"char_class": char_class, "primary_skill": primary_skill}
+
+        build_groups[key].append(items)
+        build_meta[key] = meta
+        build_class_mix[key][char_class] += 1
+
         if "/" in char_key:
             account, char = char_key.split("/", 1)
             build_chars[key].append({"account": account, "char": char})
@@ -656,22 +828,36 @@ def analyze(raw: dict, pattern_index: list, tier_ranges: dict) -> list:
         meta = build_meta[key]
         count = len(chars_items)
         play_pct = round(count / total_chars * 100, 1) if total_chars > 0 else 0
-
         slots_out = _aggregate_slots(chars_items, pattern_index, tier_ranges)
-
-        # Save a handful of example characters for direct profile linking in the UI
         example_chars = build_chars[key][:EXAMPLE_CHARS_PER_BUILD]
 
-        builds_out.append({
-            "char_class": meta["char_class"],
-            "primary_skill": meta["primary_skill"],
+        entry = {
+            **meta,
             "count": count,
             "play_pct": play_pct,
             "slots": slots_out,
             "example_chars": example_chars,
-        })
+        }
+        if group_by == "skill":
+            # Top ascendancies playing this skill (for the UI to surface)
+            mix_items = sorted(build_class_mix[key].items(), key=lambda x: -x[1])
+            entry["class_mix"] = [
+                {"char_class": c, "count": n, "pct": round(n / count * 100, 1)}
+                for c, n in mix_items
+            ]
+        builds_out.append(entry)
 
     return builds_out
+
+
+def analyze(raw: dict, pattern_index: list, tier_ranges: dict) -> list:
+    """Granular view: grouped by (char_class, primary_skill)."""
+    return _group_and_aggregate(raw, pattern_index, tier_ranges, group_by="class_skill")
+
+
+def analyze_by_skill(raw: dict, pattern_index: list, tier_ranges: dict) -> list:
+    """Cross-ascendancy view: grouped by primary_skill only."""
+    return _group_and_aggregate(raw, pattern_index, tier_ranges, group_by="skill")
 
 
 # ---------------------------------------------------------------------------
@@ -709,15 +895,22 @@ def main():
                 break
         print(f"  {len(ladder_entries)} ladder entries loaded from cache")
         raw = {}
+        skipped_low_level = 0
         for entry in ladder_entries:
             acct = entry.get("account", {}).get("name", "")
             char = entry.get("character", {}).get("name", "")
             char_class = entry.get("character", {}).get("class", "Unknown")
+            level = entry.get("character", {}).get("level", 0)
             if not acct or not char:
+                continue
+            if level < MIN_LADDER_LEVEL:
+                skipped_low_level += 1
                 continue
             items = _load_cache(f"items_{acct}_{char}")
             if items:
                 raw[f"{acct}/{char}"] = {"items": items, "char_class": char_class}
+        if skipped_low_level:
+            print(f"  Skipped {skipped_low_level} sub-level-{MIN_LADDER_LEVEL} characters")
         print(f"  {len(raw)} cached characters found")
     else:
         print("Scraping ladder + character items...")
@@ -726,12 +919,14 @@ def main():
 
     print("Analyzing mod frequencies by build archetype...")
     builds_out = analyze(raw, pattern_index, tier_ranges)
+    builds_by_skill_out = analyze_by_skill(raw, pattern_index, tier_ranges)
 
     output = {
         "league": LEAGUE,
         "analyzed_at": datetime.now(timezone.utc).isoformat(),
         "characters_sampled": len(raw),
         "builds": builds_out,
+        "builds_by_skill": builds_by_skill_out,
     }
 
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
@@ -739,8 +934,13 @@ def main():
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"\nDone. Output: {OUTPUT_FILE}")
+    print("Top builds by (class, skill):")
     for build in builds_out[:8]:
         print(f"  {build['char_class']} / {build['primary_skill']}: {build['count']} chars ({build['play_pct']}%)")
+    print("Top builds by skill (cross-ascendancy):")
+    for build in builds_by_skill_out[:8]:
+        mix = ", ".join(f"{m['char_class']} {m['pct']}%" for m in build.get("class_mix", [])[:3])
+        print(f"  {build['primary_skill']}: {build['count']} chars ({build['play_pct']}%) — {mix}")
 
 
 if __name__ == "__main__":

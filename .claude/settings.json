@@ -45,7 +45,23 @@
       "Bash(python -c \"import json; d=json.load\\(open\\('src/data/active_economy.json', encoding='utf-8'\\)\\); print\\(list\\(d.keys\\(\\)\\)[:10]\\); print\\('divine_price:', d.get\\('divine_price'\\)\\); print\\('league:', d.get\\('league'\\)\\)\")",
       "Bash(curl -s http://localhost:5173)",
       "Bash(powershell -Command 'Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -like '\\\\''*fetch_trade_prices*'\\\\'' } | Stop-Process -Force')",
-      "Bash(taskkill //F //IM python.exe)"
+      "Bash(taskkill //F //IM python.exe)",
+      "Bash(npx vite *)",
+      "Bash(python -c ' *)",
+      "Bash(curl -s -A \"poe-crafter/1.0\" \"https://poe.ninja/api/data/getbuildoverview?overview=mirage&type=exp&language=en\" --max-time 20 -o /tmp/ninja_overview.json -w \"http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -s -A Mozilla/5.0 'https://poe.ninja/api/data/getbuildoverview?overview=__TRACKED_VAR__&type=exp&language=en' --max-time 15 -o /tmp/n.json -w 'http=%{http_code} size=%{size_download}\\\\n')",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://poe.ninja/api/data/0/getbuildoverview?overview=mirage&type=exp&language=en\" --max-time 15 -o /tmp/n.json -w \"ladder0 http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://poe.ninja/builds/mirage\" --max-time 15 -o /tmp/n2.html -w \"page http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://poe.ninja/builds\" --max-time 15 -o /tmp/builds.html -w \"http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -s -A Mozilla/5.0 'https://poe.ninja/api/data/getbuildoverview?overview=__TRACKED_VAR__&type=exp&language=en' --max-time 20 -o /tmp/n.json -w 'http=%{http_code} size=%{size_download}\\\\n')",
+      "Bash(curl -sL -A \"Mozilla/5.0\" -H \"Accept: application/json\" \"https://poe.ninja/builds/mirage\" --max-time 15 -o /tmp/builds_mirage.html -w \"http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://poe.ninja/builds/mirage\" --max-time 15)",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://assets.poe.ninja/_astro/Poe1SearchPageWrapper.DrqSclOq.js\" --max-time 20 -o /tmp/ninja.js -w \"http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(grep -oE \"\\(poe\\\\.ninja/api/[^\\\\\"'\\\\` ]+|/api/[a-zA-Z0-9/._?=&-]{5,80}\\)\" /tmp/ninja.js)",
+      "Bash(curl -s -X POST -A \"Mozilla/5.0\" -H \"Content-Type: application/json\" -d '{\"league\":\"mirage\"}' \"https://poe.ninja/poe1/api/builds/latest/search\" -o /tmp/n.json -w \"http=%{http_code} size=%{size_download}\\\\n\" --max-time 15)",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://poe.ninja/poe1/api/builds/dictionary?snapshotName=mirage\" -o /tmp/d.json -w \"http=%{http_code} size=%{size_download}\\\\n\" --max-time 15)",
+      "Bash(grep -oE \".{0}snapshotName[=:][^,;\\)]{0,80}\" /tmp/ninja.js)",
+      "Bash(grep -oE '/poe[12]/api/[^\"`\\)\\\\\\\\]{1,100}' /tmp/ninja.js)"
     ],
     "additionalDirectories": [
       "C:\\Users\\nwahi\\poe-crafter\\data\\build_cache"
