@@ -62,6 +62,15 @@ SLOT_MAP = {
 FRAME_TYPE_RARE   = 2
 FRAME_TYPE_UNIQUE = 3
 
+# Minimum share of sampled items that must carry an influence before we
+# call a slot "dominantly influenced". Below this threshold the occasional
+# influenced item is noise, not a strategy worth filtering the trade query by.
+INFLUENCE_MIN_PCT = 0.30
+
+# GGG `influences` field on items uses these keys. They already match our
+# canonical influence names, so no remapping is needed.
+INFLUENCE_KEYS = ("shaper", "elder", "crusader", "hunter", "redeemer", "warlord")
+
 GGG_LADDER_URL = "https://api.pathofexile.com/ladders/{league}"
 GGG_ITEMS_URL  = "https://www.pathofexile.com/character-window/get-items"
 
@@ -648,6 +657,9 @@ def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) 
     slot_base_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     # fractured-mod tracking: per slot, count how many sampled items fracture each group
     slot_fractured_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    # influence tracking: per slot, count how many rare items carry each influence
+    # ("none" = no influence). Dual-influence items count toward both.
+    slot_influence_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
 
     for items in chars_items:
         seen_slots: set[str] = set()   # for rare-mod aggregation (skips non-rare)
@@ -685,6 +697,18 @@ def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) 
                 ).strip()
                 if base:
                     slot_base_counts[item_tag][base] += 1
+
+            # Influence observed on this rare item. GGG returns e.g.
+            # {"shaper": true, "elder": true} on the item object. Dual-influence
+            # items contribute to both counts so we can still detect them.
+            influences_on_item = item.get("influences") or {}
+            any_influence = False
+            for inf_key in INFLUENCE_KEYS:
+                if influences_on_item.get(inf_key):
+                    slot_influence_counts[item_tag][inf_key] += 1
+                    any_influence = True
+            if not any_influence:
+                slot_influence_counts[item_tag]["none"] += 1
 
             # Track fractured mods separately so we know which group is locked
             # on the base. A mod group gets counted once per item even if it
@@ -763,6 +787,22 @@ def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) 
         unique_n   = slot_unique_counts.get(item_tag, 0)
         unique_rate = round(unique_n / equipped_n * 100, 1) if equipped_n else 0.0
 
+        # Influence distribution: share of rare sampled items per influence,
+        # plus a single dominant influence when one clearly dominates. Consumers
+        # (fetch_trade_prices, profit engine) use dominant_influence to decide
+        # whether to filter trade queries to influenced bases.
+        infl_counts = slot_influence_counts.get(item_tag, {})
+        influence_freq: dict[str, float] = {}
+        dominant_influence: str | None = None
+        if sample_n:
+            for inf_key, cnt in infl_counts.items():
+                influence_freq[inf_key] = round(cnt / sample_n * 100, 1)
+            influenced_only = {k: v for k, v in infl_counts.items() if k != "none"}
+            if influenced_only:
+                top_inf, top_cnt = max(influenced_only.items(), key=lambda x: x[1])
+                if top_cnt / sample_n >= INFLUENCE_MIN_PCT:
+                    dominant_influence = top_inf
+
         if mod_freq:
             slots_out[item_tag] = {
                 "sample_count": sample_n,
@@ -773,6 +813,8 @@ def _aggregate_slots(chars_items: list, pattern_index: list, tier_ranges: dict) 
                 "base_type_freq": base_type_freq,
                 "fractured_group":   fractured_group,
                 "fractured_freq_pct": fractured_freq_pct,
+                "influence_freq":     influence_freq,
+                "dominant_influence": dominant_influence,
             }
 
     return slots_out

@@ -1,1 +1,1 @@
-{"total_listings": 51, "sampled": 10, "prices_chaos": [5.0, 5.0, 5.0, 10.0, 20.0, 30.0, 30.0, 30.0, 42.0, 50.0], "p10": 5, "p25": 5, "median": 25, "p75": 30, "p90": 50, "common_base": "Bone Ring"}
+{"total_listings": 29, "sampled": 10, "prices_chaos": [1.0, 10.0, 10.0, 16.0, 16.0, 20.0, 20.0, 30.0, 39.0, 40.0], "p10": 10, "p25": 10, "median": 18, "p75": 30, "p90": 40, "common_base": "Topaz Ring"}

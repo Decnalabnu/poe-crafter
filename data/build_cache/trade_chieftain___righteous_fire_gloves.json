@@ -1,1 +1,1 @@
-{"total_listings": 37, "sampled": 10, "prices_chaos": [5.0, 9.0, 10.0, 10.0, 16.0, 20.0, 25.0, 40.0, 40.0, 40.0], "p10": 9, "p25": 10, "median": 18, "p75": 40, "p90": 40, "common_base": "Wyvernscale Gauntlets"}
+{"total_listings": 27, "sampled": 10, "prices_chaos": [10.0, 10.0, 20.0, 25.0, 30.0, 45.0, 50.0, 60.0, 80.0, 200.0], "p10": 10, "p25": 20, "median": 38, "p75": 60, "p90": 200, "common_base": "Leviathan Gauntlets"}

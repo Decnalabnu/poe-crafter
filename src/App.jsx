@@ -6,6 +6,7 @@ import CrafterTab from "./components/CrafterTab";
 import CraftOptimizer from "./components/CraftOptimizer";
 import ProfitHeatmap from "./components/ProfitHeatmap";
 import ScryingRanker from "./components/ScryingRanker";
+import GemXPTab from "./components/GemXPTab";
 import { ELEMENTAL_RESIST_GROUPS } from "./constants";
 
 const TABS = [
@@ -15,6 +16,7 @@ const TABS = [
   { id: "builds",  label: "Build Analyzer" },
   { id: "recomb",  label: "Recomb Calculator" },
   { id: "scrying", label: "Scrying Ranker" },
+  { id: "gemxp",   label: "Gem XP" },
 ];
 
 export default function App() {
@@ -108,6 +110,7 @@ export default function App() {
       {activeTab === "builds"   && <BuildAnalyzer onCraftThis={handleCraftThis} />}
       {activeTab === "recomb"   && <RecombCalculator />}
       {activeTab === "scrying"  && <ScryingRanker />}
+      {activeTab === "gemxp"    && <GemXPTab />}
     </div>
   );
 }

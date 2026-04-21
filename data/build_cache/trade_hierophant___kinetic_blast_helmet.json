@@ -1,0 +1,1 @@
+{"total_listings": 12, "sampled": 10, "prices_chaos": [1.0, 5.0, 5.0, 8.0, 13.0, 20.0, 44.0, 100.0, 873.9, 1456.5], "p10": 5, "p25": 5, "median": 16, "p75": 100, "p90": 1456, "common_base": "Paladin Crown"}

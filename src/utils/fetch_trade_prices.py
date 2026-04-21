@@ -44,8 +44,9 @@ LISTINGS_PER_QUERY = 10 # listings fetched per target (trade API: max 10 per fet
 MIN_BASE_SAMPLES = 3    # minimum listings for base price to be trusted (avoids 1-listing flukes)
 CACHE_TTL_HOURS = 4     # stale price cache beyond this age is re-fetched
 
-SEARCH_DELAY = 3.0      # seconds between POST /search requests
-FETCH_DELAY  = 1.5      # seconds between GET /fetch requests
+SEARCH_DELAY = 8.0      # seconds between POST /search requests
+FETCH_DELAY  = 4.0      # seconds between GET /fetch requests
+RATE_LIMIT_COOLDOWN = 120  # seconds to wait after a 403/429 before resuming
 
 GGG_TRADE_BASE = "https://www.pathofexile.com/api/trade"
 HEADERS = {"User-Agent": "poe-crafter-price-fetcher/1.0 (personal research tool)"}
@@ -236,7 +237,8 @@ def extract_min_value(group: str, item_tag: str, target_tier: int, items_db: dic
 # Target construction from build_items.json
 # ---------------------------------------------------------------------------
 
-def build_targets(build_items: dict, items_db: dict, stat_map: dict) -> list:
+def build_targets(build_items: dict, items_db: dict, stat_map: dict,
+                   builds_key: str = "builds") -> list:
     """
     Constructs one trade-query target per (build, slot) with ≥2 required mods.
     Required = frequency_pct >= MIN_FREQ_PCT in the sampled build data.
@@ -249,15 +251,21 @@ def build_targets(build_items: dict, items_db: dict, stat_map: dict) -> list:
     the target is tagged with that influence type and the trade query will include the
     appropriate misc_filter (shaper_item, elder_item, etc.).
     """
-    builds = sorted(build_items["builds"], key=lambda b: -b["play_pct"])[:TOP_BUILDS]
-    # Drop builds below MIN_PLAY_PCT — they don't have enough representation
-    # to produce reliable mod-frequency data, and pricing them wastes API calls.
-    builds = [b for b in builds if b.get("play_pct", 0) >= MIN_PLAY_PCT]
+    builds = sorted(build_items.get(builds_key, build_items["builds"]),
+                     key=lambda b: -b["play_pct"])[:TOP_BUILDS]
+    builds = [
+        b for b in builds
+        if b.get("play_pct", 0) >= MIN_PLAY_PCT
+        and b.get("primary_skill", "Unknown") != "Unknown"
+    ]
     targets = []
     unmapped = []
 
     for build in builds:
-        build_label = f"{build['char_class']} / {build['primary_skill']}"
+        if "char_class" in build:
+            build_label = f"{build['char_class']} / {build['primary_skill']}"
+        else:
+            build_label = build["primary_skill"]
 
         for slot, slot_data in build.get("slots", {}).items():
             if slot not in CATEGORY_MAP:
@@ -326,6 +334,16 @@ def build_targets(build_items: dict, items_db: dict, stat_map: dict) -> list:
                 else:
                     print(f"    {build_label}/{slot}: conflicting influences "
                           f"{influence_votes_capped} — skipping influence filter")
+
+            # Fallback: when no required mod is influenced-only, the mod-inferred
+            # signal above is blank even if ladder items are overwhelmingly on an
+            # influenced base (e.g. a Hunter ring whose mods are all plain Life /
+            # Damage). Use the ladder-observed dominant influence in that case so
+            # the trade query filters to the base type the meta actually uses.
+            if target_influence is None:
+                ladder_inf = slot_data.get("dominant_influence")
+                if ladder_inf:
+                    target_influence = ladder_inf
 
             # Fractured base detection: the scraper tags a slot with
             # fractured_group when a meaningful share of ladder items are on a
@@ -471,19 +489,29 @@ def fetch_target_prices(target: dict, league: str, session: requests.Session,
             "sort": {"price": "asc"},
         }
         time.sleep(SEARCH_DELAY)
-        try:
-            resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
-            if resp.status_code == 429:
-                wait = int(resp.headers.get("Retry-After", 60))
-                print(f"    Rate limited — waiting {wait}s")
-                time.sleep(wait)
+        for attempt in range(3):
+            try:
                 resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
-            resp.raise_for_status()
-            data = resp.json()
-            return data.get("result", []), data.get("id", "")
-        except Exception as e:
-            print(f"    Search error: {e}")
-            return None
+                if resp.status_code in (429, 403):
+                    wait = max(
+                        int(resp.headers.get("Retry-After", RATE_LIMIT_COOLDOWN)),
+                        RATE_LIMIT_COOLDOWN,
+                    )
+                    kind = "Forbidden (temp ban)" if resp.status_code == 403 else "Rate limited"
+                    print(f"    {kind} — cooling down {wait}s (attempt {attempt + 1}/3)")
+                    time.sleep(wait)
+                    continue
+                resp.raise_for_status()
+                data = resp.json()
+                return data.get("result", []), data.get("id", "")
+            except requests.exceptions.HTTPError:
+                print(f"    Search HTTP error {resp.status_code}")
+                return None
+            except Exception as e:
+                print(f"    Search error: {e}")
+                return None
+        print(f"    Search gave up after 3 rate-limit retries")
+        return None
 
     # Progressive fallback strategy:
     #  1. All mods + influence filter (if any)
@@ -663,17 +691,27 @@ def fetch_base_price(base_type: str, slot: str, league: str,
         }
 
     time.sleep(SEARCH_DELAY)
-    try:
-        resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
-        if resp.status_code == 429:
-            wait = int(resp.headers.get("Retry-After", 60))
-            print(f"    Rate limited (base price) — waiting {wait}s")
-            time.sleep(wait)
+    data = None
+    for attempt in range(3):
+        try:
             resp = session.post(f"{GGG_TRADE_BASE}/search/{league}", json=payload, timeout=15)
-        resp.raise_for_status()
-        data = resp.json()
-    except Exception as e:
-        print(f"    Base price search failed ({base_type}): {e}")
+            if resp.status_code in (429, 403):
+                wait = max(
+                    int(resp.headers.get("Retry-After", RATE_LIMIT_COOLDOWN)),
+                    RATE_LIMIT_COOLDOWN,
+                )
+                kind = "Forbidden (temp ban)" if resp.status_code == 403 else "Rate limited"
+                print(f"    {kind} (base price) — cooling down {wait}s (attempt {attempt + 1}/3)")
+                time.sleep(wait)
+                continue
+            resp.raise_for_status()
+            data = resp.json()
+            break
+        except Exception as e:
+            print(f"    Base price search failed ({base_type}): {e}")
+            return None
+    if data is None:
+        print(f"    Base price search gave up after 3 rate-limit retries ({base_type})")
         return None
 
     result_ids = data.get("result", [])
@@ -723,6 +761,8 @@ def main():
                         help="Show targets without fetching any prices")
     parser.add_argument("--rebuild-map", action="store_true",
                         help="Force-refresh the cached stat ID map from trade API")
+    parser.add_argument("--by-skill", action="store_true",
+                        help="Use cross-ascendancy builds_by_skill (fewer, larger-sample targets)")
     args = parser.parse_args()
 
     print(f"=== PoE Trade Price Fetcher (league: {LEAGUE}) ===\n")
@@ -739,8 +779,9 @@ def main():
     print("Building stat ID map...")
     stat_map = build_stat_id_map(session, force=args.rebuild_map)
 
-    print("\nBuilding trade targets from build data...")
-    targets = build_targets(build_items, items_db, stat_map)
+    builds_key = "builds_by_skill" if args.by_skill else "builds"
+    print(f"\nBuilding trade targets from {builds_key}...")
+    targets = build_targets(build_items, items_db, stat_map, builds_key=builds_key)
 
     if args.dry_run:
         print("\n--- Targets (dry run) ---")

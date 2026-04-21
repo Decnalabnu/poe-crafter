@@ -2,9 +2,12 @@ import requests
 import json
 import os
 import shutil
+from statistics import median
 
-LEAGUE = "Mirage" 
+LEAGUE = "Mirage"
 OUTPUT_FILE = "src/data/active_economy.json"
+
+GGG_HEADERS = {"User-Agent": "poe-crafter-price-fetcher/1.0 (personal research tool)"}
 
 def fetch_ninja_data(type, league):
     url = f"https://poe.ninja/api/data/itemoverview?league={league}&type={type}"
@@ -16,12 +19,45 @@ def fetch_ninja_data(type, league):
         print(f"Failed to fetch {type}: {e}")
         return []
 
+def fetch_divine_from_ggg(league):
+    """Live chaos-per-divine rate from GGG's bulk exchange. Median of cheapest 10 listings.
+    Tracks the poe.ninja website display; ninja's API lags by 20–30c."""
+    url = f"https://www.pathofexile.com/api/trade/exchange/{league}"
+    body = {
+        "query": {"status": {"option": "online"}, "have": ["chaos"], "want": ["divine"]},
+        "sort": {"have": "asc"},
+        "engine": "new",
+    }
+    try:
+        r = requests.post(url, json=body, headers=GGG_HEADERS, timeout=15)
+        r.raise_for_status()
+        rates = []
+        for listing in r.json().get("result", {}).values():
+            for off in listing.get("listing", {}).get("offers", []):
+                chaos = off["exchange"]["amount"]
+                div = off["item"]["amount"]
+                if div > 0:
+                    rates.append(chaos / div)
+        rates.sort()
+        if len(rates) >= 3:
+            return round(median(rates[:10]), 1)
+    except Exception as e:
+        print(f"  GGG trade fetch failed ({e}); falling back to poe.ninja")
+    return None
+
 def update_economy():
     print(f"Fetching live prices for {LEAGUE} league...")
-    
+
     currency_url = f"https://poe.ninja/api/data/currencyoverview?league={LEAGUE}&type=Currency"
     currency_data = requests.get(currency_url).json().get("lines", [])
-    divine_price = next((item["chaosEquivalent"] for item in currency_data if item["currencyTypeName"] == "Divine Orb"), 150)
+    divine_line = next((item for item in currency_data if item["currencyTypeName"] == "Divine Orb"), {})
+
+    divine_price = (
+        fetch_divine_from_ggg(LEAGUE)
+        or (divine_line.get("receive") or {}).get("value")
+        or divine_line.get("chaosEquivalent")
+        or 150
+    )
 
     essence_lines = fetch_ninja_data("Essence", LEAGUE)
     essence_prices = {}

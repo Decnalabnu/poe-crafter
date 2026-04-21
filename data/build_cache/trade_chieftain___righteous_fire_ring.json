@@ -1,1 +1,1 @@
-{"total_listings": 26, "sampled": 10, "prices_chaos": [5.0, 5.0, 11.0, 13.0, 15.0, 50.0, 50.0, 60.0, 100.0, 150.0], "p10": 5, "p25": 11, "median": 32, "p75": 60, "p90": 150, "common_base": "Two-Stone Ring"}
+{"total_listings": 16, "sampled": 10, "prices_chaos": [10.0, 20.0, 30.0, 40.0, 50.0, 200.0, 200.0, 291.3, 291.3, 291.3], "p10": 20, "p25": 30, "median": 125, "p75": 291, "p90": 291, "common_base": "Two-Stone Ring"}

@@ -61,7 +61,22 @@
       "Bash(curl -s -X POST -A \"Mozilla/5.0\" -H \"Content-Type: application/json\" -d '{\"league\":\"mirage\"}' \"https://poe.ninja/poe1/api/builds/latest/search\" -o /tmp/n.json -w \"http=%{http_code} size=%{size_download}\\\\n\" --max-time 15)",
       "Bash(curl -s -A \"Mozilla/5.0\" \"https://poe.ninja/poe1/api/builds/dictionary?snapshotName=mirage\" -o /tmp/d.json -w \"http=%{http_code} size=%{size_download}\\\\n\" --max-time 15)",
       "Bash(grep -oE \".{0}snapshotName[=:][^,;\\)]{0,80}\" /tmp/ninja.js)",
-      "Bash(grep -oE '/poe[12]/api/[^\"`\\)\\\\\\\\]{1,100}' /tmp/ninja.js)"
+      "Bash(grep -oE '/poe[12]/api/[^\"`\\)\\\\\\\\]{1,100}' /tmp/ninja.js)",
+      "Bash(python scheduler.py --dry-run)",
+      "Bash(curl -s -o /tmp/trade_test.json -w 'http=%{http_code}' -A 'poe-crafter-price-fetcher/1.0 \\(personal research tool\\)' https://www.pathofexile.com/api/trade/data/stats --max-time 10)",
+      "Bash(curl -s -o /tmp/trade2_test.json -w 'http=%{http_code}' -A 'poe-crafter-price-fetcher/1.0 \\(personal research tool\\)' https://www.pathofexile.com/api/trade2/data/stats --max-time 10)",
+      "Bash(curl -s -o /tmp/trade_search.json -w 'http=%{http_code}' -X POST -H 'Content-Type: application/json' -A 'poe-crafter-price-fetcher/1.0 \\(personal research tool\\)' -d '{\"query\":{\"status\":{\"option\":\"online\"},\"type\":\"Helical Ring\",\"filters\":{\"type_filters\":{\"filters\":{\"rarity\":{\"option\":\"rare\"}}}}},\"sort\":{\"price\":\"asc\"}}' https://www.pathofexile.com/api/__TRACKED_VAR__/search/Mirage --max-time 10)",
+      "Bash(python src/utils/fetch_trade_prices.py --dry-run --by-skill)",
+      "Read(//c/Users/nwahi/poe-crafter/**)",
+      "Bash(curl -s \"https://poe.ninja/api/data/currencyoverview?league=Mirage&type=Currency\")",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(l['currencyTypeName'], '| chaosEquivalent:', l.get\\('chaosEquivalent'\\), '| pay:', l.get\\('pay',{}\\).get\\('value'\\) if l.get\\('pay'\\) else None, '| receive:', l.get\\('receive',{}\\).get\\('value'\\) if l.get\\('receive'\\) else None\\) for l in d['lines'] if 'Divine' in l['currencyTypeName'] or 'Chaos' in l['currencyTypeName'] or 'Exalted' in l['currencyTypeName']]\")",
+      "Bash(curl -sS -w \"\\\\nHTTP:%{http_code}\\\\n\" \"https://poe.ninja/api/data/currencyoverview?league=Mirage&type=Currency\" -o /tmp/ninja.json)",
+      "Bash(curl -sSL -w \"\\\\nHTTP:%{http_code}\\\\n\" \"https://poe.ninja/api/data/currencyoverview?league=Mirage&type=Currency\" -o /tmp/ninja.json)",
+      "Bash(curl -sSL \"https://poe.ninja/api/data/getindexstate\" -o /tmp/idx.json)",
+      "Bash(python -c \"import json; d=json.load\\(open\\('/tmp/idx.json'\\)\\); [print\\(l.get\\('name'\\), '| url:', l.get\\('url'\\), '| indexed:', l.get\\('indexed'\\)\\) for l in d.get\\('economyLeagues',[]\\)]\")",
+      "Bash(curl -sSL \"https://poe.ninja/api/data/currencyoverview?league=Mirage&type=Currency\" -o ninja_tmp.json)",
+      "Bash(curl -sS -w '\\\\nHTTP:%{http_code}\\\\n' -X POST https://www.pathofexile.com/api/trade/exchange/Mirage -H 'Content-Type: application/json' -H 'User-Agent: poe-crafter-price-check/1.0' -d '{\"query\":{\"status\":{\"option\":\"online\"},\"have\":[\"chaos\"],\"want\":[\"divine\"]},\"sort\":{\"have\":\"asc\"},\"engine\":\"new\"}' -o ggg_div.json)",
+      "Bash(python src/utils/update_data.py)"
     ],
     "additionalDirectories": [
       "C:\\Users\\nwahi\\poe-crafter\\data\\build_cache"

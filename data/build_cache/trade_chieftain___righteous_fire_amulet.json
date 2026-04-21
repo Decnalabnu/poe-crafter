@@ -1,1 +1,1 @@
-{"total_listings": 2, "sampled": 2, "prices_chaos": [302.7, 3632.4], "p10": 303, "p25": 303, "median": 1968, "p75": 3632, "p90": 3632, "common_base": "Coral Amulet"}
+{"total_listings": 5, "sampled": 5, "prices_chaos": [1.0, 69.0, 145.7, 873.9, 2913.0], "p10": 1, "p25": 69, "median": 146, "p75": 874, "p90": 2913, "common_base": "Simplex Amulet"}
