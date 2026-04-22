@@ -1,1 +1,1 @@
-{"gem": "Pride", "level": 20, "total_listings": 11, "samples": 10, "prices_chaos": [40.0, 60.0, 75.0, 334.2, 334.2, 334.2, 334.2, 334.2, 334.2, 668.4], "p10": 60.0, "median": 334.2}
+{"gem": "Pride", "level": 20, "total_listings": 9, "samples": 9, "prices_chaos": [10.0, 40.0, 360.0, 360.0, 360.0, 360.0, 360.0, 720.0, 3600.0], "p10": 10.0, "median": 360.0}

@@ -59,6 +59,30 @@ def update_economy():
         or 150
     )
 
+    # Key crafting orbs — chaos is the reference currency (fixed at 1.0).
+    # Values come from poe.ninja's chaosEquivalent; sub-1c orbs like alt/aug
+    # come through as decimals (e.g. alt ≈ 0.19c).
+    CURRENCY_MAP = {
+        "Orb of Alteration":    "alteration",
+        "Orb of Augmentation":  "augmentation",
+        "Regal Orb":            "regal",
+        "Orb of Scouring":      "scouring",
+        "Orb of Annulment":     "annulment",
+        "Exalted Orb":          "exalted",
+        "Orb of Alchemy":       "alchemy",
+        "Orb of Transmutation": "transmutation",
+        "Blessed Orb":          "blessed",
+        "Vaal Orb":             "vaal",
+        "Chaos Orb":            "chaos",
+    }
+    currency_prices = {"chaos": 1.0}
+    for item in currency_data:
+        key = CURRENCY_MAP.get(item.get("currencyTypeName"))
+        if key and key != "chaos":
+            price = item.get("chaosEquivalent")
+            if price is not None:
+                currency_prices[key] = price
+
     essence_lines = fetch_ninja_data("Essence", LEAGUE)
     essence_prices = {}
     for item in essence_lines:
@@ -95,6 +119,7 @@ def update_economy():
     economy_data = {
         "league": LEAGUE,
         "divine_price": divine_price,
+        "currency": currency_prices,
         "essences": essence_prices,
         "fossils": fossil_prices,
         "resonators": resonator_prices

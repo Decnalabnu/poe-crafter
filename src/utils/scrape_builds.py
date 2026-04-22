@@ -176,6 +176,12 @@ def build_tier_ranges(items_db: dict) -> dict:
                 tier = mod.get("tier")
                 if tier is None:
                     continue
+                # Skip essence/influence-exclusive (weight=0) mods: their numeric
+                # ranges often overlap naturally-rollable tiers, and ladder items
+                # are overwhelmingly chaos/exalt-rolled. Including them would
+                # mis-tag common rolls as an unreachable tier.
+                if (mod.get("spawn_weights") or [{}])[0].get("weight", 0) <= 0:
+                    continue
                 text = mod.get("text", "")
                 if not text:
                     continue

@@ -1,1 +1,1 @@
-{"gem": "Freezing Pulse", "level": 20, "total_listings": 9, "samples": 9, "prices_chaos": [1.0, 5.0, 8.0, 16.0, 31.0, 45.0, 100.0, 334.2, 334.2], "p10": 1.0, "median": 31.0}
+{"gem": "Freezing Pulse", "level": 20, "total_listings": 5, "samples": 5, "prices_chaos": [5.0, 28.0, 100.0, 360.0, 5000.0], "p10": 5.0, "median": 100.0}

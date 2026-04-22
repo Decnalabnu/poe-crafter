@@ -18,7 +18,9 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('rows:', len\\(d\\)\\); print\\('columns:', list\\(d[0].keys\\(\\)\\) if d else 'empty'\\)\")",
       "Bash(python3 -c ':*)",
       "Bash(node -e ':*)",
-      "Read(//c/Users/nwahi/AppData/Local/npm-cache/_npx/6b84f719dfae3186/node_modules/**)"
+      "Read(//c/Users/nwahi/AppData/Local/npm-cache/_npx/6b84f719dfae3186/node_modules/**)",
+      "Bash(python -c \"import json; d=json.load\\(open\\('src/data/active_economy.json'\\)\\); print\\(json.dumps\\(d.get\\('currency'\\), indent=2\\)\\)\")",
+      "Bash(python -c \"import json; d=json.load\\(open\\('public/active_economy.json'\\)\\); print\\('league:', d['league']\\); print\\('divine:', d['divine_price']\\); print\\('alt:', d['currency']['alteration']\\)\")"
     ]
   }
 }

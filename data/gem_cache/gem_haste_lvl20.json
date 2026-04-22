@@ -1,1 +1,1 @@
-{"gem": "Haste", "level": 20, "total_listings": 13, "samples": 10, "prices_chaos": [5.0, 31.0, 50.0, 334.2, 334.2, 334.2, 334.2, 334.2, 334.2, 334.2], "p10": 31.0, "median": 334.2}
+{"gem": "Haste", "level": 20, "total_listings": 5, "samples": 5, "prices_chaos": [60.0, 100.0, 250.0, 360.0, 3600.0], "p10": 60.0, "median": 250.0}

@@ -1,1 +1,1 @@
-{"gem": "Precision", "level": 20, "total_listings": 17, "samples": 10, "prices_chaos": [31.0, 50.0, 67.0, 67.0, 75.0, 80.0, 90.0, 100.0, 100.0, 108.0], "p10": 50.0, "median": 77.5}
+{"gem": "Precision", "level": 20, "total_listings": 17, "samples": 10, "prices_chaos": [5.0, 15.0, 20.0, 30.0, 31.0, 35.0, 50.0, 75.0, 100.0, 100.0], "p10": 15.0, "median": 33.0}

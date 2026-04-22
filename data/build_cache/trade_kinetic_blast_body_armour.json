@@ -1,1 +1,1 @@
-{"total_listings": 18, "sampled": 10, "prices_chaos": [3.0, 5.0, 10.0, 10.0, 40.0, 45.0, 80.0, 98.0, 150.0, 150.0], "p10": 5, "p25": 10, "median": 42, "p75": 98, "p90": 150, "common_base": "Twilight Regalia"}
+{"total_listings": 15, "sampled": 10, "prices_chaos": [5.0, 10.0, 20.0, 20.0, 45.0, 90.0, 100.0, 100.0, 150.0, 180.0], "p10": 10, "p25": 20, "median": 68, "p75": 100, "p90": 180, "common_base": "Twilight Regalia"}

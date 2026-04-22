@@ -1,528 +1,588 @@
 {
   "league": "Mirage",
-  "updated_at": "2026-04-20T12:13:13.963984+00:00",
+  "updated_at": "2026-04-22T10:05:26.230484+00:00",
   "cards": {
+    "History": {
+      "chaosValue": 41795,
+      "divineValue": 123.8,
+      "stackSize": 5
+    },
     "Damnation": {
-      "chaosValue": 98805,
-      "divineValue": 294.5,
+      "chaosValue": 38959,
+      "divineValue": 115.4,
       "stackSize": 16
     },
     "House of Mirrors": {
-      "chaosValue": 43788,
-      "divineValue": 130.5,
+      "chaosValue": 35463,
+      "divineValue": 105.0,
       "stackSize": 9
     },
-    "History": {
-      "chaosValue": 31202,
-      "divineValue": 93.0,
-      "stackSize": 5
-    },
     "Unrequited Love": {
-      "chaosValue": 21808,
-      "divineValue": 65.0,
+      "chaosValue": 21269,
+      "divineValue": 63.0,
       "stackSize": 16
     },
     "Father's Love": {
-      "chaosValue": 20130,
-      "divineValue": 60.0,
+      "chaosValue": 19952,
+      "divineValue": 59.1,
       "stackSize": 2
     },
     "The Price of Devotion": {
-      "chaosValue": 11810,
-      "divineValue": 35.2,
+      "chaosValue": 10162,
+      "divineValue": 30.1,
       "stackSize": 7
     },
     "The Slumbering Beast": {
-      "chaosValue": 9830,
-      "divineValue": 29.3,
+      "chaosValue": 8575,
+      "divineValue": 25.4,
       "stackSize": 5
     },
     "The Apothecary": {
-      "chaosValue": 9394,
-      "divineValue": 28.0,
+      "chaosValue": 8035,
+      "divineValue": 23.8,
       "stackSize": 5
     },
     "A Familiar Call": {
-      "chaosValue": 6710,
+      "chaosValue": 6752,
       "divineValue": 20.0,
       "stackSize": 3
     },
     "The Eye of Terror": {
-      "chaosValue": 5032,
+      "chaosValue": 5064,
       "divineValue": 15.0,
       "stackSize": 8
     },
+    "Winter's Embrace": {
+      "chaosValue": 5064,
+      "divineValue": 15.0,
+      "stackSize": 2
+    },
     "The Immortal": {
-      "chaosValue": 4630,
-      "divineValue": 13.8,
+      "chaosValue": 4693,
+      "divineValue": 13.9,
       "stackSize": 10
     },
-    "Choking Guilt": {
-      "chaosValue": 3120,
-      "divineValue": 9.3,
+    "Lucky Bastion": {
+      "chaosValue": 3646,
+      "divineValue": 10.8,
       "stackSize": 6
     },
+    "Choking Guilt": {
+      "chaosValue": 2920,
+      "divineValue": 8.65,
+      "stackSize": 6
+    },
+    "Divine Justice": {
+      "chaosValue": 2161,
+      "divineValue": 6.4,
+      "stackSize": 1
+    },
     "The Demon": {
-      "chaosValue": 2080,
+      "chaosValue": 2093,
       "divineValue": 6.2,
       "stackSize": 10
     },
+    "Fire Of Unknown Origin": {
+      "chaosValue": 1722,
+      "divineValue": 5.1,
+      "stackSize": 7
+    },
     "Burning Blood": {
-      "chaosValue": 1678,
+      "chaosValue": 1688,
       "divineValue": 5.0,
       "stackSize": 6
     },
-    "Fire Of Unknown Origin": {
-      "chaosValue": 1678,
-      "divineValue": 5.0,
-      "stackSize": 7
-    },
     "When Currents Blaze": {
-      "chaosValue": 1678,
+      "chaosValue": 1688,
       "divineValue": 5.0,
       "stackSize": 2
     },
-    "The Lake": {
-      "chaosValue": 1417,
-      "divineValue": 4.22,
-      "stackSize": 8
-    },
-    "Divine Justice": {
-      "chaosValue": 1409,
-      "divineValue": 4.2,
-      "stackSize": 1
+    "The Insane Cat": {
+      "chaosValue": 1283,
+      "divineValue": 3.8,
+      "stackSize": 9
     },
     "Seven Years Bad Luck": {
-      "chaosValue": 1141,
-      "divineValue": 3.4,
+      "chaosValue": 1182,
+      "divineValue": 3.5,
       "stackSize": 13
     },
     "The Progeny of Lunaris": {
-      "chaosValue": 1107,
+      "chaosValue": 1114,
       "divineValue": 3.3,
       "stackSize": 2
     },
+    "I See Brothers": {
+      "chaosValue": 1104,
+      "divineValue": 3.27,
+      "stackSize": 2
+    },
+    "The Lake": {
+      "chaosValue": 1023,
+      "divineValue": 3.03,
+      "stackSize": 8
+    },
     "Love Through Ice": {
-      "chaosValue": 1006,
+      "chaosValue": 1013,
       "divineValue": 3.0,
       "stackSize": 4
     },
-    "The Last Supper": {
-      "chaosValue": 806.0,
-      "divineValue": 2.4,
-      "stackSize": 6
-    },
     "Luminous Trove": {
-      "chaosValue": 637.4,
-      "divineValue": 1.9,
+      "chaosValue": 652.6,
+      "divineValue": 1.93,
       "stackSize": 7
     },
     "The Fiend": {
-      "chaosValue": 536.8,
-      "divineValue": 1.6,
+      "chaosValue": 553.7,
+      "divineValue": 1.64,
       "stackSize": 11
     },
-    "The Hale Heart": {
-      "chaosValue": 402.0,
-      "divineValue": 1.2,
+    "The Formless Sea": {
+      "chaosValue": 506.4,
+      "divineValue": 1.5,
+      "stackSize": 7
+    },
+    "Temperance": {
+      "chaosValue": 452.6,
+      "divineValue": 1.34,
       "stackSize": 4
     },
-    "Brother's Gift": {
-      "chaosValue": 343.0,
-      "divineValue": 1.02,
-      "stackSize": 1
+    "The Conduit": {
+      "chaosValue": 371.4,
+      "divineValue": 1.1,
+      "stackSize": 9
     },
     "The Vast": {
-      "chaosValue": 335.5,
+      "chaosValue": 337.6,
       "divineValue": 1.0,
       "stackSize": 7
     },
     "The Endless Darkness": {
-      "chaosValue": 335.5,
+      "chaosValue": 337.6,
       "divineValue": 1.0,
       "stackSize": 9
     },
     "Pride of the First Ones": {
-      "chaosValue": 335.5,
+      "chaosValue": 337.6,
       "divineValue": 1.0,
       "stackSize": 7
     },
+    "Underground Forest": {
+      "chaosValue": 337.6,
+      "divineValue": 1.0,
+      "stackSize": 4
+    },
+    "The Fishmonger": {
+      "chaosValue": 337.6,
+      "divineValue": 1.0,
+      "stackSize": 4
+    },
     "The Greatest Intentions": {
-      "chaosValue": 335.5,
+      "chaosValue": 337.6,
       "divineValue": 1.0,
       "stackSize": 10
     },
     "Desecrated Virtue": {
-      "chaosValue": 335.5,
+      "chaosValue": 337.6,
       "divineValue": 1.0,
       "stackSize": 9
     },
     "The Astromancer": {
-      "chaosValue": 335.5,
+      "chaosValue": 337.6,
       "divineValue": 1.0,
       "stackSize": 7
     },
-    "The Shortcut": {
-      "chaosValue": 335.5,
-      "divineValue": 1.0,
-      "stackSize": 1
-    },
     "A Modest Request": {
-      "chaosValue": 335.5,
+      "chaosValue": 337.6,
       "divineValue": 1.0,
       "stackSize": 3
     },
     "The One That Got Away": {
-      "chaosValue": 335.5,
+      "chaosValue": 337.6,
       "divineValue": 1.0,
       "stackSize": 7
+    },
+    "Auspicious Ambitions": {
+      "chaosValue": 337.6,
+      "divineValue": 1.0,
+      "stackSize": 4
+    },
+    "Who Asked": {
+      "chaosValue": 337.6,
+      "divineValue": 1.0,
+      "stackSize": 9
     },
     "The Sacrifice": {
       "chaosValue": 300.0,
       "divineValue": 0.89,
       "stackSize": 4
     },
+    "Reflection of the Heart": {
+      "chaosValue": 271.0,
+      "divineValue": 0.8,
+      "stackSize": 2
+    },
     "One Last Score": {
-      "chaosValue": 274.4,
-      "divineValue": 0.82,
+      "chaosValue": 255.1,
+      "divineValue": 0.76,
       "stackSize": 5
-    },
-    "The Insane Cat": {
-      "chaosValue": 272.4,
-      "divineValue": 0.81,
-      "stackSize": 9
-    },
-    "Temperance": {
-      "chaosValue": 261.6,
-      "divineValue": 0.78,
-      "stackSize": 4
     },
     "The Doctor": {
       "chaosValue": 240.0,
-      "divineValue": 0.72,
+      "divineValue": 0.71,
       "stackSize": 8
     },
-    "Wealth and Power": {
-      "chaosValue": 220.0,
-      "divineValue": 0.66,
-      "stackSize": 11
-    },
     "Further Invention": {
-      "chaosValue": 214.2,
+      "chaosValue": 215.0,
       "divineValue": 0.64,
       "stackSize": 4
     },
     "The Journey": {
-      "chaosValue": 204.6,
+      "chaosValue": 205.7,
       "divineValue": 0.61,
       "stackSize": 4
     },
     "Succor of the Sinless": {
       "chaosValue": 203.2,
-      "divineValue": 0.61,
+      "divineValue": 0.6,
       "stackSize": 6
     },
     "The World Eater": {
-      "chaosValue": 200.0,
+      "chaosValue": 201.2,
       "divineValue": 0.6,
       "stackSize": 8
     },
-    "I See Brothers": {
-      "chaosValue": 195.1,
-      "divineValue": 0.58,
+    "Squandered Prosperity": {
+      "chaosValue": 200.0,
+      "divineValue": 0.59,
+      "stackSize": 5
+    },
+    "Wealth and Power": {
+      "chaosValue": 184.0,
+      "divineValue": 0.55,
+      "stackSize": 11
+    },
+    "Brother's Gift": {
+      "chaosValue": 176.4,
+      "divineValue": 0.52,
+      "stackSize": 1
+    },
+    "Broken Promises": {
+      "chaosValue": 175.0,
+      "divineValue": 0.52,
       "stackSize": 2
     },
     "Lonely Warrior": {
-      "chaosValue": 192.4,
-      "divineValue": 0.57,
+      "chaosValue": 172.3,
+      "divineValue": 0.51,
       "stackSize": 10
     },
     "Prometheus' Armoury": {
-      "chaosValue": 170.6,
+      "chaosValue": 171.3,
       "divineValue": 0.51,
       "stackSize": 6
     },
-    "Reflection of the Heart": {
-      "chaosValue": 158.2,
-      "divineValue": 0.47,
-      "stackSize": 2
-    },
-    "The Dragon's Heart": {
+    "The Last Supper": {
       "chaosValue": 150.0,
-      "divineValue": 0.45,
-      "stackSize": 11
-    },
-    "The Fishmonger": {
-      "chaosValue": 147.1,
       "divineValue": 0.44,
-      "stackSize": 4
+      "stackSize": 6
     },
-    "The Gulf": {
-      "chaosValue": 141.2,
-      "divineValue": 0.42,
-      "stackSize": 5
+    "The Long Watch": {
+      "chaosValue": 146.3,
+      "divineValue": 0.43,
+      "stackSize": 3
     },
-    "From Bone to Ashes": {
-      "chaosValue": 119.6,
-      "divineValue": 0.36,
+    "The Rabbit's Foot": {
+      "chaosValue": 128.0,
+      "divineValue": 0.38,
       "stackSize": 8
     },
+    "The Celestial Stone": {
+      "chaosValue": 118.8,
+      "divineValue": 0.35,
+      "stackSize": 10
+    },
     "Nook's Crown": {
-      "chaosValue": 113.0,
+      "chaosValue": 113.7,
       "divineValue": 0.34,
       "stackSize": 4
     },
-    "The Mad King": {
-      "chaosValue": 112.0,
-      "divineValue": 0.33,
-      "stackSize": 7
-    },
-    "Broken Promises": {
+    "The Dragon's Heart": {
       "chaosValue": 110.0,
       "divineValue": 0.33,
-      "stackSize": 2
-    },
-    "The Deep Ones": {
-      "chaosValue": 107.1,
-      "divineValue": 0.32,
-      "stackSize": 5
-    },
-    "The Everlasting": {
-      "chaosValue": 102.0,
-      "divineValue": 0.3,
-      "stackSize": 3
-    },
-    "Who Asked": {
-      "chaosValue": 101.4,
-      "divineValue": 0.3,
-      "stackSize": 9
-    },
-    "The Rabbit's Foot": {
-      "chaosValue": 100.0,
-      "divineValue": 0.3,
-      "stackSize": 8
-    },
-    "The Conduit": {
-      "chaosValue": 92.05,
-      "divineValue": 0.27,
-      "stackSize": 9
-    },
-    "The Formless Sea": {
-      "chaosValue": 91.1,
-      "divineValue": 0.27,
-      "stackSize": 7
-    },
-    "The Archmage's Right Hand": {
-      "chaosValue": 87.1,
-      "divineValue": 0.26,
-      "stackSize": 7
-    },
-    "The Breach": {
-      "chaosValue": 78.55,
-      "divineValue": 0.23,
-      "stackSize": 4
-    },
-    "The Forbidden Fruit": {
-      "chaosValue": 77.0,
-      "divineValue": 0.23,
-      "stackSize": 1
+      "stackSize": 11
     },
     "The Gentleman": {
-      "chaosValue": 75.1,
-      "divineValue": 0.22,
+      "chaosValue": 108.3,
+      "divineValue": 0.32,
       "stackSize": 4
     },
-    "The Celestial Stone": {
-      "chaosValue": 75.1,
-      "divineValue": 0.22,
-      "stackSize": 10
+    "The White Knight": {
+      "chaosValue": 108.3,
+      "divineValue": 0.32,
+      "stackSize": 8
     },
     "Lethean Temptation": {
-      "chaosValue": 74.3,
-      "divineValue": 0.22,
+      "chaosValue": 107.6,
+      "divineValue": 0.32,
       "stackSize": 6
     },
     "The Price of Loyalty": {
-      "chaosValue": 72.25,
-      "divineValue": 0.22,
+      "chaosValue": 101.9,
+      "divineValue": 0.3,
       "stackSize": 4
     },
+    "The Destination": {
+      "chaosValue": 100.0,
+      "divineValue": 0.3,
+      "stackSize": 9
+    },
+    "The Sephirot": {
+      "chaosValue": 95.0,
+      "divineValue": 0.28,
+      "stackSize": 11
+    },
+    "The Mad King": {
+      "chaosValue": 95.0,
+      "divineValue": 0.28,
+      "stackSize": 7
+    },
+    "Council of Cats": {
+      "chaosValue": 83.52,
+      "divineValue": 0.25,
+      "stackSize": 4
+    },
+    "The Enforcer": {
+      "chaosValue": 80.32,
+      "divineValue": 0.24,
+      "stackSize": 4
+    },
+    "The Breach": {
+      "chaosValue": 78.76,
+      "divineValue": 0.23,
+      "stackSize": 4
+    },
+    "Void of the Elements": {
+      "chaosValue": 78.76,
+      "divineValue": 0.23,
+      "stackSize": 3
+    },
+    "The Gulf": {
+      "chaosValue": 75.6,
+      "divineValue": 0.22,
+      "stackSize": 5
+    },
+    "The Forbidden Fruit": {
+      "chaosValue": 75.0,
+      "divineValue": 0.22,
+      "stackSize": 1
+    },
     "The Catch": {
-      "chaosValue": 69.5,
+      "chaosValue": 69.92,
       "divineValue": 0.21,
       "stackSize": 18
     },
-    "The Tumbleweed": {
-      "chaosValue": 67.9,
+    "The Incantation": {
+      "chaosValue": 68.42,
       "divineValue": 0.2,
-      "stackSize": 2
+      "stackSize": 4
+    },
+    "The Tyrant": {
+      "chaosValue": 68.32,
+      "divineValue": 0.2,
+      "stackSize": 9
+    },
+    "Keeper's Corruption": {
+      "chaosValue": 68.32,
+      "divineValue": 0.2,
+      "stackSize": 7
     },
     "The Samurai's Eye": {
       "chaosValue": 67.0,
       "divineValue": 0.2,
       "stackSize": 3
     },
-    "The Last One Standing": {
-      "chaosValue": 57.32,
-      "divineValue": 0.17,
-      "stackSize": 10
+    "Tranquillity": {
+      "chaosValue": 64.64,
+      "divineValue": 0.19,
+      "stackSize": 7
     },
-    "The Destination": {
-      "chaosValue": 55.0,
+    "Remembrance": {
+      "chaosValue": 59.86,
+      "divineValue": 0.18,
+      "stackSize": 8
+    },
+    "From Bone to Ashes": {
+      "chaosValue": 58.06,
+      "divineValue": 0.17,
+      "stackSize": 8
+    },
+    "The Brittle Emperor": {
+      "chaosValue": 56.26,
+      "divineValue": 0.17,
+      "stackSize": 8
+    },
+    "The Craving": {
+      "chaosValue": 56.26,
+      "divineValue": 0.17,
+      "stackSize": 4
+    },
+    "The Mayor": {
+      "chaosValue": 55.6,
       "divineValue": 0.16,
-      "stackSize": 9
+      "stackSize": 5
     },
     "The Offering": {
-      "chaosValue": 51.55,
+      "chaosValue": 51.76,
       "divineValue": 0.15,
       "stackSize": 8
     },
     "The Forgotten Treasure": {
-      "chaosValue": 51.55,
+      "chaosValue": 51.76,
       "divineValue": 0.15,
       "stackSize": 6
+    },
+    "Desperate Crusade": {
+      "chaosValue": 51.76,
+      "divineValue": 0.15,
+      "stackSize": 3
+    },
+    "The Lord of Celebration": {
+      "chaosValue": 50.0,
+      "divineValue": 0.15,
+      "stackSize": 4
+    },
+    "Echoes of Love": {
+      "chaosValue": 50.0,
+      "divineValue": 0.15,
+      "stackSize": 3
     },
     "The Damned": {
       "chaosValue": 50.0,
       "divineValue": 0.15,
       "stackSize": 6
     },
-    "Void of the Elements": {
-      "chaosValue": 50.0,
-      "divineValue": 0.15,
-      "stackSize": 3
-    },
     "The Old Man": {
       "chaosValue": 50.0,
       "divineValue": 0.15,
       "stackSize": 12
     },
-    "The Sephirot": {
-      "chaosValue": 49.1,
-      "divineValue": 0.15,
-      "stackSize": 11
-    },
-    "Magnum Opus": {
-      "chaosValue": 47.0,
-      "divineValue": 0.14,
-      "stackSize": 5
-    },
     "Draped in Dreams": {
-      "chaosValue": 46.0,
+      "chaosValue": 47.5,
       "divineValue": 0.14,
       "stackSize": 5
     },
-    "The Brittle Emperor": {
-      "chaosValue": 42.55,
-      "divineValue": 0.13,
-      "stackSize": 8
+    "The Shortcut": {
+      "chaosValue": 47.26,
+      "divineValue": 0.14,
+      "stackSize": 1
     },
     "The Jester": {
-      "chaosValue": 42.55,
+      "chaosValue": 42.76,
       "divineValue": 0.13,
       "stackSize": 9
     },
-    "Judging Voices": {
-      "chaosValue": 42.55,
-      "divineValue": 0.13,
-      "stackSize": 9
-    },
-    "Echoes of Love": {
-      "chaosValue": 40.2,
+    "The Last One Standing": {
+      "chaosValue": 41.76,
       "divineValue": 0.12,
-      "stackSize": 3
+      "stackSize": 10
     },
-    "The Road to Power": {
-      "chaosValue": 35.5,
+    "Divine Beauty": {
+      "chaosValue": 36.8,
       "divineValue": 0.11,
-      "stackSize": 7
+      "stackSize": 12
     },
     "The Brawny Battle Mage": {
-      "chaosValue": 35.35,
+      "chaosValue": 35.56,
       "divineValue": 0.11,
       "stackSize": 5
     },
-    "Home": {
-      "chaosValue": 35.0,
-      "divineValue": 0.1,
-      "stackSize": 3
-    },
-    "The Incantation": {
-      "chaosValue": 34.45,
-      "divineValue": 0.1,
-      "stackSize": 4
-    },
-    "Divine Beauty": {
-      "chaosValue": 31.4,
+    "The Lord in Black": {
+      "chaosValue": 31.0,
       "divineValue": 0.09,
-      "stackSize": 12
+      "stackSize": 6
     },
-    "The Aspirant": {
+    "Magnum Opus": {
       "chaosValue": 31.0,
       "divineValue": 0.09,
       "stackSize": 5
+    },
+    "Reckless Ambition": {
+      "chaosValue": 30.8,
+      "divineValue": 0.09,
+      "stackSize": 6
     },
     "Last Stand": {
       "chaosValue": 30.0,
       "divineValue": 0.09,
       "stackSize": 3
     },
-    "Apocalypse": {
-      "chaosValue": 30.0,
+    "The Aspirant": {
+      "chaosValue": 29.9,
       "divineValue": 0.09,
-      "stackSize": 2
-    },
-    "The Artist": {
-      "chaosValue": 29.2,
-      "divineValue": 0.09,
-      "stackSize": 11
+      "stackSize": 5
     },
     "Dark Dreams": {
       "chaosValue": 29.0,
       "divineValue": 0.09,
       "stackSize": 4
     },
-    "Squandered Prosperity": {
-      "chaosValue": 29.0,
-      "divineValue": 0.09,
-      "stackSize": 5
-    },
-    "Etched in Blood": {
-      "chaosValue": 26.0,
+    "The Artist": {
+      "chaosValue": 28.1,
       "divineValue": 0.08,
-      "stackSize": 9
+      "stackSize": 11
     },
-    "The Shieldbearer": {
-      "chaosValue": 25.8,
-      "divineValue": 0.08,
-      "stackSize": 8
-    },
-    "Doryani's Epiphany": {
-      "chaosValue": 25.2,
+    "The Everlasting": {
+      "chaosValue": 27.8,
       "divineValue": 0.08,
       "stackSize": 3
+    },
+    "Apocalypse": {
+      "chaosValue": 27.5,
+      "divineValue": 0.08,
+      "stackSize": 2
+    },
+    "Home": {
+      "chaosValue": 26.7,
+      "divineValue": 0.08,
+      "stackSize": 3
+    },
+    "Pride Before the Fall": {
+      "chaosValue": 25.2,
+      "divineValue": 0.07,
+      "stackSize": 8
     },
     "The Queen": {
       "chaosValue": 25.0,
       "divineValue": 0.07,
       "stackSize": 16
     },
-    "The Lord in Black": {
-      "chaosValue": 24.5,
-      "divineValue": 0.07,
-      "stackSize": 6
-    },
     "The Long Con": {
-      "chaosValue": 24.0,
+      "chaosValue": 25.0,
       "divineValue": 0.07,
       "stackSize": 4
+    },
+    "Sambodhi's Wisdom": {
+      "chaosValue": 25.0,
+      "divineValue": 0.07,
+      "stackSize": 3
+    },
+    "The Fox in the Brambles": {
+      "chaosValue": 24.0,
+      "divineValue": 0.07,
+      "stackSize": 7
+    },
+    "Monochrome": {
+      "chaosValue": 22.8,
+      "divineValue": 0.07,
+      "stackSize": 3
     },
     "The Thaumaturgist": {
       "chaosValue": 22.0,
       "divineValue": 0.07,
       "stackSize": 8
     },
-    "The Mayor": {
+    "The Deep Ones": {
       "chaosValue": 22.0,
       "divineValue": 0.07,
       "stackSize": 5
@@ -532,85 +592,45 @@
       "divineValue": 0.07,
       "stackSize": 7
     },
-    "The Lord of Celebration": {
+    "Etched in Blood": {
+      "chaosValue": 22.0,
+      "divineValue": 0.07,
+      "stackSize": 9
+    },
+    "Forbidden Power": {
       "chaosValue": 21.8,
       "divineValue": 0.06,
       "stackSize": 4
     },
-    "Tranquillity": {
-      "chaosValue": 21.2,
+    "The Shieldbearer": {
+      "chaosValue": 21.8,
       "divineValue": 0.06,
-      "stackSize": 7
+      "stackSize": 8
     },
-    "Imperfect Memories": {
-      "chaosValue": 21.2,
-      "divineValue": 0.06,
-      "stackSize": 5
-    },
-    "Reckless Ambition": {
-      "chaosValue": 20.4,
+    "The Dark Mage": {
+      "chaosValue": 20.0,
       "divineValue": 0.06,
       "stackSize": 6
     },
-    "Pride Before the Fall": {
-      "chaosValue": 20.1,
-      "divineValue": 0.06,
-      "stackSize": 8
-    },
-    "Light and Truth": {
-      "chaosValue": 18.0,
-      "divineValue": 0.05,
-      "stackSize": 2
-    },
-    "The Craving": {
-      "chaosValue": 18.0,
-      "divineValue": 0.05,
-      "stackSize": 4
-    },
-    "The Long Watch": {
-      "chaosValue": 18.0,
-      "divineValue": 0.05,
-      "stackSize": 3
-    },
-    "The Rusted Bard": {
-      "chaosValue": 18.0,
-      "divineValue": 0.05,
-      "stackSize": 9
-    },
-    "The Wolf's Legacy": {
-      "chaosValue": 17.2,
-      "divineValue": 0.05,
-      "stackSize": 4
-    },
-    "The Eternal War": {
-      "chaosValue": 17.0,
-      "divineValue": 0.05,
-      "stackSize": 4
-    },
-    "Council of Cats": {
-      "chaosValue": 16.5,
-      "divineValue": 0.05,
-      "stackSize": 4
-    },
     "The Soul": {
-      "chaosValue": 16.0,
+      "chaosValue": 18.0,
       "divineValue": 0.05,
       "stackSize": 9
     },
-    "Sambodhi's Wisdom": {
-      "chaosValue": 16.0,
+    "Bijoux": {
+      "chaosValue": 17.5,
       "divineValue": 0.05,
       "stackSize": 3
     },
-    "Treasure Hunter": {
-      "chaosValue": 15.6,
+    "Imperfect Memories": {
+      "chaosValue": 16.4,
       "divineValue": 0.05,
-      "stackSize": 7
+      "stackSize": 5
     },
-    "The Undisputed": {
-      "chaosValue": 15.0,
-      "divineValue": 0.04,
-      "stackSize": 8
+    "The Avenger": {
+      "chaosValue": 16.0,
+      "divineValue": 0.05,
+      "stackSize": 12
     },
     "The Chosen": {
       "chaosValue": 15.0,
@@ -627,50 +647,100 @@
       "divineValue": 0.04,
       "stackSize": 4
     },
-    "The Fox in the Brambles": {
-      "chaosValue": 14.5,
+    "Brotherhood in Exile": {
+      "chaosValue": 14.4,
       "divineValue": 0.04,
-      "stackSize": 7
+      "stackSize": 5
+    },
+    "Turn the Other Cheek": {
+      "chaosValue": 14.0,
+      "divineValue": 0.04,
+      "stackSize": 3
+    },
+    "The Life Thief": {
+      "chaosValue": 14.0,
+      "divineValue": 0.04,
+      "stackSize": 6
+    },
+    "The Eternal War": {
+      "chaosValue": 14.0,
+      "divineValue": 0.04,
+      "stackSize": 4
+    },
+    "The Silly Boy": {
+      "chaosValue": 13.8,
+      "divineValue": 0.04,
+      "stackSize": 9
     },
     "The Hive of Knowledge": {
       "chaosValue": 13.0,
       "divineValue": 0.04,
       "stackSize": 6
     },
-    "The Prince of Darkness": {
-      "chaosValue": 12.5,
+    "Parasitic Passengers": {
+      "chaosValue": 13.0,
       "divineValue": 0.04,
-      "stackSize": 6
+      "stackSize": 8
     },
-    "The Silly Boy": {
-      "chaosValue": 12.4,
+    "The Rusted Bard": {
+      "chaosValue": 13.0,
       "divineValue": 0.04,
       "stackSize": 9
     },
-    "The Enforcer": {
+    "The Warlord": {
       "chaosValue": 11.8,
-      "divineValue": 0.04,
-      "stackSize": 4
-    },
-    "Anarchy's Price": {
-      "chaosValue": 11.2,
       "divineValue": 0.03,
-      "stackSize": 13
+      "stackSize": 6
     },
-    "Peaceful Moments": {
+    "The Archmage's Right Hand": {
+      "chaosValue": 11.8,
+      "divineValue": 0.03,
+      "stackSize": 7
+    },
+    "The Whiteout": {
+      "chaosValue": 11.8,
+      "divineValue": 0.03,
+      "stackSize": 8
+    },
+    "The Leviathan": {
+      "chaosValue": 11.6,
+      "divineValue": 0.03,
+      "stackSize": 7
+    },
+    "The Prince of Darkness": {
       "chaosValue": 11.0,
+      "divineValue": 0.03,
+      "stackSize": 6
+    },
+    "The Road to Power": {
+      "chaosValue": 10.6,
+      "divineValue": 0.03,
+      "stackSize": 7
+    },
+    "The Eye of the Dragon": {
+      "chaosValue": 10.6,
+      "divineValue": 0.03,
+      "stackSize": 10
+    },
+    "The Tumbleweed": {
+      "chaosValue": 10.6,
+      "divineValue": 0.03,
+      "stackSize": 2
+    },
+    "The Fletcher": {
+      "chaosValue": 10.4,
       "divineValue": 0.03,
       "stackSize": 5
     },
-    "The Avenger": {
+    "Hunter's Reward": {
       "chaosValue": 10.0,
       "divineValue": 0.03,
-      "stackSize": 12
+      "stackSize": 3
     },
-    "The Eye of the Dragon": {
+    "Mawr Blaidd": {
       "chaosValue": 10.0,
       "divineValue": 0.03,
-      "stackSize": 10
+      "stackSize": 16
     },
     "Rebirth": {
       "chaosValue": 10.0,
@@ -682,15 +752,15 @@
       "divineValue": 0.03,
       "stackSize": 8
     },
+    "Vile Power": {
+      "chaosValue": 10.0,
+      "divineValue": 0.03,
+      "stackSize": 5
+    },
     "The Eldritch Decay": {
       "chaosValue": 10.0,
       "divineValue": 0.03,
       "stackSize": 4
-    },
-    "The White Knight": {
-      "chaosValue": 10.0,
-      "divineValue": 0.03,
-      "stackSize": 8
     },
     "Dying Light": {
       "chaosValue": 10.0,
@@ -702,197 +772,182 @@
       "divineValue": 0.03,
       "stackSize": 6
     },
-    "A Stone Perfected": {
+    "Lachrymal Necrosis": {
       "chaosValue": 10.0,
       "divineValue": 0.03,
-      "stackSize": 5
+      "stackSize": 3
     },
-    "Vile Power": {
-      "chaosValue": 9.6,
+    "Judging Voices": {
+      "chaosValue": 10.0,
       "divineValue": 0.03,
-      "stackSize": 5
+      "stackSize": 9
     },
-    "Monochrome": {
-      "chaosValue": 9.3,
+    "Gemcutter's Mercy": {
+      "chaosValue": 9.7,
       "divineValue": 0.03,
       "stackSize": 3
     },
     "Buried Treasure": {
+      "chaosValue": 9.5,
+      "divineValue": 0.03,
+      "stackSize": 3
+    },
+    "A Stone Perfected": {
+      "chaosValue": 9.5,
+      "divineValue": 0.03,
+      "stackSize": 5
+    },
+    "Doryani's Epiphany": {
       "chaosValue": 9.3,
       "divineValue": 0.03,
       "stackSize": 3
     },
-    "The Polymath": {
-      "chaosValue": 9.1,
+    "Peaceful Moments": {
+      "chaosValue": 9.2,
       "divineValue": 0.03,
-      "stackSize": 3
+      "stackSize": 5
     },
-    "Brother's Stash": {
-      "chaosValue": 9.0,
-      "divineValue": 0.03,
-      "stackSize": 1
-    },
-    "The Siren": {
-      "chaosValue": 8.8,
+    "The Dungeon Master": {
+      "chaosValue": 9.2,
       "divineValue": 0.03,
       "stackSize": 7
     },
-    "Avian Pursuit": {
+    "Merciless Armament": {
+      "chaosValue": 9.1,
+      "divineValue": 0.03,
+      "stackSize": 4
+    },
+    "The Undisputed": {
+      "chaosValue": 9.0,
+      "divineValue": 0.03,
+      "stackSize": 8
+    },
+    "The Fortunate": {
+      "chaosValue": 9.0,
+      "divineValue": 0.03,
+      "stackSize": 12
+    },
+    "The Siren": {
       "chaosValue": 8.6,
       "divineValue": 0.03,
-      "stackSize": 3
+      "stackSize": 7
+    },
+    "The Offspring": {
+      "chaosValue": 8.6,
+      "divineValue": 0.03,
+      "stackSize": 9
     },
     "The Easy Stroll": {
       "chaosValue": 8.5,
       "divineValue": 0.03,
       "stackSize": 2
     },
-    "The Offspring": {
-      "chaosValue": 8.5,
-      "divineValue": 0.03,
-      "stackSize": 9
+    "Death": {
+      "chaosValue": 8.2,
+      "divineValue": 0.02,
+      "stackSize": 4
     },
-    "Hunter's Reward": {
+    "The Polymath": {
       "chaosValue": 8.2,
       "divineValue": 0.02,
       "stackSize": 3
     },
-    "The Side Quest": {
-      "chaosValue": 8.2,
+    "Brother's Stash": {
+      "chaosValue": 7.5,
+      "divineValue": 0.02,
+      "stackSize": 1
+    },
+    "A Dusty Memory": {
+      "chaosValue": 7.3,
       "divineValue": 0.02,
       "stackSize": 5
     },
     "The Strategist": {
-      "chaosValue": 8.0,
+      "chaosValue": 7.1,
       "divineValue": 0.02,
       "stackSize": 6
-    },
-    "Azyran's Reward": {
-      "chaosValue": 7.6,
-      "divineValue": 0.02,
-      "stackSize": 9
-    },
-    "The Life Thief": {
-      "chaosValue": 7.5,
-      "divineValue": 0.02,
-      "stackSize": 6
-    },
-    "The Hook": {
-      "chaosValue": 7.5,
-      "divineValue": 0.02,
-      "stackSize": 8
-    },
-    "Lachrymal Necrosis": {
-      "chaosValue": 7.5,
-      "divineValue": 0.02,
-      "stackSize": 3
-    },
-    "Parasitic Passengers": {
-      "chaosValue": 7.5,
-      "divineValue": 0.02,
-      "stackSize": 8
-    },
-    "Death": {
-      "chaosValue": 7.4,
-      "divineValue": 0.02,
-      "stackSize": 4
-    },
-    "Remembrance": {
-      "chaosValue": 7.4,
-      "divineValue": 0.02,
-      "stackSize": 8
-    },
-    "The Dungeon Master": {
-      "chaosValue": 7.4,
-      "divineValue": 0.02,
-      "stackSize": 7
     },
     "Lucky Deck": {
       "chaosValue": 7.0,
       "divineValue": 0.02,
       "stackSize": 9
     },
-    "Guardian's Challenge": {
-      "chaosValue": 6.8,
-      "divineValue": 0.02,
-      "stackSize": 4
-    },
-    "Merciless Armament": {
-      "chaosValue": 6.6,
-      "divineValue": 0.02,
-      "stackSize": 4
-    },
-    "The Twilight Moon": {
-      "chaosValue": 6.4,
+    "The Enlightened": {
+      "chaosValue": 7.0,
       "divineValue": 0.02,
       "stackSize": 6
     },
-    "Misery in Darkness": {
-      "chaosValue": 6.4,
-      "divineValue": 0.02,
-      "stackSize": 6
-    },
-    "A Fate Worse Than Death": {
-      "chaosValue": 6.2,
+    "The Wolf's Legacy": {
+      "chaosValue": 7.0,
       "divineValue": 0.02,
       "stackSize": 4
     },
-    "The Leviathan": {
-      "chaosValue": 6.03,
-      "divineValue": 0.02,
-      "stackSize": 7
-    },
-    "The Whiteout": {
-      "chaosValue": 5.8,
-      "divineValue": 0.02,
-      "stackSize": 8
-    },
-    "Keeper's Corruption": {
-      "chaosValue": 5.8,
-      "divineValue": 0.02,
-      "stackSize": 7
-    },
-    "Altered Perception": {
-      "chaosValue": 5.8,
+    "Avian Pursuit": {
+      "chaosValue": 6.5,
       "divineValue": 0.02,
       "stackSize": 3
     },
-    "The Transformation": {
-      "chaosValue": 5.7,
+    "The Pact": {
+      "chaosValue": 6.2,
+      "divineValue": 0.02,
+      "stackSize": 9
+    },
+    "The Twilight Moon": {
+      "chaosValue": 6.0,
+      "divineValue": 0.02,
+      "stackSize": 6
+    },
+    "Azyran's Reward": {
+      "chaosValue": 6.0,
+      "divineValue": 0.02,
+      "stackSize": 9
+    },
+    "Gift of the Gemling Queen": {
+      "chaosValue": 5.9,
+      "divineValue": 0.02,
+      "stackSize": 9
+    },
+    "The Celestial Justicar": {
+      "chaosValue": 5.8,
+      "divineValue": 0.02,
+      "stackSize": 6
+    },
+    "The Hunger": {
+      "chaosValue": 5.8,
+      "divineValue": 0.02,
+      "stackSize": 9
+    },
+    "The Void": {
+      "chaosValue": 5.8,
+      "divineValue": 0.02,
+      "stackSize": 1
+    },
+    "The Side Quest": {
+      "chaosValue": 5.8,
       "divineValue": 0.02,
       "stackSize": 5
     },
-    "The Ethereal": {
-      "chaosValue": 5.6,
-      "divineValue": 0.02,
-      "stackSize": 7
-    },
-    "The Spoiled Prince": {
-      "chaosValue": 5.5,
-      "divineValue": 0.02,
-      "stackSize": 4
-    },
-    "The Nurse": {
-      "chaosValue": 5.5,
+    "Terrible Secret of Space": {
+      "chaosValue": 5.8,
       "divineValue": 0.02,
       "stackSize": 8
     },
-    "Bijoux": {
+    "The Transformation": {
+      "chaosValue": 5.6,
+      "divineValue": 0.02,
+      "stackSize": 5
+    },
+    "The Gambler": {
       "chaosValue": 5.5,
       "divineValue": 0.02,
-      "stackSize": 3
+      "stackSize": 5
     },
-    "Darker Half": {
-      "chaosValue": 5.5,
-      "divineValue": 0.02,
-      "stackSize": 3
-    },
-    "The Warlord": {
+    "The Nurse": {
       "chaosValue": 5.1,
       "divineValue": 0.02,
-      "stackSize": 6
+      "stackSize": 8
     },
-    "Turn the Other Cheek": {
+    "Altered Perception": {
       "chaosValue": 5.1,
       "divineValue": 0.02,
       "stackSize": 3
@@ -902,353 +957,358 @@
       "divineValue": 0.01,
       "stackSize": 1
     },
-    "Scholar of the Seas": {
+    "The Demoness": {
       "chaosValue": 5.0,
       "divineValue": 0.01,
-      "stackSize": 7
+      "stackSize": 5
     },
-    "The Enlightened": {
+    "The Patient": {
       "chaosValue": 5.0,
       "divineValue": 0.01,
-      "stackSize": 6
+      "stackSize": 8
     },
-    "The Inoculated": {
+    "The Hook": {
       "chaosValue": 5.0,
       "divineValue": 0.01,
-      "stackSize": 4
+      "stackSize": 8
     },
     "Eternal Bonds": {
       "chaosValue": 5.0,
       "divineValue": 0.01,
       "stackSize": 4
     },
+    "A Fate Worse Than Death": {
+      "chaosValue": 5.0,
+      "divineValue": 0.01,
+      "stackSize": 4
+    },
+    "Darker Half": {
+      "chaosValue": 5.0,
+      "divineValue": 0.01,
+      "stackSize": 3
+    },
     "Something Dark": {
       "chaosValue": 5.0,
       "divineValue": 0.01,
       "stackSize": 5
+    },
+    "The Shepherd's Sandals": {
+      "chaosValue": 5.0,
+      "divineValue": 0.01,
+      "stackSize": 3
     },
     "Man With Bear": {
       "chaosValue": 5.0,
       "divineValue": 0.01,
       "stackSize": 3
     },
-    "The Fortunate": {
-      "chaosValue": 5.0,
-      "divineValue": 0.01,
-      "stackSize": 12
-    },
     "Audacity": {
       "chaosValue": 4.6,
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "The King's Heart": {
+    "The Inoculated": {
       "chaosValue": 4.6,
       "divineValue": 0.01,
-      "stackSize": 8
+      "stackSize": 4
     },
-    "Perfection": {
-      "chaosValue": 4.6,
-      "divineValue": 0.01,
-      "stackSize": 5
-    },
-    "The Cacophony": {
-      "chaosValue": 4.6,
-      "divineValue": 0.01,
-      "stackSize": 8
-    },
-    "Brotherhood in Exile": {
+    "Call to the First Ones": {
       "chaosValue": 4.6,
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "The Celestial Justicar": {
-      "chaosValue": 4.5,
-      "divineValue": 0.01,
-      "stackSize": 6
-    },
-    "Emperor of Purity": {
-      "chaosValue": 4.4,
+    "The Golden Era": {
+      "chaosValue": 4.6,
       "divineValue": 0.01,
       "stackSize": 7
     },
-    "Friendship": {
+    "Anarchy's Price": {
       "chaosValue": 4.4,
       "divineValue": 0.01,
-      "stackSize": 3
+      "stackSize": 13
+    },
+    "The Cacophony": {
+      "chaosValue": 4.4,
+      "divineValue": 0.01,
+      "stackSize": 8
     },
     "Unchained": {
       "chaosValue": 4.4,
       "divineValue": 0.01,
       "stackSize": 4
     },
-    "Bowyer's Dream": {
-      "chaosValue": 4.2,
-      "divineValue": 0.01,
-      "stackSize": 6
-    },
-    "Mawr Blaidd": {
-      "chaosValue": 4.2,
-      "divineValue": 0.01,
-      "stackSize": 16
-    },
-    "The Void": {
-      "chaosValue": 4.2,
-      "divineValue": 0.01,
-      "stackSize": 1
-    },
     "The Wedding Gift": {
+      "chaosValue": 4.4,
+      "divineValue": 0.01,
+      "stackSize": 2
+    },
+    "The Spark and the Flame": {
       "chaosValue": 4.2,
       "divineValue": 0.01,
       "stackSize": 2
     },
-    "The Dark Mage": {
+    "The Ethereal": {
       "chaosValue": 4.0,
       "divineValue": 0.01,
-      "stackSize": 6
+      "stackSize": 7
     },
-    "The Patient": {
-      "chaosValue": 4.0,
+    "Emperor of Purity": {
+      "chaosValue": 3.8,
+      "divineValue": 0.01,
+      "stackSize": 7
+    },
+    "The Encroaching Darkness": {
+      "chaosValue": 3.8,
       "divineValue": 0.01,
       "stackSize": 8
     },
-    "The Calling": {
-      "chaosValue": 3.8,
-      "divineValue": 0.01,
-      "stackSize": 6
-    },
-    "The Fletcher": {
-      "chaosValue": 3.8,
-      "divineValue": 0.01,
-      "stackSize": 5
-    },
-    "The Hunger": {
-      "chaosValue": 3.8,
-      "divineValue": 0.01,
-      "stackSize": 9
-    },
-    "Underground Forest": {
+    "The Spoiled Prince": {
       "chaosValue": 3.7,
       "divineValue": 0.01,
       "stackSize": 4
     },
-    "The Heroic Shot": {
+    "Perfection": {
+      "chaosValue": 3.7,
+      "divineValue": 0.01,
+      "stackSize": 5
+    },
+    "Prejudice": {
       "chaosValue": 3.6,
       "divineValue": 0.01,
-      "stackSize": 1
+      "stackSize": 7
+    },
+    "Guardian's Challenge": {
+      "chaosValue": 3.6,
+      "divineValue": 0.01,
+      "stackSize": 4
     },
     "The Betrayal": {
       "chaosValue": 3.5,
       "divineValue": 0.01,
       "stackSize": 9
     },
-    "The Encroaching Darkness": {
+    "The Mind's Eyes": {
       "chaosValue": 3.5,
       "divineValue": 0.01,
-      "stackSize": 8
+      "stackSize": 7
     },
-    "The Pact": {
+    "The Calling": {
+      "chaosValue": 3.49,
+      "divineValue": 0.01,
+      "stackSize": 6
+    },
+    "Bowyer's Dream": {
       "chaosValue": 3.4,
       "divineValue": 0.01,
-      "stackSize": 9
-    },
-    "The Spark and the Flame": {
-      "chaosValue": 3.4,
-      "divineValue": 0.01,
-      "stackSize": 2
+      "stackSize": 6
     },
     "The Bitter Blossom": {
-      "chaosValue": 3.3,
+      "chaosValue": 3.4,
       "divineValue": 0.01,
       "stackSize": 3
     },
-    "The Arena Champion": {
+    "The Blessing of Moosh": {
+      "chaosValue": 3.4,
+      "divineValue": 0.01,
+      "stackSize": 4
+    },
+    "Light and Truth": {
       "chaosValue": 3.2,
       "divineValue": 0.01,
-      "stackSize": 10
+      "stackSize": 2
     },
     "A Dab of Ink": {
       "chaosValue": 3.2,
       "divineValue": 0.01,
       "stackSize": 9
     },
-    "The Mind's Eyes": {
+    "The Heroic Shot": {
       "chaosValue": 3.2,
       "divineValue": 0.01,
-      "stackSize": 7
+      "stackSize": 1
     },
-    "Boundless Realms": {
+    "The Academic": {
+      "chaosValue": 3.2,
+      "divineValue": 0.01,
+      "stackSize": 8
+    },
+    "Grave Knowledge": {
       "chaosValue": 3.0,
       "divineValue": 0.01,
-      "stackSize": 4
-    },
-    "Gift of the Gemling Queen": {
-      "chaosValue": 3.0,
-      "divineValue": 0.01,
-      "stackSize": 9
+      "stackSize": 6
     },
     "The Feast": {
       "chaosValue": 3.0,
       "divineValue": 0.01,
       "stackSize": 5
     },
+    "Lingering Remnants": {
+      "chaosValue": 3.0,
+      "divineValue": 0.01,
+      "stackSize": 16
+    },
+    "The Dreamer": {
+      "chaosValue": 3.0,
+      "divineValue": 0.01,
+      "stackSize": 6
+    },
+    "The Price of Protection": {
+      "chaosValue": 3.0,
+      "divineValue": 0.01,
+      "stackSize": 5
+    },
+    "The Bones": {
+      "chaosValue": 3.0,
+      "divineValue": 0.01,
+      "stackSize": 6
+    },
     "Gift of Asenath": {
       "chaosValue": 3.0,
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "The Primordial": {
-      "chaosValue": 2.9,
+    "Rebirth and Renewal": {
+      "chaosValue": 3.0,
+      "divineValue": 0.01,
+      "stackSize": 4
+    },
+    "The Last Laugh": {
+      "chaosValue": 2.92,
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "Justified Ambition": {
+    "The Cataclysm": {
       "chaosValue": 2.9,
       "divineValue": 0.01,
-      "stackSize": 5
+      "stackSize": 13
+    },
+    "Atziri's Arsenal": {
+      "chaosValue": 2.9,
+      "divineValue": 0.01,
+      "stackSize": 4
     },
     "Bound by Flame": {
       "chaosValue": 2.9,
       "divineValue": 0.01,
       "stackSize": 2
     },
-    "The Deal": {
+    "The Arena Champion": {
       "chaosValue": 2.8,
+      "divineValue": 0.01,
+      "stackSize": 10
+    },
+    "Justified Ambition": {
+      "chaosValue": 2.73,
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "Terrible Secret of Space": {
-      "chaosValue": 2.8,
-      "divineValue": 0.01,
-      "stackSize": 8
-    },
-    "Rebirth and Renewal": {
-      "chaosValue": 2.8,
-      "divineValue": 0.01,
-      "stackSize": 4
-    },
-    "Checkmate": {
-      "chaosValue": 2.8,
-      "divineValue": 0.01,
-      "stackSize": 8
-    },
-    "Lingering Remnants": {
+    "Toxic Tidings": {
       "chaosValue": 2.7,
       "divineValue": 0.01,
-      "stackSize": 16
+      "stackSize": 5
     },
-    "The Professor": {
-      "chaosValue": 2.7,
-      "divineValue": 0.01,
-      "stackSize": 4
-    },
-    "The Academic": {
-      "chaosValue": 2.7,
-      "divineValue": 0.01,
-      "stackSize": 8
-    },
-    "The Enthusiasts": {
-      "chaosValue": 2.7,
-      "divineValue": 0.01,
-      "stackSize": 3
-    },
-    "The Wolf": {
+    "The Forsaken": {
       "chaosValue": 2.6,
       "divineValue": 0.01,
-      "stackSize": 5
+      "stackSize": 7
     },
     "Harmony of Souls": {
       "chaosValue": 2.6,
       "divineValue": 0.01,
       "stackSize": 9
     },
-    "The Bear Woman": {
+    "The Innocent": {
       "chaosValue": 2.6,
       "divineValue": 0.01,
-      "stackSize": 6
+      "stackSize": 10
     },
-    "The Shepherd's Sandals": {
-      "chaosValue": 2.6,
-      "divineValue": 0.01,
-      "stackSize": 3
-    },
-    "Gemcutter's Mercy": {
-      "chaosValue": 2.6,
-      "divineValue": 0.01,
-      "stackSize": 3
-    },
-    "Toxic Tidings": {
+    "The Deal": {
       "chaosValue": 2.6,
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "The Innocent": {
-      "chaosValue": 2.5,
-      "divineValue": 0.01,
-      "stackSize": 10
-    },
-    "The Unexpected Prize": {
-      "chaosValue": 2.5,
+    "Acclimatisation": {
+      "chaosValue": 2.6,
       "divineValue": 0.01,
       "stackSize": 2
+    },
+    "The Forward Gaze": {
+      "chaosValue": 2.6,
+      "divineValue": 0.01,
+      "stackSize": 6
+    },
+    "Checkmate": {
+      "chaosValue": 2.6,
+      "divineValue": 0.01,
+      "stackSize": 8
+    },
+    "The Finishing Touch": {
+      "chaosValue": 2.6,
+      "divineValue": 0.01,
+      "stackSize": 2
+    },
+    "The Drunken Aristocrat": {
+      "chaosValue": 2.56,
+      "divineValue": 0.01,
+      "stackSize": 8
+    },
+    "The Web": {
+      "chaosValue": 2.5,
+      "divineValue": 0.01,
+      "stackSize": 8
+    },
+    "The Professor": {
+      "chaosValue": 2.5,
+      "divineValue": 0.01,
+      "stackSize": 4
+    },
+    "The Enthusiasts": {
+      "chaosValue": 2.5,
+      "divineValue": 0.01,
+      "stackSize": 3
     },
     "The Wind": {
       "chaosValue": 2.4,
       "divineValue": 0.01,
       "stackSize": 7
     },
-    "The Forsaken": {
+    "Immortal Resolve": {
       "chaosValue": 2.4,
       "divineValue": 0.01,
-      "stackSize": 7
-    },
-    "Atziri's Arsenal": {
-      "chaosValue": 2.4,
-      "divineValue": 0.01,
-      "stackSize": 4
-    },
-    "Forbidden Power": {
-      "chaosValue": 2.4,
-      "divineValue": 0.01,
-      "stackSize": 4
+      "stackSize": 6
     },
     "Boon of the First Ones": {
       "chaosValue": 2.4,
       "divineValue": 0.01,
       "stackSize": 6
     },
-    "Alluring Bounty": {
+    "Akil's Prophecy": {
       "chaosValue": 2.4,
       "divineValue": 0.01,
-      "stackSize": 7
+      "stackSize": 3
     },
     "The Dapper Prodigy": {
       "chaosValue": 2.3,
       "divineValue": 0.01,
       "stackSize": 6
     },
-    "The Web": {
+    "The Primordial": {
       "chaosValue": 2.3,
       "divineValue": 0.01,
-      "stackSize": 8
+      "stackSize": 5
     },
-    "The Drunken Aristocrat": {
+    "Dementophobia": {
+      "chaosValue": 2.3,
+      "divineValue": 0.01,
+      "stackSize": 11
+    },
+    "The Unexpected Prize": {
       "chaosValue": 2.2,
       "divineValue": 0.01,
-      "stackSize": 8
+      "stackSize": 2
     },
-    "Akil's Prophecy": {
-      "chaosValue": 2.2,
-      "divineValue": 0.01,
-      "stackSize": 3
-    },
-    "The Bones": {
+    "The Insatiable": {
       "chaosValue": 2.1,
-      "divineValue": 0.01,
-      "stackSize": 6
-    },
-    "Cartographer's Delight": {
-      "chaosValue": 2.0,
       "divineValue": 0.01,
       "stackSize": 3
     },
@@ -1257,25 +1317,30 @@
       "divineValue": 0.01,
       "stackSize": 8
     },
-    "Grave Knowledge": {
+    "Heterochromia": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
-      "stackSize": 6
+      "stackSize": 2
     },
-    "The Cataclysm": {
+    "The Cursed King": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
-      "stackSize": 13
+      "stackSize": 8
     },
     "The Lion": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "The Stormcaller": {
+    "The Risk": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
-      "stackSize": 4
+      "stackSize": 3
+    },
+    "The Summoner": {
+      "chaosValue": 2.0,
+      "divineValue": 0.01,
+      "stackSize": 6
     },
     "The Surveyor": {
       "chaosValue": 2.0,
@@ -1287,20 +1352,30 @@
       "divineValue": 0.01,
       "stackSize": 4
     },
-    "The Trial": {
+    "The Union": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
       "stackSize": 7
+    },
+    "The Wolf": {
+      "chaosValue": 2.0,
+      "divineValue": 0.01,
+      "stackSize": 5
     },
     "The Wolf's Shadow": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
       "stackSize": 3
     },
-    "The Realm": {
+    "The Wolverine": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
-      "stackSize": 5
+      "stackSize": 4
+    },
+    "The Ruthless Ceinture": {
+      "chaosValue": 2.0,
+      "divineValue": 0.01,
+      "stackSize": 7
     },
     "Left to Fate": {
       "chaosValue": 2.0,
@@ -1312,20 +1387,20 @@
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "The Price of Protection": {
+    "The Undaunted": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
       "stackSize": 5
-    },
-    "The Golden Era": {
-      "chaosValue": 2.0,
-      "divineValue": 0.01,
-      "stackSize": 7
     },
     "The Fool": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
       "stackSize": 4
+    },
+    "The Skeleton": {
+      "chaosValue": 2.0,
+      "divineValue": 0.01,
+      "stackSize": 6
     },
     "The Escape": {
       "chaosValue": 2.0,
@@ -1337,15 +1412,10 @@
       "divineValue": 0.01,
       "stackSize": 13
     },
-    "Acclimatisation": {
+    "The Bear Woman": {
       "chaosValue": 2.0,
       "divineValue": 0.01,
-      "stackSize": 2
-    },
-    "Prejudice": {
-      "chaosValue": 2.0,
-      "divineValue": 0.01,
-      "stackSize": 7
+      "stackSize": 6
     },
     "Brush, Paint and Palette": {
       "chaosValue": 2.0,
@@ -1377,52 +1447,22 @@
       "divineValue": 0.01,
       "stackSize": 4
     },
-    "The Last Laugh": {
-      "chaosValue": 2.0,
-      "divineValue": 0.01,
-      "stackSize": 5
-    },
-    "Heterochromia": {
-      "chaosValue": 1.9,
-      "divineValue": 0.01,
-      "stackSize": 2
-    },
-    "The Insatiable": {
-      "chaosValue": 1.9,
-      "divineValue": 0.01,
-      "stackSize": 3
-    },
-    "Immortal Resolve": {
-      "chaosValue": 1.9,
+    "Misery in Darkness": {
+      "chaosValue": 1.91,
       "divineValue": 0.01,
       "stackSize": 6
+    },
+    "The Master Artisan": {
+      "chaosValue": 1.9,
+      "divineValue": 0.01,
+      "stackSize": 5
     },
     "The Seeker": {
       "chaosValue": 1.9,
       "divineValue": 0.01,
       "stackSize": 9
     },
-    "The Card Sharp": {
-      "chaosValue": 1.9,
-      "divineValue": 0.01,
-      "stackSize": 4
-    },
-    "The Finishing Touch": {
-      "chaosValue": 1.9,
-      "divineValue": 0.01,
-      "stackSize": 2
-    },
-    "Cursed Words": {
-      "chaosValue": 1.88,
-      "divineValue": 0.01,
-      "stackSize": 13
-    },
-    "The Cursed King": {
-      "chaosValue": 1.8,
-      "divineValue": 0.01,
-      "stackSize": 8
-    },
-    "The Oath": {
+    "A Mother's Parting Gift": {
       "chaosValue": 1.8,
       "divineValue": 0.01,
       "stackSize": 6
@@ -1432,122 +1472,132 @@
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "The Wolverine": {
+    "The Stormcaller": {
       "chaosValue": 1.8,
       "divineValue": 0.01,
       "stackSize": 4
     },
-    "The Ruthless Ceinture": {
+    "The Wretched": {
       "chaosValue": 1.8,
       "divineValue": 0.01,
-      "stackSize": 7
+      "stackSize": 6
     },
-    "The Undaunted": {
+    "The Card Sharp": {
+      "chaosValue": 1.8,
+      "divineValue": 0.01,
+      "stackSize": 4
+    },
+    "Astral Protection": {
       "chaosValue": 1.8,
       "divineValue": 0.01,
       "stackSize": 5
     },
-    "The Blessing of Moosh": {
-      "chaosValue": 1.8,
-      "divineValue": 0.01,
-      "stackSize": 4
-    },
-    "Endless Night": {
-      "chaosValue": 1.8,
-      "divineValue": 0.01,
-      "stackSize": 7
-    },
-    "Ever-Changing": {
-      "chaosValue": 1.8,
-      "divineValue": 0.01,
-      "stackSize": 3
-    },
-    "A Mother's Parting Gift": {
-      "chaosValue": 1.77,
-      "divineValue": 0.01,
-      "stackSize": 6
-    },
-    "The Watcher": {
+    "The Mercenary": {
       "chaosValue": 1.7,
       "divineValue": 0.01,
-      "stackSize": 12
+      "stackSize": 5
+    },
+    "The Sigil": {
+      "chaosValue": 1.7,
+      "divineValue": 0.01,
+      "stackSize": 3
     },
     "The Coming Storm": {
       "chaosValue": 1.7,
       "divineValue": 0.01,
       "stackSize": 8
     },
-    "The Skeleton": {
-      "chaosValue": 1.7,
-      "divineValue": 0.01,
-      "stackSize": 6
-    },
-    "The Forward Gaze": {
-      "chaosValue": 1.7,
-      "divineValue": 0.01,
-      "stackSize": 6
-    },
-    "Astral Protection": {
-      "chaosValue": 1.7,
-      "divineValue": 0.01,
-      "stackSize": 5
-    },
-    "Alivia's Grace": {
-      "chaosValue": 1.67,
-      "divineValue": 0.0,
-      "stackSize": 6
-    },
-    "The Wretched": {
-      "chaosValue": 1.62,
-      "divineValue": 0.0,
-      "stackSize": 6
-    },
-    "The Tyrant": {
-      "chaosValue": 1.6,
-      "divineValue": 0.0,
-      "stackSize": 9
-    },
     "The Wolven King's Bite": {
-      "chaosValue": 1.6,
-      "divineValue": 0.0,
+      "chaosValue": 1.7,
+      "divineValue": 0.01,
       "stackSize": 8
     },
     "Haunting Shadows": {
-      "chaosValue": 1.6,
-      "divineValue": 0.0,
+      "chaosValue": 1.7,
+      "divineValue": 0.01,
       "stackSize": 4
     },
-    "The Union": {
-      "chaosValue": 1.5,
-      "divineValue": 0.0,
-      "stackSize": 7
-    },
-    "The Darkest Dream": {
-      "chaosValue": 1.5,
-      "divineValue": 0.0,
-      "stackSize": 6
-    },
-    "Blind Venture": {
-      "chaosValue": 1.4,
-      "divineValue": 0.0,
+    "Endless Night": {
+      "chaosValue": 1.7,
+      "divineValue": 0.01,
       "stackSize": 7
     },
     "Hope": {
-      "chaosValue": 1.4,
+      "chaosValue": 1.6,
       "divineValue": 0.0,
       "stackSize": 5
     },
-    "The Risk": {
+    "Lysah's Respite": {
+      "chaosValue": 1.6,
+      "divineValue": 0.0,
+      "stackSize": 6
+    },
+    "The Fox": {
+      "chaosValue": 1.6,
+      "divineValue": 0.0,
+      "stackSize": 6
+    },
+    "The Porcupine": {
+      "chaosValue": 1.6,
+      "divineValue": 0.0,
+      "stackSize": 6
+    },
+    "The Darkest Dream": {
+      "chaosValue": 1.6,
+      "divineValue": 0.0,
+      "stackSize": 6
+    },
+    "Disdain": {
+      "chaosValue": 1.6,
+      "divineValue": 0.0,
+      "stackSize": 5
+    },
+    "Alivia's Grace": {
+      "chaosValue": 1.6,
+      "divineValue": 0.0,
+      "stackSize": 6
+    },
+    "The Watcher": {
+      "chaosValue": 1.5,
+      "divineValue": 0.0,
+      "stackSize": 12
+    },
+    "The Realm": {
+      "chaosValue": 1.5,
+      "divineValue": 0.0,
+      "stackSize": 5
+    },
+    "The Fathomless Depths": {
+      "chaosValue": 1.5,
+      "divineValue": 0.0,
+      "stackSize": 8
+    },
+    "Alluring Bounty": {
+      "chaosValue": 1.5,
+      "divineValue": 0.0,
+      "stackSize": 7
+    },
+    "The Doppelganger": {
+      "chaosValue": 1.48,
+      "divineValue": 0.0,
+      "stackSize": 2
+    },
+    "Cartographer's Delight": {
       "chaosValue": 1.4,
       "divineValue": 0.0,
       "stackSize": 3
+    },
+    "The Dragon": {
+      "chaosValue": 1.4,
+      "divineValue": 0.0,
+      "stackSize": 4
     },
     "Time-Lost Relic": {
       "chaosValue": 1.4,
       "divineValue": 0.0,
       "stackSize": 10
     },
-    "Boon of Justice": {
+    "Costly Curio": {
       "chaosValue": 1.4,
       "divineValue": 0.0,
       "stackSize": 6
@@ -1557,22 +1607,52 @@
       "divineValue": 0.0,
       "stackSize": 5
     },
-    "The Doppelganger": {
-      "chaosValue": 1.38,
+    "Ever-Changing": {
+      "chaosValue": 1.4,
       "divineValue": 0.0,
-      "stackSize": 2
+      "stackSize": 3
     },
-    "The Gladiator": {
+    "The Endurance": {
+      "chaosValue": 1.3,
+      "divineValue": 0.0,
+      "stackSize": 4
+    },
+    "The Trial": {
+      "chaosValue": 1.3,
+      "divineValue": 0.0,
+      "stackSize": 7
+    },
+    "Vinia's Token": {
       "chaosValue": 1.3,
       "divineValue": 0.0,
       "stackSize": 5
     },
-    "Imperial Legacy": {
-      "chaosValue": 1.3,
+    "Boundless Realms": {
+      "chaosValue": 1.2,
       "divineValue": 0.0,
-      "stackSize": 22
+      "stackSize": 4
     },
-    "The Summoner": {
+    "The Scavenger": {
+      "chaosValue": 1.2,
+      "divineValue": 0.0,
+      "stackSize": 8
+    },
+    "The Wrath": {
+      "chaosValue": 1.2,
+      "divineValue": 0.0,
+      "stackSize": 8
+    },
+    "Treasure Hunter": {
+      "chaosValue": 1.2,
+      "divineValue": 0.0,
+      "stackSize": 7
+    },
+    "The Admirer": {
+      "chaosValue": 1.2,
+      "divineValue": 0.0,
+      "stackSize": 9
+    },
+    "Boon of Justice": {
       "chaosValue": 1.2,
       "divineValue": 0.0,
       "stackSize": 6
@@ -1582,20 +1662,15 @@
       "divineValue": 0.0,
       "stackSize": 8
     },
-    "Dialla's Subjugation": {
-      "chaosValue": 1.1,
+    "Cursed Words": {
+      "chaosValue": 1.2,
       "divineValue": 0.0,
-      "stackSize": 7
+      "stackSize": 13
     },
-    "The Witch": {
+    "The Gladiator": {
       "chaosValue": 1.1,
       "divineValue": 0.0,
-      "stackSize": 8
-    },
-    "Arrogance of the Vaal": {
-      "chaosValue": 1.1,
-      "divineValue": 0.0,
-      "stackSize": 8
+      "stackSize": 5
     },
     "Abandoned Wealth": {
       "chaosValue": 1.0,
@@ -1607,6 +1682,11 @@
       "divineValue": 0.0,
       "stackSize": 9
     },
+    "Blind Venture": {
+      "chaosValue": 1.0,
+      "divineValue": 0.0,
+      "stackSize": 7
+    },
     "Coveted Possession": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
@@ -1616,6 +1696,11 @@
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 5
+    },
+    "Dialla's Subjugation": {
+      "chaosValue": 1.0,
+      "divineValue": 0.0,
+      "stackSize": 7
     },
     "Doedre's Madness": {
       "chaosValue": 1.0,
@@ -1692,11 +1777,6 @@
       "divineValue": 0.0,
       "stackSize": 7
     },
-    "Lysah's Respite": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 6
-    },
     "Prosperity": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
@@ -1716,6 +1796,11 @@
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 8
+    },
+    "Scholar of the Seas": {
+      "chaosValue": 1.0,
+      "divineValue": 0.0,
+      "stackSize": 7
     },
     "Shard of Fate": {
       "chaosValue": 1.0,
@@ -1752,37 +1837,12 @@
       "divineValue": 0.0,
       "stackSize": 11
     },
-    "The Demoness": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 5
-    },
-    "The Dragon": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 4
-    },
-    "The Endurance": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 4
-    },
     "The Explorer": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 6
     },
     "The Flora's Gift": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 5
-    },
-    "The Fox": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 6
-    },
-    "The Gambler": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 5
@@ -1817,6 +1877,11 @@
       "divineValue": 0.0,
       "stackSize": 5
     },
+    "The King's Heart": {
+      "chaosValue": 1.0,
+      "divineValue": 0.0,
+      "stackSize": 8
+    },
     "The Lich": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
@@ -1832,12 +1897,12 @@
       "divineValue": 0.0,
       "stackSize": 5
     },
-    "The Mercenary": {
+    "The Metalsmith's Gift": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
-      "stackSize": 5
+      "stackSize": 6
     },
-    "The Metalsmith's Gift": {
+    "The Oath": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 6
@@ -1867,17 +1932,7 @@
       "divineValue": 0.0,
       "stackSize": 9
     },
-    "The Scavenger": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 8
-    },
     "The Scholar": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 3
-    },
-    "The Sigil": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 3
@@ -1922,11 +1977,6 @@
       "divineValue": 0.0,
       "stackSize": 4
     },
-    "The Wrath": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 8
-    },
     "Three Faces in the Dark": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
@@ -1937,22 +1987,12 @@
       "divineValue": 0.0,
       "stackSize": 5
     },
-    "Vinia's Token": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 5
-    },
     "Volatile Power": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 9
     },
     "Mitts": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 5
-    },
-    "Call to the First Ones": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 5
@@ -1971,11 +2011,6 @@
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 3
-    },
-    "The Porcupine": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 6
     },
     "Might is Right": {
       "chaosValue": 1.0,
@@ -2007,11 +2042,6 @@
       "divineValue": 0.0,
       "stackSize": 4
     },
-    "The Dreamer": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 6
-    },
     "Three Voices": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
@@ -2037,30 +2067,25 @@
       "divineValue": 0.0,
       "stackSize": 7
     },
-    "The Fathomless Depths": {
+    "The Witch": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 8
-    },
-    "The Admirer": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 9
     },
     "The Wilted Rose": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 7
     },
-    "The Master Artisan": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 5
-    },
     "Sambodhi's Vow": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 3
+    },
+    "Arrogance of the Vaal": {
+      "chaosValue": 1.0,
+      "divineValue": 0.0,
+      "stackSize": 8
     },
     "Alone in the Darkness": {
       "chaosValue": 1.0,
@@ -2081,6 +2106,11 @@
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 5
+    },
+    "Imperial Legacy": {
+      "chaosValue": 1.0,
+      "divineValue": 0.0,
+      "stackSize": 22
     },
     "Demigod's Wager": {
       "chaosValue": 1.0,
@@ -2127,25 +2157,10 @@
       "divineValue": 0.0,
       "stackSize": 6
     },
-    "Dementophobia": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 11
-    },
     "A Sea of Blue": {
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 3
-    },
-    "Costly Curio": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 6
-    },
-    "Disdain": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 5
     },
     "The Scout": {
       "chaosValue": 1.0,
@@ -2166,11 +2181,6 @@
       "chaosValue": 1.0,
       "divineValue": 0.0,
       "stackSize": 3
-    },
-    "A Dusty Memory": {
-      "chaosValue": 1.0,
-      "divineValue": 0.0,
-      "stackSize": 5
     },
     "Eldritch Perfection": {
       "chaosValue": 1.0,

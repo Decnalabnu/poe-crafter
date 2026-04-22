@@ -85,13 +85,21 @@ def process_card_data(wiki_cards, weights):
                 clean_id = re.sub(r'^(MapWorlds|MapAtlas|MapZana|MapTier\d+|Map)', '', area)
                 # Inject spaces before capital letters to get 'Jungle Valley'
                 clean_map_name = re.sub(r'([a-z])([A-Z])', r'\1 \2', clean_id).strip()
-                
+
                 # Strip " Map" suffix if the Wiki returns plain English names (e.g. "Jungle Valley Map")
                 if clean_map_name.endswith(" Map"):
                     clean_map_name = clean_map_name[:-4]
-                
+
                 # Clean up trailing underscores from Wiki weirdness (e.g., "Racecourse_")
                 clean_map_name = clean_map_name.strip("_")
+
+                # Lowercase common prepositions ("Chambers Of Impurity" -> "Chambers of Impurity")
+                lowercase_words = {"Of", "The", "In", "And", "To", "At", "On", "A"}
+                parts = clean_map_name.split(" ")
+                clean_map_name = " ".join(
+                    p.lower() if i > 0 and p in lowercase_words else p
+                    for i, p in enumerate(parts)
+                )
 
                 # Filter out non-scryable maps (T17s, Guardians, Uniques, Fragments)
                 excluded_exact = {"Sanctuary", "Citadel", "Fortress", "Abomination", "Ziggurat", "Chimera", "Hydra", "Minotaur", "Phoenix", "Vaal Temple"}

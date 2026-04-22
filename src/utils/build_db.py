@@ -136,8 +136,11 @@ def get_translated_string(stats_list, trans_dict_multi, trans_dict_single):
 
 def assign_tiers_to_pool(mod_list):
     """
-    Within each mod group, assign tier numbers.
-    T1 = best = highest required_level (tiebreak: lowest weight = rarer = better).
+    Within each mod group, assign tier numbers (CoE convention).
+    T1 = best naturally-rollable tier. Essence/influence-exclusive (weight=0) mods
+    are ranked behind naturally-rollable mods at the same ilvl so they don't
+    displace the real T1. Ordering within each bucket: higher required_level first,
+    then higher spawn weight first.
     The _required_level field is dropped from the final output.
     """
     from collections import defaultdict
@@ -150,8 +153,9 @@ def assign_tiers_to_pool(mod_list):
         sorted_indices = sorted(
             indices,
             key=lambda i: (
+                0 if result[i]["spawn_weights"][0].get("weight", 0) > 0 else 1,
                 -result[i].get("_required_level", 0),
-                result[i]["spawn_weights"][0].get("weight", 0),
+                -result[i]["spawn_weights"][0].get("weight", 0),
             ),
         )
         for tier, idx in enumerate(sorted_indices, 1):

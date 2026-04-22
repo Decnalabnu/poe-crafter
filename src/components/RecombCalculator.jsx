@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import itemsData from "../data/items.json";
 import { useEconomy } from "../contexts/EconomyContext";
 import { calculateRecombEV } from "../utils/calculator";
@@ -20,10 +20,18 @@ export default function RecombCalculator() {
   const [influence, setInfluence] = useState(null);
   const [affinityType, setAffinityType] = useState("prefix"); // "prefix" | "suffix"
   const [selectedIds, setSelectedIds] = useState([null, null, null]); // [A, B, C]
-  const [altCost, setAltCost] = useState(1);
+  const liveAltPrice = economyData.currency?.alteration ?? 0.15;
+  const [altCost, setAltCost] = useState(liveAltPrice);
   const [recombCost, setRecombCost] = useState(100);
   const [sellValueDivines, setSellValueDivines] = useState(10);
   const [result, setResult] = useState(null);
+
+  // Sync the alt-cost input with live economy once it loads (initial state is
+  // seeded from the bundled snapshot, which may be stale until /active_economy.json
+  // resolves).
+  useEffect(() => {
+    setAltCost(liveAltPrice);
+  }, [liveAltPrice]);
 
   const divinePrice = economyData.divine_price || 150;
 
@@ -148,15 +156,16 @@ export default function RecombCalculator() {
       {/* Costs */}
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px", flexWrap: "wrap" }}>
         {[
-          { label: "Alt cost (c)", value: altCost, setter: setAltCost },
-          { label: "Recomb cost (c)", value: recombCost, setter: setRecombCost },
-          { label: "Sell value (div)", value: sellValueDivines, setter: setSellValueDivines },
-        ].map(({ label, value, setter }) => (
+          { label: "Alt cost (c)", value: altCost, setter: setAltCost, step: 0.01 },
+          { label: "Recomb cost (c)", value: recombCost, setter: setRecombCost, step: 1 },
+          { label: "Sell value (div)", value: sellValueDivines, setter: setSellValueDivines, step: 1 },
+        ].map(({ label, value, setter, step }) => (
           <div key={label} style={{ flex: "1 1 120px" }}>
             <label style={{ display: "block", fontSize: "12px", color: "#888", marginBottom: "4px" }}>{label}</label>
             <input
               type="number"
               min={0}
+              step={step}
               value={value}
               onChange={(e) => setter(Number(e.target.value))}
               style={{ width: "100%", padding: "7px 10px", background: "#1e1e1e", color: "white", border: "1px solid #555", borderRadius: "4px", fontSize: "13px" }}

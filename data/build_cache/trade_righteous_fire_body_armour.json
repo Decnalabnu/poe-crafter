@@ -1,1 +1,1 @@
-{"total_listings": 6, "sampled": 6, "prices_chaos": [20.0, 250.0, 308.4, 308.4, 400.0, 616.8], "p10": 20, "p25": 250, "median": 308, "p75": 400, "p90": 617, "common_base": "Royal Plate"}
+{"total_listings": 8, "sampled": 8, "prices_chaos": [8.0, 20.0, 60.0, 250.0, 360.0, 360.0, 360.0, 1800.0], "p10": 8, "p25": 60, "median": 305, "p75": 360, "p90": 1800, "common_base": "Conquest Lamellar"}

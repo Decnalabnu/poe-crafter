@@ -1,1 +1,1 @@
-{"gem": "Anger", "level": 20, "total_listings": 17, "samples": 10, "prices_chaos": [10.0, 10.0, 13.0, 15.0, 20.0, 20.0, 20.0, 30.0, 30.0, 50.0], "p10": 10.0, "median": 20.0}
+{"gem": "Anger", "level": 20, "total_listings": 8, "samples": 8, "prices_chaos": [9.0, 30.0, 50.0, 100.0, 100.0, 360.0, 360.0, 360.0], "p10": 9.0, "median": 100.0}

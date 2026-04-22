@@ -1,1 +1,1 @@
-{"total_listings": 12, "sampled": 10, "prices_chaos": [5.0, 10.0, 15.0, 40.0, 110.0, 325.0, 616.8, 616.8, 1233.6, 2467.2], "p10": 10, "p25": 15, "median": 218, "p75": 617, "p90": 2467, "common_base": "Lich's Circlet"}
+{"total_listings": 12, "sampled": 10, "prices_chaos": [3.0, 10.0, 110.0, 325.0, 360.0, 360.0, 720.0, 999.0, 1440.0, 2880.0], "p10": 10, "p25": 110, "median": 360, "p75": 999, "p90": 2880, "common_base": "Moonlit Circlet"}
